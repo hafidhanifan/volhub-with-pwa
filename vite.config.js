@@ -41,5 +41,6 @@ export default defineConfig({
                 secure: false,
             },
         },
+        sourcemapIgnoreList: [/\.min\.js$/],
     },
 });
