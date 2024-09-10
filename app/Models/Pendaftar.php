@@ -19,7 +19,13 @@ class Pendaftar extends Model
         'motivasi',
         'status_applicant',
         'tgl_pendaftaran',
-        'note_to_applicant'
+        'note_to_applicant',
+        'tgl_interview',
+        'lokasi_interview',
+        'status_interview',
+        'note_interview',
+        'tgl_interview',
+        'interview_time',
     ];
 
     // protected static function boot()
@@ -41,10 +47,7 @@ class Pendaftar extends Model
         return $this->belongsTo(Kegiatan::class, 'id_kegiatan');
     }
 
-    public function Interview()
-    {
-        return $this->belongsTo(Interview::class, 'id_interview');
-    }
+    
 
 
 }

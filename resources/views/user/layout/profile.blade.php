@@ -15,12 +15,16 @@
   <section class="mt-8 mx-auto lg:flex gap-8 lg:max-w-6xl xl:max-w-7xl">
     <div
       class="container w-full h-fit mx-auto p-6 rounded-xl lg:max-w-sm lg:shadow-sm bg-white border border-slate-200">
-      <div class="flex items-center gap-4">
-        <img src="../src/image/profile-img.png" alt="" class="w-20" />
+      <div class="flex items-center gap-4 overflow-hidden">
+          @if(!empty($user->foto_profile))
+            <img src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="profile user" class="w-20 rounded-full" />
+          @else
+            <img src="{{asset('img/logo-user.png')}}" alt="profile user" class="w-20 rounded-full" />
+          @endif
         <div class="">
-          <span class="font-semibold text-lg line-clamp-1">Dinda Farras G.</span>
+          <span class="font-semibold text-lg line-clamp-1">{{$user->nama_user}}</span>
           <p class="text-sm line-clamp-1">
-            Ingin menjadi anak sukses dan masuk surga.
+            {{$user->bio}}
           </p>
         </div>
       </div>
@@ -48,7 +52,7 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium text-base">Email</span>
-            <p class="line-clamp-1 text-sm">dindafarrasketceh@gmail.com</p>
+            <p class="line-clamp-1 text-sm">{{$user->email_user}}</p>
           </div>
         </div>
         <div class="flex gap-4 mt-4">
@@ -63,7 +67,7 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium">Phone</span>
-            <p class="text-sm">+6281802231234</p>
+            <p class="text-sm">{{$user->nomor_telephone}}</p>
           </div>
         </div>
         <div class="flex gap-4 mt-4">
@@ -149,13 +153,7 @@
               </div>
               <div class="overflow-hidden px-3 pt-4">
                 <p class="text-base mt-2 line-clamp-3">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Sed doloribus cum magni suscipit tempore nulla perspiciatis
-                  autem dolore distinctio, fuga eum ducimus assumenda
-                  laboriosam commodi totam ullam odit. Rerum deleniti
-                  consectetur necessitatibus suscipit! Soluta sint atque cum
-                  at fugiat! Odio nobis voluptas adipisci eos animi, rerum
-                  unde excepturi quod sunt!
+                  {{$user->deskripsi}}
                 </p>
               </div>
               <button class="px-3 pb-2">More</button>
@@ -194,7 +192,7 @@
                       d="M400,432H96v16h304c8.8,0,16-7.2,16-16v-16C416,424.8,408.8,432,400,432z"></path>
                   </g>
                 </svg>
-                <a href="../src/pdf/file.pdf" target="_blank" class="block text-sm">CV_Dinda Farras G.</a>
+                <a href="{{ asset('storage/cv/' . auth()->user()->cv) }}" target="_blank" class="block text-sm" download>{{$user->cv}}</a>
               </div>
             </div>
           </div>
@@ -231,8 +229,10 @@
                     </button>
                   </div>
                   <div class="mt-4 flex flex-wrap justify-evenly items-center gap-y-6">
+                    <?php $no = 1 ?>
+                    @foreach($user->skills as $skill)
                     <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
+                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">{{$skill->nama_skill}}</span>
                       <button id="deleteSkill">
                         <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
                           xmlns="http://www.w3.org/2000/svg">
@@ -246,81 +246,7 @@
                         </svg>
                       </button>
                     </div>
-                    <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
-                    <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
-                    <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
-                    <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
-                    <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
+                    @endforeach
                   </div>
                   <!-- Modal Alert Delete Skill Start -->
                   <div id="deleteSkillModal"
@@ -360,9 +286,10 @@
               <!-- Modal Add Skill End -->
             </div>
             <div class="p-4 flex flex-wrap justify-evenly gap-2">
-              <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">Paid</span>
-              <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">Offline</span>
-              <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">Free</span>
+              <?php $no = 1 ?>
+              @foreach($user->skills as $skill)
+                <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">{{$skill->nama_skill}}</span>
+              @endforeach
             </div>
           </div>
           <!-- Skill End -->

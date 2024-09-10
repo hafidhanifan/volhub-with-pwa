@@ -117,9 +117,9 @@ Route::prefix('mitra')->group(function () {
         Route::get('detail-pendaftar/{id}/{id_pendaftar}', [MitraController::class, 'showDetailPendaftarPage'])->name('mitra.detail.pendaftar');
         Route::patch('pendaftar/{id}/update-status', [MitraController::class, 'updateStatus'])->name('mitra.updateStatus');
         Route::post('add-interview-date/{id_pendaftar}', [MitraController::class, 'addInterviewAction'])->name('mitra.add-interview-action');
-        Route::put('edit-interview-date/{id_pendaftar}/{id_interview}', [MitraController::class, 'editInterviewAction'])->name('mitra.edit-interview-action');
-        Route::post('add-note/{id_pendaftar}/{id_interview}', [MitraController::class, 'addNoteAction'])->name('mitra.add-note-action');
-        Route::put('edit-note/{id_pendaftar}/{id_interview}', [MitraController::class, 'editNoteAction'])->name('mitra.edit-note-action');
+        Route::put('edit-interview-date/{id_pendaftar}', [MitraController::class, 'editInterviewAction'])->name('mitra.edit-interview-action');
+        Route::post('add-note/{id_pendaftar}', [MitraController::class, 'addNoteAction'])->name('mitra.add-note-action');
+        Route::put('edit-note/{id_pendaftar}', [MitraController::class, 'editNoteAction'])->name('mitra.edit-note-action');
         // Route::post('send-note-hire/{id_pendaftar}', [MitraController::class, 'updateStatusHire'])->name('send.note.hire');
         // Route::post('send-note-reject/{id_pendaftar}', [MitraController::class, 'updateStatusReject'])->name('send.note.reject');
         
