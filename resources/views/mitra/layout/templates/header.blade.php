@@ -14,16 +14,6 @@
   <title>PlainAdmin Demo | Bootstrap 5 Admin Template</title>
 
   <!-- ========== All CSS files linkup ========= -->
-  {{--
-  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('/css/lineicons.css') }}" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="{{ asset('/css/materialdesignicons.min.css') }}" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="{{ asset('/css/fullcalendar.css') }}" />
-  <link rel="stylesheet" href="{{ asset('/css/fullcalendar.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/mitra.css') }}" />
-  <link rel="stylesheet" href="{{ asset('/css/main.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-  <link rel="stylesheet" href="{{ asset('css/responsive.css') }}" /> --}}
 
   @vite([
   'resources/css/bootstrap.min.css',
