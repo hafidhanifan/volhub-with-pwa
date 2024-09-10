@@ -1,0 +1,580 @@
+/* Landing Page */
+@media only screen and (max-width: 1050px) {
+    .footer__body {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer__body-logo img {
+        width: 300px;
+    }
+
+    .footer__body-support {
+        margin-top: 60px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .program__body {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 30px;
+        justify-items: center;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .hero__text-title,
+    .hero__text-tagline {
+        font-size: 150%;
+    }
+
+    .hero__text-description {
+        font-size: 130%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .app-bar__navigation,
+    .app-bar__sign-up,
+    .app-bar__user-panel {
+        display: none;
+    }
+
+    .dropdown {
+        display: none;
+    }
+
+    .mobile-nav.open {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        position: absolute;
+        background: rgba(0, 52, 82, 0.8);
+        backdrop-filter: blur(150px);
+        right: 20px;
+        top: 120px;
+        width: 50%;
+        border-radius: 20px;
+        z-index: 1100;
+    }
+
+    .mobile-nav li {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .mobile-nav li a {
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: 0.2s ease-out;
+        display: inline-block;
+    }
+
+    .mobile-nav li a:hover {
+        transform: scale(1.2);
+    }
+
+    .sign-up {
+        width: 100%;
+        text-align: center;
+        background-color: #003452;
+        border-radius: 20px;
+        padding: 13px 18px 13px 18px;
+        color: white;
+    }
+
+    .app-bar__navigation ul {
+        flex-direction: column;
+    }
+
+    .app-bar__logo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 95vw;
+    }
+
+    #drawerButton {
+        display: block;
+        cursor: pointer;
+    }
+
+    .program__header h3 {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .program__body {
+        grid-template-columns: repeat(1, 1fr);
+        row-gap: 30px;
+        justify-items: center;
+    }
+
+    .introduction__logo {
+        display: none;
+    }
+
+    .introduction__wrapper {
+        margin: 0 auto 0 auto;
+        margin-block: 30px;
+        width: 90%;
+        height: 100%;
+    }
+
+    .introduction__title h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .team__body {
+        padding-inline: 20px;
+    }
+}
+
+/* Daftar Volunteer */
+
+@media only screen and (max-width: 1200px) {
+    .sidebar {
+        position: absolute;
+        left: -250px;
+    }
+
+    .sidebar.open {
+        display: block;
+        position: fixed;
+        left: 0;
+        width: 30%;
+        top: 150px;
+        z-index: 1000;
+        transition: left 0.3s ease;
+    }
+
+    .content__header-show-profile {
+        background-color: black;
+        padding: 0 0 0 12px;
+
+        z-index: 1001;
+    }
+
+    .content__header-show-profile i {
+        display: block;
+        cursor: pointer;
+        position: fixed;
+        right: 0;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 900;
+    }
+
+    .overlay.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .sidebar.open {
+        width: 40%;
+    }
+
+    .content__body {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 555px) {
+    .content__header-showing {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .sidebar.open {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .sidebar.open {
+        width: 60%;
+    }
+
+    .content__body {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .sidebar.open {
+        width: 60%;
+    }
+}
+
+/* SignUp */
+@media only screen and (max-width: 1050px) {
+    .content__hero-tagline__text {
+        font-size: 3.5rem;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .form-signup-container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .container-right__content {
+        height: 120vh;
+    }
+    .content__hero-image {
+        height: 150vh;
+    }
+
+    .content__hero-tagline__text {
+        font-size: 3rem;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+    .container {
+        flex-direction: column-reverse;
+    }
+
+    .form-signup-container {
+        padding: 58px 0 10px 0;
+    }
+
+    .form-signup-container__button {
+        padding-bottom: 30px;
+    }
+
+    .container-left {
+        width: 100%;
+        height: 120vh;
+    }
+
+    .container-right {
+        width: 100%;
+    }
+
+    .content__hero-tagline {
+        width: 100%;
+    }
+
+    .content__hero-tagline__text {
+        font-size: 5rem;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .content__hero-tagline__text {
+        font-size: 4rem;
+    }
+
+    .form-signup-container__button {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .form-signup-container__button button {
+        width: 100%;
+    }
+
+    .form-login-button__signup {
+        width: 100%;
+    }
+
+    .form-signup-button__login {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .form-signup-container__button {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .form-signup-container__button button {
+        width: 100%;
+    }
+
+    .form-login-button__signup {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .content__hero-tagline__text {
+        font-size: 3.5rem;
+    }
+}
+
+/* Detail Volunteer */
+@media only screen and (max-width: 900px) {
+    .detail-header__wrapper {
+        margin-inline: 20px;
+        right: 0;
+        left: 0;
+    }
+
+    .description__text {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    article.text {
+        max-width: 100%;
+    }
+
+    .information {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 725px) {
+    .description__benefit-body {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modal__content {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .container-detail {
+        padding-top: 5vh;
+    }
+
+    .detail-header__wrapper {
+        position: static;
+        margin-top: 50px;
+        margin-inline: 20px;
+    }
+
+    .detail-header__body {
+        flex-direction: column;
+        gap: 0;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .detail-header__body-name {
+        width: 100%;
+    }
+
+    .detail-header__body-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .detail-header__body-button button {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .detail-header__wrapper {
+        position: static;
+        margin-inline: 20px;
+        margin-top: 50px;
+    }
+
+    .detail-header__body-title h1 {
+        font-size: 1.1rem;
+    }
+
+    .container-detail {
+        padding-top: 5vh;
+    }
+
+    .description__benefit-body {
+        grid-template-columns: repeat(1, 1fr);
+        align-items: center;
+    }
+
+    .description__benefit-item-text p {
+        max-width: 100%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .recommendation__header {
+        flex-direction: column;
+        line-height: 40px;
+        align-items: flex-start;
+    }
+}
+
+/* Profile */
+@media only screen and (max-width: 1065px) {
+    .abstract {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .abstract__profile-summary {
+        width: 100%;
+    }
+
+    .abstract__button {
+        width: 50%;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .abstract__button a {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1065px) {
+    .abstract__profile {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .abstract__profile-image img {
+        width: 100%;
+    }
+
+    .abstract__summary-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    .abstract__summary-header {
+        margin-left: 0;
+    }
+
+    .abstract__summary-body {
+        margin-left: 0;
+        column-gap: 90px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .abstract__profile-image {
+        width: 50%;
+    }
+
+    .status {
+        flex-direction: column;
+    }
+
+    .status__skill {
+        width: 100%;
+    }
+
+    .status__process {
+        width: 100%;
+    }
+
+    .status__item-logo img {
+        width: 80px;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .abstract__summary-header h1 {
+        font-size: 2.1rem;
+    }
+
+    .abstract__summary-header p {
+        font-size: 1.2rem;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .abstract__button {
+        width: 70%;
+    }
+
+    .abstract__profile-image {
+        width: 60%;
+    }
+
+    .abstract__summary-body {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .status__process-item {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Drodown */
+@media only screen and (max-width: 1230px) {
+    .dropdown {
+        width: 30%;
+    }
+}
+
+/* Edit Skill */
+
+@media only screen and (max-width: 900px) {
+    .edit-personal__form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .edit-skill__container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .edit-skill__wrapper {
+        width: 100%;
+    }
+
+    .edit-profile__navigation ul {
+        flex-direction: column;
+        margin-top: 50px;
+        gap: 20px;
+    }
+
+    .edit-akun__form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .edit-personal__item input {
+        width: 100%;
+    }
+}
