@@ -162,12 +162,9 @@ Route::prefix('user')->group(function () {
 
         // (User) Route untuk Detail User
         Route::get('detail-profile/{id}', [UserController::class, 'showDetailUserPage'])->name('user.detail-profile-page');
-        Route::get('edit-detail/{id}', [UserController::class, 'showEditUserPage'])->name('user.edit-profile-page');
         Route::put('edit-detail/{id}', [UserController::class, 'editUserAction'])->name('user.edit-profile-action');
         Route::put('edit-foto-profile/{id}', [UserController::class, 'editFotoProfileAction'])->name('user.edit-foto-profile-action');
-        Route::get('edit-akun/{id}', [UserController::class, 'showEditAkunPage'])->name('user.edit-akun-page');
         Route::put('edit-akun/{id}', [UserController::class, 'editAkunAction'])->name('user.edit-akun-action');
-        Route::get('edit-skill/{id}', [UserController::class, 'showEditSkillPage'])->name('user.edit-skill-page');
         Route::post('add-skill/{id}', [UserController::class, 'addSkillAction'])->name('user.add-skill-action');
         Route::delete('{id}/remove-skill/{id_skill}', [UserController::class, 'removeSkill'])->name('user.remove-skill-action');
         

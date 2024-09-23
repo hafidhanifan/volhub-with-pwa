@@ -342,7 +342,7 @@ class MitraController extends Controller
         // Mengambil ID kegiatan dari pendaftar dengan status diterima
         $acceptedKegiatanIds = DB::table('data_pendaftar')
             ->where('id_user', $id_user)
-            ->where('status_applicant', 'In-review')
+            ->where('status_applicant', 'Hire')
             ->pluck('id_kegiatan');
 
         // Mengambil data kegiatan berdasarkan ID yang diperoleh

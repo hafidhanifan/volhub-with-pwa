@@ -15,6 +15,7 @@ export default defineConfig({
                 "resources/css/main.css",
                 "resources/css/style.css",
                 "resources/css/responsive.css",
+                "resources/css/userProfile.css",
                 "resources/js/bootstrap.bundle.min.js",
                 "resources/js/Chart.min.js",
                 "resources/js/dynamic-pie-chart.js",
@@ -25,6 +26,7 @@ export default defineConfig({
                 "resources/js/polyfill.js",
                 "resources/js/main.js",
                 "resources/js/mitra.js",
+                "resources/js/userProfile.js",
             ],
             refresh: true, // Mengaktifkan fitur auto-refresh saat save
         }),

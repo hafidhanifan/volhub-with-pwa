@@ -1,0 +1,13 @@
+.more {
+  color: #5aa6cf;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.more:hover {
+  text-decoration: none;
+  color: #5aa6cf;
+  font-weight: 600;
+}
