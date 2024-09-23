@@ -46,7 +46,7 @@
               <h2>Data Diri</h2>
             </div>
               <div class="edit-personal__form__container">
-                <form action="{{ route('user.edit-profile-action', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+                {{-- <form action="{{ route('user.edit-profile-action', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data"> --}}
                   @csrf
                   @method('PUT')
                 <div class="edit-personal__form">

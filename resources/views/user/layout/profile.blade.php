@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   {{-- <script type="module" src="/src/js/main.js"></script>
   <link rel="stylesheet" href="/src/css/style.css" /> --}}
-  @vite(['resources/css/app.css'])
+  @vite(['resources/css/app.css', 'resources/css/userProfile.css', 'resources/js/userProfile.js'])
 
   <title>Profile User</title>
 </head>
@@ -15,12 +15,16 @@
   <section class="mt-8 mx-auto lg:flex gap-8 lg:max-w-6xl xl:max-w-7xl">
     <div
       class="container w-full h-fit mx-auto p-6 rounded-xl lg:max-w-sm lg:shadow-sm bg-white border border-slate-200">
-      <div class="flex items-center gap-4">
-        <img src="../src/image/profile-img.png" alt="" class="w-20" />
+      <div class="flex items-center gap-4 overflow-hidden">
+          @if(!empty($user->foto_profile))
+            <img src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="profile user" class="w-20 rounded-full" />
+          @else
+            <img src="{{asset('img/logo-user.png')}}" alt="profile user" class="w-20 rounded-full" />
+          @endif
         <div class="">
-          <span class="font-semibold text-lg line-clamp-1">Dinda Farras G.</span>
+          <span class="font-semibold text-lg line-clamp-1">{{$user->nama_user}}</span>
           <p class="text-sm line-clamp-1">
-            Ingin menjadi anak sukses dan masuk surga.
+            {{$user->bio}}
           </p>
         </div>
       </div>
@@ -48,7 +52,7 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium text-base">Email</span>
-            <p class="line-clamp-1 text-sm">dindafarrasketceh@gmail.com</p>
+            <p class="line-clamp-1 text-sm">{{$user->email_user}}</p>
           </div>
         </div>
         <div class="flex gap-4 mt-4">
@@ -63,7 +67,7 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium">Phone</span>
-            <p class="text-sm">+6281802231234</p>
+            <p class="text-sm">{{$user->nomor_telephone}}</p>
           </div>
         </div>
         <div class="flex gap-4 mt-4">
@@ -148,17 +152,16 @@
                 <span class="text-lg font-semibold">Deskripsi</span>
               </div>
               <div class="overflow-hidden px-3 pt-4">
-                <p class="text-base mt-2 line-clamp-3">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Sed doloribus cum magni suscipit tempore nulla perspiciatis
-                  autem dolore distinctio, fuga eum ducimus assumenda
-                  laboriosam commodi totam ullam odit. Rerum deleniti
-                  consectetur necessitatibus suscipit! Soluta sint atque cum
-                  at fugiat! Odio nobis voluptas adipisci eos animi, rerum
-                  unde excepturi quod sunt!
+                <p class="text-base mt-2">
+                  @if (strlen($user->deskripsi) > 100)
+                      <span class="short-desc">{{ Str::limit($user->deskripsi, 200, '...') }}</span>
+                      <span class="more-desc" style="display: none;">{{ $user->deskripsi }}</span>
+                      <a href="javascript:void(0);" class="more" onclick="toggleTextDesc(this)">More</a>
+                  @else
+                      {{ $user->deskripsi }}
+                  @endif
                 </p>
               </div>
-              <button class="px-3 pb-2">More</button>
             </div>
             <!-- CV Card Start -->
             <div class="lg:mt-8 border border-slate-300 rounded-2xl lg:w-2/6">
@@ -194,7 +197,7 @@
                       d="M400,432H96v16h304c8.8,0,16-7.2,16-16v-16C416,424.8,408.8,432,400,432z"></path>
                   </g>
                 </svg>
-                <a href="../src/pdf/file.pdf" target="_blank" class="block text-sm">CV_Dinda Farras G.</a>
+                <a href="{{ asset('storage/cv/' . auth()->user()->cv) }}" target="_blank" class="block text-sm" download>{{$user->cv}}</a>
               </div>
             </div>
           </div>
@@ -231,96 +234,24 @@
                     </button>
                   </div>
                   <div class="mt-4 flex flex-wrap justify-evenly items-center gap-y-6">
+                    <?php $no = 1 ?>
+                    @foreach($user->skills as $skill)
                     <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
+                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">{{$skill->nama_skill}}</span>
+                        <button id="deleteSkill">
+                          <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                              <path
+                                d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
+                                fill="#ffffff"></path>
+                            </g>
+                          </svg>
+                        </button>
                     </div>
-                    <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
-                    <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
-                    <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
-                    <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
-                    <div class="relative">
-                      <span class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">Paid</span>
-                      <button id="deleteSkill">
-                        <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                          <g id="SVGRepo_iconCarrier">
-                            <path
-                              d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                              fill="#ffffff"></path>
-                          </g>
-                        </svg>
-                      </button>
-                    </div>
+                    @endforeach
                   </div>
                   <!-- Modal Alert Delete Skill Start -->
                   <div id="deleteSkillModal"
@@ -336,10 +267,14 @@
                           class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
                           Cancel
                         </button>
-                        <button id="confirmDeleteSkill" type="button"
-                          class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-                          Yes, Delete
-                        </button>
+                        <form action="{{ route('user.remove-skill-action', ['id' => $user->id, 'id_skill' => $skill->id_skill]) }}" method="POST" style="display: inline;">
+                          @csrf
+                          @method('DELETE')
+                          <button id="confirmDeleteSkill" type="submit"
+                            class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                            Yes, Delete
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -360,9 +295,10 @@
               <!-- Modal Add Skill End -->
             </div>
             <div class="p-4 flex flex-wrap justify-evenly gap-2">
-              <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">Paid</span>
-              <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">Offline</span>
-              <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">Free</span>
+              <?php $no = 1 ?>
+              @foreach($user->skills as $skill)
+                <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">{{$skill->nama_skill}}</span>
+              @endforeach
             </div>
           </div>
           <!-- Skill End -->
@@ -525,7 +461,7 @@
                   <textarea name="description" id="name"
                     class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
                     placeholder="Tell about yourself" required>
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores explicabo totam sequi temporibus laborum eum adipisci saepe nihil.</textarea>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores explicabo totam sequi temporibus laborum eum adipisci saepe nihil.</textarea>
                 </div>
               </form>
               <div class="mt-8 flex justify-end">
@@ -608,7 +544,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                   <div id="profileContent"
                     class="max-h-[50vh] md:max-h-[60vh] lg:max-h-[80vh] md:px-8 py-4 overflow-y-auto hide-scrollbar md:border-l-2">
                     <div class="flex flex-col md:flex-row gap-4 items-center">
-                      <img src="../src/image/profile-img.png" alt="" class="w-32" />
+                      <img src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="" class="w-28 rounded-full" />
                       <div class="flex flex-col md:flex-row gap-4">
                         <button type="button"
                           class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -645,37 +581,73 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                         <!-- Modal Alert Delete Picture End -->
                       </div>
                     </div>
-                    <form class="mt-8">
-                      <div class="grid gap-6 mb-6">
+                    <form class="mt-8" action="{{ route('user.edit-profile-action', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+                      @csrf
+                      @method('PUT')
+                      <div class="grid grid-cols-2 gap-6 mb-6">
                         <div>
                           <label for="name" class="block mb-2 font-medium text-gray-900">Profile Name</label>
                           <input type="text" id="name"
                             class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your name" value="Dinda Farras G." required />
+                            placeholder="Insert your name" name="nama_user" value="{{ old('user', $user->nama_user) }}" required />
                         </div>
                         <div>
                           <label for="name" class="block mb-2 font-medium text-gray-900">Bio</label>
                           <input type="text" id="bio"
                             class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your bio" value="Aku adalah meteor" required />
+                            placeholder="Insert your bio" name="bio" value="{{ old('user', $user->bio) }}" />
                         </div>
+                        <div>
+                          <label for="name" class="block mb-2 font-medium text-gray-900">Gender</label>
+                          <select id="gender"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                            placeholder="Insert your gender" name="gender"> 
+                            <option value="">Choose Gender</option>
+                              @foreach($gender as $gender)
+                                <option value="{{ $gender }}" @if(old('gender', $user->gender) == $gender) selected @endif>{{ ucfirst($gender) }}</option>
+                              @endforeach
+                          </select>
+                        </div>
+                        <div>
+                          <label for="name" class="block mb-2 font-medium text-gray-900">Age</label>
+                          <input type="text" id="usia"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                            placeholder="Insert your age" name="usia" value="{{ old('user', $user->usia) }}" />
+                        </div>
+                        <div>
+                          <label for="name" class="block mb-2 font-medium text-gray-900">Domicile</label>
+                          <input type="text" id="domisili"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                            placeholder="Insert your domicile" name="domisili" value="{{ old('user', $user->domisili) }}" />
+                        </div>
+                        <div>
+                          <label for="name" class="block mb-2 font-medium text-gray-900">Last Education</label>
+                          <select id="pendidikan_terakhir"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                            placeholder="Insert your last education" name="pendidikan_terakhir">
+                            <option value="">Choose Last Education</option>
+                              @foreach($pendidikanTerakhir as $pendidikan)
+                                <option value="{{ $pendidikan }}"@if(old('pendidikan', $user->pendidikan_terakhir) == $pendidikan) selected @endif>{{ ucfirst($pendidikan) }}</option>
+                              @endforeach
+                          </select>
+                        </div>
+                      </div>
+                      <div class="grid gap-6 mb-6">
                         <div>
                           <label for="cv" class="block mb-2 font-medium text-gray-900 cursor-pointer">CV</label>
                           <input type="file" id="cv"
                             class="w-full p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block hover:cursor-pointer"
-                            placeholder="Insert your bio" required />
+                            placeholder="Insert your bio" name="cv" />
                         </div>
                         <div>
                           <label for="name" class="block mb-2 font-medium text-gray-900">Description</label>
-
-                          <textarea name="description" id="name"
+                          <textarea name="deskripsi" id="deskripsi"
                             class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Tell about yourself" required>
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores explicabo totam sequi temporibus laborum eum adipisci saepe nihil.</textarea>
+                            placeholder="Tell about yourself" required>{{ old('user', $user->deskripsi) }}</textarea>
                         </div>
                       </div>
                       <div class="flex justify-end">
-                        <button type="button"
+                        <button type="submit"
                           class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
                           Save Changes
                         </button>
@@ -683,22 +655,57 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                     </form>
                   </div>
                   <div id="contactContent" class="hidden">
-                    <form class="p-8">
+                    <form class="p-8" action="{{ route('user.edit-akun-action', ['id' => $user->id]) }}" method="POST">
+                      @csrf
+                      @method('PUT')
                       <div class="grid gap-6 mb-6">
                         <div>
                           <label for="emailUser" class="block mb-2 font-medium text-gray-900">Email</label>
                           <input type="email" id="emailUser"
                             class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your Email" value="dinda@gmail.com" required />
+                            placeholder="Insert your Email" name="email_user" value="{{ old('user', $user->email_user) }}" required />
                         </div>
                         <div>
                           <label for="phone" class="block mb-2 font-medium text-gray-900">Phone</label>
                           <input type="text" id="phone"
                             class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your bio" value="+6281802231234" required />
+                            placeholder="Insert your bio" name="nomor_telephone" value="{{ old('user', $user->nomor_telephone) }}" required />
                         </div>
                         <div>
-                          <label for="name" class="block mb-2 font-medium text-gray-900">Description</label>
+                          <label for="emailUser" class="block mb-2 font-medium text-gray-900">Instagram</label>
+                          <input type="text" id="instagramUser"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                            placeholder="Insert your Email" value="dinda@gmail.com" />
+                        </div>
+                        <div>
+                          <label for="phone" class="block mb-2 font-medium text-gray-900">LinkedIn</label>
+                          <input type="text" id="linkedinUser"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                            placeholder="Insert your bio" value="+6281802231234" />
+                        </div>
+                      </div>
+                      <div class="flex justify-end">
+                        <button type="submit"
+                          class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                          Save Changes
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <div id="accountContent" class="hidden">
+                    <form class="p-8">
+                      <div class="grid gap-6 mb-6">
+                        <div>
+                          <label for="emailUser" class="block mb-2 font-medium text-gray-900">Username</label>
+                          <input type="text" id="usernameUser"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                            placeholder="Insert your Email" value="{{ old('user', $user->username) }}" required />
+                        </div>
+                        <div>
+                          <label for="phone" class="block mb-2 font-medium text-gray-900">Password</label>
+                          <input type="password" id="passwordUser"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                            placeholder="Insert your bio" value="{{ old('user', $user->password) }}" required />
                         </div>
                       </div>
                       <div class="flex justify-end">
@@ -709,7 +716,6 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                       </div>
                     </form>
                   </div>
-                  <div id="accountContent" class="hidden">akun</div>
                 </div>
               </div>
             </div>
@@ -881,8 +887,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
         const cancelDeleteSkill = document.getElementById("cancelDeleteSkill");
         const closeModalSkill = document.getElementById("closeModalSkill");
         const showSkillModal = document.getElementById("addSkillModal");
-        const openModalAddSkillButton =
-          document.getElementById("openModalAddSkill");
+        const openModalAddSkillButton = document.getElementById("openModalAddSkill");
         // Modal Add Experience (Element Selection)
         const addExperienceButton = document.getElementById(
           "addExperienceButton"
@@ -924,8 +929,8 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
           showSkillModal.classList.remove("hidden");
         });
 
-        deleteSkill.addEventListener("click", function () {
-          deleteSkillModal.classList.remove("hidden");
+        deleteSkillButtons.addEventListener("click", function () {
+            deleteSkillModal.classList.remove("hidden");
         });
 
         cancelDeleteSkill.addEventListener("click", function () {
@@ -1046,7 +1051,31 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
           }
         });
       }
+      
+      //More Deskripsi
+      function toggleTextDesc(element) {
+          console.log('Button clicked');
+          // Mengakses elemen induk dari tombol yang diklik
+          var parent = element.parentElement;
+
+          // Mengambil elemen short-desc dan more-desc dari parent
+          var shortDesc = parent.querySelector('.short-desc');
+          var moreDesc = parent.querySelector('.more-desc');
+          
+          // Mengecek apakah moreDesc sedang disembunyikan
+          if (moreDesc.style.display === "none" || moreDesc.style.display === "") {
+              shortDesc.style.display = "none";
+              moreDesc.style.display = "inline";
+              element.textContent = "Less";
+          } else {
+              shortDesc.style.display = "inline";
+              moreDesc.style.display = "none";
+              element.textContent = "More";
+          }
+      }
+
   </script>
+  
 </body>
 
 </html>

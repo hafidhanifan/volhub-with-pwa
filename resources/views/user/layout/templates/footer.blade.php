@@ -108,8 +108,8 @@
                   </div>
                 </div>
                 <div class="role">
-                  <p>Fullstack Developer</p>
-                  <p>UI/UX Designer</p>
+                  <p>Backend Developer</p>
+                  <p>Business Analyst</p>
                 </div>
               </div>
             </div>
@@ -160,6 +160,7 @@
 </footer>
 
   <script src="{{ asset('/js/user.js') }}"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
   <script>

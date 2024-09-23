@@ -117,9 +117,9 @@ Route::prefix('mitra')->group(function () {
         Route::get('detail-pendaftar/{id}/{id_pendaftar}', [MitraController::class, 'showDetailPendaftarPage'])->name('mitra.detail.pendaftar');
         Route::patch('pendaftar/{id}/update-status', [MitraController::class, 'updateStatus'])->name('mitra.updateStatus');
         Route::post('add-interview-date/{id_pendaftar}', [MitraController::class, 'addInterviewAction'])->name('mitra.add-interview-action');
-        Route::put('edit-interview-date/{id_pendaftar}/{id_interview}', [MitraController::class, 'editInterviewAction'])->name('mitra.edit-interview-action');
-        Route::post('add-note/{id_pendaftar}/{id_interview}', [MitraController::class, 'addNoteAction'])->name('mitra.add-note-action');
-        Route::put('edit-note/{id_pendaftar}/{id_interview}', [MitraController::class, 'editNoteAction'])->name('mitra.edit-note-action');
+        Route::put('edit-interview-date/{id_pendaftar}', [MitraController::class, 'editInterviewAction'])->name('mitra.edit-interview-action');
+        Route::post('add-note/{id_pendaftar}', [MitraController::class, 'addNoteAction'])->name('mitra.add-note-action');
+        Route::put('edit-note/{id_pendaftar}', [MitraController::class, 'editNoteAction'])->name('mitra.edit-note-action');
         // Route::post('send-note-hire/{id_pendaftar}', [MitraController::class, 'updateStatusHire'])->name('send.note.hire');
         // Route::post('send-note-reject/{id_pendaftar}', [MitraController::class, 'updateStatusReject'])->name('send.note.reject');
         
@@ -162,12 +162,9 @@ Route::prefix('user')->group(function () {
 
         // (User) Route untuk Detail User
         Route::get('detail-profile/{id}', [UserController::class, 'showDetailUserPage'])->name('user.detail-profile-page');
-        Route::get('edit-detail/{id}', [UserController::class, 'showEditUserPage'])->name('user.edit-profile-page');
         Route::put('edit-detail/{id}', [UserController::class, 'editUserAction'])->name('user.edit-profile-action');
         Route::put('edit-foto-profile/{id}', [UserController::class, 'editFotoProfileAction'])->name('user.edit-foto-profile-action');
-        Route::get('edit-akun/{id}', [UserController::class, 'showEditAkunPage'])->name('user.edit-akun-page');
         Route::put('edit-akun/{id}', [UserController::class, 'editAkunAction'])->name('user.edit-akun-action');
-        Route::get('edit-skill/{id}', [UserController::class, 'showEditSkillPage'])->name('user.edit-skill-page');
         Route::post('add-skill/{id}', [UserController::class, 'addSkillAction'])->name('user.add-skill-action');
         Route::delete('{id}/remove-skill/{id_skill}', [UserController::class, 'removeSkill'])->name('user.remove-skill-action');
         

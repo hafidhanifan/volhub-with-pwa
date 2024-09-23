@@ -297,7 +297,7 @@ class MitraController extends Controller
         $mitra = Mitra::find($id);
         $kegiatans = Kegiatan::where('id_mitra', $mitra->id_mitra)->get();
         $statusInterview = ['Not scheduled yet', 'On progress', 'Interview Completed'];
-        $pendaftar = Pendaftar::with(['user', 'interview'])->find($id_pendaftar);
+        $pendaftar = Pendaftar::with(['user'])->find($id_pendaftar);
 
         if (!$pendaftar) {
             return redirect()->route('mitra.pendaftar')->with('error', 'Pendaftar tidak ditemukan.');
@@ -307,32 +307,31 @@ class MitraController extends Controller
         $formattedNoteDate = null; 
 
         // Pengecekan status interview dan pembaruan status sesuai kondisi
-        if ($pendaftar->interview) {
-            $interview = $pendaftar->interview;
+        
 
             // Cek apakah tgl_interview dan lokasi_interview sudah diatur
-            if ($interview->tgl_interview && $interview->lokasi_interview) {
+            if ($pendaftar->tgl_interview && $pendaftar->lokasi_interview) {
                 // Format tanggal interview menjadi "26 August 2024"
-                $interviewDate = Carbon::parse($interview->tgl_interview);
+                $interviewDate = Carbon::parse($pendaftar->tgl_interview);
                 $formattedInterviewDate = $interviewDate->translatedFormat('d F Y');
 
                 // Cek jika tanggal interview sudah lewat
                 $endOfInterviewDay = $interviewDate->endOfDay();
                 if (Carbon::now()->greaterThan($endOfInterviewDay)) {
-                    $interview->status_interview = 'Interview Completed';
+                    $pendaftar->status_interview = 'Interview Completed';
                 } else {
-                    $interview->status_interview = 'On progress';
+                    $pendaftar->status_interview = 'On progress';
                 }
-                $interview->save();
+                $pendaftar->save();
             } else {
-                $interview->status_interview = 'Not scheduled yet';
-                $interview->save();
+                $pendaftar->status_interview = 'Not scheduled yet';
+                $pendaftar->save();
             }
 
-            if ($interview->tgl_note) {
-                $formattedNoteDate = Carbon::parse($interview->tgl_note)->translatedFormat('d F Y');
+            if ($pendaftar->tgl_note) {
+                $formattedNoteDate = Carbon::parse($pendaftar->tgl_note)->translatedFormat('d F Y');
             }
-        }
+        
 
         $id_user = $pendaftar->user->id;
 
@@ -343,7 +342,7 @@ class MitraController extends Controller
         // Mengambil ID kegiatan dari pendaftar dengan status diterima
         $acceptedKegiatanIds = DB::table('data_pendaftar')
             ->where('id_user', $id_user)
-            ->where('status_applicant', 'In-review')
+            ->where('status_applicant', 'Hire')
             ->pluck('id_kegiatan');
 
         // Mengambil data kegiatan berdasarkan ID yang diperoleh
@@ -362,22 +361,19 @@ class MitraController extends Controller
 
     public function addInterviewAction(Request $request, $id_pendaftar)
     {
-        $pendaftar = Pendaftar::with(['user', 'interview'])->find($id_pendaftar);
-        $interview = new Interview;
+        $pendaftar = Pendaftar::with(['user'])->find($id_pendaftar);
 
-        $interview->tgl_interview = $request->tgl_interview;
-        $interview->status_interview = 'Not scheduled yet';
-        $interview->lokasi_interview = $request->lokasi_interview;
+        $pendaftar->tgl_interview = $request->tgl_interview;
+        $pendaftar->status_interview = 'Not scheduled yet';
+        $pendaftar->lokasi_interview = $request->lokasi_interview;
 
-        $interview->save();
+        $pendaftar->save();
 
-        // Update id_interview di tabel data_pendaftar
-        $pendaftar->id_interview = $interview->id_interview;
         $pendaftar->status_applicant = 'Interview';
         $pendaftar->save();
 
         // Format tanggal dengan Carbon hingga akhir hari
-        $interviewDate = Carbon::parse($interview->tgl_interview);
+        $interviewDate = Carbon::parse($pendaftar->tgl_interview);
         $formattedInterviewDate = $interviewDate->translatedFormat('d F Y');
 
         // Cek apakah tanggal interview sudah lewat dari pukul 23:59
@@ -396,7 +392,7 @@ class MitraController extends Controller
             'success' => true,
             'message' => 'Interview schedule added successfully',
             'tgl_interview' => $formattedInterviewDate,
-            'lokasi_interview' => $interview->lokasi_interview,
+            'lokasi_interview' => $pendaftar->lokasi_interview,
             'status_interview' => $statusInterview,
         ]);
 
@@ -404,82 +400,17 @@ class MitraController extends Controller
                  ->with('success', 'Status pendaftaran berhasil diperbarui.');
     }
 
-    public function editInterviewAction(Request $request, $id_pendaftar, $id_interview)
+    public function addNoteAction(Request $request, $id_pendaftar)
     {
-        $pendaftar = Pendaftar::with(['user', 'interview'])->find($id_pendaftar);
-        $interview = Interview::find($id_interview);
+        $pendaftar = Pendaftar::with(['user'])->find($id_pendaftar);
 
-        $interview->tgl_interview = $request->tgl_interview;
-        $interview->status_interview = $request->status_interview;
-        $interview->lokasi_interview = $request->lokasi_interview;
-        $pendaftar->status_applicant = 'Interview';
+        $pendaftar->tgl_note = $request->tgl_note;
+        $pendaftar->note_interview = $request->note_interview;
 
-        $interview->save(); // Simpan nilai interview termasuk status awal
-
-        // Update id_interview di tabel data_pendaftar
-        $pendaftar->id_interview = $interview->id_interview;
-        $pendaftar->save();
-
-        // Format tanggal dengan Carbon hingga akhir hari
-        $interviewDate = Carbon::parse($interview->tgl_interview);
-        $formattedInterviewDate = $interviewDate->translatedFormat('d F Y');
-
-        // Cek apakah tanggal interview sudah lewat dari pukul 23:59
-        $now = Carbon::now();
-        $endOfInterviewDay = $interviewDate->endOfDay();
-
-        if ($now->greaterThan($endOfInterviewDay)) {
-            $interview->status_interview = 'Interview Completed';
-            $interview->save(); // Simpan kembali jika status berubah menjadi "Interview Completed"
-        } else {
-            // Jika tanggal interview belum mencapai akhir hari
-            $interview->status_interview = 'On progress'; // Atur status sebagai "On progress"
-        }
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Interview schedule added successfully',
-            'tgl_interview' => $formattedInterviewDate,
-            'lokasi_interview' => $interview->lokasi_interview,
-            'status_interview' => $interview->status_interview,
-        ]);
-                 
-    }
-
-    public function addNoteAction(Request $request, $id_pendaftar, $id_interview)
-    {
-        $pendaftar = Pendaftar::with(['user', 'interview'])->find($id_pendaftar);
-        $interview = Interview::find($id_interview);
-
-        $interview->tgl_note = $request->tgl_note;
-        $interview->note_interview = $request->note_interview;
-
-        $interview->save();
-
-        $pendaftar->id_interview = $interview->id_interview;
         $pendaftar->save();
 
         return redirect()->back()
                  ->with('success', 'Status pendaftaran berhasil diperbarui.');        
-    }
-
-    public function editNoteAction(Request $request, $id_pendaftar, $id_interview)
-    {
-        $pendaftar = Pendaftar::with(['user', 'interview'])->find($id_pendaftar);
-        $interview = Interview::find($id_interview);
-
-        $interview->tgl_note = $request->tgl_note;
-        $interview->note_interview = $request->note_interview;
-
-        $interview->save();
-
-        // Update id_interview di tabel data_pendaftar
-        $pendaftar->id_interview = $interview->id_interview;
-        $pendaftar->save();
-
-        return redirect()->back()
-                 ->with('success', 'Status pendaftaran berhasil diperbarui.');
-                 
     }
 
     public function updateStatusHire(Request $request, $id_pendaftar)

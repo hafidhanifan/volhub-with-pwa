@@ -77,35 +77,18 @@ class UserController extends Controller
     public function showDetailUserPage($id)
     {
         $user = User::find($id);
-        return view('user.layout.profile', compact('user'));
-    }
-
-    public function showEditUserPage($id)
-    {
-        $user = User::find($id);
         $gender = ['Perempuan', 'Laki-Laki'];
         $pendidikanTerakhir = ['SD', 'SMP', 'SMA/SMK', 'Diploma (D1 - D4)', 'Sarjana (S1)', 'Magister (S2)', 'Doktor (S3)'];
-        return view('user.layout.edit-data-diri', compact('user', 'gender', 'pendidikanTerakhir'));
-    }
-
-    public function showEditAkunPage($id)
-    {
-        $user = User::find($id);
-        return view('user.layout.edit-pengaturan-akun', compact('user'));
-    }
-
-    public function showEditSkillPage($id)
-    {
-        $user = User::find($id);
-        return view('user.layout.edit-skill', compact('user'));
+        return view('user.layout.profile', compact('user', 'gender', 'pendidikanTerakhir'));
     }
 
     public function editUserAction(Request $request, $id)
     {
         $user = User::find($id);
+        $gender = ['Perempuan', 'Laki-Laki'];
+        $pendidikanTerakhir = ['SD', 'SMP', 'SMA/SMK', 'Diploma (D1 - D4)', 'Sarjana (S1)', 'Magister (S2)', 'Doktor (S3)'];
         $user->nama_user = $request->nama_user;
         $user->bio = $request->bio;
-        $user->nomor_telephone = $request->nomor_telephone;
         $user->usia = $request->usia;
         $user->domisili = $request->domisili;
         $user->gender = $request->gender;
@@ -131,7 +114,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return view('user.layout.profile', compact('user'))->with('success', 'User berhasil diupdate.');
+        return view('user.layout.profile', compact('user', 'gender', 'pendidikanTerakhir'))->with('success', 'User berhasil diupdate.');
     }
     
     public function editFotoProfileAction(Request $request, $id)
@@ -173,14 +156,13 @@ class UserController extends Controller
     public function editAkunAction(Request $request, $id) 
     {
         $user = User::find($id);
-        $user->username = $request->username;
-        $user->password = $request->password;
+        $user->nomor_telephone = $request->nomor_telephone;
         $user->email_user = $request->email_user;
 
-        if ($request->filled('password')) {
-            // Enkripsi password
-            $user->password = Hash::make($request->password);
-        }
+        // if ($request->filled('password')) {
+        //     // Enkripsi password
+        //     $user->password = Hash::make($request->password);
+        // }
 
         $user->save();
 

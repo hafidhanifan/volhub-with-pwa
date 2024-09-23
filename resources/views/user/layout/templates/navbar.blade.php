@@ -48,7 +48,7 @@
           <div class="dropdown-icon">
             <i class="fa-solid fa-gear"></i>
           </div>
-          <a href="{{route('user.edit-profile-page', ['id' => $user->id])}}" class="dropdown-text">PENGATURAN AKUN</a>
+          <a href="" class="dropdown-text">PENGATURAN AKUN</a>
         </div>
         <div class="dropdown-item">
           <div class="dropdown-icon">

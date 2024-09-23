@@ -87,23 +87,21 @@
                     <h3>Schedule Interview</h3>
                   </div>
                   <div class="modal__formSchedule">
-                    <form id="scheduleForm" action="{{ isset($pendaftar->interview) ? route('mitra.edit-interview-action', ['id_pendaftar' => $pendaftar->id_pendaftar, 'id_interview'=>$pendaftar->id_interview]) : route('mitra.add-interview-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST" class="schedule-interview-form">
+                    <form id="scheduleForm" action="{{ route('mitra.add-interview-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST" class="schedule-interview-form">
                       @csrf
-                      @if(isset($pendaftar->interview))
-                        @method('PUT')
-                      @endif
+                      
                       <div class="schedule-interview-information">
                         <div class="interview-date-form">
                           <label>Interview Date</label>
-                          <input type="date" name="tgl_interview" value="{{ isset($pendaftar->interview) ? $pendaftar->interview->tgl_interview : '' }}" />
+                          <input type="date" name="tgl_interview" value="{{ isset($pendaftar->tgl_interview) ? $pendaftar->tgl_interview : '' }}" />
                         </div>
                         <div class="interview-location-form">
                           <label>Interview Location</label>
-                          <textarea rows="3" name="lokasi_interview">{{ old('lokasi_interview', isset($pendaftar->interview) ? $pendaftar->interview->lokasi_interview : '') }}</textarea>
+                          <textarea rows="3" name="lokasi_interview">{{ old('lokasi_interview', isset($pendaftar->tgl_interview) ? $pendaftar->lokasi_interview : '') }}</textarea>
                         </div>
                       </div>
                       <button type="submit" class="main-btn-kategori primary-btn rounded btn-hover right-align" id="scheduleAction">
-                        {{ isset($pendaftar->interview) ? 'Update Schedule' : 'Set Schedule' }}
+                        {{ isset($pendaftar->tgl_interview) ? 'Update Schedule' : 'Set Schedule' }}
                       </button>
                     </form>
                   </div>
@@ -350,7 +348,7 @@
                         <div class="interview-information">
                           <div class="interview-information__date">
                             <p class="interview-information-title">Interview Date</p>
-                            @if ($pendaftar->interview)
+                            @if ($pendaftar->tgl_interview)
                               <p class="interview-information-isi" id="interview-date">{{ $formattedInterviewDate }}</p>
                             @else
                               <p id="interview-date">Set schedule first</p>
@@ -360,9 +358,9 @@
                             <p class="interview-information-title">Interview Status</p>
                             <div class="interview-information-isi-status">
                               @if ($pendaftar->status_applicant === 'Hire' || $pendaftar->status_applicant === 'Reject')
-                                @if ($pendaftar->interview)
-                                  @if ($pendaftar->interview->status_interview === 'Interview Completed')
-                                    <p id="status_interview" class="status-completed">{{ ucfirst($pendaftar->interview->status_interview) }}</p>
+                                @if ($pendaftar->tgl_interview)
+                                  @if ($pendaftar->status_interview === 'Interview Completed')
+                                    <p id="status_interview" class="status-completed">{{ ucfirst($pendaftar->status_interview) }}</p>
                                   @else
                                     <p id="status_interview" class="status-completed">Interview Completed</p>
                                   @endif
@@ -370,17 +368,17 @@
                                   <p id="status_interview" class="status-not-scheduled">Not scheduled yet</p>
                                 @endif
                               @else
-                                @if ($pendaftar->interview)
+                                @if ($pendaftar->tgl_interview)
                                   <p id="status_interview" class="
-                                    @if ($pendaftar->interview->status_interview === 'Not scheduled yet')
+                                    @if ($pendaftar->status_interview === 'Not scheduled yet')
                                       status-not-scheduled
-                                    @elseif ($pendaftar->interview->status_interview === 'On progress')
+                                    @elseif ($pendaftar->status_interview === 'On progress')
                                       status-on-progress
-                                    @elseif ($pendaftar->interview->status_interview === 'Interview Completed')
+                                    @elseif ($pendaftar->status_interview === 'Interview Completed')
                                       status-completed
                                     @endif
                                   ">
-                                    {{ ucfirst($pendaftar->interview->status_interview) }}
+                                    {{ ucfirst($pendaftar->status_interview) }}
                                   </p>
                                 @else
                                   <p class="status-not-scheduled">Not scheduled yet</p>
@@ -391,8 +389,8 @@
                         </div>
                         <div class="interview-information__location">
                           <p class="interview-information-title">Interview Location</p>
-                          @if ($pendaftar->interview)
-                            <p class="interview-information-isi" id="interview-location">{{ $pendaftar->interview->lokasi_interview }}</p>
+                          @if ($pendaftar->tgl_interview)
+                            <p class="interview-information-isi" id="interview-location">{{ $pendaftar->lokasi_interview }}</p>
                           @else
                             <p id="interview-location">Set schedule first</p>
                           @endif
@@ -419,7 +417,7 @@
                         <div class="note-interview">
                           <p>Note</p>
                           <div class="add-button-note">
-                            @if ($pendaftar->interview && $pendaftar->interview->note_interview)
+                            @if ($pendaftar->tgl_interview && $pendaftar->note_interview)
                               <i class="fa-solid fa-pen"></i>
                               <button class="add-note-button" id="openModalAddNote">
                                 Update Note
@@ -440,11 +438,11 @@
                             </div>
                             <p class="note-interview-date">{{$formattedNoteDate}}</p>
                           </div>
-                          @if ($pendaftar->interview && $pendaftar->interview->note_interview)
+                          @if ($pendaftar->tgl_interview && $pendaftar->note_interview)
                             <div class="note-interview-isi">
                               {{-- <p>{{$pendaftar->interview->note_interview}}</p> --}}
-                              <p class="short-note">{{ Str::limit($pendaftar->interview->note_interview, 150, '...') }}</p>
-                              <p class="more-note" style="display: none;">{{ $pendaftar->interview->note_interview }}</p>
+                              <p class="short-note">{{ Str::limit($pendaftar->note_interview, 150, '...') }}</p>
+                              <p class="more-note" style="display: none;">{{ $pendaftar->note_interview }}</p>
                               <a href="javascript:void(0);" onclick="toggleNote(this)" class="read-more-note">More</a>
                             </div>
                           </div>
@@ -465,7 +463,7 @@
                             </div>
                             <p class="note-interview-date">{{$formattedNoteDate}}</p>
                           </div>
-                          @if ($pendaftar->interview && $pendaftar->note_to_applicant)
+                          @if ($pendaftar->tgl_interview && $pendaftar->note_to_applicant)
                               <div class="note-interview-isi">
                                   <p class="short-note">{{ Str::limit($pendaftar->note_to_applicant, 150, '...') }}</p>
                                   <p class="more-note" style="display: none;">{{ $pendaftar->note_to_applicant }}</p>
@@ -484,7 +482,7 @@
                     {{-- MODAL ADD NOTE --}}
                     <div id="modalAddNote" class="modal__interview">
                       <div class="modal__schedule">
-                        @if (!isset($pendaftar->interview) || !$pendaftar->interview->id_interview)
+                        @if (!isset($pendaftar->tgl_interview))
                             <p class="text-warning">Please set the schedule first before adding or updating a note.</p>
                         @else
                           <div class="modal__headerSchedule">
@@ -492,21 +490,17 @@
                               <h3>New Note</h3>
                           </div>
                           <div class="modal__formSchedule">
-                            <form action="{{ isset($pendaftar->interview) && $pendaftar->interview->id_interview
-                              ? route('mitra.edit-note-action', ['id_pendaftar' => $pendaftar->id_pendaftar, 'id_interview' => $pendaftar->interview->id_interview])
-                              : route('mitra.add-note-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}"
+                            <form action="{{ route('mitra.add-note-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}"
                               method="POST" class="schedule-interview-form">
                               @csrf
-                              @if(isset($pendaftar->interview))
-                                  @method('PUT') <!-- Gunakan PUT atau PATCH untuk update/edit -->
-                              @endif
+                            
                                 <div class="interview-location-form">
                                   <label>Note</label>
-                                  <input type="date" name="tgl_note" value="{{ isset($pendaftar->interview) ? $pendaftar->interview->tgl_note : '' }}" ></input>
-                                  <textarea rows="3" name="note_interview">{{ old('note_interview', isset($pendaftar->interview) ? $pendaftar->interview->note_interview : '') }}</textarea>
+                                  <input type="date" name="tgl_note" value="{{ isset($pendaftar->tgl_interview) ? $pendaftar->tgl_note : '' }}" ></input>
+                                  <textarea rows="3" name="note_interview">{{ old('note_interview', isset($pendaftar->tgl_interview) ? $pendaftar->note_interview : '') }}</textarea>
                                 </div>
                                 <button type="submit" class="main-btn-kategori primary-btn rounded btn-hover right-align">
-                                  {{ isset($pendaftar->interview) && $pendaftar->interview->note_interview ? 'Update Note' : 'Add New Note' }}
+                                  {{ isset($pendaftar->tgl_interview) && $pendaftar->note_interview ? 'Update Note' : 'Add New Note' }}
                                 </button>
                             </form>
                           </div>
