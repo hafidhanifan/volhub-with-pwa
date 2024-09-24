@@ -114,6 +114,225 @@
         </button>
       </div>
     </div>
+    <!-- Modal Settings Start--> 
+    <div id="modalSetting"
+      class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+      <div class="w-4/5 md:max-w-4xl bg-white border-b-2 rounded-lg shadow-lg">
+        <div class="flex items-center justify-between p-4 border-b-2">
+          <h2 class="text-xl font-semibold">Settings</h2>
+          <button id="closeModalSetting" class="text-gray-600 hover:text-gray-900">
+            <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
+                fill="#0F0F0F" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex flex-col items-center md:flex-row md:items-start">
+          <div class="">
+            <ul class="flex md:flex-col">
+              <li>
+                <button id="profileBtn"
+                  class="py-4 pl-4 pr-16 w-full text-left border-b-4 md:border-b-0 md:border-r-4 border-sky-600 bg-sky-100 hover:bg-sky-100">
+                  Profile
+                </button>
+              </li>
+              <li>
+                <button id="contactBtn"
+                  class="py-4 pl-4 pr-16 w-full text-left border-b-4 md:border-b-0 md:border-r-4 border-transparent hover:bg-sky-100">
+                  Contact
+                </button>
+              </li>
+              <li>
+                <button id="accountBtn"
+                  class="py-4 pl-4 pr-16 w-full text-left border-b-4 md:border-b-0 md:border-r-4 border-transparent hover:bg-sky-100">
+                  Account
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="w-4/5">
+            <div id="profileContent"
+              class="max-h-[50vh] md:max-h-[60vh] lg:max-h-[80vh] md:px-8 py-4 overflow-y-auto hide-scrollbar md:border-l-2">
+              <div class="flex flex-col md:flex-row gap-4 items-center">
+                <img src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="" class="w-28 rounded-full" />
+                <div class="flex flex-col md:flex-row gap-4">
+                  <button type="button"
+                    class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Change Picture
+                  </button>
+                  <button id="deletePicture" type="button"
+                    class="px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                    Delete Picture
+                  </button>
+
+                  <!-- Modal Alert Delete Picture Start-->
+                  <div id="deleteModal"
+                    class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+                    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+                      <h3 class="text-lg font-bold mb-4">
+                        Are you sure?
+                      </h3>
+                      <p class="text-sm text-gray-600 mb-6">
+                        Do you really want to delete this picture? This
+                        process cannot be undone.
+                      </p>
+                      <div class="flex justify-end space-x-3">
+                        <button id="cancelDelete" type="button"
+                          class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                          Cancel
+                        </button>
+                        <button id="confirmDelete" type="button"
+                          class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                          Yes, Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal Alert Delete Picture End -->
+                </div>
+              </div>
+              <form class="mt-8" action="{{ route('user.edit-profile-action', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label for="name" class="block mb-2 font-medium text-gray-900">Profile Name</label>
+                    <input type="text" id="name"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your name" name="nama_user" value="{{ old('user', $user->nama_user) }}" required />
+                  </div>
+                  <div>
+                    <label for="name" class="block mb-2 font-medium text-gray-900">Bio</label>
+                    <input type="text" id="bio"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your bio" name="bio" value="{{ old('user', $user->bio) }}" />
+                  </div>
+                  <div>
+                    <label for="name" class="block mb-2 font-medium text-gray-900">Gender</label>
+                    <select id="gender"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your gender" name="gender"> 
+                      <option value="">Choose Gender</option>
+                        @foreach($gender as $gender)
+                          <option value="{{ $gender }}" @if(old('gender', $user->gender) == $gender) selected @endif>{{ ucfirst($gender) }}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                  <div>
+                    <label for="name" class="block mb-2 font-medium text-gray-900">Age</label>
+                    <input type="text" id="usia"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your age" name="usia" value="{{ old('user', $user->usia) }}" />
+                  </div>
+                  <div>
+                    <label for="name" class="block mb-2 font-medium text-gray-900">Domicile</label>
+                    <input type="text" id="domisili"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your domicile" name="domisili" value="{{ old('user', $user->domisili) }}" />
+                  </div>
+                  <div>
+                    <label for="name" class="block mb-2 font-medium text-gray-900">Last Education</label>
+                    <select id="pendidikan_terakhir"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your last education" name="pendidikan_terakhir">
+                      <option value="">Choose Last Education</option>
+                        @foreach($pendidikanTerakhir as $pendidikan)
+                          <option value="{{ $pendidikan }}"@if(old('pendidikan', $user->pendidikan_terakhir) == $pendidikan) selected @endif>{{ ucfirst($pendidikan) }}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                </div>
+                <div class="grid gap-6 mb-6">
+                  <div>
+                    <label for="cv" class="block mb-2 font-medium text-gray-900 cursor-pointer">CV</label>
+                    <input type="file" id="cv"
+                      class="w-full p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block hover:cursor-pointer"
+                      placeholder="Insert your bio" name="cv" />
+                  </div>
+                  <div>
+                    <label for="name" class="block mb-2 font-medium text-gray-900">Description</label>
+                    <textarea name="deskripsi" id="deskripsi"
+                      class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Tell about yourself" required>{{ old('user', $user->deskripsi) }}</textarea>
+                  </div>
+                </div>
+                <div class="flex justify-end">
+                  <button type="submit"
+                    class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div id="contactContent" class="hidden">
+              <form class="p-8" action="{{ route('user.edit-akun-action', ['id' => $user->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="grid gap-6 mb-6">
+                  <div>
+                    <label for="emailUser" class="block mb-2 font-medium text-gray-900">Email</label>
+                    <input type="email" id="emailUser"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your Email" name="email_user" value="{{ old('user', $user->email_user) }}" required />
+                  </div>
+                  <div>
+                    <label for="phone" class="block mb-2 font-medium text-gray-900">Phone</label>
+                    <input type="text" id="phone"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your bio" name="nomor_telephone" value="{{ old('user', $user->nomor_telephone) }}" required />
+                  </div>
+                  <div>
+                    <label for="emailUser" class="block mb-2 font-medium text-gray-900">Instagram</label>
+                    <input type="text" id="instagramUser"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your Email" value="dinda@gmail.com" />
+                  </div>
+                  <div>
+                    <label for="phone" class="block mb-2 font-medium text-gray-900">LinkedIn</label>
+                    <input type="text" id="linkedinUser"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your bio" value="+6281802231234" />
+                  </div>
+                </div>
+                <div class="flex justify-end">
+                  <button type="submit"
+                    class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div id="accountContent" class="hidden">
+              <form class="p-8">
+                <div class="grid gap-6 mb-6">
+                  <div>
+                    <label for="emailUser" class="block mb-2 font-medium text-gray-900">Username</label>
+                    <input type="text" id="usernameUser"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your Email" value="{{ old('user', $user->username) }}" required />
+                  </div>
+                  <div>
+                    <label for="phone" class="block mb-2 font-medium text-gray-900">Password</label>
+                    <input type="password" id="passwordUser"
+                      class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Insert your bio" value="{{ old('user', $user->password) }}" required />
+                  </div>
+                </div>
+                <div class="flex justify-end">
+                  <button type="button"
+                    class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Settings End -->
     <div class="container mx-auto p-6 shadow-sm rounded-xl bg-white border border-slate-200">
       <!-- Button Navigation Start -->
       <div class="max-w-sm mx-auto">
@@ -320,24 +539,22 @@
                 Add
               </button>
             </div>
-            <div class="rounded-2xl m-4 flex">
+            <?php $no = 1 ?>
+            @foreach($user->experiences as $experience)
+            <div class="rounded-2xl m-4 flex justify-between">
               <div class="">
                 <div class="flex items-center gap-4 px-4 pb-2">
                   <div class="overflow-hidden">
                     <h2 class="text-lg font-semibold line-clamp-2">
-                      Pembersihan Pantai Indrayanti
+                      {{$experience->judul_kegiatan}}
                     </h2>
-                    <p class="text-sm">Mitra VolHub</p>
+                    <p class="text-sm">{{$experience->mitra}}</p>
                   </div>
                 </div>
                 <div class="max-h-32 overflow-hidden">
                   <p class="text-sm text-gray-700 line-clamp-2 px-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Repudiandae harum architecto, non itaque voluptas ut, sunt
-                    impedit expedita maxime debitis perspiciatis facilis autem
-                    sit rerum assumenda necessitatibus minus quo consectetur?
+                    {{$experience->deskripsi}}
                   </p>
-                  <button class="px-4">More</button>
                 </div>
               </div>
               <div class="">
@@ -354,38 +571,7 @@
                 </button>
               </div>
             </div>
-            <div class="rounded-2xl m-4 flex">
-              <div class="">
-                <div class="flex items-center gap-4 px-4 pb-2">
-                  <div class="overflow-hidden">
-                    <h2 class="text-lg font-semibold line-clamp-2">
-                      Pembersihan Pantai Indrayanti
-                    </h2>
-                    <p class="text-sm">Mitra VolHub</p>
-                  </div>
-                </div>
-                <div class="max-h-32 overflow-hidden">
-                  <p class="text-sm text-gray-700 line-clamp-2 px-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Repudiandae harum architecto, non itaque voluptas ut, sunt
-                    impedit expedita maxime debitis perspiciatis facilis autem
-                    sit rerum assumenda necessitatibus minus quo consectetur?
-                  </p>
-                  <button class="px-4">More</button>
-                </div>
-              </div>
-              <div class="">
-                <svg class="w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                  <g id="SVGRepo_iconCarrier">
-                    <path
-                      d="M15.4998 5.50067L18.3282 8.3291M13 21H21M3 21.0004L3.04745 20.6683C3.21536 19.4929 3.29932 18.9052 3.49029 18.3565C3.65975 17.8697 3.89124 17.4067 4.17906 16.979C4.50341 16.497 4.92319 16.0772 5.76274 15.2377L17.4107 3.58969C18.1918 2.80865 19.4581 2.80864 20.2392 3.58969C21.0202 4.37074 21.0202 5.63707 20.2392 6.41812L8.37744 18.2798C7.61579 19.0415 7.23497 19.4223 6.8012 19.7252C6.41618 19.994 6.00093 20.2167 5.56398 20.3887C5.07171 20.5824 4.54375 20.6889 3.48793 20.902L3 21.0004Z"
-                      stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                  </g>
-                </svg>
-              </div>
-            </div>
+            @endforeach
           </div>
           <!-- Modal Add Experience Start -->
           <div id="addExperienceModal"
@@ -401,32 +587,51 @@
                   </svg>
                 </button>
               </div>
-              <form action="" class="">
+              <form action="{{ route ('user.add-experience-action', ['id' => $user->id]) }}" method="POST" class="">
+                @csrf
                 <div class="my-4">
                   <label for="activity-name" class="block mb-2 font-medium text-gray-900">Activity Name</label>
-                  <input type="text" id="activityName"
+                  <input type="text" id="activityName" name="judul_kegiatan"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Insert your name" required />
+                    placeholder="Insert activity name" required />
                 </div>
                 <div class="my-4">
-                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Partner Activity</label>
-                  <input type="text" id="partnerActivity"
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Company Name</label>
+                  <input type="text" id="partnerActivity" name="mitra"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Insert your partner name" required />
+                    placeholder="Insert company name" required />
+                </div>
+                <div class="my-4">
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Location</label>
+                  <input type="text" id="partnerActivity" name="lokasi_kegiatan"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                    placeholder="Insert location" />
+                </div>
+                <div class="my-4">
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Start Date</label>
+                  <input type="date" id="partnerActivity" name="tgl_mulai"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                    placeholder="Insert start date" required />
+                </div>
+                <div class="my-4">
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">End Date</label>
+                  <input type="date" id="partnerActivity" name="tgl_selesai"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                    placeholder="Insert end date" />
                 </div>
                 <div class="my-4">
                   <label for="description" class="block mb-2 font-medium text-gray-900">Description</label>
-                  <textarea name="description" id="name"
+                  <textarea name="deskripsi" id="name"
                     class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Tell about yourself" required></textarea>
+                    required></textarea>
+                </div>
+                <div class="mt-8 flex justify-end">
+                  <button type="submit"
+                    class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                    Add
+                  </button>
                 </div>
               </form>
-              <div class="mt-8 flex justify-end">
-                <button type="button"
-                  class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
-                  Add
-                </button>
-              </div>
             </div>
           </div>
           <!-- Modal Add Experience End -->
@@ -503,225 +708,7 @@
           <!-- Modal Alert Delete Experience End -->
           <!-- Experience End -->
 
-          <!-- Modal Settings Start -->
-          <div id="modalSetting"
-            class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div class="w-4/5 md:max-w-4xl bg-white border-b-2 rounded-lg shadow-lg">
-              <div class="flex items-center justify-between p-4 border-b-2">
-                <h2 class="text-xl font-semibold">Settings</h2>
-                <button id="closeModalSetting" class="text-gray-600 hover:text-gray-900">
-                  <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                      fill="#0F0F0F" />
-                  </svg>
-                </button>
-              </div>
-
-              <div class="flex flex-col items-center md:flex-row md:items-start">
-                <div class="">
-                  <ul class="flex md:flex-col">
-                    <li>
-                      <button id="profileBtn"
-                        class="py-4 pl-4 pr-16 w-full text-left border-b-4 md:border-b-0 md:border-r-4 border-sky-600 bg-sky-100 hover:bg-sky-100">
-                        Profile
-                      </button>
-                    </li>
-                    <li>
-                      <button id="contactBtn"
-                        class="py-4 pl-4 pr-16 w-full text-left border-b-4 md:border-b-0 md:border-r-4 border-transparent hover:bg-sky-100">
-                        Contact
-                      </button>
-                    </li>
-                    <li>
-                      <button id="accountBtn"
-                        class="py-4 pl-4 pr-16 w-full text-left border-b-4 md:border-b-0 md:border-r-4 border-transparent hover:bg-sky-100">
-                        Account
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                <div class="w-4/5">
-                  <div id="profileContent"
-                    class="max-h-[50vh] md:max-h-[60vh] lg:max-h-[80vh] md:px-8 py-4 overflow-y-auto hide-scrollbar md:border-l-2">
-                    <div class="flex flex-col md:flex-row gap-4 items-center">
-                      <img src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="" class="w-28 rounded-full" />
-                      <div class="flex flex-col md:flex-row gap-4">
-                        <button type="button"
-                          class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                          Change Picture
-                        </button>
-                        <button id="deletePicture" type="button"
-                          class="px-3 py-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                          Delete Picture
-                        </button>
-
-                        <!-- Modal Alert Delete Picture Start-->
-                        <div id="deleteModal"
-                          class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-                          <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-                            <h3 class="text-lg font-bold mb-4">
-                              Are you sure?
-                            </h3>
-                            <p class="text-sm text-gray-600 mb-6">
-                              Do you really want to delete this picture? This
-                              process cannot be undone.
-                            </p>
-                            <div class="flex justify-end space-x-3">
-                              <button id="cancelDelete" type="button"
-                                class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
-                                Cancel
-                              </button>
-                              <button id="confirmDelete" type="button"
-                                class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-                                Yes, Delete
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- Modal Alert Delete Picture End -->
-                      </div>
-                    </div>
-                    <form class="mt-8" action="{{ route('user.edit-profile-action', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
-                      @csrf
-                      @method('PUT')
-                      <div class="grid grid-cols-2 gap-6 mb-6">
-                        <div>
-                          <label for="name" class="block mb-2 font-medium text-gray-900">Profile Name</label>
-                          <input type="text" id="name"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your name" name="nama_user" value="{{ old('user', $user->nama_user) }}" required />
-                        </div>
-                        <div>
-                          <label for="name" class="block mb-2 font-medium text-gray-900">Bio</label>
-                          <input type="text" id="bio"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your bio" name="bio" value="{{ old('user', $user->bio) }}" />
-                        </div>
-                        <div>
-                          <label for="name" class="block mb-2 font-medium text-gray-900">Gender</label>
-                          <select id="gender"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your gender" name="gender"> 
-                            <option value="">Choose Gender</option>
-                              @foreach($gender as $gender)
-                                <option value="{{ $gender }}" @if(old('gender', $user->gender) == $gender) selected @endif>{{ ucfirst($gender) }}</option>
-                              @endforeach
-                          </select>
-                        </div>
-                        <div>
-                          <label for="name" class="block mb-2 font-medium text-gray-900">Age</label>
-                          <input type="text" id="usia"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your age" name="usia" value="{{ old('user', $user->usia) }}" />
-                        </div>
-                        <div>
-                          <label for="name" class="block mb-2 font-medium text-gray-900">Domicile</label>
-                          <input type="text" id="domisili"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your domicile" name="domisili" value="{{ old('user', $user->domisili) }}" />
-                        </div>
-                        <div>
-                          <label for="name" class="block mb-2 font-medium text-gray-900">Last Education</label>
-                          <select id="pendidikan_terakhir"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your last education" name="pendidikan_terakhir">
-                            <option value="">Choose Last Education</option>
-                              @foreach($pendidikanTerakhir as $pendidikan)
-                                <option value="{{ $pendidikan }}"@if(old('pendidikan', $user->pendidikan_terakhir) == $pendidikan) selected @endif>{{ ucfirst($pendidikan) }}</option>
-                              @endforeach
-                          </select>
-                        </div>
-                      </div>
-                      <div class="grid gap-6 mb-6">
-                        <div>
-                          <label for="cv" class="block mb-2 font-medium text-gray-900 cursor-pointer">CV</label>
-                          <input type="file" id="cv"
-                            class="w-full p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block hover:cursor-pointer"
-                            placeholder="Insert your bio" name="cv" />
-                        </div>
-                        <div>
-                          <label for="name" class="block mb-2 font-medium text-gray-900">Description</label>
-                          <textarea name="deskripsi" id="deskripsi"
-                            class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Tell about yourself" required>{{ old('user', $user->deskripsi) }}</textarea>
-                        </div>
-                      </div>
-                      <div class="flex justify-end">
-                        <button type="submit"
-                          class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
-                          Save Changes
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  <div id="contactContent" class="hidden">
-                    <form class="p-8" action="{{ route('user.edit-akun-action', ['id' => $user->id]) }}" method="POST">
-                      @csrf
-                      @method('PUT')
-                      <div class="grid gap-6 mb-6">
-                        <div>
-                          <label for="emailUser" class="block mb-2 font-medium text-gray-900">Email</label>
-                          <input type="email" id="emailUser"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your Email" name="email_user" value="{{ old('user', $user->email_user) }}" required />
-                        </div>
-                        <div>
-                          <label for="phone" class="block mb-2 font-medium text-gray-900">Phone</label>
-                          <input type="text" id="phone"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your bio" name="nomor_telephone" value="{{ old('user', $user->nomor_telephone) }}" required />
-                        </div>
-                        <div>
-                          <label for="emailUser" class="block mb-2 font-medium text-gray-900">Instagram</label>
-                          <input type="text" id="instagramUser"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your Email" value="dinda@gmail.com" />
-                        </div>
-                        <div>
-                          <label for="phone" class="block mb-2 font-medium text-gray-900">LinkedIn</label>
-                          <input type="text" id="linkedinUser"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your bio" value="+6281802231234" />
-                        </div>
-                      </div>
-                      <div class="flex justify-end">
-                        <button type="submit"
-                          class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
-                          Save Changes
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  <div id="accountContent" class="hidden">
-                    <form class="p-8">
-                      <div class="grid gap-6 mb-6">
-                        <div>
-                          <label for="emailUser" class="block mb-2 font-medium text-gray-900">Username</label>
-                          <input type="text" id="usernameUser"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your Email" value="{{ old('user', $user->username) }}" required />
-                        </div>
-                        <div>
-                          <label for="phone" class="block mb-2 font-medium text-gray-900">Password</label>
-                          <input type="password" id="passwordUser"
-                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                            placeholder="Insert your bio" value="{{ old('user', $user->password) }}" required />
-                        </div>
-                      </div>
-                      <div class="flex justify-end">
-                        <button type="button"
-                          class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
-                          Save Changes
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Modal Settings End -->
+          
         </div>
       </div>
       <div id="activityContent" class="hidden container mt-8">

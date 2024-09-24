@@ -46,5 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Pendaftar::class, 'id_user');
     }
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class, 'id_user');
+    }
 
 }

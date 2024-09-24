@@ -42,9 +42,5 @@ class Mitra extends Authenticatable
         return $this->hasMany(Kegiatan::class, 'id_mitra');
     }
 
-    public function Interview()
-    {
-        return $this->hasMany(Interview::class, 'id_mitra');
-    }
 
 }

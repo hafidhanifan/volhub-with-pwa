@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Skill;
 use App\Models\Kegiatan;
 use App\Models\Pendaftar;
+use App\Models\Experience;
 use Illuminate\Http\Request;
 // use Intervention\Image\Image;
 use Image;
@@ -194,6 +195,25 @@ class UserController extends Controller
 
         // Redirect kembali dengan pesan sukses
         return redirect()->back()->with('success', 'Kemampuan berhasil dihapus.');
+    }
+
+    public function addExperienceAction(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $experience = new Experience;
+
+        $experience->id_user = $user->id;
+        $experience->judul_kegiatan = $request->judul_kegiatan;
+        $experience->lokasi_kegiatan = $request->lokasi_kegiatan;
+        $experience->tgl_mulai = $request->tgl_mulai;
+        $experience->tgl_selesai = $request->tgl_selesai;
+        $experience->deskripsi = $request->deskripsi;
+        $experience->mitra = $request->mitra;
+
+        $experience->save();
+
+        return redirect()->back();
     }
 
     //All About Kegiatan
