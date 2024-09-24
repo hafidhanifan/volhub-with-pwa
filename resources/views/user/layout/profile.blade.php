@@ -241,7 +241,8 @@
                     <div class="relative">
                       <span
                         class="bg-snippet text-white text-sm py-2 px-8 rounded-xl text-center">{{$skill->nama_skill}}</span>
-                      <button id="deleteSkill">
+                      <button id="deleteSkill{{ $skill->id_skill }}" class="delete-skill-btn"
+                        data-id="{{ $skill->id_skill }}">
                         <svg class="w-6 absolute -inset-2 left-[68px]" viewBox="0 0 24 24" fill="none"
                           xmlns="http://www.w3.org/2000/svg">
                           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -270,12 +271,10 @@
                           class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
                           Cancel
                         </button>
-                        <form
-                          action="{{ route('user.remove-skill-action', ['id' => $user->id, 'id_skill' => $skill->id_skill]) }}"
-                          method="POST" style="display: inline;">
+                        <form id="confirmDeleteSkill" action="" method="POST" style="display: inline;">
                           @csrf
                           @method('DELETE')
-                          <button id="confirmDeleteSkill" type="submit"
+                          <button type="submit"
                             class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
                             Yes, Delete
                           </button>
@@ -284,17 +283,18 @@
                     </div>
                   </div>
                   <!-- Modal ALert Delete Skill End -->
-                  <form action="" class="mt-8">
+                  <form action="{{ route('user.add-skill-action', ['id' => $user->id])}}" method="POST" class="mt-8">
+                    @csrf
                     <input type="text" id="skill"
                       class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                      placeholder="Insert your skill" required />
+                      placeholder="Insert your skill" name="nama_skill" required />
+                    <div class="mt-8 flex justify-end">
+                      <button type="submit"
+                        class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                        Save Changes
+                      </button>
+                    </div>
                   </form>
-                  <div class="mt-8 flex justify-end">
-                    <button type="button"
-                      class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
-                      Save Changes
-                    </button>
-                  </div>
                 </div>
               </div>
               <!-- Modal Add Skill End -->
@@ -893,15 +893,18 @@
         const modal = document.getElementById("deleteModal");
         const cancelDeleteButton = document.getElementById("cancelDelete");
         const confirmDeleteButton = document.getElementById("confirmDelete");
+
         // Modal Skill (Element Selection)
-        const deleteSkill = document.getElementById("deleteSkill");
+        const deleteSkill = document.querySelectorAll(".delete-skill-btn");
         const deleteSkillModal = document.getElementById("deleteSkillModal");
         const confirmDeleteSkill =
           document.getElementById("confirmDeleteSkill");
         const cancelDeleteSkill = document.getElementById("cancelDeleteSkill");
         const closeModalSkill = document.getElementById("closeModalSkill");
         const showSkillModal = document.getElementById("addSkillModal");
-        const openModalAddSkillButton = document.getElementById("openModalAddSkill");
+        const openModalAddSkillButton =
+          document.getElementById("openModalAddSkill");
+        
         // Modal Add Experience (Element Selection)
         const addExperienceButton = document.getElementById(
           "addExperienceButton"
@@ -943,8 +946,15 @@
           showSkillModal.classList.remove("hidden");
         });
 
-        deleteSkillButtons.addEventListener("click", function () {
-            deleteSkillModal.classList.remove("hidden");
+        deleteSkill.forEach(button => {
+          button.addEventListener('click', function () {
+              const skillId = this.getAttribute('data-id');
+              const userId = "{{ $user->id }}"; // Ambil user ID dari variabel PHP
+              const actionUrl = `{{ url('user', [$user->id, 'remove-skill']) }}/${skillId}`;
+              confirmDeleteSkill.setAttribute('action', actionUrl);
+
+              deleteSkillModal.classList.remove('hidden');
+          });
         });
 
         cancelDeleteSkill.addEventListener("click", function () {
