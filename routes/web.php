@@ -168,6 +168,7 @@ Route::prefix('user')->group(function () {
         Route::post('add-skill/{id}', [UserController::class, 'addSkillAction'])->name('user.add-skill-action');
         Route::delete('{id}/remove-skill/{id_skill}', [UserController::class, 'removeSkill'])->name('user.remove-skill-action');
         Route::post('add-experience/{id}', [UserController::class, 'addExperienceAction'])->name('user.add-experience-action');
+        Route::put('edit-experience/{id}/{id_experience}', [UserController::class, 'editExperienceAction'])->name('user.edit-experience-action');
 
         // (User) Route untuk Detail Kegiatan
         Route::get('{id}/detail-kegiatan/{id_kegiatan}', [UserController::class, 'showDetailKegiatanPage'])->name('user.detail-kegiatan-page');

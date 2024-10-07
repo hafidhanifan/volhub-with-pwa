@@ -30,7 +30,9 @@ class User extends Authenticatable
         'bio',
         'usia',
         'foto_profile',
-        'cv'
+        'cv',
+        'instagram',
+        'linkedIn'
     ];
 
     protected $hidden = [

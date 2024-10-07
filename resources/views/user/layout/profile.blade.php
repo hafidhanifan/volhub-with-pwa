@@ -89,8 +89,9 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium">Instagram</span>
-            <a class="text-sm hover:text-blueText block" href="https://www.instagram.com/nda.fg/"
-              target="_blank">https://www.instagram.com/nda.fg/</a>
+            <a href="{{ (strpos($user->instagram, 'http://') === 0 || strpos($user->instagram, 'https://') === 0) ? $user->instagram : 'https://' . $user->instagram }}" 
+              class="text-sm hover:text-blueText block" 
+              target="_blank">{{$user->instagram}}</a>
           </div>
         </div>
         <div class="flex gap-4 mt-4 border-b-2 pb-8">
@@ -104,9 +105,9 @@
             </g>
           </svg>
           <div class="flex flex-col">
-            <span class="font-medium">Linkedin</span>
-            <a href="https://www.linkedin.com/in/dinda-farras/"
-              class="text-sm block hover:text-blueText">https://www.linkedin.com/in/dinda-farras/</a>
+            <span class="font-medium">LinkedIn</span>
+            <a href="{{ (strpos($user->linkedIn, 'http://') === 0 || strpos($user->linkedIn, 'https://') === 0) ? $user->linkedIn : 'https://' . $user->linkedIn }}" 
+            class="text-sm block hover:text-blueText" target="_blank">{{$user->linkedIn}}</a>
           </div>
         </div>
         <button id="openModalSetting"
@@ -286,15 +287,15 @@
                   </div>
                   <div>
                     <label for="emailUser" class="block mb-2 font-medium text-gray-900">Instagram</label>
-                    <input type="text" id="instagramUser"
+                    <input type="url" id="instagramUser"
                       class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                      placeholder="Insert your Email" value="dinda@gmail.com" />
+                      placeholder="Insert your Instagram" name="instagram" value="{{ old('user', $user->instagram) }}" />
                   </div>
                   <div>
                     <label for="phone" class="block mb-2 font-medium text-gray-900">LinkedIn</label>
-                    <input type="text" id="linkedinUser"
+                    <input type="url" id="linkedinUser"
                       class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                      placeholder="Insert your bio" value="+6281802231234" />
+                      placeholder="Insert your LinkedIn" name="linkedIn" value="{{ old('user', $user->linkedIn) }}" />
                   </div>
                 </div>
                 <div class="flex justify-end">
@@ -501,7 +502,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- Modal ALert Delete Skill End -->
+                  <!-- Modal Alert Delete Skill End -->
                   <form action="{{ route('user.add-skill-action', ['id' => $user->id])}}" method="POST" class="mt-8">
                     @csrf
                     <input type="text" id="skill"
@@ -563,7 +564,7 @@
                 </div>
               </div>
               <div class="">
-                <button id="editExperienceModalButton">
+                <button id="editExperienceModalButton{{ $experience->id_experience }}" data-id="{{ $experience->id_experience }}" class="edit-experience-btn">
                   <svg class="w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -654,37 +655,39 @@
                   </svg>
                 </button>
               </div>
-              <form action="" class="">
+              <form id="editExperienceAction" action="" method="POST">
+                @csrf
+                @method('PUT')
                 <div class="my-4">
                   <label for="activity-name" class="block mb-2 font-medium text-gray-900">Activity Name</label>
-                  <input type="text" id="activityName"
+                  <input type="text" id="activityName" name="judul_kegiatan"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Insert your name" value="Dinda Farras G." required />
+                    placeholder="Insert your name" value="" required />
                 </div>
                 <div class="my-4">
                   <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Partner Activity</label>
-                  <input type="text" id="partnerActivity"
+                  <input type="text" id="partnerActivity" name="mitra"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Insert your name" value="Dinda Farras G." required />
+                    placeholder="Insert your name" required />
                 </div>
                 <div class="my-4">
                   <label for="description" class="block mb-2 font-medium text-gray-900">Description</label>
-                  <textarea name="description" id="name"
+                  <textarea id="descriptionActivity" name="deskripsi" 
                     class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
                     placeholder="Tell about yourself" required>
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores explicabo totam sequi temporibus laborum eum adipisci saepe nihil.</textarea>
                 </div>
+                <div class="mt-8 flex justify-end">
+                  <button id="deleteExperienceButton" type="button"
+                    class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                    Delete
+                  </button>
+                  <button type="submit"
+                    class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                    Update
+                  </button>
+                </div>
               </form>
-              <div class="mt-8 flex justify-end">
-                <button id="deleteExperienceButton" type="button"
-                  class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                  Delete
-                </button>
-                <button type="button"
-                  class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
-                  Update
-                </button>
-              </div>
             </div>
           </div>
           <!-- Modal Edit Experience End -->
@@ -894,8 +897,12 @@
           "closeAddModalExperience"
         );
         // Modal Edit & Delete Experience (Element Selection)
-        const editExperienceModalButton = document.getElementById(
-          "editExperienceModalButton"
+        const editExperienceModalButton = document.querySelectorAll(
+          ".edit-experience-btn"
+        );
+
+        const editExperienceAction = document.getElementById(
+          "editExperienceAction"
         );
         const showExperienceModal = document.getElementById(
           "editExperienceModal"
@@ -952,8 +959,21 @@
           showAddExperienceModal.classList.add("hidden");
         });
         // Event Handling Edit Experience Modal
-        editExperienceModalButton.addEventListener("click", function () {
-          showExperienceModal.classList.remove("hidden");
+        editExperienceModalButton.forEach(button => {
+            button.addEventListener("click", function () {
+              const experienceId = this.getAttribute('data-id');
+              const userId = "{{$user->id}}";
+              const actionUrl = `{{ route('user.edit-experience-action', ['id' => $user->id, 'id_experience' => ':experienceId']) }}`;
+
+              // Gantikan placeholder ':experienceId' dengan nilai experienceId yang sebenarnya
+              const finalActionUrl = actionUrl.replace(':experienceId', experienceId);
+
+              // Set URL hasil pada form action
+              editExperienceAction.setAttribute('action', finalActionUrl);
+
+              showExperienceModal.classList.remove("hidden");
+
+          });
         });
 
         closeExperienceModalButton.addEventListener("click", function () {
