@@ -61,12 +61,12 @@
                 </div>
               </div>
               <div class="border-t border-gray-200"></div>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover2">Profile</a>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover2">Settings</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Profile</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Settings</a>
               <a href="#" class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white">Logout</a>
               @else
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover2">Login User</a>
-              <a href="#" class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white">Login
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login User</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login
                 Partner</a>
               @endif
             </div>
@@ -78,45 +78,37 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu"
       class="-z-10 absolute top-20 left-0 w-full bg-white shadow-lg transform -translate-y-[calc(100%+5rem)] opacity-0 transition-all duration-300 md:hidden">
+      @if(!auth()->check())
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover2">Home</a>
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover2">Volunteer</a>
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover2">Partner</a>
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover2">Login Mitra</a>
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover2">Login Volunteer</a>
+        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Home</a>
+        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Volunteer</a>
+        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
+        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Mitra</a>
+        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Volunteer</a>
       </div>
       <div class="border-t border-gray-200"></div>
+      @else
       <!-- Jika user sudah Login -->
-      <!-- <div class="p-3">
-          <div class="flex items-center mb-4">
-            <img
-              class="h-10 w-10 rounded-full"
-              src="../src/image/profile-img.png"
-              alt="Avatar"
-            />
-            <div class="ml-3">
-              <div class="text-base font-medium text-gray-800">
-                Hafid Hanifan
-              </div>
-              <div class="text-sm font-light">hafid.hanifan123@gmail.com</div>
-            </div>
+      @php
+      $user = auth()->user();
+      @endphp
+      <div class="p-3" <div class="flex items-center mb-4">
+        <img class="h-10 w-10 rounded-full" src="../src/image/profile-img.png" alt="Avatar" />
+        <div class="ml-3">
+          <div class="text-base font-medium text-gray-800">
+            Hafid Hanifan
           </div>
-          <a
-            href="#"
-            class="block px-2 py-2 mt-3 mb-1 text-base font-light rounded-lg hover:bg-button_hover2"
-            >Your Profile</a
-          >
-          <a
-            href="#"
-            class="block px-2 py-2 mb-1 text-base font-light rounded-lg hover:bg-button_hover2"
-            >Settings</a
-          >
-          <a
-            href="#"
-            class="block px-2 py-2 text-base font-light text-red-600 hover:text-white hover:bg-button_alert rounded-lg"
-            >Sign out</a
-          >
-        </div> -->
+          <div class="text-sm font-light">hafid.hanifan123@gmail.com</div>
+        </div>
+      </div>
+      <a href="#" class="block px-2 py-2 mt-3 mb-1 text-base font-light rounded-lg hover:bg-button_hover">Your
+        Profile</a>
+      <a href="#" class="block px-2 py-2 mb-1 text-base font-light rounded-lg hover:bg-button_hover">Settings</a>
+      <a href="#"
+        class="block px-2 py-2 text-base font-light text-red-600 hover:text-white hover:bg-button_alert rounded-lg">Sign
+        out</a>
+    </div>
+    @endif
     </div>
   </nav>
 </header>
