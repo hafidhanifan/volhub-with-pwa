@@ -26,16 +26,16 @@
       </button>
       <!-- Dropdown Menu -->
       <ul id="dropdownCategories" class="absolute left-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg hidden">
-        <li class="px-4 py-2 text-sm hover:bg-button_hover2 cursor-pointer">
+        <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
           Mockups
         </li>
-        <li class="px-4 py-2 text-sm hover:bg-button_hover2 cursor-pointer">
+        <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
           Templates
         </li>
-        <li class="px-4 py-2 text-sm hover:bg-button_hover2 cursor-pointer">
+        <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
           Design
         </li>
-        <li class="px-4 py-2 text-sm hover:bg-button_hover2 cursor-pointer">
+        <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
           Logos
         </li>
       </ul>

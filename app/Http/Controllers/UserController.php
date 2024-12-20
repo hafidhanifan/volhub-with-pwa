@@ -49,6 +49,7 @@ class UserController extends Controller
     {   
         $user = User::find($id);
         $kegiatans = Kegiatan::withCount('pendaftars')->get();
+        $kategori = Kategori::find($id)
         $totalKegiatan = $kegiatans->count();
 
         foreach ($kegiatans as $kegiatan) {
