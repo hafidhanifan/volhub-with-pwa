@@ -1,194 +1,60 @@
 @include('user.layout.templates.header')
 @include('user.layout.templates.navbar')
 
-    <main>
-      <div class="layout-wrapper">
-        @if(auth()->check())
-          @php
-            $user = auth()->user();
-          @endphp
-          <section class="sidebar">
-            <div class="profile">
-              <div class="profile__image">
-                @if(!empty($user->foto_profile))
-                  <img src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="profile user" />
-                @else
-                  <img src="{{asset('img/logo-user.png')}}" alt="profile user" />
-                @endif
-              </div>
-              <div class="profile__data">
-                <div class="profile__data-name">
-                  <p>{{$user->nama_user}}</p>
-                </div>
-                <div class="profile__data-location">
-                    @if(!empty($user->email_user))
-                      <p>{{ $user->email_user }}</p>
-                    @else
-                      <p>Ups! Data masih kosong</p>
-                    @endif
-                </div>
-                <form  action="{{ route('user.detail-profile-page', ['id' => $user->id]) }}" method="POST" class="profile__data-button">
-                  @csrf
-                  @method('GET')
-                  <button>Kegiatan</button>
-                </form>
-              </div>
-            </div>
-            <div class="skill">
-              <div class="skill__header">
-                <p>Top Skills</p>
-              </div>
-              <div class="skill__item">
-                <ul>
-                  <?php $no = 1 ?>
-                  @foreach($user->skills as $skill)
-                    <li>{{$skill->nama_skill}}</li>
-                  @endforeach
-                </ul>
-              </div>
-            </div>
-          </section>
-            
-        @else
-          <section class="sidebar">
-            <div class="profile">
-              <div class="profile__image">
-                <img src="{{ asset('img/logo-user.png')}}" alt="" />
-              </div>
-              <div class="profile__data">
-                <div class="profile__data-name">
-                  <p>Silahkan Login Terlebih Dahulu</p>
-                </div>
-                <form action="{{route('user.login')}}">
-                  <div class="profile__data-button-logout">
-                    <button>Login</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </section>  
-        @endif
-            
-        <section class="content">
-          <div class="content__header">
-            <div class="content__header-showing">
-              <p><span>{{ $totalKegiatan }}</span> Volunteer Activities</p>
-              <form class="content__header-search" method="GET" action="{{ route('search') }}">
-                @csrf
-                <div class="search-wrapper">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" name="search" placeholder="Search.." value="{{ request('search') }}" />
-                </div>
-              </form>
-            </div>
-            <div class="content__header-show-profile">
-              <i id="showUser" class="fa-solid fa-address-card"></i>
-            </div>
-            <div id="overlay" class="overlay"></div>
-          </div>
+<main class="mt-20 mb-20">
+  <!-- Search section start -->
+  <section class="flex items-center p-4 ml-4 max-w-2xl">
+    <!-- Dropdown -->
+    <div class="relative inline-block">
+      <button id="dropdownCategoriesButton"
+        class="h-[37.6px] flex items-center gap-1 px-4 rounded-l-md font-light text-sm text-slate-600 bg-slate-100 border-l border-t border-b border-slate-300">
+        Categories
+        <span class="relative w-4 h-4">
+          <svg id="arrowDown"
+            class="w-4 absolute top-0 left-0 fill-slate-600 transform transition-transform duration-200"
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M12.707 14.707a1 1 0 0 1-1.414 0l-5-5a1 1 0 0 1 1.414-1.414L12 12.586l4.293-4.293a1 1 0 1 1 1.414 1.414l-5 5Z" />
+          </svg>
+          <svg id="arrowUp"
+            class="w-4 absolute top-0 left-0 fill-slate-600 transform transition-transform duration-200 scale-0"
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M18.293 15.29a1 1 0 0 0 0-1.415L13.4 8.988a2 2 0 0 0-2.828 0l-4.89 4.89a1 1 0 1 0 1.414 1.415l4.185-4.186a1 1 0 0 1 1.415 0l4.182 4.182a1 1 0 0 0 1.414 0Z" />
+          </svg>
+        </span>
+      </button>
+      <!-- Dropdown Menu -->
+      <ul id="dropdownCategories" class="absolute left-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg hidden">
+        <li class="px-4 py-2 text-sm hover:bg-button_hover2 cursor-pointer">
+          Mockups
+        </li>
+        <li class="px-4 py-2 text-sm hover:bg-button_hover2 cursor-pointer">
+          Templates
+        </li>
+        <li class="px-4 py-2 text-sm hover:bg-button_hover2 cursor-pointer">
+          Design
+        </li>
+        <li class="px-4 py-2 text-sm hover:bg-button_hover2 cursor-pointer">
+          Logos
+        </li>
+      </ul>
+    </div>
 
-          <div class="content__body">
-            <?php $no = 1 ?>
-            @foreach($kegiatans as $kegiatan)
-              @if(auth()->check())
-                @php
-                  $user = auth()->user();
-                @endphp
-                <a href="{{ route('user.detail-kegiatan-page', ['id' => $user->id, 'id_kegiatan' => $kegiatan->id_kegiatan]) }}" method="POST" class="content__data-button">
-                  @csrf
-                  @method('GET')
-                  <div class="content__body-item">
-                    <div class="content__body-item-up">
-                      <div class="content__item-kegiatan">
-                        <img class="content__item-logo-mitra" src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}"/>
-                        <div class="content__data-title">
-                          <h1>{{ $kegiatan->nama_kegiatan }}</h1>
-                          <span>{{ $kegiatan->mitra->nama_mitra }}</span>
-                        </div>
-                      </div>
-                      <i class="fa-regular fa-bookmark" style="font-size: 20px"></i>
-                    </div>
-                    <div class="content__item-data">
-                      <div class="content__item-dataDeskripsi">
-                        <p>{{ $kegiatan->deskripsi}}</p>
-                      </div>
-                      <div class="content__item-dataInformation">
-                        <div class="content__data-sistemKegiatan">
-                          <i class="fa-solid fa-briefcase" style="color:#9d9d9d"></i>
-                          <p>{{ $kegiatan->sistem_kegiatan}}</p>
-                        </div>
-                        <div class="content__data-location">
-                          <i class="fa-solid fa-location-dot" style="color:#9d9d9d"></i>
-                          <p>{{ $kegiatan->lokasi_kegiatan }}</p>
-                        </div>
-                        <div class="content__data-pendaftar">
-                          <i class="fa-solid fa-user" style="color:#9d9d9d"></i>
-                          <p>{{ $kegiatan->pendaftars_count }} applied</p>
-                        </div>
-                        <div class="content__data-waktu">
-                          <i class="fa-solid fa-clock" style="color:#9d9d9d"></i>
-                            @if($kegiatan->sisa_hari > 0)
-                              <p>{{ $kegiatan->sisa_hari }} days left</p>
-                            @else
-                              <p>Ditutup</p>
-                            @endif
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-                @else
-                <a href="{{ route('user.detail-kegiatan', ['id_kegiatan' => $kegiatan->id_kegiatan]) }}" method="POST" class="content__data-button">
-                  @csrf
-                  @method('GET')
-                  <div class="content__body-item">
-                    <div class="content__body-item-up">
-                      <div class="content__item-kegiatan">
-                        <img class="content__item-logo-mitra" src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}"/>
-                        <div class="content__data-title">
-                          <h1>{{ $kegiatan->nama_kegiatan }}</h1>
-                          <span>{{ $kegiatan->mitra->nama_mitra }}</span>
-                        </div>
-                      </div>
-                      <i class="fa-regular fa-bookmark" style="font-size: 20px"></i>
-                    </div>
-                    <div class="content__item-data">
-                      <div class="content__item-dataDeskripsi">
-                        <p>{{ $kegiatan->deskripsi}}</p>
-                      </div>
-                      <div class="content__item-dataInformation">
-                        <div class="content__data-sistemKegiatan">
-                          <i class="fa-solid fa-briefcase" style="color:#9d9d9d"></i>
-                          <p>{{ $kegiatan->sistem_kegiatan}}</p>
-                        </div>
-                        <div class="content__data-location">
-                          <i class="fa-solid fa-location-dot" style="color:#9d9d9d"></i>
-                          <p>{{ $kegiatan->lokasi_kegiatan }}</p>
-                        </div>
-                        <div class="content__data-pendaftar">
-                          <i class="fa-solid fa-user" style="color:#9d9d9d"></i>
-                          <p>{{ $kegiatan->pendaftars_count }} applied</p>
-                        </div>
-                        <div class="content__data-waktu">
-                          <i class="fa-solid fa-clock" style="color:#9d9d9d"></i>
-                          @if($kegiatan->sisa_hari > 0)
-                            <p>{{ $kegiatan->sisa_hari }} days left</p>
-                          @else
-                            <p>Ditutup</p>
-                          @endif
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              @endif
-            @endforeach
-          </div>
-          
-        </section>
+    <!-- Search Bar -->
+    <div class="flex-1">
+      <input type="text" placeholder="Search..."
+        class="w-full px-4 py-2 text-sm border-slate-300 bg-slate-100 focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-0" />
+    </div>
 
-      </div>
-    </main>
+    <!-- Search Button -->
+    <button class="h-[37.6px] px-2 py-2 rounded-r-md bg-cyan-500">
+      <svg class="w-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M15 10.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-.82 4.74a6 6 0 1 1 1.06-1.06l4.79 4.79-1.06 1.06-4.79-4.79Z" />
+      </svg>
+    </button>
+  </section>
+  <!-- Search section end -->
+</main>
 @include('user.layout.templates.footer')
-
- 
