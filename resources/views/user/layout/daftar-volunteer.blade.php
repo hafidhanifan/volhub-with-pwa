@@ -31,18 +31,6 @@
           {{ $kategori->nama_kategori }}
         </li>
         @endforeach
-        <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
-          Mockups
-        </li>
-        <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
-          Templates
-        </li>
-        <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
-          Design
-        </li>
-        <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
-          Logos
-        </li>
       </ul>
     </div>
 

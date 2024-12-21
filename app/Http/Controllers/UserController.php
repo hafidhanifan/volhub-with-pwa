@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Image;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Skill;
+use App\Models\Kategori;
 use App\Models\Kegiatan;
+// use Intervention\Image\Image;
 use App\Models\Pendaftar;
 use App\Models\Experience;
 use Illuminate\Http\Request;
-// use Intervention\Image\Image;
-use Image;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Validation\ValidationException;
 
@@ -34,11 +35,12 @@ class UserController extends Controller
     public function showDaftarKegiatan() {
         $kegiatans = Kegiatan::withCount('pendaftars')->get();
         $totalKegiatan = $kegiatans->count();
+        $kategori = Kategori::all();
         foreach ($kegiatans as $kegiatan) {
             // Menghitung sisa hari dengan penutupan dihitung sampai akhir hari (23:59:59)
             $kegiatan->sisa_hari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);
         }
-        return view('user.layout.daftar-volunteer', compact('kegiatans', 'totalKegiatan', 'kegiatan'));
+        return view('user.layout.daftar-volunteer', compact('kegiatans', 'totalKegiatan', 'kegiatan','kategori'));
     }
 
     public function showFaqPage() {
@@ -49,7 +51,7 @@ class UserController extends Controller
     {   
         $user = User::find($id);
         $kegiatans = Kegiatan::withCount('pendaftars')->get();
-        $kategori = Kategori::all();
+        
         $totalKegiatan = $kegiatans->count();
 
         foreach ($kegiatans as $kegiatan) {
@@ -57,7 +59,7 @@ class UserController extends Controller
             $kegiatan->sisa_hari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);
         }        
 
-        return view('user.layout.daftar-volunteer', compact( 'kegiatans', 'kategori', 'user', 'totalKegiatan', 'kegiatan'));
+        return view('user.layout.daftar-volunteer', compact( 'kegiatans', 'user', 'totalKegiatan', 'kegiatan'));
     }
 
     public function showDetailKegiatan($id_kegiatan)
