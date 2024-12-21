@@ -49,7 +49,7 @@ class UserController extends Controller
     {   
         $user = User::find($id);
         $kegiatans = Kegiatan::withCount('pendaftars')->get();
-        $kategori = Kategori::find($id)
+        $kategori = Kategori::all();
         $totalKegiatan = $kegiatans->count();
 
         foreach ($kegiatans as $kegiatan) {
@@ -57,7 +57,7 @@ class UserController extends Controller
             $kegiatan->sisa_hari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);
         }        
 
-        return view('user.layout.daftar-volunteer', compact( 'kegiatans', 'user', 'totalKegiatan', 'kegiatan'));
+        return view('user.layout.daftar-volunteer', compact( 'kegiatans', 'kategori', 'user', 'totalKegiatan', 'kegiatan'));
     }
 
     public function showDetailKegiatan($id_kegiatan)

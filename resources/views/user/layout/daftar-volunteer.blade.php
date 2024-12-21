@@ -26,6 +26,11 @@
       </button>
       <!-- Dropdown Menu -->
       <ul id="dropdownCategories" class="absolute left-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg hidden">
+        @foreach ($kategori as $kategori)
+        <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
+          {{ $kategori->nama_kategori }}
+        </li>
+        @endforeach
         <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
           Mockups
         </li>
