@@ -49,5 +49,214 @@
     </button>
   </section>
   <!-- Search section end -->
+
+  <!-- All volunteer start -->
+  <section>
+    <div class="lg:flex lg:justify-center lg:gap-x-4 lg:px-8 lg:mt-2">
+      <!-- Volunteer Card -->
+      <div class="bg-white lg:w-1/3 lg:bg-white lg:rounded-lg lg:shadow-sm lg:p-4">
+        <div class="p-2 border-b bg-white lg:rounded-t-lg">
+          <span class="block font-medium">All Volunteer</span>
+          <span class="block text-sm text-slate-500 font-normal">100 results</span>
+        </div>
+        <div id="volunteerCard" class="flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100">
+          <div class="max-w-16">
+            <img src="../src/image/logo_mitra.jpg" alt=""
+              class="w-full rounded-full outline outline-1 outline-slate-200" />
+          </div>
+          <div class="w-full">
+            <div class="flex flex-col gap-1">
+              <p class="font-semibold line-clamp-1">
+                Kegiatan Sosial Kulon Progo Membangun Membangun Semangat
+              </p>
+              <p class="text-sm text-gray-800 line-clamp-1">
+                Mega Group Megawati Wkwkwkwkwk
+              </p>
+              <p class="text-sm text-gray-800 line-clamp-1">Yogyakarta</p>
+              <p class="text-sm text-gray-800">Onsite</p>
+            </div>
+          </div>
+        </div>
+        <div id="volunteerCard" class="flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100">
+          <div class="max-w-16">
+            <img src="../src/image/logo_mitra.jpg" alt=""
+              class="w-full rounded-full outline outline-1 outline-slate-200" />
+          </div>
+          <div class="w-full">
+            <div class="flex flex-col gap-1">
+              <p class="font-semibold line-clamp-1">
+                Kegiatan Sosial Kulon Progo Membangun Membangun Semangat
+              </p>
+              <p class="text-sm text-gray-800 line-clamp-1">
+                Mega Group Megawati Wkwkwkwkwk
+              </p>
+              <p class="text-sm text-gray-800 line-clamp-1">Yogyakarta</p>
+              <p class="text-sm text-gray-800">Onsite</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Detail Volunteer -->
+      <div id="detailVolunteer"
+        class="fixed top-0 left-0 w-full h-screen bg-white z-50 transform transition-transform duration-500 ease-in-out overflow-y-scroll no-scrollbar lg:static lg:translate-y-0 lg:w-2/3 lg:h-auto lg:z-auto lg:transition-none lg:rounded-lg lg:shadow-sm lg:p-8">
+        <div class="p-4 lg:hidden">
+          <button id="backBtn">
+            <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 386.242 386.242" xml:space="preserve">
+              <path
+                d="M374.212 182.3H39.432l100.152-99.767c4.704-4.704 4.704-12.319 0-17.011-4.704-4.704-12.319-4.704-17.011 0L3.474 184.61c-4.632 4.632-4.632 12.379 0 17.011l119.1 119.1c4.704 4.704 12.319 4.704 17.011 0 4.704-4.704 4.704-12.319 0-17.011L39.432 206.36h334.779c6.641 0 12.03-5.39 12.03-12.03s-5.389-12.03-12.029-12.03z" />
+            </svg>
+          </button>
+        </div>
+        <div class="px-8 md:p-2">
+          <div class="flex items-center gap-x-4">
+            <div class="w-10">
+              <img src="../src/image/logo_mitra.jpg" alt="" class="w-full" />
+            </div>
+            <span class="block">Mega Group</span>
+          </div>
+          <div class="mt-4 pb-4">
+            <h1 class="text-lg font-semibold">
+              Kegiatan Sosial Kulon Progo Membangun
+            </h1>
+            <p class="mt-2 text-gray-500 text-sm">
+              Kulon Progo, Yogyakarta, Indonesia
+            </p>
+          </div>
+          <div class="flex gap-x-2">
+            <svg class="w-6 fill-slate-500" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M27 29H4a2 2 0 0 1-2-2V15s5.221 2.685 10 3.784V20a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-1.216C23.778 17.685 29 15 29 15v12a2 2 0 0 1-2 2zM17 17a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h3zm2 0a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v.896C7.221 16.764 2 14 2 14v-4a2 2 0 0 1 2-2h6V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2h6a2 2 0 0 1 2 2v4s-5.222 2.764-10 3.896V17zm0-10a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v1h7V7z" />
+            </svg>
+            <div class="flex items-center gap-x-1">
+              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">Offline</span>
+              <span class="block h-auto">&middot;</span>
+              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">2 Days Left</span>
+              <span class="block h-auto">&middot;</span>
+              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">10 Applied</span>
+            </div>
+          </div>
+          <div class="mt-4 gap-2 border-b pb-4">
+            <button id="applyBtn" class="px-6 py-2 bg-cyan-500 hover:bg-button_hover rounded-lg text-sm text-white">
+              Apply
+            </button>
+            <button class="px-6 py-2 border border-sky-300 hover:bg-sky-300 rounded-lg text-sm">
+              Save
+            </button>
+          </div>
+          <div class="mt-4 md:w-2/3">
+            <h2 class="font-semibold">Volunteer Description:</h2>
+            <p class="text-sm text-justify">
+              We are seeking a talented and highly motivated Volunteer to
+              join our program. The deal candidate will have a strong
+              portofolio of Lorem ipsum dolor sit, amet consectetur
+              adipisicing elit. Enim quam tenetur quis autem reiciendis
+              delectus vel minus, consequuntur dolore similique.
+            </p>
+            <div class="mt-4">
+              <h2 class="font-semibold">Key Responsibilities</h2>
+              <ul class="list-disc pl-10 text-sm text-justify">
+                <li class="my-1">
+                  Collaborate with team and reach every goal
+                </li>
+                <li class="my-1">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Aut sequi, nisi ea quo iure cupiditate?
+                </li>
+                <li class="my-1">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Pariatur neque ipsam excepturi atque aut cupiditate dolore
+                  nemo fugit facilis delectus.
+                </li>
+              </ul>
+            </div>
+            <div class="mt-4">
+              <h2 class="font-semibold">Required Skill</h2>
+              <div class="flex gap-2 flex-wrap mt-2">
+                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem ipsum</span>
+                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem</span>
+                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem ipsum dolor</span>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h2 class="font-semibold">Benefits</h2>
+              <div class="flex gap-2 flex-wrap mt-2">
+                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Paid</span>
+                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Unpaid</span>
+                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Menambah Relasi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for apply Volunteer -->
+    <div id="applyMdl"
+      class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+      <!-- Modal Content -->
+      <div
+        class="bg-white rounded-lg shadow-lg w-4/5 p-6 transform scale-95 transition-transform duration-300 md:w-1/3">
+        <div class="flex justify-between items-center mb-4">
+          <label for="motivation" class="font-semibold">Your Motivation</label>
+          <button id="closeApplyMdl" class="text-gray-500 hover:text-gray-700 text-xl">
+            &times;
+          </button>
+        </div>
+
+        <textarea id="motivation" rows="4"
+          class="block mb-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
+          placeholder="Write your motivation ..."></textarea>
+
+        <label for="cv" class="font-semibold">Upload Your CV</label>
+        <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+          <div class="flex flex-col items-center">
+            <svg class="w-20 fill-gray-300" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <g>
+                  <path class="st0"
+                    d="M378.413,0H208.297h-13.182L185.8,9.314L57.02,138.102l-9.314,9.314v13.176v265.514 c0,47.36,38.528,85.895,85.896,85.895h244.811c47.353,0,85.881-38.535,85.881-85.895V85.896C464.294,38.528,425.766,0,378.413,0z M432.497,426.105c0,29.877-24.214,54.091-54.084,54.091H133.602c-29.884,0-54.098-24.214-54.098-54.091V160.591h83.716 c24.885,0,45.077-20.178,45.077-45.07V31.804h170.116c29.87,0,54.084,24.214,54.084,54.092V426.105z">
+                  </path>
+                  <path class="st0"
+                    d="M171.947,252.785h-28.529c-5.432,0-8.686,3.533-8.686,8.825v73.754c0,6.388,4.204,10.599,10.041,10.599 c5.711,0,9.914-4.21,9.914-10.599v-22.406c0-0.545,0.279-0.817,0.824-0.817h16.436c20.095,0,32.188-12.226,32.188-29.612 C204.136,264.871,192.182,252.785,171.947,252.785z M170.719,294.888h-15.208c-0.545,0-0.824-0.272-0.824-0.81v-23.23 c0-0.545,0.279-0.816,0.824-0.816h15.208c8.42,0,13.447,5.027,13.447,12.498C184.167,290,179.139,294.888,170.719,294.888z">
+                  </path>
+                  <path class="st0"
+                    d="M250.191,252.785h-21.868c-5.432,0-8.686,3.533-8.686,8.825v74.843c0,5.3,3.253,8.693,8.686,8.693h21.868 c19.69,0,31.923-6.249,36.81-21.324c1.76-5.3,2.723-11.681,2.723-24.857c0-13.175-0.964-19.557-2.723-24.856 C282.113,259.034,269.881,252.785,250.191,252.785z M267.856,316.896c-2.318,7.331-8.965,10.459-18.21,10.459h-9.23 c-0.545,0-0.824-0.272-0.824-0.816v-55.146c0-0.545,0.279-0.817,0.824-0.817h9.23c9.245,0,15.892,3.128,18.21,10.46 c0.95,3.128,1.62,8.56,1.62,17.93C269.476,308.336,268.805,313.768,267.856,316.896z">
+                  </path>
+                  <path class="st0"
+                    d="M361.167,252.785h-44.812c-5.432,0-8.7,3.533-8.7,8.825v73.754c0,6.388,4.218,10.599,10.055,10.599 c5.697,0,9.914-4.21,9.914-10.599v-26.351c0-0.538,0.265-0.81,0.81-0.81h26.086c5.837,0,9.23-3.532,9.23-8.56 c0-5.028-3.393-8.553-9.23-8.553h-26.086c-0.545,0-0.81-0.272-0.81-0.817v-19.425c0-0.545,0.265-0.816,0.81-0.816h32.733 c5.572,0,9.245-3.666,9.245-8.553C370.411,256.45,366.738,252.785,361.167,252.785z">
+                  </path>
+                </g>
+              </g>
+            </svg>
+            <div class="mt-4 text-sm lg:flex leading-6 text-gray-600">
+              <label for="file-upload"
+                class="relative cursor-pointer rounded-md bg-white font-semibold text-sky-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                <span>Upload a PDF file</span>
+                <input id="file-upload" name="file-upload" type="file" class="sr-only" />
+              </label>
+              <p class="pl-1">or drag and drop</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-end mt-2">
+          <button id="submitBtn" class="px-4 py-2 bg-sky-400 rounded-lg text-white hover:bg-sky-600">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Modal for appy Volunteer End -->
+
+    <!-- Modal Notification  -->
+    <div id="notification"
+      class="fixed bottom-4 right-4 bg-sky-400 text-white text-sm px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+      CV has been submitted
+    </div>
+    <!-- Modal Notification End -->
+  </section>
+  <!-- All volunteer end -->
 </main>
 @include('user.layout.templates.footer')
