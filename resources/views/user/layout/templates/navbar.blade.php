@@ -52,7 +52,7 @@
               class="hidden absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-50">
               @if(auth()->check())
               @php
-                $user = auth()->user();
+              $user = auth()->user();
               @endphp
               <div class="px-4 py-2">
                 <div class="text-gray-900 font-semibold">{{$user->nama_user}}</div>
@@ -61,11 +61,14 @@
                 </div>
               </div>
               <div class="border-t border-gray-200"></div>
-              <a href="{{ route('user.detail-profile-page', ['id' => $user->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Profile</a>
+              <a href="{{ route('user.detail-profile-page', ['id' => $user->id]) }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Profile</a>
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Settings</a>
-              <a href="{{route('user.logout')}}" class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white">Logout</a>
+              <a href="{{route('user.logout')}}"
+                class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white">Logout</a>
               @else
-              <a href="{{ route('user.login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login User</a>
+              <a href="{{ route('user.login') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login User</a>
               <a href="{{ route('mitra.login') }}"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login
                 Partner</a>

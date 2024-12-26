@@ -696,6 +696,3 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
     </section>
   </div>
 </main>
-</body>
-
-</html>

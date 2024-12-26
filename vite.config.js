@@ -27,6 +27,7 @@ export default defineConfig({
                 "resources/js/main.js",
                 "resources/js/mitra.js",
                 "resources/js/userProfile.js",
+                "resources/js/user-fix.js",
             ],
             refresh: true, // Mengaktifkan fitur auto-refresh saat save
         }),
