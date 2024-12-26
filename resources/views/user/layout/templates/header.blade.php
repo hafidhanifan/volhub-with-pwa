@@ -7,7 +7,8 @@
   <meta name="dicoding:f1836yb034@dicoding.org" content="hafidhanifan33@gmail.com">
   <title>VolunteerHub</title>
 
-  @vite(['resources/css/app.css','resources/css/style.css', 'resources/css/responsive.css',
+  @vite(['resources/css/app.css','resources/css/new-css.css', 'resources/css/style.css', 'resources/css/responsive.css',
+  'resources/js/user.js',
   'resources/js/user-fix.js'])
 
 
