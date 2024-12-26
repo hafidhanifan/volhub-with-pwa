@@ -4,52 +4,38 @@
 <main class="mt-20 mb-20">
   <!-- Search section start -->
   <section class="flex items-center p-4 ml-4 max-w-2xl">
-    <!-- Dropdown -->
-    <div class="relative inline-block">
-      <button id="dropdownCategoriesButton"
-        class="h-[37.6px] flex items-center gap-1 px-4 rounded-l-md font-light text-sm text-slate-600 bg-slate-100 border-l border-t border-b border-slate-300">
-        Categories
-        <span class="relative w-4 h-4">
-          <svg id="arrowDown"
-            class="w-4 absolute top-0 left-0 fill-slate-600 transform transition-transform duration-200"
-            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd"
-              d="M12.707 14.707a1 1 0 0 1-1.414 0l-5-5a1 1 0 0 1 1.414-1.414L12 12.586l4.293-4.293a1 1 0 1 1 1.414 1.414l-5 5Z" />
-          </svg>
-          <svg id="arrowUp"
-            class="w-4 absolute top-0 left-0 fill-slate-600 transform transition-transform duration-200 scale-0"
-            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M18.293 15.29a1 1 0 0 0 0-1.415L13.4 8.988a2 2 0 0 0-2.828 0l-4.89 4.89a1 1 0 1 0 1.414 1.415l4.185-4.186a1 1 0 0 1 1.415 0l4.182 4.182a1 1 0 0 0 1.414 0Z" />
-          </svg>
-        </span>
-      </button>
-      <!-- Dropdown Menu -->
-      {{-- <ul id="dropdownCategories" class="absolute left-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg hidden">
-        @foreach ($kategori as $kategori)
-        <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
-          {{ $kategori->nama_kategori }}
-        </li>
-        @endforeach
-      </ul> --}}
-    </div>
+
 
     <!-- Search Bar -->
-    <form method="GET" action="{{ route('search') }}">
-      @csrf
-        <div class="flex-1">
-          <input type="text" name="search" placeholder="Search..."
-            class="w-full px-4 py-2 text-sm border-slate-300 bg-slate-100 focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-0" value="{{ request('search') }}" />
+    <form method="GET" action="{{ route('search') }}" class="flex">
+        <!-- Dropdown -->
+        <div class="relative inline-block">
+            <select id="dropdownCategories" name="kategori"
+                class="h-[37.6px] flex items-center gap-1 px-4 rounded-l-md font-light text-sm text-slate-600 bg-slate-100 border-l border-t border-b border-slate-300">
+                <option value="" {{ request('kategori') == '' ? 'selected' : '' }}>All Categories</option>
+                @foreach ($kategori as $itemKategori)
+                    <option value="{{ $itemKategori->id_kategori }}" {{ request('kategori') == $itemKategori->id_kategori ? 'selected' : '' }}>
+                        {{ $itemKategori->nama_kategori }}
+                    </option>
+                @endforeach
+            </select>
         </div>
+    
+        <!-- Input Search -->
+        <div class="flex-1">
+            <input type="text" name="search" placeholder="Search..."
+                class="w-full px-4 py-2 text-sm border-slate-300 bg-slate-100 focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-0"
+                value="{{ request('search') }}" />
+        </div>
+    
+        <!-- Search Button -->
+        <button type="submit" class="h-[37.6px] px-2 py-2 rounded-r-md bg-cyan-500">
+            <svg class="w-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M15 10.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-.82 4.74a6 6 0 1 1 1.06-1.06l4.79 4.79-1.06 1.06-4.79-4.79Z" />
+            </svg>
+        </button>
     </form>
-
-    <!-- Search Button -->
-    <button class="h-[37.6px] px-2 py-2 rounded-r-md bg-cyan-500">
-      <svg class="w-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd"
-          d="M15 10.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-.82 4.74a6 6 0 1 1 1.06-1.06l4.79 4.79-1.06 1.06-4.79-4.79Z" />
-      </svg>
-    </button>
   </section>
   <!-- Search section end -->
 
@@ -62,27 +48,44 @@
           <span class="block font-medium">All Volunteer</span>
           <span class="block text-sm text-slate-500 font-normal">{{ $totalKegiatan }} results</span>
         </div>
-        <?php $no = 1 ?>
-          @foreach($kegiatans as $kegiatan)
-          <div id="volunteerCard" onclick="detailKegiatan('{{ $kegiatan->id_kegiatan }}')" class="flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100">
-            <div class="max-w-16">
-              <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt=""
-                class="w-full rounded-full outline outline-1 outline-slate-200" />
-            </div>
-            <div class="w-full">
-              <div class="flex flex-col gap-1">
-                <p id="detailTitle" class="font-semibold line-clamp-1">
-                  {{ $kegiatan->nama_kegiatan }}
-                </p>
-                <p class="text-sm text-gray-800 line-clamp-1">
-                  {{ $kegiatan->mitra->nama_mitra }}
-                </p>
-                <p class="text-sm text-gray-800 line-clamp-1">{{ $kegiatan->lokasi_kegiatan }}</p>
-                <p class="text-sm text-gray-800">{{ $kegiatan->sistem_kegiatan}}</p>
+
+        @if($kegiatans->isNotEmpty())
+          <?php $no = 1 ?>
+            @foreach($kegiatans as $kegiatan)
+            <div id="volunteerCard" onclick="detailKegiatan('{{ $kegiatan->id_kegiatan }}')" class="flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100">
+              <div class="max-w-16">
+                <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt=""
+                  class="w-full rounded-full outline outline-1 outline-slate-200" />
+              </div>
+              <div class="w-full">
+                <div class="flex flex-col gap-1">
+                  <p id="detailTitle" class="font-semibold line-clamp-1">
+                    {{ $kegiatan->nama_kegiatan }}
+                  </p>
+                  <p class="text-sm text-gray-800 line-clamp-1">
+                    {{ $kegiatan->mitra->nama_mitra }}
+                  </p>
+                  <p class="text-sm text-gray-800 line-clamp-1">{{ $kegiatan->lokasi_kegiatan }}</p>
+                  <p class="text-sm text-gray-800">{{ $kegiatan->sistem_kegiatan}}</p>
+                </div>
               </div>
             </div>
-          </div>
-          @endforeach
+            @endforeach
+        @else
+          @if(!$kegiatanByKategori)
+            <div class="flex items-center justify-center h-screen">
+              <p class="text-gray-500 text-center">No activities match your search.</p>
+            </div>
+          @elseif(!$kegiatanByKategori && $kegiatanBySearch)
+            <div class="flex items-center justify-center h-screen">
+              <p class="text-gray-500 text-center">No activities match your search.</p>
+            </div>
+          @elseif(!$kegiatanBySearch && $kegiatanByKategori)
+            <div class="flex items-center justify-center h-screen">
+              <p class="text-gray-500 text-center">No activities match your search.</p>
+            </div>
+          @endif
+        @endif
       </div>
       <!-- Detail Volunteer -->
       <div id="detailVolunteer"
@@ -95,79 +98,85 @@
             </svg>
           </button>
         </div>
-        <div class="px-8 md:p-2">
-          <div class="flex items-center gap-x-4">
-            <div class="w-10">
-              <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt="" class="w-full" />
+        @if(isset($kegiatan))
+          <div class="px-8 md:p-2">
+            <div class="flex items-center gap-x-4">
+              <div class="w-10">
+                <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt="" class="w-full rounded-full" />
+              </div>
+              <span class="block">{{ $kegiatan->mitra->nama_mitra }}</span>
             </div>
-            <span class="block">{{ $kegiatan->mitra->nama_mitra }}</span>
-          </div>
-          <div class="mt-4 pb-4">
-            <h1 class="text-lg font-semibold">
-              {{ $kegiatan->nama_kegiatan }}
-            </h1>
-            <p class="mt-2 text-gray-500 text-sm">
-              {{ $kegiatan->lokasi_kegiatan }}
-            </p>
-          </div>
-          <div class="flex gap-x-2">
-            <svg class="w-6 fill-slate-500" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M27 29H4a2 2 0 0 1-2-2V15s5.221 2.685 10 3.784V20a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-1.216C23.778 17.685 29 15 29 15v12a2 2 0 0 1-2 2zM17 17a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h3zm2 0a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v.896C7.221 16.764 2 14 2 14v-4a2 2 0 0 1 2-2h6V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2h6a2 2 0 0 1 2 2v4s-5.222 2.764-10 3.896V17zm0-10a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v1h7V7z" />
-            </svg>
-            <div class="flex items-center gap-x-1">
-              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">{{ $kegiatan->sistem_kegiatan}}</span>
-              <span class="block h-auto">&middot;</span>
-              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">
-                @if($kegiatan->sisa_hari > 0)
-                  <p>{{ $kegiatan->sisa_hari }} days left</p>
-                @else
-                  <p>Ditutup</p>
-                @endif
-              </span>
-              <span class="block h-auto">&middot;</span>
-              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">{{ $kegiatan->pendaftars_count }} applied</span>
+            <div class="mt-4 pb-4">
+              <h1 class="text-lg font-semibold">
+                {{ $kegiatan->nama_kegiatan }}
+              </h1>
+              <p class="mt-2 text-gray-500 text-sm">
+                {{ $kegiatan->lokasi_kegiatan }}
+              </p>
             </div>
-          </div>
-          <div class="mt-4 gap-2 border-b pb-4">
-            <button id="applyBtn" class="px-6 py-2 bg-cyan-500 hover:bg-button_hover rounded-lg text-sm text-white">
-              Apply
-            </button>
-            <button class="px-6 py-2 border border-sky-300 hover:bg-sky-300 rounded-lg text-sm">
-              Save
-            </button>
-          </div>
-          <div class="mt-4 md:w-2/3">
-            <h2 class="font-semibold">Description</h2>
-            <p class="text-sm text-justify">
-              {{ $kegiatan->deskripsi}}
-            </p>
-            <div class="mt-4">
-              <h2 class="font-semibold">Requirement</h2>
-              <div class="flex gap-2 flex-wrap mt-2">
-                @if($kegiatan->kriterias->isNotEmpty())
-                  @foreach($kegiatan->kriterias as $kriteria)
-                  <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">{{ $kriteria->nama_kriteria }}</span>
-                  @endforeach
-                @else
-                  <span class="px-4 py-1 bg-red-200 text-sm rounded-lg">Mitra belum mengisikan data</span>
-                @endif
+            <div class="flex gap-x-2">
+              <svg class="w-6 fill-slate-500" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M27 29H4a2 2 0 0 1-2-2V15s5.221 2.685 10 3.784V20a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-1.216C23.778 17.685 29 15 29 15v12a2 2 0 0 1-2 2zM17 17a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h3zm2 0a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v.896C7.221 16.764 2 14 2 14v-4a2 2 0 0 1 2-2h6V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2h6a2 2 0 0 1 2 2v4s-5.222 2.764-10 3.896V17zm0-10a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v1h7V7z" />
+              </svg>
+              <div class="flex items-center gap-x-1">
+                <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">{{ $kegiatan->sistem_kegiatan}}</span>
+                <span class="block h-auto">&middot;</span>
+                <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">
+                  @if($kegiatan->sisa_hari > 0)
+                    <p>{{ $kegiatan->sisa_hari }} days left</p>
+                  @else
+                    <p>Ditutup</p>
+                  @endif
+                </span>
+                <span class="block h-auto">&middot;</span>
+                <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">{{ $kegiatan->pendaftars_count }} applied</span>
               </div>
             </div>
-            <div class="mt-4">
-              <h2 class="font-semibold">Benefits</h2>
-              <div class="flex gap-2 flex-wrap mt-2">
-                @if($kegiatan->benefits->isNotEmpty())
-                  @foreach($kegiatan->benefits as $benefit)
-                    <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">{{ $benefit->nama_benefit }}</span>
-                  @endforeach
-                @else
-                  <span class="px-4 py-1 bg-red-200 text-sm rounded-lg">Mitra belum mengisikan data</span>
-                @endif
+            <div class="mt-4 gap-2 border-b pb-4">
+              <button id="applyBtn" class="px-6 py-2 bg-cyan-500 hover:bg-button_hover rounded-lg text-sm text-white">
+                Apply
+              </button>
+              <button class="px-6 py-2 border border-sky-300 hover:bg-sky-300 rounded-lg text-sm">
+                Save
+              </button>
+            </div>
+            <div class="mt-4 md:w-2/3">
+              <h2 class="font-semibold">Description</h2>
+              <p class="text-sm text-justify">
+                {{ $kegiatan->deskripsi}}
+              </p>
+              <div class="mt-4">
+                <h2 class="font-semibold">Requirement</h2>
+                <div class="flex gap-2 flex-wrap mt-2">
+                  @if($kegiatan->kriterias->isNotEmpty())
+                    @foreach($kegiatan->kriterias as $kriteria)
+                    <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">{{ $kriteria->nama_kriteria }}</span>
+                    @endforeach
+                  @else
+                    <span class="px-4 py-1 bg-red-200 text-sm rounded-lg">Mitra belum mengisikan data</span>
+                  @endif
+                </div>
+              </div>
+              <div class="mt-4">
+                <h2 class="font-semibold">Benefits</h2>
+                <div class="flex gap-2 flex-wrap mt-2">
+                  @if($kegiatan->benefits->isNotEmpty())
+                    @foreach($kegiatan->benefits as $benefit)
+                      <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">{{ $benefit->nama_benefit }}</span>
+                    @endforeach
+                  @else
+                    <span class="px-4 py-1 bg-red-200 text-sm rounded-lg">Mitra belum mengisikan data</span>
+                  @endif
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        @else
+          <div class="flex items-center justify-center h-screen">
+            <p class="text-gray-500 text-center">No details available.</p>
+          </div>
+        @endif
       </div>
     </div>
 

@@ -24,7 +24,7 @@ class UserController extends Controller
     //All About Navigasi
     public function showHome() {
         $kegiatans = Kegiatan::withCount('pendaftars')->get()
-         ->take(4) ;
+         ->take(3) ;
          foreach ($kegiatans as $kegiatan) {
             // Menghitung sisa hari dengan penutupan dihitung sampai akhir hari (23:59:59)
             $kegiatan->sisa_hari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);
@@ -40,7 +40,7 @@ class UserController extends Controller
             // Menghitung sisa hari dengan penutupan dihitung sampai akhir hari (23:59:59)
             $kegiatan->sisa_hari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);
         }
-        return view('user.layout.daftar-volunteer', compact('kegiatans', 'totalKegiatan', 'kegiatan','kategori'));
+        return view('user.layout.daftar-volunteer', compact('kegiatans', 'totalKegiatan', 'kategori'));
     }
 
     public function showFaqPage() {
@@ -53,13 +53,14 @@ class UserController extends Controller
         $kegiatans = Kegiatan::withCount('pendaftars')->get();
         
         $totalKegiatan = $kegiatans->count();
+        $kategori = Kategori::all();
 
         foreach ($kegiatans as $kegiatan) {
             // Menghitung sisa hari dengan penutupan dihitung sampai akhir hari (23:59:59)
             $kegiatan->sisa_hari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);
         }        
 
-        return view('user.layout.daftar-volunteer', compact( 'kegiatans', 'user', 'totalKegiatan', 'kegiatan'));
+        return view('user.layout.daftar-volunteer', compact( 'kegiatans', 'user', 'totalKegiatan', 'kegiatan', 'kategori'));
     }
 
     public function showDetailKegiatan($id_kegiatan)
@@ -144,11 +145,11 @@ class UserController extends Controller
     
             // Mengubah base64 menjadi file
             $cropped_image = $request->input('cropped_image');
-            $image = Image::make($cropped_image);
+            // $image = Image::make($cropped_image);
             $newName = $user->nama_user . '-' . now()->timestamp . '.png';
             $path = 'foto-profile/' . $newName;
     
-            Storage::disk('public')->put($path, (string) $image->encode());
+            // Storage::disk('public')->put($path, (string) $image->encode());
     
             // Simpan path gambar ke database
             $user->foto_profile = $newName;
@@ -320,28 +321,50 @@ class UserController extends Controller
     public function search(Request $request)
     {
         $search = $request->search;
-        $kegiatans = Kegiatan::with(['mitra', 'pendaftars'])
+        $kategori = $request->kategori;
+
+        // Query pencarian
+        $kegiatans = Kegiatan::with(['mitra', 'pendaftars', 'kategori'])
             ->withCount('pendaftars')
-            ->where(function ($query) use ($search) {
-                $query->where('nama_kegiatan', 'like', "%$search%");
+            ->when($kategori, function ($query) use ($kategori) {
+                // Filter berdasarkan kategori
+                $query->whereHas('kategori', function ($query) use ($kategori) {
+                    $query->where('id_kategori', $kategori);
+                });
             })
-            ->orWhereHas('mitra', function ($query) use ($search) {
-                $query->where('nama_mitra', 'like', "%$search%");
+            ->when($search, function ($query) use ($search, $kategori) {
+                // Pencarian berdasarkan nama atau mitra, hanya jika kategori ada
+                $query->where(function ($query) use ($search) {
+                    $query->where('nama_kegiatan', 'like', "%$search%")
+                        ->orWhereHas('mitra', function ($query) use ($search) {
+                            $query->where('nama_mitra', 'like', "%$search%");
+                        })
+                        ->orWhere('sistem_kegiatan', 'like', "%$search%")
+                        ->orWhere('lokasi_kegiatan', 'like', "%$search%");
+                });
             })
-            ->orWhere('sistem_kegiatan', 'like', "%$search%")
-            ->orWhere('lokasi_kegiatan', 'like', "%$search%")
             ->get();
-        
-            /**
-                * @var \App\Models\Kegiatan $kegiatan
-            */
 
-            foreach ($kegiatans as $kegiatan) {
-                $kegiatan->sisa_hari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);
-            }
+        // Hitung sisa hari untuk setiap kegiatan
+        foreach ($kegiatans as $kegiatan) {
+            $kegiatan->sisa_hari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);
+        }
+
+        // Data untuk digunakan di view
         $totalKegiatan = $kegiatans->count();
+        $kegiatanByKategori = $kategori ? Kegiatan::whereHas('kategori', function ($query) use ($kategori) {
+            $query->where('id_kategori', $kategori);
+        })->exists() : false;
 
-        return view('user.layout.daftar-volunteer', compact('kegiatans', 'search', 'totalKegiatan'));
-    }
+        $kegiatanBySearch = $kategori
+            ? Kegiatan::whereHas('kategori', function ($query) use ($kategori) {
+                $query->where('id_kategori', $kategori);
+            })->where('nama_kegiatan', 'like', "%$search%")->exists()
+            : false;
+
+        $kategori = Kategori::all();
+
+        return view('user.layout.daftar-volunteer', compact('kegiatans', 'search', 'kegiatanByKategori', 'kegiatanBySearch', 'totalKegiatan', 'kategori'));
+}
 
 }

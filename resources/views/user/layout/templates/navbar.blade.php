@@ -11,7 +11,7 @@
         <!-- Navbar untuk layar lebar -->
         <div class="hidden md:flex space-x-8 items-center justify-center w-full">
           <a href="{{ route('home') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Home</a>
-          <a href="#" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Volunteer</a>
+          <a href="{{ route('daftar.kegiatan') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Volunteer</a>
           <a href="#" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Partner</a>
         </div>
 
@@ -38,12 +38,12 @@
               <button id="profile-menu-button"
                 class="text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
                 @if(auth()->check())
-                @php
-                $user = auth()->user();
-                @endphp
-                <img class="w-12 rounded-full" src="../src/image/profile-img.png" alt="Avatar" />
+                  @php
+                    $user = auth()->user();
+                  @endphp
+                    <img class="w-12 rounded-full" src="../src/image/profile-img.png" alt="Avatar" />
                 @else
-                <img class="w-12 rounded-full" src="{{asset('img/default-profile.png')}}" alt="Avatar" />
+                  <img class="w-12 rounded-full" src="{{asset('img/default-profile.png')}}" alt="Avatar" />
                 @endif
               </button>
             </div>
@@ -62,7 +62,6 @@
               </div>
               <div class="border-t border-gray-200"></div>
               <a href="{{ route('user.detail-profile-page', ['id' => $user->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Profile</a>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Settings</a>
               <a href="{{route('user.logout')}}" class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white">Logout</a>
               @else
               <a href="{{ route('user.login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login User</a>
@@ -81,11 +80,11 @@
       class="-z-10 absolute top-20 left-0 w-full bg-white shadow-lg transform -translate-y-[calc(100%+5rem)] opacity-0 transition-all duration-300 md:hidden">
       @if(!auth()->check())
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Home</a>
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Volunteer</a>
+        <a href="{{ route('home') }}" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Home</a>
+        <a href="{{ route('daftar.kegiatan') }}" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Volunteer</a>
         <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Mitra</a>
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Volunteer</a>
+        <a href="{{ route('mitra.login') }}" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Mitra</a>
+        <a href="{{ route('user.login') }}" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Volunteer</a>
       </div>
       <div class="border-t border-gray-200"></div>
       @else
@@ -97,17 +96,14 @@
         <img class="h-10 w-10 rounded-full" src="../src/image/profile-img.png" alt="Avatar" />
         <div class="ml-3">
           <div class="text-base font-medium text-gray-800">
-            Hafid Hanifan
+            {{$user->nama_user}}
           </div>
-          <div class="text-sm font-light">hafid.hanifan123@gmail.com</div>
+          <div class="text-sm font-light">{{$user->email_user}}</div>
         </div>
       </div>
-      <a href="#" class="block px-2 py-2 mt-3 mb-1 text-base font-light rounded-lg hover:bg-button_hover">Your
-        Profile</a>
-      <a href="#" class="block px-2 py-2 mb-1 text-base font-light rounded-lg hover:bg-button_hover">Settings</a>
-      <a href="#"
-        class="block px-2 py-2 text-base font-light text-red-600 hover:text-white hover:bg-button_alert rounded-lg">Sign
-        out</a>
+      <a href="{{ route('user.detail-profile-page', ['id' => $user->id]) }}" class="block px-2 py-2 mt-3 mb-1 text-base font-light rounded-lg hover:bg-button_hover">Profile</a>
+      <a href="{{route('user.logout')}}"
+        class="block px-2 py-2 text-base font-light text-red-600 hover:text-white hover:bg-button_alert rounded-lg">Logout</a>
     </div>
     @endif
     </div>

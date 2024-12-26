@@ -160,7 +160,7 @@
         </span>
         Opportunities
       </span>
-      <button class="h-8 text-md flex items-center md:text-lg lg:text-xl">
+      <a href="{{route('daftar.kegiatan')}}"class="h-8 text-md flex items-center md:text-lg lg:text-xl">
         See All<svg class="w-6 md:w-8 lg:w-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
           <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -169,309 +169,120 @@
               stroke-linejoin="round"></path>
           </g>
         </svg>
-      </button>
+      </a>
     </div>
     <!-- Card Container -->
     <div class="mt-6 flex flex-wrap flex-1 justify-center md:flex-nowrap md:gap-2 lg:gap-6">
       <!-- Card Items -->
-      <div class="w-full mt-4 rounded-lg p-4 max-w-lg shadow-md border-2 hover:border-2 hover:border-sky-300 md:w-1/3">
-        <div class="flex items-start justify-between">
-          <div class="flex gap-4">
-            <img src="../src/image/logo_mitra.jpg" alt="" class="w-14 rounded-full" />
-            <div class="w-full">
-              <h2 class="line-clamp-1 font-semibold">
-                Cleaning beaches in Yogyakarta
-              </h2>
-              <span class="text-sm">Humanity</span>
-            </div>
-          </div>
-          <svg class="w-7" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <path clip-rule="evenodd"
-                d="M5 2.92445C5 1.8616 5.8616 1 6.92444 1H20.3956C21.4584 1 22.32 1.8616 22.32 2.92444V25.0556C22.32 26.6414 20.5096 27.5466 19.2409 26.5951L13.66 22.4094L8.07911 26.5951C6.81045 27.5466 5 26.6414 5 25.0556V2.92445ZM20.3956 3.50178C20.3956 3.18293 20.1371 2.92444 19.8182 2.92444L7.50178 2.92445C7.18293 2.92445 6.92444 3.18293 6.92444 3.50178V24.4782C6.92444 24.7161 7.19601 24.8519 7.38631 24.7092L12.5053 20.8699C13.1896 20.3567 14.1304 20.3567 14.8147 20.8699L19.9337 24.7092C20.124 24.8519 20.3956 24.7161 20.3956 24.4782V3.50178Z"
-                fill="#000000" fill-rule="evenodd"></path>
-            </g>
-          </svg>
-        </div>
-        <div class="description mt-4">
-          <p class="line-clamp-3 text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Accusamus quos esse quo laudantium consequatur nisi similique
-            rem est quaerat, voluptates ut fugit numquam cupiditate officia,
-            voluptate a nostrum aperiam voluptatem.
-          </p>
-        </div>
-        <!-- Icon Container -->
-        <div class="mt-4 mx-auto w-fit grid grid-cols-2 gap-2 gap-x-2 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4">
-          <!-- Icon Items -->
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" fill="#64748b" viewBox="0 0 32 32" version="1.1"
-              xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z">
-                </path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">Yogyakarta</span>
-            </div>
-          </div>
+      <?php $no = 1 ?>
+          @foreach($kegiatans as $kegiatan)
+            <div class="w-full mt-4 rounded-lg p-4 max-w-lg shadow-md border-2 hover:border-2 hover:border-sky-300 md:w-1/3">
+              <div class="flex items-start justify-between">
+                <div class="flex gap-4">
+                  <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt="Logo" class="w-14 rounded-full" />
+                  <div class="w-full">
+                    <h2 class="line-clamp-1 font-semibold">
+                      {{ $kegiatan->nama_kegiatan }}
+                    </h2>
+                    <span class="text-sm">{{ $kegiatan->mitra->nama_mitra }}</span>
+                  </div>
+                </div>
+                <svg class="w-7" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path clip-rule="evenodd"
+                      d="M5 2.92445C5 1.8616 5.8616 1 6.92444 1H20.3956C21.4584 1 22.32 1.8616 22.32 2.92444V25.0556C22.32 26.6414 20.5096 27.5466 19.2409 26.5951L13.66 22.4094L8.07911 26.5951C6.81045 27.5466 5 26.6414 5 25.0556V2.92445ZM20.3956 3.50178C20.3956 3.18293 20.1371 2.92444 19.8182 2.92444L7.50178 2.92445C7.18293 2.92445 6.92444 3.18293 6.92444 3.50178V24.4782C6.92444 24.7161 7.19601 24.8519 7.38631 24.7092L12.5053 20.8699C13.1896 20.3567 14.1304 20.3567 14.8147 20.8699L19.9337 24.7092C20.124 24.8519 20.3956 24.7161 20.3956 24.4782V3.50178Z"
+                      fill="#000000" fill-rule="evenodd"></path>
+                  </g>
+                </svg>
+              </div>
+              <div class="description mt-4">
+                <p class="line-clamp-3 text-sm">
+                  {{ $kegiatan->deskripsi }}
+                </p>
+              </div>
+              <!-- Icon Container -->
+              <div class="mt-4 mx-auto w-fit grid grid-cols-2 gap-2 gap-x-2 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4">
+                <!-- Icon Items -->
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 flex-shrink-0" fill="#64748b" viewBox="0 0 32 32" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z">
+                      </path>
+                    </g>
+                  </svg>
+                  <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+                    <span class="text-sm text-slate-500 font-semibold">{{$kegiatan->lokasi_kegiatan}}</span>
+                  </div>
+                </div>
 
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-                  stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">10 Applied</span>
-            </div>
-          </div>
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                        stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                  </svg>
+                  <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+                    <span class="text-sm text-slate-500 font-semibold">{{ $kegiatan->pendaftars_count }} Applied</span>
+                  </div>
+                </div>
 
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M12 7V12H15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-                  stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">Closed</span>
-            </div>
-          </div>
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M12 7V12H15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                        stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                  </svg>
+                  <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+                    @if($kegiatan->sisa_hari > 0)
+                      <span class="text-sm text-slate-500 font-semibold">
+                        {{ $kegiatan->sisa_hari }} days left
+                      </span>
+                    @else
+                      <span class="text-sm text-slate-500 font-semibold">
+                        Closed
+                      </span>
+                    @endif
+                  </div>
+                </div>
 
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M10.0002 12.25C9.58597 12.25 9.25019 12.5858 9.25019 13C9.25019 13.4142 9.58597 13.75 10.0002 13.75H14.0002C14.4144 13.75 14.7502 13.4142 14.7502 13C14.7502 12.5858 14.4144 12.25 14.0002 12.25H10.0002Z"
-                  fill="#64748b"></path>
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M7.32033 4.27529C7.65835 2.55091 9.17665 1.25 11.0002 1.25H13.0002C14.8238 1.25 16.3421 2.55092 16.6801 4.2753C19.6252 5.03147 21.7075 7.66894 21.7495 10.7198C21.7502 10.7665 21.7502 10.8178 21.7502 10.9044V13.9829C21.7504 13.994 21.7504 14.0052 21.7502 14.0163V16.375C21.7502 18.8445 20.035 20.9827 17.6244 21.5184C13.9201 22.3415 10.0803 22.3415 6.37602 21.5184C3.96535 20.9827 2.25019 18.8445 2.25019 16.375V14.0163C2.24994 14.0052 2.24994 13.994 2.25019 13.9829V10.9043C2.25019 10.8177 2.25019 10.7664 2.25083 10.7198C2.2929 7.66892 4.37523 5.03144 7.32033 4.27529ZM9.01465 3.94034C9.39359 3.23199 10.1411 2.75 11.0002 2.75H13.0002C13.8594 2.75 14.6068 3.232 14.9858 3.94035C13.0069 3.63773 10.9935 3.63772 9.01465 3.94034ZM20.2502 10.9111V13.5066C14.9716 15.711 9.02878 15.711 3.75019 13.5066V10.9111C3.75019 10.8157 3.7502 10.7755 3.75069 10.7405C3.78387 8.33419 5.4489 6.25854 7.79074 5.70414C7.82473 5.69609 7.86404 5.68733 7.95714 5.66665C8.04138 5.64793 8.08131 5.63905 8.12071 5.63048C10.6771 5.07434 13.3232 5.07434 15.8797 5.63048C15.9191 5.63905 15.959 5.64793 16.0432 5.66665C16.1363 5.68733 16.1756 5.69609 16.2096 5.70414C18.5515 6.25854 20.2165 8.33419 20.2497 10.7405C20.2502 10.7755 20.2502 10.8157 20.2502 10.9111ZM3.75019 16.375V15.123C7.91456 16.7307 12.4332 17.0771 16.7502 16.1622V17C16.7502 17.4142 17.086 17.75 17.5002 17.75C17.9144 17.75 18.2502 17.4142 18.2502 17V15.7911C18.9242 15.5999 19.5916 15.3772 20.2502 15.123V16.375C20.2502 18.1415 19.0233 19.6709 17.299 20.0541C13.809 20.8296 10.1914 20.8296 6.70141 20.0541C4.97705 19.6709 3.75019 18.1415 3.75019 16.375Z"
-                  fill="#64748b"></path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">Offline</span>
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M10.0002 12.25C9.58597 12.25 9.25019 12.5858 9.25019 13C9.25019 13.4142 9.58597 13.75 10.0002 13.75H14.0002C14.4144 13.75 14.7502 13.4142 14.7502 13C14.7502 12.5858 14.4144 12.25 14.0002 12.25H10.0002Z"
+                        fill="#64748b"></path>
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M7.32033 4.27529C7.65835 2.55091 9.17665 1.25 11.0002 1.25H13.0002C14.8238 1.25 16.3421 2.55092 16.6801 4.2753C19.6252 5.03147 21.7075 7.66894 21.7495 10.7198C21.7502 10.7665 21.7502 10.8178 21.7502 10.9044V13.9829C21.7504 13.994 21.7504 14.0052 21.7502 14.0163V16.375C21.7502 18.8445 20.035 20.9827 17.6244 21.5184C13.9201 22.3415 10.0803 22.3415 6.37602 21.5184C3.96535 20.9827 2.25019 18.8445 2.25019 16.375V14.0163C2.24994 14.0052 2.24994 13.994 2.25019 13.9829V10.9043C2.25019 10.8177 2.25019 10.7664 2.25083 10.7198C2.2929 7.66892 4.37523 5.03144 7.32033 4.27529ZM9.01465 3.94034C9.39359 3.23199 10.1411 2.75 11.0002 2.75H13.0002C13.8594 2.75 14.6068 3.232 14.9858 3.94035C13.0069 3.63773 10.9935 3.63772 9.01465 3.94034ZM20.2502 10.9111V13.5066C14.9716 15.711 9.02878 15.711 3.75019 13.5066V10.9111C3.75019 10.8157 3.7502 10.7755 3.75069 10.7405C3.78387 8.33419 5.4489 6.25854 7.79074 5.70414C7.82473 5.69609 7.86404 5.68733 7.95714 5.66665C8.04138 5.64793 8.08131 5.63905 8.12071 5.63048C10.6771 5.07434 13.3232 5.07434 15.8797 5.63048C15.9191 5.63905 15.959 5.64793 16.0432 5.66665C16.1363 5.68733 16.1756 5.69609 16.2096 5.70414C18.5515 6.25854 20.2165 8.33419 20.2497 10.7405C20.2502 10.7755 20.2502 10.8157 20.2502 10.9111ZM3.75019 16.375V15.123C7.91456 16.7307 12.4332 17.0771 16.7502 16.1622V17C16.7502 17.4142 17.086 17.75 17.5002 17.75C17.9144 17.75 18.2502 17.4142 18.2502 17V15.7911C18.9242 15.5999 19.5916 15.3772 20.2502 15.123V16.375C20.2502 18.1415 19.0233 19.6709 17.299 20.0541C13.809 20.8296 10.1914 20.8296 6.70141 20.0541C4.97705 19.6709 3.75019 18.1415 3.75019 16.375Z"
+                        fill="#64748b"></path>
+                    </g>
+                  </svg>
+                  <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
+                    <span class="text-sm text-slate-500 font-semibold">Offline</span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
+          @endforeach
       <!-- Closed tag for card items -->
 
-      <!-- Card Items -->
-      <div class="w-full mt-4 rounded-lg p-4 max-w-lg shadow-md border-2 hover:border-2 hover:border-sky-300 md:w-1/3">
-        <div class="flex items-start justify-between">
-          <div class="flex gap-4">
-            <img src="../src/image/logo_mitra.jpg" alt="" class="w-14 rounded-full" />
-            <div class="w-full">
-              <h2 class="line-clamp-1 font-semibold">
-                Cleaning beaches in Yogyakarta
-              </h2>
-              <span class="text-sm">Humanity</span>
-            </div>
-          </div>
-          <svg class="w-8" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <path clip-rule="evenodd"
-                d="M5 2.92445C5 1.8616 5.8616 1 6.92444 1H20.3956C21.4584 1 22.32 1.8616 22.32 2.92444V25.0556C22.32 26.6414 20.5096 27.5466 19.2409 26.5951L13.66 22.4094L8.07911 26.5951C6.81045 27.5466 5 26.6414 5 25.0556V2.92445ZM20.3956 3.50178C20.3956 3.18293 20.1371 2.92444 19.8182 2.92444L7.50178 2.92445C7.18293 2.92445 6.92444 3.18293 6.92444 3.50178V24.4782C6.92444 24.7161 7.19601 24.8519 7.38631 24.7092L12.5053 20.8699C13.1896 20.3567 14.1304 20.3567 14.8147 20.8699L19.9337 24.7092C20.124 24.8519 20.3956 24.7161 20.3956 24.4782V3.50178Z"
-                fill="#000000" fill-rule="evenodd"></path>
-            </g>
-          </svg>
-        </div>
-        <div class="description mt-4">
-          <p class="line-clamp-3 text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Accusamus quos esse quo laudantium consequatur nisi similique
-            rem est quaerat, voluptates ut fugit numquam cupiditate officia,
-            voluptate a nostrum aperiam voluptatem.
-          </p>
-        </div>
-        <!-- Icon Container -->
-        <div class="mt-4 mx-auto w-fit grid grid-cols-2 gap-2 gap-x-2 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4">
-          <!-- Icon Items -->
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" fill="#64748b" viewBox="0 0 32 32" version="1.1"
-              xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z">
-                </path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">Yogyakarta</span>
-            </div>
-          </div>
 
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-                  stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">10 Applied</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M12 7V12H15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-                  stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">Closed</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M10.0002 12.25C9.58597 12.25 9.25019 12.5858 9.25019 13C9.25019 13.4142 9.58597 13.75 10.0002 13.75H14.0002C14.4144 13.75 14.7502 13.4142 14.7502 13C14.7502 12.5858 14.4144 12.25 14.0002 12.25H10.0002Z"
-                  fill="#64748b"></path>
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M7.32033 4.27529C7.65835 2.55091 9.17665 1.25 11.0002 1.25H13.0002C14.8238 1.25 16.3421 2.55092 16.6801 4.2753C19.6252 5.03147 21.7075 7.66894 21.7495 10.7198C21.7502 10.7665 21.7502 10.8178 21.7502 10.9044V13.9829C21.7504 13.994 21.7504 14.0052 21.7502 14.0163V16.375C21.7502 18.8445 20.035 20.9827 17.6244 21.5184C13.9201 22.3415 10.0803 22.3415 6.37602 21.5184C3.96535 20.9827 2.25019 18.8445 2.25019 16.375V14.0163C2.24994 14.0052 2.24994 13.994 2.25019 13.9829V10.9043C2.25019 10.8177 2.25019 10.7664 2.25083 10.7198C2.2929 7.66892 4.37523 5.03144 7.32033 4.27529ZM9.01465 3.94034C9.39359 3.23199 10.1411 2.75 11.0002 2.75H13.0002C13.8594 2.75 14.6068 3.232 14.9858 3.94035C13.0069 3.63773 10.9935 3.63772 9.01465 3.94034ZM20.2502 10.9111V13.5066C14.9716 15.711 9.02878 15.711 3.75019 13.5066V10.9111C3.75019 10.8157 3.7502 10.7755 3.75069 10.7405C3.78387 8.33419 5.4489 6.25854 7.79074 5.70414C7.82473 5.69609 7.86404 5.68733 7.95714 5.66665C8.04138 5.64793 8.08131 5.63905 8.12071 5.63048C10.6771 5.07434 13.3232 5.07434 15.8797 5.63048C15.9191 5.63905 15.959 5.64793 16.0432 5.66665C16.1363 5.68733 16.1756 5.69609 16.2096 5.70414C18.5515 6.25854 20.2165 8.33419 20.2497 10.7405C20.2502 10.7755 20.2502 10.8157 20.2502 10.9111ZM3.75019 16.375V15.123C7.91456 16.7307 12.4332 17.0771 16.7502 16.1622V17C16.7502 17.4142 17.086 17.75 17.5002 17.75C17.9144 17.75 18.2502 17.4142 18.2502 17V15.7911C18.9242 15.5999 19.5916 15.3772 20.2502 15.123V16.375C20.2502 18.1415 19.0233 19.6709 17.299 20.0541C13.809 20.8296 10.1914 20.8296 6.70141 20.0541C4.97705 19.6709 3.75019 18.1415 3.75019 16.375Z"
-                  fill="#64748b"></path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">Offline</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Closed tag for card items -->
-
-      <!-- Card Items -->
-      <div class="w-full mt-4 rounded-lg p-4 max-w-lg shadow-md border-2 hover:border-2 hover:border-sky-300 md:w-1/3">
-        <div class="flex items-start justify-between">
-          <div class="flex gap-4">
-            <img src="../src/image/logo_mitra.jpg" alt="" class="w-14 rounded-full" />
-            <div class="w-full">
-              <h2 class="line-clamp-1 font-semibold">
-                Cleaning beaches in Yogyakarta
-              </h2>
-              <span class="text-sm">Humanity</span>
-            </div>
-          </div>
-          <svg class="w-8" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-            <g id="SVGRepo_iconCarrier">
-              <path clip-rule="evenodd"
-                d="M5 2.92445C5 1.8616 5.8616 1 6.92444 1H20.3956C21.4584 1 22.32 1.8616 22.32 2.92444V25.0556C22.32 26.6414 20.5096 27.5466 19.2409 26.5951L13.66 22.4094L8.07911 26.5951C6.81045 27.5466 5 26.6414 5 25.0556V2.92445ZM20.3956 3.50178C20.3956 3.18293 20.1371 2.92444 19.8182 2.92444L7.50178 2.92445C7.18293 2.92445 6.92444 3.18293 6.92444 3.50178V24.4782C6.92444 24.7161 7.19601 24.8519 7.38631 24.7092L12.5053 20.8699C13.1896 20.3567 14.1304 20.3567 14.8147 20.8699L19.9337 24.7092C20.124 24.8519 20.3956 24.7161 20.3956 24.4782V3.50178Z"
-                fill="#000000" fill-rule="evenodd"></path>
-            </g>
-          </svg>
-        </div>
-        <div class="description mt-4">
-          <p class="line-clamp-3 text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Accusamus quos esse quo laudantium consequatur nisi similique
-            rem est quaerat, voluptates ut fugit numquam cupiditate officia,
-            voluptate a nostrum aperiam voluptatem.
-          </p>
-        </div>
-        <!-- Icon Container -->
-        <div class="mt-4 mx-auto w-fit grid grid-cols-2 gap-2 gap-x-2 sm:grid-cols-4 md:grid-cols-2 lg:grid-cols-4">
-          <!-- Icon Items -->
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" fill="#64748b" viewBox="0 0 32 32" version="1.1"
-              xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M16.114-0.011c-6.559 0-12.114 5.587-12.114 12.204 0 6.93 6.439 14.017 10.77 18.998 0.017 0.020 0.717 0.797 1.579 0.797h0.076c0.863 0 1.558-0.777 1.575-0.797 4.064-4.672 10-12.377 10-18.998 0-6.618-4.333-12.204-11.886-12.204zM16.515 29.849c-0.035 0.035-0.086 0.074-0.131 0.107-0.046-0.032-0.096-0.072-0.133-0.107l-0.523-0.602c-4.106-4.71-9.729-11.161-9.729-17.055 0-5.532 4.632-10.205 10.114-10.205 6.829 0 9.886 5.125 9.886 10.205 0 4.474-3.192 10.416-9.485 17.657zM16.035 6.044c-3.313 0-6 2.686-6 6s2.687 6 6 6 6-2.687 6-6-2.686-6-6-6zM16.035 16.044c-2.206 0-4.046-1.838-4.046-4.044s1.794-4 4-4c2.207 0 4 1.794 4 4 0.001 2.206-1.747 4.044-3.954 4.044z">
-                </path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">Yogyakarta</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-                  stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">10 Applied</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M12 7V12H15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-                  stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">Closed</span>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <svg class="w-5 flex-shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M10.0002 12.25C9.58597 12.25 9.25019 12.5858 9.25019 13C9.25019 13.4142 9.58597 13.75 10.0002 13.75H14.0002C14.4144 13.75 14.7502 13.4142 14.7502 13C14.7502 12.5858 14.4144 12.25 14.0002 12.25H10.0002Z"
-                  fill="#64748b"></path>
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M7.32033 4.27529C7.65835 2.55091 9.17665 1.25 11.0002 1.25H13.0002C14.8238 1.25 16.3421 2.55092 16.6801 4.2753C19.6252 5.03147 21.7075 7.66894 21.7495 10.7198C21.7502 10.7665 21.7502 10.8178 21.7502 10.9044V13.9829C21.7504 13.994 21.7504 14.0052 21.7502 14.0163V16.375C21.7502 18.8445 20.035 20.9827 17.6244 21.5184C13.9201 22.3415 10.0803 22.3415 6.37602 21.5184C3.96535 20.9827 2.25019 18.8445 2.25019 16.375V14.0163C2.24994 14.0052 2.24994 13.994 2.25019 13.9829V10.9043C2.25019 10.8177 2.25019 10.7664 2.25083 10.7198C2.2929 7.66892 4.37523 5.03144 7.32033 4.27529ZM9.01465 3.94034C9.39359 3.23199 10.1411 2.75 11.0002 2.75H13.0002C13.8594 2.75 14.6068 3.232 14.9858 3.94035C13.0069 3.63773 10.9935 3.63772 9.01465 3.94034ZM20.2502 10.9111V13.5066C14.9716 15.711 9.02878 15.711 3.75019 13.5066V10.9111C3.75019 10.8157 3.7502 10.7755 3.75069 10.7405C3.78387 8.33419 5.4489 6.25854 7.79074 5.70414C7.82473 5.69609 7.86404 5.68733 7.95714 5.66665C8.04138 5.64793 8.08131 5.63905 8.12071 5.63048C10.6771 5.07434 13.3232 5.07434 15.8797 5.63048C15.9191 5.63905 15.959 5.64793 16.0432 5.66665C16.1363 5.68733 16.1756 5.69609 16.2096 5.70414C18.5515 6.25854 20.2165 8.33419 20.2497 10.7405C20.2502 10.7755 20.2502 10.8157 20.2502 10.9111ZM3.75019 16.375V15.123C7.91456 16.7307 12.4332 17.0771 16.7502 16.1622V17C16.7502 17.4142 17.086 17.75 17.5002 17.75C17.9144 17.75 18.2502 17.4142 18.2502 17V15.7911C18.9242 15.5999 19.5916 15.3772 20.2502 15.123V16.375C20.2502 18.1415 19.0233 19.6709 17.299 20.0541C13.809 20.8296 10.1914 20.8296 6.70141 20.0541C4.97705 19.6709 3.75019 18.1415 3.75019 16.375Z"
-                  fill="#64748b"></path>
-              </g>
-            </svg>
-            <div class="max-w-[150px] overflow-hidden text-ellipsis whitespace-nowrap">
-              <span class="text-sm text-slate-500 font-semibold">Offline</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Closed tag for card items -->
+      
     </div>
   </section>
   <!-- Volunteer activity section end -->
