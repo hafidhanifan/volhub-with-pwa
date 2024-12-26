@@ -63,7 +63,7 @@
               <div class="border-t border-gray-200"></div>
               <a href="{{ route('user.detail-profile-page', ['id' => $user->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Profile</a>
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Settings</a>
-              <a href="" class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white">Logout</a>
+              <a href="{{route('user.logout')}}" class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white">Logout</a>
               @else
               <a href="{{ route('user.login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login User</a>
               <a href="{{ route('mitra.login') }}"
