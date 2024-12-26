@@ -1,6 +1,5 @@
 @include('user.layout.templates.header')
 @include('user.layout.templates.navbar')
-@include('user.layout.templates.hero')
 <main class="mt-20">
   <!-- Hero section start -->
   <section class="lg:h-[calc(100vh-80px)] overflow-hidden">
@@ -21,7 +20,7 @@
       </button>
     </div>
     <div class="mx-auto w-full">
-      <img src="../src/image/hero-image.png" alt="Hero Image"
+      <img src="{{asset('img/hero image/hero-image.png') }}" alt="Hero Image"
         class="z-0 w-full mx-auto sm:w-4/5 md:w-8/12 lg:w-3/6 lg:-mt-12" />
     </div>
 
