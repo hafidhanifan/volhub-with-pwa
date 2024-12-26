@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       detailVolunteerCard.classList.add("translate-y-full");
     });
   });
-  
+
   // Modal aplly volunteer
   document.addEventListener("DOMContentLoaded", () => {
     const applyButton = document.getElementById("applyBtn");

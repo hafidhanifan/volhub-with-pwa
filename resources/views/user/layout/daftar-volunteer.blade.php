@@ -25,20 +25,23 @@
         </span>
       </button>
       <!-- Dropdown Menu -->
-      <ul id="dropdownCategories" class="absolute left-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg hidden">
+      {{-- <ul id="dropdownCategories" class="absolute left-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg hidden">
         @foreach ($kategori as $kategori)
         <li class="px-4 py-2 text-sm hover:bg-button_hover cursor-pointer">
           {{ $kategori->nama_kategori }}
         </li>
         @endforeach
-      </ul>
+      </ul> --}}
     </div>
 
     <!-- Search Bar -->
-    <div class="flex-1">
-      <input type="text" placeholder="Search..."
-        class="w-full px-4 py-2 text-sm border-slate-300 bg-slate-100 focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-0" />
-    </div>
+    <form method="GET" action="{{ route('search') }}">
+      @csrf
+        <div class="flex-1">
+          <input type="text" name="search" placeholder="Search..."
+            class="w-full px-4 py-2 text-sm border-slate-300 bg-slate-100 focus:border-sky-500 focus:ring focus:ring-sky-500 focus:ring-opacity-0" value="{{ request('search') }}" />
+        </div>
+    </form>
 
     <!-- Search Button -->
     <button class="h-[37.6px] px-2 py-2 rounded-r-md bg-cyan-500">
@@ -57,44 +60,29 @@
       <div class="bg-white lg:w-1/3 lg:bg-white lg:rounded-lg lg:shadow-sm lg:p-4">
         <div class="p-2 border-b bg-white lg:rounded-t-lg">
           <span class="block font-medium">All Volunteer</span>
-          <span class="block text-sm text-slate-500 font-normal">100 results</span>
+          <span class="block text-sm text-slate-500 font-normal">{{ $totalKegiatan }} results</span>
         </div>
-        <div id="volunteerCard" class="flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100">
-          <div class="max-w-16">
-            <img src="../src/image/logo_mitra.jpg" alt=""
-              class="w-full rounded-full outline outline-1 outline-slate-200" />
-          </div>
-          <div class="w-full">
-            <div class="flex flex-col gap-1">
-              <p class="font-semibold line-clamp-1">
-                Kegiatan Sosial Kulon Progo Membangun Membangun Semangat
-              </p>
-              <p class="text-sm text-gray-800 line-clamp-1">
-                Mega Group Megawati Wkwkwkwkwk
-              </p>
-              <p class="text-sm text-gray-800 line-clamp-1">Yogyakarta</p>
-              <p class="text-sm text-gray-800">Onsite</p>
+        <?php $no = 1 ?>
+          @foreach($kegiatans as $kegiatan)
+          <div id="volunteerCard" onclick="detailKegiatan('{{ $kegiatan->id_kegiatan }}')" class="flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100">
+            <div class="max-w-16">
+              <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt=""
+                class="w-full rounded-full outline outline-1 outline-slate-200" />
+            </div>
+            <div class="w-full">
+              <div class="flex flex-col gap-1">
+                <p id="detailTitle" class="font-semibold line-clamp-1">
+                  {{ $kegiatan->nama_kegiatan }}
+                </p>
+                <p class="text-sm text-gray-800 line-clamp-1">
+                  {{ $kegiatan->mitra->nama_mitra }}
+                </p>
+                <p class="text-sm text-gray-800 line-clamp-1">{{ $kegiatan->lokasi_kegiatan }}</p>
+                <p class="text-sm text-gray-800">{{ $kegiatan->sistem_kegiatan}}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="volunteerCard" class="flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100">
-          <div class="max-w-16">
-            <img src="../src/image/logo_mitra.jpg" alt=""
-              class="w-full rounded-full outline outline-1 outline-slate-200" />
-          </div>
-          <div class="w-full">
-            <div class="flex flex-col gap-1">
-              <p class="font-semibold line-clamp-1">
-                Kegiatan Sosial Kulon Progo Membangun Membangun Semangat
-              </p>
-              <p class="text-sm text-gray-800 line-clamp-1">
-                Mega Group Megawati Wkwkwkwkwk
-              </p>
-              <p class="text-sm text-gray-800 line-clamp-1">Yogyakarta</p>
-              <p class="text-sm text-gray-800">Onsite</p>
-            </div>
-          </div>
-        </div>
+          @endforeach
       </div>
       <!-- Detail Volunteer -->
       <div id="detailVolunteer"
@@ -110,16 +98,16 @@
         <div class="px-8 md:p-2">
           <div class="flex items-center gap-x-4">
             <div class="w-10">
-              <img src="../src/image/logo_mitra.jpg" alt="" class="w-full" />
+              <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt="" class="w-full" />
             </div>
-            <span class="block">Mega Group</span>
+            <span class="block">{{ $kegiatan->mitra->nama_mitra }}</span>
           </div>
           <div class="mt-4 pb-4">
             <h1 class="text-lg font-semibold">
-              Kegiatan Sosial Kulon Progo Membangun
+              {{ $kegiatan->nama_kegiatan }}
             </h1>
             <p class="mt-2 text-gray-500 text-sm">
-              Kulon Progo, Yogyakarta, Indonesia
+              {{ $kegiatan->lokasi_kegiatan }}
             </p>
           </div>
           <div class="flex gap-x-2">
@@ -128,11 +116,17 @@
                 d="M27 29H4a2 2 0 0 1-2-2V15s5.221 2.685 10 3.784V20a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-1.216C23.778 17.685 29 15 29 15v12a2 2 0 0 1-2 2zM17 17a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h3zm2 0a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v.896C7.221 16.764 2 14 2 14v-4a2 2 0 0 1 2-2h6V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2h6a2 2 0 0 1 2 2v4s-5.222 2.764-10 3.896V17zm0-10a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v1h7V7z" />
             </svg>
             <div class="flex items-center gap-x-1">
-              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">Offline</span>
+              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">{{ $kegiatan->sistem_kegiatan}}</span>
               <span class="block h-auto">&middot;</span>
-              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">2 Days Left</span>
+              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">
+                @if($kegiatan->sisa_hari > 0)
+                  <p>{{ $kegiatan->sisa_hari }} days left</p>
+                @else
+                  <p>Ditutup</p>
+                @endif
+              </span>
               <span class="block h-auto">&middot;</span>
-              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">10 Applied</span>
+              <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">{{ $kegiatan->pendaftars_count }} applied</span>
             </div>
           </div>
           <div class="mt-4 gap-2 border-b pb-4">
@@ -144,45 +138,32 @@
             </button>
           </div>
           <div class="mt-4 md:w-2/3">
-            <h2 class="font-semibold">Volunteer Description:</h2>
+            <h2 class="font-semibold">Description</h2>
             <p class="text-sm text-justify">
-              We are seeking a talented and highly motivated Volunteer to
-              join our program. The deal candidate will have a strong
-              portofolio of Lorem ipsum dolor sit, amet consectetur
-              adipisicing elit. Enim quam tenetur quis autem reiciendis
-              delectus vel minus, consequuntur dolore similique.
+              {{ $kegiatan->deskripsi}}
             </p>
             <div class="mt-4">
-              <h2 class="font-semibold">Key Responsibilities</h2>
-              <ul class="list-disc pl-10 text-sm text-justify">
-                <li class="my-1">
-                  Collaborate with team and reach every goal
-                </li>
-                <li class="my-1">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Aut sequi, nisi ea quo iure cupiditate?
-                </li>
-                <li class="my-1">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Pariatur neque ipsam excepturi atque aut cupiditate dolore
-                  nemo fugit facilis delectus.
-                </li>
-              </ul>
-            </div>
-            <div class="mt-4">
-              <h2 class="font-semibold">Required Skill</h2>
+              <h2 class="font-semibold">Requirement</h2>
               <div class="flex gap-2 flex-wrap mt-2">
-                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem ipsum</span>
-                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem</span>
-                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem ipsum dolor</span>
+                @if($kegiatan->kriterias->isNotEmpty())
+                  @foreach($kegiatan->kriterias as $kriteria)
+                  <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">{{ $kriteria->nama_kriteria }}</span>
+                  @endforeach
+                @else
+                  <span class="px-4 py-1 bg-red-200 text-sm rounded-lg">Mitra belum mengisikan data</span>
+                @endif
               </div>
             </div>
             <div class="mt-4">
               <h2 class="font-semibold">Benefits</h2>
               <div class="flex gap-2 flex-wrap mt-2">
-                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Paid</span>
-                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Unpaid</span>
-                <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Menambah Relasi</span>
+                @if($kegiatan->benefits->isNotEmpty())
+                  @foreach($kegiatan->benefits as $benefit)
+                    <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">{{ $benefit->nama_benefit }}</span>
+                  @endforeach
+                @else
+                  <span class="px-4 py-1 bg-red-200 text-sm rounded-lg">Mitra belum mengisikan data</span>
+                @endif
               </div>
             </div>
           </div>
