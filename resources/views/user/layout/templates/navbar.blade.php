@@ -66,7 +66,8 @@
               <a href="#" class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white">Logout</a>
               @else
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login User</a>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login
+              <a href="{{ route('mitra.login') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login
                 Partner</a>
               @endif
             </div>
