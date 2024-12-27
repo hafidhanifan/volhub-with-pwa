@@ -164,6 +164,7 @@ Route::prefix('user')->group(function () {
         Route::get('detail-profile/{id}', [UserController::class, 'showDetailUserPage'])->name('user.detail-profile-page');
         Route::put('edit-detail/{id}', [UserController::class, 'editUserAction'])->name('user.edit-profile-action');
         Route::put('edit-foto-profile/{id}', [UserController::class, 'editFotoProfileAction'])->name('user.edit-foto-profile-action');
+        Route::put('edit-contact/{id}', [UserController::class, 'editContactAction'])->name('user.edit-contact-action');
         Route::put('edit-akun/{id}', [UserController::class, 'editAkunAction'])->name('user.edit-akun-action');
         Route::post('add-skill/{id}', [UserController::class, 'addSkillAction'])->name('user.add-skill-action');
         Route::delete('{id}/remove-skill/{id_skill}', [UserController::class, 'removeSkill'])->name('user.remove-skill-action');

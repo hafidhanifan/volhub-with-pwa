@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function initializeTabProfile() {
-        const profileTabs = ["about", "activity", "applied", "favorite"];
+        const profileTabs = ["about", "applied"];
 
         profileTabs.forEach((tab) => {
             const button = document.getElementById(`${tab}Btn`);

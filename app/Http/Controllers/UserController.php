@@ -162,7 +162,7 @@ class UserController extends Controller
 
     }
 
-    public function editAkunAction(Request $request, $id) 
+    public function editContactAction(Request $request, $id) 
     {
         $user = User::find($id);
         $gender = ['Perempuan', 'Laki-Laki'];
@@ -172,18 +172,23 @@ class UserController extends Controller
         $user->instagram = $request->instagram;
         $user->linkedIn = $request->linkedIn;
 
-        // if ($request->filled('password')) {
-        //     // Enkripsi password
-        //     $user->password = Hash::make($request->password);
-        // }
+        $user->save();
+
+        return redirect()->back();
+    }
+
+    public function editAkunAction(Request $request, $id) 
+    {
+        $user = User::find($id);
+        $user->username = $request->username;
+        
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
 
         $user->save();
 
-        return redirect()->back()->with([
-            'success' => 'User berhasil diupdate.',
-            'gender' => $gender,
-            'pendidikanTerakhir' => $pendidikanTerakhir
-        ]);
+        return redirect()->back();
     }
 
     public function addSkillAction(Request $request, $id)

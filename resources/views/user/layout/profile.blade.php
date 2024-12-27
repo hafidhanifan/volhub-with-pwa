@@ -128,7 +128,7 @@
               <div id="profileContent"
                 class="max-h-[50vh] md:max-h-[60vh] lg:max-h-[80vh] md:px-8 py-4 overflow-y-auto hide-scrollbar md:border-l-2">
                 <div class="flex flex-col md:flex-row gap-4 items-center">
-                  <img src="../src/image/profile-img.png" alt="" class="w-32" />
+                  <img src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="profile user" class="w-32" />
                   <div class="flex flex-col md:flex-row gap-4">
                     <button type="button"
                       class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -165,37 +165,72 @@
                     <!-- Modal Alert Delete Picture End -->
                   </div>
                 </div>
-                <form class="mt-8">
+                <form class="mt-8" action="{{ route('user.edit-profile-action', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  @method('PUT')
                   <div class="grid gap-6 mb-6">
                     <div>
-                      <label for="profileName" class="block mb-2 font-medium text-gray-900">Profile Name</label>
-                      <input type="text" id="profileName"
+                      <label for="name" class="block mb-2 font-medium text-gray-900">Profile Name</label>
+                      <input type="text" id="name" name="nama_user"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert your name" value="Dinda Farras G." required />
+                        placeholder="Insert your name" value="{{ old('user', $user->nama_user) }}" />
                     </div>
                     <div>
                       <label for="bioUser" class="block mb-2 font-medium text-gray-900">Bio</label>
-                      <input type="text" id="bioUser"
+                      <input type="text" id="bioUser" name="bio"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert your bio" value="Aku adalah meteor" required />
+                        placeholder="Insert your bio" value="{{ old('user', $user->bio) }}" />
+                    </div>
+                    <div>
+                      <label for="genderUser" class="block mb-2 font-medium text-gray-900">Gender</label>
+                      <select id="gender" name="gender"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert your gender" name="gender"> 
+                        <option value="">Choose Gender</option>
+                          @foreach($gender as $gender)
+                            <option value="{{ $gender }}" @if(old('gender', $user->gender) == $gender) selected @endif>{{ ucfirst($gender) }}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                    <div>
+                      <label for="ageUser" class="block mb-2 font-medium text-gray-900">Age</label>
+                      <input type="text" id="ageUser" name="usia"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert your age" value="{{ old('user', $user->usia) }}" />
+                    </div>
+                    <div>
+                      <label for="domisiliUser" class="block mb-2 font-medium text-gray-900">Domicile</label>
+                      <input type="text" id="domisiliUser" name="domisili"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert your domicile" value="{{ old('user', $user->domisili) }}" />
+                    </div>
+                    <div>
+                      <label for="pendidikanUser" class="block mb-2 font-medium text-gray-900">Last Education</label>
+                      <select id="pendidikan_terakhir"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert your last education" name="pendidikan_terakhir">
+                        <option value="">Choose Last Education</option>
+                          @foreach($pendidikanTerakhir as $pendidikan)
+                            <option value="{{ $pendidikan }}"@if(old('pendidikan', $user->pendidikan_terakhir) == $pendidikan) selected @endif>{{ ucfirst($pendidikan) }}</option>
+                          @endforeach
+                      </select>
                     </div>
                     <div>
                       <label for="cvUser" class="block mb-2 font-medium text-gray-900 cursor-pointer">CV</label>
-                      <input type="file" id="cvUser"
+                      <input type="file" id="cvUser" name="cv"
                         class="w-full p-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block hover:cursor-pointer"
-                        placeholder="Insert your bio" required />
+                        placeholder="Insert your bio" />
                     </div>
                     <div>
                       <label for="descriptionUser" class="block mb-2 font-medium text-gray-900">Description</label>
-
-                      <textarea name="description" id="descriptionUser"
+                      <textarea name="deskripsi" id="descriptionUser"
                         class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Tell about yourself" required>
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores explicabo totam sequi temporibus laborum eum adipisci saepe nihil.</textarea>
+                        placeholder="Tell about yourself">
+                        {{ old('user', $user->deskripsi) }}</textarea>
                     </div>
                   </div>
                   <div class="flex justify-end">
-                    <button type="button"
+                    <button type="submit"
                       class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
                       Save Changes
                     </button>
@@ -203,33 +238,69 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                 </form>
               </div>
               <div id="contactContent" class="hidden">
-                <form class="md:p-8">
+                <form class="md:p-8" action="{{ route('user.edit-contact-action', ['id' => $user->id]) }}" method="POST">
+                  @csrf
+                  @method('PUT')
                   <div class="grid gap-6 mb-6">
                     <div>
                       <label for="emailUser" class="block mb-2 font-medium text-gray-900">Email</label>
                       <input type="email" id="emailUser"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert your Email" value="dinda@gmail.com" required />
+                        placeholder="Insert your Email" name="email_user" value="{{ old('user', $user->email_user) }}"  />
                     </div>
                     <div>
                       <label for="phone" class="block mb-2 font-medium text-gray-900">Phone</label>
                       <input type="text" id="phone"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert your bio" value="+6281802231234" required />
+                        placeholder="Insert your phone number" name="nomor_telephone" value="{{ old('user', $user->nomor_telephone) }}"  />
                     </div>
                     <div>
-                      <label for="name" class="block mb-2 font-medium text-gray-900">Description</label>
+                      <label for="instagramUser" class="block mb-2 font-medium text-gray-900">Instagram</label>
+                      <input type="url" id="instagramUser"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert your instagram link" name="instagram" value="{{ old('user', $user->instagram) }}"  />
+                    </div>
+                    <div>
+                      <label for="linkedInUser" class="block mb-2 font-medium text-gray-900">LinkedIn</label>
+                      <input type="url" id="linkedInUser"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert your linkedIn link" name="linkedIn" value="{{ old('user', $user->linkedIn) }}"  />
                     </div>
                   </div>
                   <div class="flex justify-end">
-                    <button type="button"
+                    <button type="submit"
                       class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
                       Save Changes
                     </button>
                   </div>
                 </form>
               </div>
-              <div id="accountContent" class="hidden">akun</div>
+              <div id="accountContent" class="hidden">
+                <form class="md:p-8" action="{{ route('user.edit-akun-action', ['id' => $user->id]) }}" method="POST">
+                  @csrf
+                  @method('PUT')
+                  <div class="grid gap-6 mb-6">
+                    <div>
+                      <label for="usernameUser" class="block mb-2 font-medium text-gray-900">Username</label>
+                      <input type="text" id="usernameUser" name="username"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert your Email" value="{{ old('user', $user->username) }}" />
+                    </div>
+                    <div>
+                      <label for="passwordUser" class="block mb-2 font-medium text-gray-900">Password</label>
+                      <input type="password" id="passwordUser" name="password"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert your bio" value="{{ old('user', $user->password) }}"  />
+                    </div>
+                  </div>
+                  <div class="flex justify-end">
+                    <button type="submit"
+                      class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                      Save Changes
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -248,18 +319,8 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
             </button>
           </li>
           <li>
-            <button id="activityBtn" class="focus:outline-none border-b-4 border-transparent">
-              Activity
-            </button>
-          </li>
-          <li>
             <button id="appliedBtn" class="focus:outline-none border-b-4 border-transparent">
               Applied
-            </button>
-          </li>
-          <li>
-            <button id="favoriteBtn" class="focus:outline-none border-b-4 border-transparent">
-              Favorite
             </button>
           </li>
         </ul>
@@ -646,102 +707,53 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
           <!-- Experience End -->
         </div>
       </div>
-      <div id="activityContent" class="hidden container mt-8">
-        <div class="border border-slate-300 rounded-2xl">
-          <div class="flex items-center gap-4 p-4">
-            <img src="../src/image/volhub-small-logo.png" alt="" class="w-16" />
-            <div class="overflow-hidden">
-              <h2 class="text-xl font-semibold line-clamp-2">
-                Pembersihan Pantai Indrayanti
-              </h2>
-              <p class="text-sm">Mitra VolHub</p>
-            </div>
-          </div>
-          <div class="mt-4 max-h-32 overflow-hidden">
-            <p class="text-sm text-gray-700 line-clamp-3 px-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Repudiandae harum architecto, non itaque voluptas ut, sunt
-              impedit expedita maxime debitis perspiciatis facilis autem sit
-              rerum assumenda necessitatibus minus quo consectetur?
-            </p>
-          </div>
-          <div class="mt-4 flex flex-wrap justify-evenly gap-2 px-4">
-            <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">Paid</span>
-            <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">Offline</span>
-            <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">Free</span>
-          </div>
-          <div class="mt-8 border-t border-gray-200">
-            <div class="flex items-center pt-2 px-4 pb-2 gap-2">
-              <!-- SVG disembunyikan -->
-              <span class="text-sm text-gray-700">Gunungkidul, Yogyakarta</span>
-            </div>
-          </div>
-        </div>
-      </div>
       <div id="appliedContent" class="hidden container mt-8">
+        @if(isset($user->pendaftars) && $user->pendaftars->isNotEmpty())
+          <?php $no = 1 ?>
+          @foreach($user->pendaftars as $pendaftar)
         <div class="border border-slate-300 rounded-2xl">
           <div class="flex items-center gap-4 p-4">
             <img src="../src/image/volhub-small-logo.png" alt="" class="w-16" />
             <div class="overflow-hidden">
               <h2 class="text-xl font-semibold line-clamp-2">
-                Pembersihan Pantai Indrayanti
+                {{$pendaftar->kegiatan->nama_kegiatan}}
               </h2>
               <p class="text-sm">Mitra VolHub</p>
             </div>
           </div>
           <div class="mt-4 max-h-32 overflow-hidden">
             <p class="text-sm text-gray-700 line-clamp-3 px-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Repudiandae harum architecto, non itaque voluptas ut, sunt
-              impedit expedita maxime debitis perspiciatis facilis autem sit
-              rerum assumenda necessitatibus minus quo consectetur?
+              {{ $pendaftar->kegiatan->deskripsi }}
             </p>
           </div>
           <div class="mt-4 flex flex-wrap justify-evenly gap-2 px-4">
             <span
-              class="bg-greenBackground border border-greenBorder font-medium text-greenText text-sm p-2 rounded-xl flex-1 text-center">Anda
-              diterima</span>
+                class="
+                    font-medium text-sm p-2 rounded-xl flex-1 text-center
+                    @if($pendaftar->status_applicant === 'In-review') bg-blue-500 text-white border-blue-600 
+                    @elseif($pendaftar->status_applicant === 'Interview') bg-purple-500 text-white border-purple-600 
+                    @elseif($pendaftar->status_applicant === 'Shortlist') bg-yellow-500 text-white border-yellow-600 
+                    @elseif($pendaftar->status_applicant === 'Hire') bg-green-500 text-white border-green-600 
+                    @elseif($pendaftar->status_applicant === 'Reject') bg-red-500 text-white border-red-600 
+                    @else bg-gray-500 text-white border-gray-600 
+                    @endif
+                ">
+                {{ $pendaftar->status_applicant }}
+            </span>
           </div>
           <div class="mt-8 border-t border-gray-200">
             <div class="flex items-center pt-2 px-4 pb-2 gap-2">
               <!-- SVG disembunyikan -->
-              <span class="text-sm text-gray-700">Gunungkidul, Yogyakarta</span>
+              <span class="text-sm text-gray-700">{{ $pendaftar->kegiatan->lokasi_kegiatan }}</span>
             </div>
           </div>
         </div>
-        <div class="mt-4 border border-slate-300 rounded-2xl">
-          <div class="flex items-center gap-4 p-4">
-            <img src="../src/image/volhub-small-logo.png" alt="" class="w-16" />
-            <div class="overflow-hidden">
-              <h2 class="text-xl font-semibold line-clamp-2">
-                Pembersihan Pantai Indrayanti
-              </h2>
-              <p class="text-sm">Mitra VolHub</p>
-            </div>
-          </div>
-          <div class="mt-4 max-h-32 overflow-hidden">
-            <p class="text-sm text-gray-700 line-clamp-3 px-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Repudiandae harum architecto, non itaque voluptas ut, sunt
-              impedit expedita maxime debitis perspiciatis facilis autem sit
-              rerum assumenda necessitatibus minus quo consectetur?
-            </p>
-          </div>
-          <div class="mt-4 flex flex-wrap justify-evenly gap-2 px-4">
-            <span
-              class="bg-greenBackground border border-greenBorder font-medium text-greenText text-sm p-2 rounded-xl flex-1 text-center">Anda
-              diterima</span>
-          </div>
-          <div class="mt-8 border-t border-gray-200">
-            <div class="flex items-center pt-2 px-4 pb-2 gap-2">
-              <!-- SVG disembunyikan -->
-              <span class="text-sm text-gray-700">Gunungkidul, Yogyakarta</span>
-            </div>
-          </div>
+        @endforeach
+        @else
+        <div class="flex items-center justify-center h-screen">
+          <p class="text-gray-500 text-center">You have not applied for any activities yet.</p>
         </div>
-      </div>
-      <div class="">
-        <div id="favoriteContent" class="hidden">Konten untuk favorite</div>
+        @endif
       </div>
     </section>
   </div>
