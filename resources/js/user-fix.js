@@ -327,27 +327,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeAddExperienceModalButton = document.getElementById(
         "closeAddModalExperienceBtn"
     );
-    const editExperienceButton = document.getElementById("editExperienceBtn");
-    const editExperienceModal = document.getElementById("editExperienceModal");
-    const closeEditExperienceModalButton = document.getElementById(
-        "closeModalExperienceBtn"
-    );
-
-    const deleteExperienceButton = document.getElementById(
-        "deleteExperienceBtn"
-    );
-    const deleteExperienceAlert = document.getElementById(
-        "deleteExperienceAlert"
-    );
-    const confirmDeleteExperienceButton = document.getElementById(
-        "confirmDeleteExperience"
-    );
-    const cancelDeleteExperienceButton = document.getElementById(
-        "cancelDeleteExperience"
-    );
-    const closeExperienceModalButton = document.getElementById(
-        "closeModalExperience"
-    );
 
     addExperienceButton.addEventListener("click", function () {
         addExperienceModal.classList.remove("hidden");
@@ -358,13 +337,64 @@ document.addEventListener("DOMContentLoaded", function () {
         addExperienceModal.classList.add("hidden");
     });
 
-    editExperienceButton.addEventListener("click", function () {
-        editExperienceModal.classList.remove("hidden");
-        editExperienceModal.classList.add("flex");
+    // icon editnya
+    const editExperienceBtn = document.querySelectorAll(".edit-experience-btn");
+
+    // form editnya
+    const editExperienceAction = document.getElementById(
+        "editExperienceAction"
+      );
+
+    const showExperienceModal = document.getElementById("editExperienceModal");
+    const closeEditExperienceModalButton = document.getElementById("closeModalExperienceBtn");
+
+    editExperienceBtn.forEach(button => {
+            button.addEventListener("click", function () {
+            const experienceId = this.getAttribute('data-id-experience');
+            const userId = this.getAttribute('data-id');
+
+            const judulKegiatan = this.getAttribute('data-judul-kegiatan');
+            document.getElementById('activityName').value = judulKegiatan;
+
+            const actionUrl = `/user/edit-experience/${userId}/${experienceId}`;
+            document.getElementById('editExperienceAction').action = actionUrl;
+            showExperienceModal.classList.remove("hidden");
+            showExperienceModal.classList.add("flex");
+
+        });
     });
 
     closeEditExperienceModalButton.addEventListener("click", function () {
         editExperienceModal.classList.add("hidden");
+    });
+
+    const deleteExperienceButton = document.document.querySelectorAll('.delete-experience-btn');
+    const deleteExperienceAlert = document.getElementById("deleteExperienceAlert");
+    const confirmDeleteExperienceButton = document.getElementById(
+        "confirmDeleteExperience"
+    );
+    const cancelDeleteExperienceButton = document.getElementById(
+        "cancelDeleteExperience"
+    );
+
+    let selectedExperienceId = null;
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            selectedExperienceId = button.getAttribute('data-id-experience');
+            deleteExperienceAlert.classList.remove('hidden');
+        });
+    });
+
+    // Konfirmasi Hapus
+    deleteExperienceButton.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const actionUrl = button.closest('form').getAttribute('action');
+            confirmDeleteExperienceButton.setAttribute('action', actionUrl);
+            deleteExperienceAlert.classList.remove('hidden');
+            deleteExperienceAlert.classList.add("flex");
+        });
     });
 
     deleteExperienceButton.addEventListener("click", function () {
@@ -495,7 +525,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // JAVASCRIPT DETAIL PROFILE USER
 
 //More Deskripsi
-document.getElementById('toggle-btn').addEventListener('click', function (event) {
+document.getElementById('btn-more-desc').addEventListener('click', function (event) {
     const element = event.target;
     const parent = element.parentElement;
     const shortDesc = parent.querySelector('.short-desc');
@@ -510,4 +540,24 @@ document.getElementById('toggle-btn').addEventListener('click', function (event)
         moreDesc.classList.add('hidden');
         element.textContent = "More";
     }
+});
+
+// More Deskripsi Experience
+document.querySelectorAll('.btn-more-desc-exp').forEach(button => {
+    button.addEventListener('click', function (event) {
+        const element = event.target;
+        const parent = element.parentElement;
+        const shortDesc = parent.querySelector('.short-desc');
+        const moreDesc = parent.querySelector('.more-desc');
+
+        if (moreDesc.classList.contains('hidden')) {
+            shortDesc.classList.add('hidden');
+            moreDesc.classList.remove('hidden');
+            element.textContent = "Less";
+        } else {
+            shortDesc.classList.remove('hidden');
+            moreDesc.classList.add('hidden');
+            element.textContent = "More";
+        }
+    });
 });

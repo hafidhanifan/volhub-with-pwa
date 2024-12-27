@@ -282,7 +282,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                   <span class="more-desc hidden">{{ $user->deskripsi }}</span>
                   <a href="javascript:void(0);"
                     class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
-                    id="toggle-btn">More</a>
+                    id="btn-more-desc">More</a>
                   @else
                   {{ $user->deskripsi }}
                   @endif
@@ -440,29 +440,35 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                 Add
               </button>
             </div>
+            <?php $no = 1 ?>
+            @foreach($user->experiences as $experience)
             <div class="rounded-2xl m-4 flex">
               <div class="">
                 <div class="flex items-center gap-4 px-4 pb-2">
                   <div class="overflow-hidden">
                     <h2 class="text-lg font-semibold line-clamp-2">
-                      Pembersihan Pantai Indrayanti
+                      {{$experience->judul_kegiatan}}
                     </h2>
-                    <p class="text-sm">Mitra VolHub</p>
+                    <p class="text-sm">{{$experience->mitra}}</p>
                   </div>
                 </div>
                 <div class="max-h-32 overflow-hidden">
                   <p class="text-sm text-gray-700 line-clamp-2 px-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Repudiandae harum architecto, non itaque voluptas ut,
-                    sunt impedit expedita maxime debitis perspiciatis
-                    facilis autem sit rerum assumenda necessitatibus minus
-                    quo consectetur?
+                    @if (strlen($experience->deskripsi) > 100)
+                    <span class="short-desc">{{ Str::limit($experience->deskripsi, 100, '...') }}</span>
+                    <span class="more-desc hidden">{{ $experience->deskripsi }}</span>
+                    <a href="javascript:void(0);"
+                      class="btn-more-desc-exp text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
+                      >More</a>
+                    @else
+                    {{ $experience->deskripsi }}
+                    @endif
                   </p>
-                  <button class="px-4">More</button>
+                  {{-- <button class="px-4">More</button> --}}
                 </div>
               </div>
               <div class="">
-                <button id="editExperienceBtn">
+                <button id="editExperienceBtn{{ $experience->id_experience }}" data-id-experience="{{ $experience->id_experience }}" data-id="{{ $user->id }}" class="edit-experience-btn">
                   <svg class="w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                       <path
@@ -473,44 +479,14 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                 </button>
               </div>
             </div>
-            <div class="rounded-2xl m-4 flex">
-              <div class="">
-                <div class="flex items-center gap-4 px-4 pb-2">
-                  <div class="overflow-hidden">
-                    <h2 class="text-lg font-semibold line-clamp-2">
-                      Pembersihan Pantai Indrayanti
-                    </h2>
-                    <p class="text-sm">Mitra VolHub</p>
-                  </div>
-                </div>
-                <div class="max-h-32 overflow-hidden">
-                  <p class="text-sm text-gray-700 line-clamp-2 px-4">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Repudiandae harum architecto, non itaque voluptas ut,
-                    sunt impedit expedita maxime debitis perspiciatis
-                    facilis autem sit rerum assumenda necessitatibus minus
-                    quo consectetur?
-                  </p>
-                  <button class="px-4">More</button>
-                </div>
-              </div>
-              <div class="">
-                <svg class="w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path
-                      d="m21.28 6.4-9.54 9.54c-.95.95-3.77 1.39-4.4.76-.63-.63-.2-3.45.75-4.4l9.55-9.55a2.58 2.58 0 1 1 3.64 3.65v0Z" />
-                    <path d="M11 4H6a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h11c2.21 0 3-1.8 3-4v-5" />
-                  </g>
-                </svg>
-              </div>
-            </div>
+            @endforeach
           </div>
           <!-- Modal Add Experience Start -->
           <div id="addExperienceModal"
             class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full bg-black bg-opacity-50 items-center justify-center">
             <div class="bg-white p-6 rounded-lg shadow-lg w-[80vw] md:w-[70vw] lg:w-[40vw]">
               <div class="pb-2 flex items-center justify-between border-b-2">
-                <h2 class="text-xl font-semibold">Experience</h2>
+                <h2 class="text-xl font-semibold">Add Experience</h2>
                 <button id="closeAddModalExperienceBtn" class="text-gray-600 hover:text-gray-900">
                   <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -519,32 +495,52 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                   </svg>
                 </button>
               </div>
-              <form action="" class="">
+              <form action="{{ route ('user.add-experience-action', ['id' => $user->id]) }}" method="POST" class="">
+                @csrf
                 <div class="my-4">
                   <label for="activity-name" class="block mb-2 font-medium text-gray-900">Activity Name</label>
-                  <input type="text" id="activityName"
+                  <input type="text" id="activityName" name="judul_kegiatan"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Insert your name" required />
+                    placeholder="Insert activity name" required />
                 </div>
                 <div class="my-4">
-                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Partner Activity</label>
-                  <input type="text" id="partnerActivity"
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Company</label>
+                  <input type="text" id="partnerActivity" name="mitra"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Insert your partner name" required />
+                    placeholder="Insert company name" required />
+                </div>
+                <div class="my-4">
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Location</label>
+                  <input type="text" id="partnerActivity" name="lokasi_kegiatan"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                    placeholder="Insert location" />
+                </div>
+                <div class="my-4">
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Start Date</label>
+                  <input type="date" id="partnerActivity" name="tgl_mulai"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                    placeholder="Insert start date" required />
+                </div>
+                <div class="my-4">
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">End Date</label>
+                  <input type="date" id="partnerActivity" name="tgl_selesai"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                    placeholder="Insert end date" />
                 </div>
                 <div class="my-4">
                   <label for="description" class="block mb-2 font-medium text-gray-900">Description</label>
-                  <textarea name="description" id="name"
+                  <textarea id="description" name="deskripsi"
                     class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Tell about yourself" required></textarea>
+                    placeholder="Tell about activity" required>
+                  </textarea>
+                </div>
+                <div class="mt-8 flex justify-end">
+                  <button type="submit"
+                    class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                    Add
+                  </button>
                 </div>
               </form>
-              <div class="mt-8 flex justify-end">
-                <button type="button"
-                  class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
-                  Add
-                </button>
-              </div>
             </div>
           </div>
           <!-- Modal Add Experience End -->
@@ -553,7 +549,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
             class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full bg-black bg-opacity-50 items-center justify-center">
             <div class="bg-white p-6 rounded-lg shadow-lg w-[80vw] md:w-[70vw] lg:w-[40vw]">
               <div class="pb-2 flex items-center justify-between border-b-2">
-                <h2 class="text-xl font-semibold">Experience</h2>
+                <h2 class="text-xl font-semibold">Edit Experience</h2>
                 <button id="closeModalExperienceBtn" class="text-gray-600 hover:text-gray-900">
                   <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -562,37 +558,61 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                   </svg>
                 </button>
               </div>
-              <form action="" class="">
+              <form id="editExperienceAction" action="" method="POST">
+                @csrf
+                @method('PUT')
                 <div class="my-4">
                   <label for="activity-name" class="block mb-2 font-medium text-gray-900">Activity Name</label>
-                  <input type="text" id="activityName"
+                  <input type="text" id="activityName" name="judul_kegiatan"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Insert your name" value="Dinda Farras G." required />
+                    placeholder="Insert activity name" value="" required />
                 </div>
                 <div class="my-4">
-                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Partner Activity</label>
-                  <input type="text" id="partnerActivity"
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Company</label>
+                  <input type="text" id="company" name="mitra"
                     class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Insert your name" value="Dinda Farras G." required />
+                    placeholder="Insert company name" required />
+                </div>
+                <div class="my-4">
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Location</label>
+                  <input type="text" id="location" name="lokasi_kegiatan"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                    placeholder="Insert location" />
+                </div>
+                <div class="my-4">
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Start Date</label>
+                  <input type="date" id="startDate" name="tgl_mulai"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                    placeholder="Insert start date" required />
+                </div>
+                <div class="my-4">
+                  <label for="partner-activity" class="block mb-2 font-medium text-gray-900">End Date</label>
+                  <input type="date" id="endData" name="tgl_selesai"
+                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                    placeholder="Insert end date" />
                 </div>
                 <div class="my-4">
                   <label for="description" class="block mb-2 font-medium text-gray-900">Description</label>
-                  <textarea name="description" id="name"
+                  <textarea id="description" name="deskripsi"
                     class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                    placeholder="Tell about yourself" required>
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores explicabo totam sequi temporibus laborum eum adipisci saepe nihil.</textarea>
+                    placeholder="Tell about activity" required>
+                  </textarea>
+                </div>
+                <div class="mt-8 flex justify-end">
+                  <button type="submit"
+                    class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                    Update
+                  </button>
                 </div>
               </form>
-              <div class="mt-8 flex justify-end">
-                <button id="deleteExperienceBtn" type="button"
-                  class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+              <form action="{{ route('user.remove-experience-action', ['id' => $user->id, 'id_experience' => $experience->id_experience]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button data-id-experience="{{ $experience->id_experience }}" type="submit"
+                  class="delete-experience-btn text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                   Delete
                 </button>
-                <button type="button"
-                  class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
-                  Update
-                </button>
-              </div>
+              </form>
             </div>
           </div>
           <!-- Modal Edit Experience End -->
@@ -611,10 +631,14 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                   class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
                   Cancel
                 </button>
-                <button id="confirmDeleteExperience" type="button"
-                  class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-                  Yes, Delete
-                </button>
+                <form id="confirmDeleteExperience" action="" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit"
+                    class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    Yes, Delete
+                  </button>
+                </form>
               </div>
             </div>
           </div>

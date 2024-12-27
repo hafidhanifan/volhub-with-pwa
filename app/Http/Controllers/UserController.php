@@ -234,26 +234,32 @@ class UserController extends Controller
 
     public function editExperienceAction(Request $request, $id, $id_experience)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         $experience = Experience::findOrFail($id_experience);
 
         $experience->id_user = $user->id;
         $experience->judul_kegiatan = $request->judul_kegiatan;
-        // $experience->lokasi_kegiatan = $request->lokasi_kegiatan;
-        // $experience->tgl_mulai = $request->tgl_mulai;
-        // $experience->tgl_selesai = $request->tgl_selesai;
+        $experience->lokasi_kegiatan = $request->lokasi_kegiatan;
+        $experience->tgl_mulai = $request->tgl_mulai;
+        $experience->tgl_selesai = $request->tgl_selesai;
         $experience->deskripsi = $request->deskripsi;
         $experience->mitra = $request->mitra;
 
         $experience->save();
 
-        // Cek apakah permintaan berasal dari AJAX atau form biasa
-        if ($request->ajax()) {
-            return response()->json(['success' => true, 'message' => 'Experience updated successfully.', 'data' => $experience]);
-        }
-
         // Untuk form biasa, lakukan redirect
-        return redirect()->back()->with('success', 'Experience updated successfully.');
+        return redirect()->back();
+    }
+
+    public function removeExperienceAction($id, $id_experience)
+    {
+        // Temukan user
+        $user = User::find($id);
+        $experience = $user->experiences()->where('id_experience', $id_experience)->first();
+
+        $experience->delete();
+
+        return redirect()->back();
     }
 
     //All About Kegiatan
