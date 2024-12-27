@@ -4,8 +4,6 @@
 <main class="mt-20 mb-20">
   <!-- Search section start -->
   <section class="flex items-center p-4 ml-4 max-w-2xl">
-
-
     <!-- Search Bar -->
     <form method="GET" action="{{ route('search') }}" class="flex">
         <!-- Dropdown -->

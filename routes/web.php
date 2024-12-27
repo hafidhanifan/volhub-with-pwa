@@ -146,7 +146,7 @@ Route::prefix('user')->group(function () {
 
     Route::get('search', [UserController::class, 'search'])->name('search');
 
-    Route::get('/user/detail-kegiatan/{id_kegiatan}', [UserController::class, 'showDetailKegiatan'])->name('user.detail-kegiatan');
+    Route::get('detail-kegiatan/{id_kegiatan}', [UserController::class, 'showDetailKegiatan'])->name('user.detail-kegiatan');
     Route::get('/signup', function () {
         return view('user/layout/signup');
     });
