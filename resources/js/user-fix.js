@@ -271,10 +271,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeSkillModalButton = document.getElementById("closeModalSkillBtn");
     const deleteSkillButton = document.getElementById("deleteSkillBtn");
     const deleteSkillAlert = document.getElementById("deleteSkillAlert");
-    const confirmDeleteSkillButton =
-        document.getElementById("confirmDeleteSkill");
-    const cancelDeleteSkillButton =
-        document.getElementById("cancelDeleteSkill");
+    const cancelDeleteSkillButton = document.getElementById("cancelDeleteSkillButton");
+    const confirmDeleteSkillButton = document.getElementById("confirmDeleteSkillButton");
+    let skillIdToDelete = null;
 
     openModalAddSkillButton.addEventListener("click", function () {
         skillModal.classList.remove("hidden");
@@ -285,15 +284,37 @@ document.addEventListener("DOMContentLoaded", function () {
         skillModal.classList.add("hidden");
     });
 
-    deleteSkillButton.addEventListener("click", function () {
-        deleteSkillAlert.classList.remove("hidden");
-        deleteSkillAlert.classList.add("flex");
+    // Event Delegation untuk tombol delete skill
+    document.addEventListener("click", function (event) {
+        if (event.target.closest(".deleteSkillBtn")) {
+            const deleteButton = event.target.closest(".deleteSkillBtn");
+            skillIdToDelete = deleteButton.getAttribute("data-id");
+
+            deleteSkillAlert.classList.remove("hidden");
+            deleteSkillAlert.classList.add("flex");
+        }
     });
 
-    confirmDeleteSkillButton.addEventListener("click", function () {
-        deleteSkillAlert.classList.add("hidden");
-    });
+    // Confirm delete skill
 
+    if (deleteSkillButton) {
+        deleteSkillButton.addEventListener("click", function () {
+            // Ambil data ID user dan skill dari atribut tombol
+            const userId = deleteSkillButton.getAttribute("data-id-user");
+            const skillId = deleteSkillButton.getAttribute("data-id-skill");
+
+            if (userId && skillId) {
+                // Update action pada form
+                confirmDeleteSkillButton.action = `user/${id}/remove-skill/${id_skill}`;
+
+                // Tampilkan modal konfirmasi
+                deleteSkillAlert.classList.remove("hidden");
+                deleteSkillAlert.classList.add("flex");
+            }
+        });
+    }
+
+    // Cancel Delete Skill
     cancelDeleteSkillButton.addEventListener("click", function () {
         deleteSkillAlert.classList.add("hidden");
     });

@@ -204,7 +204,7 @@ class UserController extends Controller
     public function removeSkill($id, $id_skill)
     {
         // Temukan user
-        $user = User::findOrFail($id);
+        $user = User::find($id);
 
         // Hapus hubungan skill dengan user
         $user->skills()->detach($id_skill);

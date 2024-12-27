@@ -360,7 +360,7 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                     <div class="relative max-w-56">
                       <span
                         class="block py-2 px-8 break-words text-white text-sm rounded-xl text-center bg-snippet">{{$skill->nama_skill}}</span>
-                      <button id="deleteSkillBtn{{ $skill->id_skill }}" class="absolute -top-2 right-0 m-2" data-id="{{ $skill->id_skill }}">
+                      <button id="deleteSkillBtn{{ $skill->id_skill }}" class="deleteSkillBtn absolute -top-2 right-0 m-2" data-id-user="{{ $user->id }}" data-id-skill="{{ $skill->id_skill }}">
                         <svg class="w-5 fill-white" viewBox="0 -0.5 25 25" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M6.97 16.47a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 1 0-1.06-1.06l1.06 1.06Zm-1.06-1.06a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 0 0-1.06-1.06l1.06 1.06Zm-5 3.94a.75.75 0 1 0-1.06 1.06l1.06-1.06Zm3.94 6.06a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-5-5a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM8.03 6.47a.75.75 0 0 0-1.06 1.06l1.06-1.06Zm0 11.06 5-5-1.06-1.06-5 5 1.06 1.06Zm5-5 5-5-1.06-1.06-5 5 1.06 1.06Zm-1.06 0 5 5 1.06-1.06-5-5-1.06 1.06Zm1.06-1.06-5-5-1.06 1.06 5 5 1.06-1.06Z" />
@@ -375,22 +375,24 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                     <div class="bg-white p-6 rounded-lg shadow-lg w-96">
                       <h3 class="text-lg font-bold mb-4">Are you sure?</h3>
                       <p class="text-sm text-gray-600 mb-6">
-                        Do you really want to delete this picture? This
+                        Do you really want to delete this skill? This
                         process cannot be undone.
                       </p>
                       <div class="flex justify-end space-x-3">
-                        <button id="cancelDeleteSkill" type="button"
+                        <button id="cancelDeleteSkillButton" type="button"
                           class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
                           Cancel
                         </button>
-                        <form id="confirmDeleteSkill" action="" method="POST" style="display: inline;">
-                          @csrf
-                          @method('DELETE')
-                          <button id="confirmDeleteSkill" type="button"
-                            class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-                            Yes, Delete
-                          </button>
-                        </form>
+                        @isset($skill)
+                          <form id="confirmDeleteSkillButton" action="{{ route('user.remove-skill-action', ['id' => $user->id, 'id_skill' => $skill->id_skill])}}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                              class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                              Yes, Delete
+                            </button>
+                          </form>
+                        @endisset
                       </div>
                     </div>
                   </div>
@@ -399,9 +401,9 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                     @csrf
                     <input type="text" id="skill"
                       class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                      placeholder="Insert your skill" required />
+                      placeholder="Insert your skill" name="nama_skill" required />
                     <div class="mt-8 flex justify-end">
-                      <button type="button"
+                      <button type="submit"
                         class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
                         Save Changes
                       </button>
