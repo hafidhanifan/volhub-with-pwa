@@ -468,3 +468,25 @@ document.addEventListener("DOMContentLoaded", () => {
         activateTab(targetContentId);
     });
 });
+
+
+
+// JAVASCRIPT DETAIL PROFILE USER
+
+//More Deskripsi
+document.getElementById('toggle-btn').addEventListener('click', function (event) {
+    const element = event.target;
+    const parent = element.parentElement;
+    const shortDesc = parent.querySelector('.short-desc');
+    const moreDesc = parent.querySelector('.more-desc');
+
+    if (moreDesc.classList.contains('hidden')) {
+        shortDesc.classList.add('hidden');
+        moreDesc.classList.remove('hidden');
+        element.textContent = "Less";
+    } else {
+        shortDesc.classList.remove('hidden');
+        moreDesc.classList.add('hidden');
+        element.textContent = "More";
+    }
+});

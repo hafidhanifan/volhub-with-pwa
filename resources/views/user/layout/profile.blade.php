@@ -6,11 +6,16 @@
     <section
       class="container w-full h-fit mx-auto p-6 rounded-xl bg-white lg:max-w-sm lg:shadow-sm lg:border border-slate-200 lg:mt-8">
       <div class="flex items-center gap-4">
-        <img src="../src/image/profile-img.png" alt="" class="w-20" />
+        @if(!empty($user->foto_profile))
+        <img src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="profile user"
+          class="w-20 rounded-full" />
+        @else
+        <img src="{{asset('img/logo-user.png')}}" alt="profile user" class="w-20 rounded-full" />
+        @endif
         <div class="">
-          <h1 class="font-medium text-lg line-clamp-1">Dinda Farras G.</h1>
+          <h1 class="font-medium text-lg line-clamp-1">{{$user->nama_user}}</h1>
           <p class="text-sm line-clamp-2">
-            Ingin menjadi anak sukses dan masuk surga.
+            {{$user->bio}}
           </p>
         </div>
       </div>
@@ -24,7 +29,7 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium text-base">Email</span>
-            <p class="line-clamp-1 text-sm">dindafarrasketceh@gmail.com</p>
+            <p class="line-clamp-1 text-sm">{{$user->email_user}}</p>
           </div>
         </div>
 
@@ -36,7 +41,7 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium">Phone</span>
-            <p class="text-sm">+6281802231234</p>
+            <p class="text-sm">{{$user->nomor_telephone}}</p>
           </div>
         </div>
 
@@ -53,8 +58,8 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium">Instagram</span>
-            <a class="text-sm hover:text-blueText block" href="https://www.instagram.com/nda.fg/"
-              target="_blank">https://www.instagram.com/nda.fg/</a>
+            <a class="text-sm hover:text-blueText block" href="{{ (strpos($user->instagram, 'http://') === 0 || strpos($user->instagram, 'https://') === 0) ? $user->instagram : 'https://' . $user->instagram }}"
+              target="_blank">{{$user->instagram}}</a>
           </div>
         </div>
 
@@ -70,8 +75,8 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium">Linkedin</span>
-            <a href="https://www.linkedin.com/in/dinda-farras/"
-              class="text-sm block hover:text-blueText">https://www.linkedin.com/in/dinda-farras/</a>
+            <a href="{{ (strpos($user->linkedIn, 'http://') === 0 || strpos($user->linkedIn, 'https://') === 0) ? $user->linkedIn : 'https://' . $user->linkedIn }}"
+              class="text-sm block hover:text-blueText">{{$user->linkedIn}}</a>
           </div>
         </div>
 
@@ -270,17 +275,18 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                 <span class="text-lg font-semibold">Deskripsi</span>
               </div>
               <div class="overflow-hidden px-3 pt-4">
-                <p class="text-base mt-2 line-clamp-3">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Sed doloribus cum magni suscipit tempore nulla
-                  perspiciatis autem dolore distinctio, fuga eum ducimus
-                  assumenda laboriosam commodi totam ullam odit. Rerum
-                  deleniti consectetur necessitatibus suscipit! Soluta sint
-                  atque cum at fugiat! Odio nobis voluptas adipisci eos
-                  animi, rerum unde excepturi quod sunt!
+                <p class="text-base mt-2">
+                    @if (strlen($user->deskripsi) > 200)
+                        <span class="short-desc">{{ Str::limit($user->deskripsi, 200, '...') }}</span>
+                        <span class="more-desc hidden">{{ $user->deskripsi }}</span>
+                        <a href="javascript:void(0);" 
+                           class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
+                           id="toggle-btn">More</a>
+                    @else
+                        {{ $user->deskripsi }}
+                    @endif
                 </p>
               </div>
-              <button class="px-3 pb-2">More</button>
             </div>
             <!-- CV Card Start -->
             <div class="lg:mt-8 border border-slate-300 rounded-2xl lg:w-2/6">
@@ -316,7 +322,8 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                       d="M400,432H96v16h304c8.8,0,16-7.2,16-16v-16C416,424.8,408.8,432,400,432z"></path>
                   </g>
                 </svg>
-                <a href="../src/pdf/file.pdf" target="_blank" class="block text-sm">CV_Dinda Farras G.</a>
+                <a href="{{ asset('storage/cv/' . auth()->user()->cv) }}" target="_blank" class="block text-sm"
+                  download>{{$user->cv}}</a>
               </div>
             </div>
           </div>
@@ -348,16 +355,19 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                     </button>
                   </div>
                   <div class="mt-4 flex flex-wrap justify-evenly items-center gap-y-6">
+                    <?php $no = 1 ?>
+                    @foreach($user->skills as $skill)
                     <div class="relative max-w-56">
                       <span
-                        class="block py-2 px-8 break-words text-white text-sm rounded-xl text-center bg-snippet">Paid</span>
-                      <button id="deleteSkillBtn" class="absolute -top-2 right-0 m-2">
+                        class="block py-2 px-8 break-words text-white text-sm rounded-xl text-center bg-snippet">{{$skill->nama_skill}}</span>
+                      <button id="deleteSkillBtn{{ $skill->id_skill }}" class="absolute -top-2 right-0 m-2" data-id="{{ $skill->id_skill }}">
                         <svg class="w-5 fill-white" viewBox="0 -0.5 25 25" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M6.97 16.47a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 1 0-1.06-1.06l1.06 1.06Zm-1.06-1.06a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 0 0-1.06-1.06l1.06 1.06Zm-5 3.94a.75.75 0 1 0-1.06 1.06l1.06-1.06Zm3.94 6.06a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-5-5a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM8.03 6.47a.75.75 0 0 0-1.06 1.06l1.06-1.06Zm0 11.06 5-5-1.06-1.06-5 5 1.06 1.06Zm5-5 5-5-1.06-1.06-5 5 1.06 1.06Zm-1.06 0 5 5 1.06-1.06-5-5-1.06 1.06Zm1.06-1.06-5-5-1.06 1.06 5 5 1.06-1.06Z" />
                         </svg>
                       </button>
                     </div>
+                    @endforeach
                   </div>
                   <!-- Modal Alert Delete Skill Start -->
                   <div id="deleteSkillAlert"
@@ -373,31 +383,39 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                           class="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
                           Cancel
                         </button>
-                        <button id="confirmDeleteSkill" type="button"
-                          class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-                          Yes, Delete
-                        </button>
+                        <form id="confirmDeleteSkill" action="" method="POST" style="display: inline;">
+                          @csrf
+                          @method('DELETE')
+                          <button id="confirmDeleteSkill" type="button"
+                            class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                            Yes, Delete
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>
                   <!-- Modal ALert Delete Skill End -->
-                  <form action="" class="mt-8">
+                  <form action="{{ route('user.add-skill-action', ['id' => $user->id])}}" method="POST" class="mt-8">
+                    @csrf
                     <input type="text" id="skill"
                       class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
                       placeholder="Insert your skill" required />
+                    <div class="mt-8 flex justify-end">
+                      <button type="button"
+                        class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
+                        Save Changes
+                      </button>
+                    </div>
                   </form>
-                  <div class="mt-8 flex justify-end">
-                    <button type="button"
-                      class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">
-                      Save Changes
-                    </button>
-                  </div>
                 </div>
               </div>
               <!-- Modal Add Skill End -->
             </div>
             <div class="p-4 flex flex-wrap justify-evenly gap-2">
-              <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">Front End</span>
+              <?php $no = 1 ?>
+              @foreach($user->skills as $skill)
+                <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">{{$skill->nama_skill}}</span>
+              @endforeach
             </div>
           </div>
           <!-- Skill End -->
