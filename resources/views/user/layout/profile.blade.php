@@ -58,7 +58,8 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium">Instagram</span>
-            <a class="text-sm hover:text-blueText block" href="{{ (strpos($user->instagram, 'http://') === 0 || strpos($user->instagram, 'https://') === 0) ? $user->instagram : 'https://' . $user->instagram }}"
+            <a class="text-sm hover:text-blueText block"
+              href="{{ (strpos($user->instagram, 'http://') === 0 || strpos($user->instagram, 'https://') === 0) ? $user->instagram : 'https://' . $user->instagram }}"
               target="_blank">{{$user->instagram}}</a>
           </div>
         </div>
@@ -276,15 +277,15 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
               </div>
               <div class="overflow-hidden px-3 pt-4">
                 <p class="text-base mt-2">
-                    @if (strlen($user->deskripsi) > 200)
-                        <span class="short-desc">{{ Str::limit($user->deskripsi, 200, '...') }}</span>
-                        <span class="more-desc hidden">{{ $user->deskripsi }}</span>
-                        <a href="javascript:void(0);" 
-                           class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
-                           id="toggle-btn">More</a>
-                    @else
-                        {{ $user->deskripsi }}
-                    @endif
+                  @if (strlen($user->deskripsi) > 200)
+                  <span class="short-desc">{{ Str::limit($user->deskripsi, 200, '...') }}</span>
+                  <span class="more-desc hidden">{{ $user->deskripsi }}</span>
+                  <a href="javascript:void(0);"
+                    class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
+                    id="toggle-btn">More</a>
+                  @else
+                  {{ $user->deskripsi }}
+                  @endif
                 </p>
               </div>
             </div>
@@ -360,7 +361,9 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                     <div class="relative max-w-56">
                       <span
                         class="block py-2 px-8 break-words text-white text-sm rounded-xl text-center bg-snippet">{{$skill->nama_skill}}</span>
-                      <button id="deleteSkillBtn{{ $skill->id_skill }}" class="deleteSkillBtn absolute -top-2 right-0 m-2" data-id-user="{{ $user->id }}" data-id-skill="{{ $skill->id_skill }}">
+                      <button id="deleteSkillBtn{{ $skill->id_skill }}"
+                        class="deleteSkillBtn absolute -top-2 right-0 m-2" data-id-user="{{ $user->id }}"
+                        data-id-skill="{{ $skill->id_skill }}">
                         <svg class="w-5 fill-white" viewBox="0 -0.5 25 25" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M6.97 16.47a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 1 0-1.06-1.06l1.06 1.06Zm-1.06-1.06a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 0 0-1.06-1.06l1.06 1.06Zm-5 3.94a.75.75 0 1 0-1.06 1.06l1.06-1.06Zm3.94 6.06a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-5-5a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM8.03 6.47a.75.75 0 0 0-1.06 1.06l1.06-1.06Zm0 11.06 5-5-1.06-1.06-5 5 1.06 1.06Zm5-5 5-5-1.06-1.06-5 5 1.06 1.06Zm-1.06 0 5 5 1.06-1.06-5-5-1.06 1.06Zm1.06-1.06-5-5-1.06 1.06 5 5 1.06-1.06Z" />
@@ -384,14 +387,16 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
                           Cancel
                         </button>
                         @isset($skill)
-                          <form id="confirmDeleteSkillButton" action="{{ route('user.remove-skill-action', ['id' => $user->id, 'id_skill' => $skill->id_skill])}}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                              class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
-                              Yes, Delete
-                            </button>
-                          </form>
+                        <form id="confirmDeleteSkillButton"
+                          action="{{ route('user.remove-skill-action', ['id' => $user->id, 'id_skill' => $skill->id_skill])}}"
+                          method="POST" style="display: inline;">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit"
+                            class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                            Yes, Delete
+                          </button>
+                        </form>
                         @endisset
                       </div>
                     </div>
@@ -413,10 +418,11 @@ Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea officiis asperiores
               </div>
               <!-- Modal Add Skill End -->
             </div>
-            <div class="p-4 flex flex-wrap justify-evenly gap-2">
+            <div class="p-4 flex flex-wrap gap-2">
               <?php $no = 1 ?>
               @foreach($user->skills as $skill)
-                <span class="bg-snippet text-white text-sm p-2 rounded-xl flex-1 text-center">{{$skill->nama_skill}}</span>
+              <span
+                class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">{{$skill->nama_skill}}</span>
               @endforeach
             </div>
           </div>
