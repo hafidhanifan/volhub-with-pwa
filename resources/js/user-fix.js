@@ -124,33 +124,145 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Modal aplly volunteer
-document.addEventListener("DOMContentLoaded", () => {
+//JAVASCRIPT LIST DAN DETAIL KEGIATAN
+document.addEventListener('DOMContentLoaded', () => {
+    const detailContainer = document.getElementById('detailVolunteer');
+    const defaultMessage = detailContainer.querySelector('.default-message');
+    const detailContent = detailContainer.querySelector('.detail-content');
+
     const applyButton = document.getElementById("applyBtn");
-    const submitButton = document.getElementById("submitBtn");
     const applyModal = document.getElementById("applyMdl");
+    const submitButton = document.getElementById("submitBtn");
     const closeModal = document.getElementById("closeApplyMdl");
     const notification = document.getElementById("notification");
+    const registrationForm = document.getElementById('registrationForm');
+    const motivationTextarea = document.getElementById('motivation');
 
-    applyButton.addEventListener("click", () => {
-        applyModal.classList.remove("opacity-0", "pointer-events-none");
-        applyModal.querySelector(".transform").classList.remove("scale-95");
+    // Tampilkan pesan default saat halaman dimuat
+    defaultMessage.classList.remove('hidden');
+    detailContent.classList.add('hidden');
+
+    document.querySelectorAll('.volunteerCard').forEach(card => {
+        card.addEventListener('click', () => {
+
+            defaultMessage.classList.add('hidden');
+            detailContent.classList.remove('hidden');
+
+            // Ambil data dari atribut data-*
+            const idKegiatan = card.dataset.idKegiatan;
+            const namaKegiatan = card.dataset.namaKegiatan;
+            const namaMitra = card.dataset.namaMitra;
+            const lokasiKegiatan = card.dataset.lokasiKegiatan;
+            const logo = card.dataset.logo;
+            const sistemKegiatan = card.dataset.sistemKegiatan;
+            const sisaHari = card.dataset.sisaHari;
+            const pendaftarCount  = card.dataset.pendaftarCount
+            const deskripsi = card.dataset.deskripsi;
+            const namaKriteria = card.dataset.namaKriteria
+            const namaBenefit = card.dataset.namaBenefit;
+
+            // Tampilkan data di bagian detail
+            detailContainer.querySelector('.namaKegiatan').textContent = namaKegiatan;
+            detailContainer.querySelector('.namaMitra').textContent = namaMitra;
+            detailContainer.querySelector('.lokasiKegiatan').textContent = lokasiKegiatan;
+            detailContainer.querySelector('img').src = logo;
+            detailContainer.querySelector('.sistemKegiatan').textContent = sistemKegiatan;
+            detailContainer.querySelector('.sisaHari').textContent = sisaHari;
+            detailContainer.querySelector('.pendaftarCount').textContent = pendaftarCount;
+            detailContainer.querySelector('.deskripsi').textContent = deskripsi;
+            
+            const kriteriaContainer = detailContainer.querySelector('.kriteriaContainer'); // Ambil container kriteria
+            kriteriaContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
+            
+            if (namaKriteria && namaKriteria.trim() !== '') {
+                // Jika data kriteria ada
+                const kriteriaArray = namaKriteria.split(','); // Pisahkan berdasarkan koma
+                kriteriaArray.forEach(kriteria => {
+                    const kriteriaSpan = document.createElement('span');
+                    kriteriaSpan.classList.add('namaKriteria', 'px-4', 'py-1', 'bg-sky-200', 'text-sm', 'rounded-lg');
+                    kriteriaSpan.textContent = kriteria.trim(); // Hapus spasi berlebih
+                    kriteriaContainer.appendChild(kriteriaSpan);
+                });
+            } else {
+                // Jika data kriteria kosong, tampilkan pesan
+                const emptyMessage = document.createElement('span');
+                emptyMessage.classList.add('namaKriteria', 'px-4', 'py-1', 'bg-red-200', 'text-sm', 'rounded-lg');
+                emptyMessage.textContent = 'Mitra belum mengisikan data';
+                kriteriaContainer.appendChild(emptyMessage);
+            }
+            
+            const benefitContainer = detailContainer.querySelector('.benefitContainer'); // Ambil container kriteria
+            benefitContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
+            
+            if (namaBenefit && namaBenefit.trim() !== '') {
+                // Jika data kriteria ada
+                const benefitArray = namaBenefit.split(','); // Pisahkan berdasarkan koma
+                benefitArray.forEach(benefit => {
+                    const benefitSpan = document.createElement('span');
+                    benefitSpan.classList.add('namaBenefit', 'px-4', 'py-1', 'bg-sky-200', 'text-sm', 'rounded-lg');
+                    benefitSpan.textContent = benefit.trim(); // Hapus spasi berlebih
+                    benefitContainer.appendChild(benefitSpan);
+                });
+            } else {
+                // Jika data kriteria kosong, tampilkan pesan
+                const emptyMessage = document.createElement('span');
+                emptyMessage.classList.add('namaBenefit', 'px-4', 'py-1', 'bg-red-200', 'text-sm', 'rounded-lg');
+                emptyMessage.textContent = 'Mitra belum mengisikan data';
+                benefitContainer.appendChild(emptyMessage);
+            }
+
+            const id = document.getElementById('applyMdl').dataset.idUser;
+            /// Isi form dengan ID kegiatan
+            const hiddenKegiatanInput = document.createElement('input');
+            hiddenKegiatanInput.type = 'hidden';
+            hiddenKegiatanInput.name = 'id_kegiatan';
+            hiddenKegiatanInput.value = idKegiatan;
+
+            // Hapus input hidden sebelumnya (jika ada) agar tidak duplikasi
+            const existingInput = registrationForm.querySelector('input[name="id_kegiatan"]');
+            if (existingInput) existingInput.remove();
+
+            // Tambahkan input hidden ke form
+            registrationForm.appendChild(hiddenKegiatanInput);
+
+            // Update placeholder pada motivation
+            motivationTextarea.placeholder = `Write your motivation for joining "${namaKegiatan}" from "${namaMitra}"...`;
+
+
+            applyButton.addEventListener("click", () => {
+                // Perbarui action form pendaftaran
+                const form = document.querySelector('#registrationForm');
+                form.action = `${id}/add-pendaftaran/${idKegiatan}`;
+
+                applyModal.classList.remove("opacity-0", "pointer-events-none");
+                applyModal.querySelector(".transform").classList.remove("scale-95");
+
+            });
+        });
     });
-
-    closeModal.addEventListener("click", () => {
-        applyModal.classList.add("opacity-0", "pointer-events-none");
-        applyModal.querySelector(".transform").classList.add("scale-95");
-    });
-
     submitButton.addEventListener("click", () => {
         applyModal.classList.add("opacity-0", "pointer-events-none");
         applyModal.querySelector(".transform").classList.add("scale-95");
         notification.classList.remove("opacity-0", "pointer-events-none");
-
+        
         // Menghilangkan notifikasi setelah 3 detik
         setTimeout(() => {
             notification.classList.add("opacity-0", "pointer-events-none");
         }, 3000);
+    });
+
+    // Event untuk menutup modal
+    closeModal.addEventListener('click', () => {
+        applyModal.classList.add('opacity-0', 'pointer-events-none');
+        applyModal.classList.remove('opacity-100');
+    });
+
+    // Event untuk menutup modal ketika klik di luar modal
+    applyModal.addEventListener('click', (e) => {
+        if (e.target === applyModal) {
+        applyModal.classList.add('opacity-0', 'pointer-events-none');
+        applyModal.classList.remove('opacity-100');
+        }
     });
 });
 

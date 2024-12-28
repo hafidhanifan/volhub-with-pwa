@@ -50,14 +50,32 @@
         @if($kegiatans->isNotEmpty())
           <?php $no = 1 ?>
             @foreach($kegiatans as $kegiatan)
-            <div id="volunteerCard" onclick="detailKegiatan('{{ $kegiatan->id_kegiatan }}')" class="flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100">
+            <div id="volunteerCard" class="volunteerCard flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100"
+                data-id-kegiatan="{{ $kegiatan->id_kegiatan }}"
+                data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}"
+                data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}"
+                data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}" 
+                data-logo="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}"
+                data-sistem-kegiatan="{{ $kegiatan->sistem_kegiatan}}"
+                data-sisa-hari="
+                  @if($kegiatan->sisa_hari > 0)
+                    {{ $kegiatan->sisa_hari }} days left
+                  @else
+                    Closed
+                  @endif
+                "
+                data-pendaftar-count ="{{ $kegiatan->pendaftars_count}} applied"
+                data-deskripsi="{{ $kegiatan->deskripsi}}"
+                data-nama-kriteria="{{ implode(',', $kegiatan->kriterias->pluck('nama_kriteria')->toArray()) }}"
+                data-nama-benefit="{{ implode(',', $kegiatan->benefits->pluck('nama_benefit')->toArray()) }}"
+              >
               <div class="max-w-16">
                 <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt=""
                   class="w-full rounded-full outline outline-1 outline-slate-200" />
               </div>
               <div class="w-full">
                 <div class="flex flex-col gap-1">
-                  <p id="detailTitle" class="font-semibold line-clamp-1">
+                  <p class="font-semibold line-clamp-1">
                     {{ $kegiatan->nama_kegiatan }}
                   </p>
                   <p class="text-sm text-gray-800 line-clamp-1">
@@ -96,107 +114,91 @@
             </svg>
           </button>
         </div>
-        @if(isset($kegiatan))
-          <div class="px-8 md:p-2">
-            <div class="flex items-center gap-x-4">
-              <div class="w-10">
-                <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt="" class="w-full rounded-full" />
+        <div class="flex items-center justify-center h-screen default-message">
+          <p class="text-gray-500 text-center">Detail Activity Here</p>
+        </div>
+        <div class="detail-content hidden">
+          @if(isset($kegiatan))
+            <div class="px-8 md:p-2">
+              <div class="flex items-center gap-x-4">
+                <div class="w-10">
+                  <img src="" alt="logo mitra" class="w-full rounded-full" />
+                </div>
+                <span class="namaMitra lock"></span>
               </div>
-              <span class="block">{{ $kegiatan->mitra->nama_mitra }}</span>
-            </div>
-            <div class="mt-4 pb-4">
-              <h1 class="text-lg font-semibold">
-                {{ $kegiatan->nama_kegiatan }}
-              </h1>
-              <p class="mt-2 text-gray-500 text-sm">
-                {{ $kegiatan->lokasi_kegiatan }}
-              </p>
-            </div>
-            <div class="flex gap-x-2">
-              <svg class="w-6 fill-slate-500" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M27 29H4a2 2 0 0 1-2-2V15s5.221 2.685 10 3.784V20a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-1.216C23.778 17.685 29 15 29 15v12a2 2 0 0 1-2 2zM17 17a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h3zm2 0a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v.896C7.221 16.764 2 14 2 14v-4a2 2 0 0 1 2-2h6V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2h6a2 2 0 0 1 2 2v4s-5.222 2.764-10 3.896V17zm0-10a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v1h7V7z" />
-              </svg>
-              <div class="flex items-center gap-x-1">
-                <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">{{ $kegiatan->sistem_kegiatan}}</span>
-                <span class="block h-auto">&middot;</span>
-                <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">
-                  @if($kegiatan->sisa_hari > 0)
-                    <p>{{ $kegiatan->sisa_hari }} days left</p>
-                  @else
-                    <p>Ditutup</p>
-                  @endif
-                </span>
-                <span class="block h-auto">&middot;</span>
-                <span class="block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md">{{ $kegiatan->pendaftars_count }} applied</span>
+              <div class="mt-4 pb-4">
+                <h1 class="namaKegiatan text-lg font-semibold"></h1>
+                <p class="lokasiKegiatan mt-2 text-gray-500 text-sm"></p>
               </div>
-            </div>
-            <div class="mt-4 gap-2 border-b pb-4">
-              <button id="applyBtn" class="px-6 py-2 bg-cyan-500 hover:bg-button_hover rounded-lg text-sm text-white">
-                Apply
-              </button>
-              <button class="px-6 py-2 border border-sky-300 hover:bg-sky-300 rounded-lg text-sm">
-                Save
-              </button>
-            </div>
-            <div class="mt-4 md:w-2/3">
-              <h2 class="font-semibold">Description</h2>
-              <p class="text-sm text-justify">
-                {{ $kegiatan->deskripsi}}
-              </p>
-              <div class="mt-4">
-                <h2 class="font-semibold">Requirement</h2>
-                <div class="flex gap-2 flex-wrap mt-2">
-                  @if($kegiatan->kriterias->isNotEmpty())
-                    @foreach($kegiatan->kriterias as $kriteria)
-                    <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">{{ $kriteria->nama_kriteria }}</span>
-                    @endforeach
-                  @else
-                    <span class="px-4 py-1 bg-red-200 text-sm rounded-lg">Mitra belum mengisikan data</span>
-                  @endif
+              <div class="flex gap-x-2">
+                <svg class="w-6 fill-slate-500" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M27 29H4a2 2 0 0 1-2-2V15s5.221 2.685 10 3.784V20a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-1.216C23.778 17.685 29 15 29 15v12a2 2 0 0 1-2 2zM17 17a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1h3zm2 0a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v.896C7.221 16.764 2 14 2 14v-4a2 2 0 0 1 2-2h6V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v2h6a2 2 0 0 1 2 2v4s-5.222 2.764-10 3.896V17zm0-10a1 1 0 0 0-1-1h-5a1 1 0 0 0-1 1v1h7V7z" />
+                </svg>
+                <div class="flex items-center gap-x-1">
+                  <span class="sistemKegiatan block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md"></span>
+                  <span class="block h-auto">&middot;</span>
+                  <span class="sisaHari block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md"></span>
+                  <span class="block h-auto">&middot;</span>
+                  <span class="pendaftarCount block h-auto text-sm bg-sky-200 px-2 text-gray-800 rounded-md"></span>
                 </div>
               </div>
-              <div class="mt-4">
-                <h2 class="font-semibold">Benefits</h2>
-                <div class="flex gap-2 flex-wrap mt-2">
-                  @if($kegiatan->benefits->isNotEmpty())
-                    @foreach($kegiatan->benefits as $benefit)
-                      <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">{{ $benefit->nama_benefit }}</span>
-                    @endforeach
-                  @else
-                    <span class="px-4 py-1 bg-red-200 text-sm rounded-lg">Mitra belum mengisikan data</span>
-                  @endif
+              <div class="mt-4 gap-2 border-b pb-4">
+                <button id="applyBtn" class="px-6 py-2 bg-cyan-500 hover:bg-button_hover rounded-lg text-sm text-white">
+                  Apply
+                </button>
+                <button class="px-6 py-2 border border-sky-300 hover:bg-sky-300 rounded-lg text-sm">
+                  Save
+                </button>
+              </div>
+              <div class="mt-4 md:w-2/3">
+                <h2 class="font-semibold">Description</h2>
+                <p class="deskripsi text-sm text-justify">
+                </p>
+                <div class="mt-4">
+                  <h2 class="font-semibold">Requirement</h2>
+                  <div class="kriteriaContainer flex gap-2 flex-wrap mt-2">
+                    <span class="namaKriteria px-4 py-1 bg-sky-200 text-sm rounded-lg"></span>
+                    <span class="namaKriteria px-4 py-1 bg-red-200 text-sm rounded-lg"></span>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <h2 class="font-semibold">Benefits</h2>
+                  <div class="benefitContainer flex gap-2 flex-wrap mt-2">
+                    <span class="namaBenefit px-4 py-1 bg-sky-200 text-sm rounded-lg"></span>
+                    <span class="namaBenefit px-4 py-1 bg-red-200 text-sm rounded-lg"></span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        @else
-          <div class="flex items-center justify-center h-screen">
-            <p class="text-gray-500 text-center">No details available.</p>
-          </div>
-        @endif
+          @else
+            <div class="flex items-center justify-center h-screen">
+              <p class="text-gray-500 text-center">No details available.</p>
+            </div>
+          @endif
+        </div>
       </div>
     </div>
 
     <!-- Modal for apply Volunteer -->
     <div id="applyMdl"
+      data-id-user="{{ auth()->user()->id }}"
       class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
       <!-- Modal Content -->
       @if(auth()->check())
       @php
         $user = auth()->user();
       @endphp
-      <div
-        class="bg-white rounded-lg shadow-lg w-4/5 p-6 transform scale-95 transition-transform duration-300 md:w-1/3">
+      <div class="bg-white rounded-lg shadow-lg w-4/5 p-6 transform scale-95 transition-transform duration-300 md:w-1/3">
         <div class="flex justify-between items-center mb-4">
           <label for="motivation" class="font-semibold">Your Motivation</label>
           <button id="closeApplyMdl" class="text-gray-500 hover:text-gray-700 text-xl">
             &times;
           </button>
         </div>
-        <form action="{{ route('user.add-pendaftaran-action', ['id' => $user->id, 'id_kegiatan' => $kegiatan->id_kegiatan]) }}" method="POST" id="registrationForm" enctype="multipart/form-data">
+        <form action="" method="POST" id="registrationForm" enctype="multipart/form-data">
           @csrf
-          <input type="hidden" name="kegiatan" value="{{ $kegiatan->id_kegiatan }}">
+          <input type="hidden" name="id_kegiatan" value=""></input>
           <textarea id="motivation" rows="4" name="motivasi"
             class="block mb-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
             placeholder="Write your motivation ..."></textarea>
@@ -261,10 +263,12 @@
     <!-- Modal for appy Volunteer End -->
 
     <!-- Modal Notification  -->
+    @if(!auth()->user()->cv)
     <div id="notification"
       class="fixed bottom-4 right-4 bg-sky-400 text-white text-sm px-4 py-2 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50">
       CV has been submitted
     </div>
+    @endif
     <!-- Modal Notification End -->
   </section>
   <!-- All volunteer end -->

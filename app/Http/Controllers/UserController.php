@@ -63,20 +63,20 @@ class UserController extends Controller
         return view('user.layout.daftar-volunteer', compact( 'kegiatans', 'user', 'totalKegiatan', 'kegiatan', 'kategori'));
     }
 
-    public function showDetailKegiatan($id_kegiatan)
-    {
-        $kegiatan = Kegiatan::with(['kategori'])->find($id_kegiatan);
-        if (!$kegiatan) {
-            return redirect()->route('user.daftar-volunteer')->with('error', 'Kegiatan tidak ditemukan.');
-        }
+    // public function showDetailKegiatan($id_kegiatan)
+    // {
+    //     $kegiatan = Kegiatan::with(['kategori'])->find($id_kegiatan);
+    //     if (!$kegiatan) {
+    //         return redirect()->route('user.daftar-volunteer')->with('error', 'Kegiatan tidak ditemukan.');
+    //     }
 
-        $rekomendasi = Kegiatan::where('id_kegiatan', '!=', $id_kegiatan)
-        //  ->latest() // Urutkan berdasarkan yang terbaru
-         ->take(4) 
-         ->get();
+    //     $rekomendasi = Kegiatan::where('id_kegiatan', '!=', $id_kegiatan)
+    //     //  ->latest() // Urutkan berdasarkan yang terbaru
+    //      ->take(4) 
+    //      ->get();
         
-        return view('user.layout.detail-kegiatan', compact('kegiatan', 'rekomendasi'));
-    }
+    //     return view('user.layout.detail-kegiatan', compact('kegiatan', 'rekomendasi'));
+    // }
 
     // All About Detail User
     public function showDetailUserPage($id)
@@ -165,8 +165,6 @@ class UserController extends Controller
     public function editContactAction(Request $request, $id) 
     {
         $user = User::find($id);
-        $gender = ['Perempuan', 'Laki-Laki'];
-        $pendidikanTerakhir = ['SD', 'SMP', 'SMA/SMK', 'Diploma (D1 - D4)', 'Sarjana (S1)', 'Magister (S2)', 'Doktor (S3)'];
         $user->nomor_telephone = $request->nomor_telephone;
         $user->email_user = $request->email_user;
         $user->instagram = $request->instagram;
@@ -268,21 +266,21 @@ class UserController extends Controller
     }
 
     //All About Kegiatan
-    public function showDetailKegiatanPage($id, $id_kegiatan)
-    {
-        $user = User::findOrFail($id);
-        $kegiatan = Kegiatan::with(['kategori'])->find($id_kegiatan);
-        if (!$kegiatan) {
-            return redirect()->route('user.daftar-volunteer')->with('error', 'Kegiatan tidak ditemukan.');
-        }
+    // public function showDetailKegiatanPage($id, $id_kegiatan)
+    // {
+    //     $user = User::findOrFail($id);
+    //     $kegiatan = Kegiatan::with(['kategori'])->find($id_kegiatan);
+    //     if (!$kegiatan) {
+    //         return redirect()->route('user.daftar-volunteer')->with('error', 'Kegiatan tidak ditemukan.');
+    //     }
        
-         $rekomendasi = Kegiatan::where('id_kegiatan', '!=', $id_kegiatan)
-        //  ->latest() // Urutkan berdasarkan yang terbaru
-         ->take(4) 
-         ->get();
+    //      $rekomendasi = Kegiatan::where('id_kegiatan', '!=', $id_kegiatan)
+    //     //  ->latest() // Urutkan berdasarkan yang terbaru
+    //      ->take(4) 
+    //      ->get();
  
-        return view('user.layout.detail-kegiatan', compact('kegiatan', 'user', 'rekomendasi'));
-    }
+    //     return view('user.layout.detail-kegiatan', compact('kegiatan', 'user', 'rekomendasi'));
+    // }
 
     
     //All Abour Pendaftaran
