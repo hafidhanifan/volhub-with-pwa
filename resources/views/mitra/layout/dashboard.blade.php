@@ -1,83 +1,270 @@
-@include('admin.layout.templates.header')
+@include('mitra.layout.templates.header')
 @include('mitra.layout.templates.sidebar')
-@include('mitra.layout.templates.navbar')
+@include('mitra.layout.templates.overlay')
 
-<!-- ========== section start ========== -->
-      <section class="section">
-        <div class="container-fluid">
-          <!-- ========== title-wrapper start ========== -->
-          <div class="title-wrapper pt-30">
-            <div class="row align-items-center">
-              <div class="col-md-6">
-                <div class="title">
-                  <h2>VolHub for Company</h2>
-                </div>
-              </div>
-              <!-- end col -->
-              <div class="col-md-6">
-                <div class="breadcrumb-wrapper">
-                  <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item">
-                        <a href="#0">Dashboard</a>
-                      </li>
-                      <li class="breadcrumb-item active" aria-current="page">
-                        Volhub
-                      </li>
-                    </ol>
-                  </nav>
-                </div>
-              </div>
-              <!-- end col -->
-            </div>
-            <!-- end row -->
-          </div>
-          <!-- ========== title-wrapper end ========== -->
-          <div class="row">
-            <div class="col-xl-3 col-lg-4 col-sm-6">
-              <div class="icon-card mb-30">
-                <div class="icon purple">
-                  <i class="lni lni-users"></i>
-                </div>
-                <div class="content">
-                  <h6 class="mb-10">Total Pengguna</h6>
-                  <h3 class="text-bold mb-10"></h3>
-                </div>
-              </div>
-              <!-- End Icon Cart -->
-            </div>
-            <!-- End Col -->
-            <div class="col-xl-3 col-lg-4 col-sm-6">
-              <div class="icon-card mb-30">
-                <div class="icon success">
-                  <i class="lni lni-network"></i>
-                </div>
-                <div class="content">
-                  <h6 class="mb-10">Total Pendaftar</h6>
-                  <h3 class="text-bold mb-10">{{$totalPendaftar}}</h3>
-                </div>
-              </div>
-              <!-- End Icon Cart -->
-            </div>
-            <!-- End Col -->
-            <div class="col-xl-3 col-lg-4 col-sm-6">
-              <div class="icon-card mb-30">
-                <div class="icon primary">
-                  <i class="lni lni-grow"></i>
-                </div>
-                <div class="content">
-                  <h6 class="mb-10">Total Kegiatan</h6>
-                  <h3 class="text-bold mb-10">{{$totalKegiatan}}</h3>
-                </div>
-              </div>
-              <!-- End Icon Cart -->
-            </div>
-          </div>
-          <!-- End Row -->
+<!-- Content Start -->
+<main class="w-full">
+  <!-- Header Content Start -->
+  <!-- Mobile -->
+  <div class="lg:hidden">
+    <button id="toggleSidebar" class="h-14 z-40 p-2">
+      <svg class="w-7 stroke-gray-500" viewBox="0 0 24 24">
+        <path d="M4 12h16m0 0-4-4m4 4-4 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <div class="w-full flex flex-col justify-between md:items-center md:flex-row">
+      <div class="pl-4 pb-3">
+        <h1 class="font-normal text-lg">Volunteer Management</h1>
+        <p class="text-gray-500 text-sm">Manage your volunteer data</p>
+      </div>
+      <div class="pl-4 md:pr-4">
+        <a href="../public/add-volunteer.html"
+          class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
+          Add Volunteer
+        </a>
+      </div>
+    </div>
+  </div>
 
-        </div>
-        <!-- end container -->
-      </section>
-      <!-- ========== section end ========== -->
+  <div class="hidden w-full lg:flex justify-between items-center">
+    <div class="p-4">
+      <h1 class="font-normal text-lg">Volunteer Management</h1>
+      <p class="text-gray-500 text-sm">Manage your volunteer data</p>
+    </div>
+    <div class="pr-4">
+      <a href="../public/add-volunteer.html"
+        class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
+        Add Volunteer
+      </a>
+    </div>
+  </div>
+  <!-- Header Content End -->
+  <div class="mt-8 overflow-x-auto w-full lg:mt-0 lg:p-4">
+    <!-- Volunteer list start -->
 
-@include('admin.layout.templates.footer')
+    <table class="min-w-full table-auto border-separate border-spacing-0 border border-gray-200 lg:rounded-lg">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
+            Volunteer listing
+          </th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
+            Date posted
+          </th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
+            Date expires
+          </th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
+        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 text-sm text-gray-800">
+            <span class="font-semibold">Volunteer Senang - Senang</span>
+
+            <p class="text-sm text-gray-500">Yogyakarta</p>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">Jan 22, 2022</td>
+          <td class="px-6 py-4 text-sm text-gray-600">Feb 22, 2022</td>
+          <td class="px-6 py-4 flex">
+            <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m18 6-.8 12.013c-.071 1.052-.106 1.578-.333 1.977a2 2 0 0 1-.866.81c-.413.2-.94.2-1.995.2H9.994c-1.055 0-1.582 0-1.995-.2a2 2 0 0 1-.866-.81c-.227-.399-.262-.925-.332-1.977L6 6M4 6h16m-4 0-.27-.812c-.263-.787-.394-1.18-.637-1.471a2 2 0 0 0-.803-.578C13.938 3 13.524 3 12.694 3h-1.388c-.829 0-1.244 0-1.596.139a2 2 0 0 0-.803.578c-.243.29-.374.684-.636 1.471L8 6"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </td>
+        </tr>
+        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 text-sm text-gray-800">
+            <span class="font-semibold">Volunteer Bahagia</span>
+
+            <p class="text-sm text-gray-500">Bandung</p>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">Jan 20, 2022</td>
+          <td class="px-6 py-4 text-sm text-gray-600">Feb 20, 2022</td>
+        </tr>
+        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 text-sm text-gray-800">
+            <span class="font-semibold">Volunteer Senang - Senang</span>
+
+            <p class="text-sm text-gray-500">Yogyakarta</p>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">Jan 22, 2022</td>
+          <td class="px-6 py-4 text-sm text-gray-600">Feb 22, 2022</td>
+          <td class="px-6 py-4 flex">
+            <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m18 6-.8 12.013c-.071 1.052-.106 1.578-.333 1.977a2 2 0 0 1-.866.81c-.413.2-.94.2-1.995.2H9.994c-1.055 0-1.582 0-1.995-.2a2 2 0 0 1-.866-.81c-.227-.399-.262-.925-.332-1.977L6 6M4 6h16m-4 0-.27-.812c-.263-.787-.394-1.18-.637-1.471a2 2 0 0 0-.803-.578C13.938 3 13.524 3 12.694 3h-1.388c-.829 0-1.244 0-1.596.139a2 2 0 0 0-.803.578c-.243.29-.374.684-.636 1.471L8 6"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </td>
+        </tr>
+        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 text-sm text-gray-800">
+            <span class="font-semibold">Volunteer Senang - Senang</span>
+
+            <p class="text-sm text-gray-500">Yogyakarta</p>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">Jan 22, 2022</td>
+          <td class="px-6 py-4 text-sm text-gray-600">Feb 22, 2022</td>
+          <td class="px-6 py-4 flex">
+            <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m18 6-.8 12.013c-.071 1.052-.106 1.578-.333 1.977a2 2 0 0 1-.866.81c-.413.2-.94.2-1.995.2H9.994c-1.055 0-1.582 0-1.995-.2a2 2 0 0 1-.866-.81c-.227-.399-.262-.925-.332-1.977L6 6M4 6h16m-4 0-.27-.812c-.263-.787-.394-1.18-.637-1.471a2 2 0 0 0-.803-.578C13.938 3 13.524 3 12.694 3h-1.388c-.829 0-1.244 0-1.596.139a2 2 0 0 0-.803.578c-.243.29-.374.684-.636 1.471L8 6"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </td>
+        </tr>
+        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 text-sm text-gray-800">
+            <span class="font-semibold">Volunteer Senang - Senang</span>
+
+            <p class="text-sm text-gray-500">Yogyakarta</p>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">Jan 22, 2022</td>
+          <td class="px-6 py-4 text-sm text-gray-600">Feb 22, 2022</td>
+          <td class="px-6 py-4 flex">
+            <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m18 6-.8 12.013c-.071 1.052-.106 1.578-.333 1.977a2 2 0 0 1-.866.81c-.413.2-.94.2-1.995.2H9.994c-1.055 0-1.582 0-1.995-.2a2 2 0 0 1-.866-.81c-.227-.399-.262-.925-.332-1.977L6 6M4 6h16m-4 0-.27-.812c-.263-.787-.394-1.18-.637-1.471a2 2 0 0 0-.803-.578C13.938 3 13.524 3 12.694 3h-1.388c-.829 0-1.244 0-1.596.139a2 2 0 0 0-.803.578c-.243.29-.374.684-.636 1.471L8 6"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </td>
+        </tr>
+        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 text-sm text-gray-800">
+            <span class="font-semibold">Volunteer Senang - Senang</span>
+
+            <p class="text-sm text-gray-500">Yogyakarta</p>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">Jan 22, 2022</td>
+          <td class="px-6 py-4 text-sm text-gray-600">Feb 22, 2022</td>
+          <td class="px-6 py-4 flex">
+            <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m18 6-.8 12.013c-.071 1.052-.106 1.578-.333 1.977a2 2 0 0 1-.866.81c-.413.2-.94.2-1.995.2H9.994c-1.055 0-1.582 0-1.995-.2a2 2 0 0 1-.866-.81c-.227-.399-.262-.925-.332-1.977L6 6M4 6h16m-4 0-.27-.812c-.263-.787-.394-1.18-.637-1.471a2 2 0 0 0-.803-.578C13.938 3 13.524 3 12.694 3h-1.388c-.829 0-1.244 0-1.596.139a2 2 0 0 0-.803.578c-.243.29-.374.684-.636 1.471L8 6"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </td>
+        </tr>
+        <!-- Tambahkan baris lainnya sesuai data -->
+      </tbody>
+    </table>
+    <!-- Volunteer list end -->
+  </div>
+  <!-- Detail volunteer start -->
+  <div id="detailVolunteer"
+    class="fixed w-full h-screen top-0 bg-white transform translate-x-full transition-transform duration-500 ease-in-out z-50 overflow-y-auto lg:w-1/3 lg:right-0">
+    <div class="relative h-20 rounded-t-lg bg-slate-100">
+      <div class="absolute right-2 top-2">
+        <button id="closeDetailVolunteerMitraBtn">
+          <svg class="w-7 fill-slate-600" viewBox="0 -0.5 25 25" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M6.97 16.47a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 1 0-1.06-1.06l1.06 1.06Zm-1.06-1.06a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 0 0-1.06-1.06l1.06 1.06Zm-5 3.94a.75.75 0 1 0-1.06 1.06l1.06-1.06Zm3.94 6.06a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-5-5a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM8.03 6.47a.75.75 0 0 0-1.06 1.06l1.06-1.06Zm0 11.06 5-5-1.06-1.06-5 5 1.06 1.06Zm5-5 5-5-1.06-1.06-5 5 1.06 1.06Zm-1.06 0 5 5 1.06-1.06-5-5-1.06 1.06Zm1.06-1.06-5-5-1.06 1.06 5 5 1.06-1.06Z" />
+          </svg>
+        </button>
+      </div>
+      <img src="../src/image/mitra-logo-3.jpg" alt="Logo Mitra"
+        class="absolute -bottom-8 left-2 max-w-16 bg-transparent rounded-full" />
+    </div>
+    <div class="mt-9 p-4">
+      <h1 class="font-medium text-lg line-clamp-3">
+        Volunteer Senang - Senang
+      </h1>
+      <h2 class="mt-2 text-slate-600 font-light text-sm">
+        Nama Mitra Mitra Volunteer
+      </h2>
+    </div>
+    <div class="pl-4 mt-2 flex gap-4">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 stroke-slate-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M3 19v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1m0-8a3 3 0 1 0 0-6m6 14v-1a4 4 0 0 0-4-4h-.5M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <p class="leading-none text-sm text-slate-600">200</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round">
+            <path opacity=".34" d="M5 10h2c2 0 3-1 3-3V5c0-2-1-3-3-3H5C3 2 2 3 2 5v2c0 2 1 3 3 3Z" />
+            <path d="M17 10h2c2 0 3-1 3-3V5c0-2-1-3-3-3h-2c-2 0-3 1-3 3v2c0 2 1 3 3 3Z" />
+            <path opacity=".34" d="M17 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3h-2c-2 0-3 1-3 3v2c0 2 1 3 3 3Z" />
+            <path d="M5 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3H5c-2 0-3 1-3 3v2c0 2 1 3 3 3Z" />
+          </g>
+        </svg>
+        <p class="leading-none text-sm text-slate-600">Offline</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-4 fill-slate-600" viewBox="-4 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm0-8a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 22c-1.663.009-10-12.819-10-17C2 6.478 6.477 2 12 2s10 4.478 10 10c0 4.125-8.363 17.009-10 17Zm0-29C5.373 0 0 5.373 0 12c0 5.018 10.005 20.011 12 20 1.964.011 12-15.05 12-20 0-6.627-5.373-12-12-12Z"
+            fill-rule="evenodd" />
+        </svg>
+        <p class="leading-none text-sm text-slate-600">Yogyakarta</p>
+      </div>
+    </div>
+    <div class="w-full p-4">
+      <button class="w-full py-3 text-white font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
+        Edit Volunteer
+      </button>
+    </div>
+    <div class="px-4 flex justify-evenly gap-2">
+      <div class="w-1/2 bg-red-200 rounded-lg p-2">
+        <span class="text-sm font-normal">Registration closed :</span>
+        <p class="text-sm leading-none font-light">24 December 2024</p>
+      </div>
+      <div class="w-1/2 bg-sky-200 rounded-lg p-2">
+        <span class="text-sm font-normal">Volunteering begin :</span>
+        <p class="text-sm leading-none font-light">25 December 2025</p>
+      </div>
+    </div>
+    <div class="px-4 pt-5">
+      <h2 class="font-semibold">Description</h2>
+      <p class="text-sm text-justify">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit
+        explicabo distinctio sint aliquid dolorem molestias quibusdam ut
+        placeat eligendi magni!
+      </p>
+    </div>
+    <div class="px-4 pt-5">
+      <div class="flex justify-between items-center">
+        <h2 class="font-semibold">Requirement</h2>
+        <a href="../public/add-requirement.html" class="text-sm text-sky-700 cursor-pointer flex items-center">
+          <svg class="w-4 stroke-sky-700" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 12h16m-8-8v16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          Add requirement
+        </a>
+      </div>
+
+      <div class="flex gap-2 flex-wrap mt-2">
+        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem ipsum</span>
+        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem</span>
+        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem ipsum dolor</span>
+      </div>
+    </div>
+    <div class="px-4 pt-5">
+      <div class="flex justify-between items-center">
+        <h2 class="font-semibold">Benefit</h2>
+        <a class="text-sm text-sky-700 cursor-pointer flex items-center">
+          <svg class="w-4 stroke-sky-700" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 12h16m-8-8v16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          Add benefit
+        </a>
+      </div>
+      <div class="flex gap-2 flex-wrap mt-2">
+        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Paid</span>
+        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Unpaid</span>
+        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Menambah Relasi</span>
+      </div>
+    </div>
+  </div>
+  <!-- Detail volunteer end -->
+</main>
+<!-- Content End -->
+
+{{-- @include('admin.layout.templates.footer') --}}
