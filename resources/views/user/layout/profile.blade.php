@@ -713,7 +713,7 @@
           @foreach($user->pendaftars as $pendaftar)
         <div class="border border-slate-300 rounded-2xl">
           <div class="flex items-center gap-4 p-4">
-            <img src="../src/image/volhub-small-logo.png" alt="" class="w-16" />
+            <img src="{{asset('storage/logo/'.$pendaftar->kegiatan->mitra->logo)}}" alt="" class="w-16 rounded-full" />
             <div class="overflow-hidden">
               <h2 class="text-xl font-semibold line-clamp-2">
                 {{$pendaftar->kegiatan->nama_kegiatan}}
