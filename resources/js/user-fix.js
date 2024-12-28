@@ -109,21 +109,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Showing detail volunteer in small screen
-// document.addEventListener("DOMContentLoaded", () => {
-//     const volunteerCard = document.getElementById("volunteerCard");
-//     const detailVolunteerCard = document.getElementById("detailVolunteer");
-//     const backButton = document.getElementById("backBtn");
-
-//     volunteerCard.addEventListener("click", () => {
-//         detailVolunteerCard.classList.remove("translate-y-full");
-//     });
-
-//     backButton.addEventListener("click", () => {
-//         detailVolunteerCard.classList.add("translate-y-full");
-//     });
-// });
-
 //JAVASCRIPT LIST DAN DETAIL KEGIATAN
 document.addEventListener('DOMContentLoaded', () => {
     const detailContainer = document.getElementById('detailVolunteer');
