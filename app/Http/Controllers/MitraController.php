@@ -30,14 +30,17 @@ class MitraController extends Controller
         $kegiatans = Kegiatan::where('id_mitra', $mitra->id_mitra)->get();
         foreach ($kegiatans as $kegiatan) 
         {
+            if ($kegiatan->tgl_kegiatan) {
+                $kegiatanDate = Carbon::parse($kegiatan->tgl_kegiatan);
+                $formattedKegiatanDate = $kegiatanDate->translatedFormat('d F Y');
+            }
+
             if ($kegiatan->tgl_penutupan) {
                 $penutupanDate = Carbon::parse($kegiatan->tgl_penutupan);
                 $formattedPenutupanDate = $penutupanDate->translatedFormat('d F Y');
-            } else {
-                $kegiatan->formatted_tgl_penutupan = null;
             }
         }
-        return view('mitra.layout.activity', compact('mitra', 'kegiatans','formattedPenutupanDate'));
+        return view('mitra.layout.activity', compact('mitra', 'kegiatans','formattedPenutupanDate', 'formattedKegiatanDate'));
     }
 
     public function showAddKegiatanPage($id)

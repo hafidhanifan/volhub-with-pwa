@@ -68,7 +68,7 @@
 
             <p class="text-sm text-gray-500">{{$kegiatan->lokasi_kegiatan}}</p>
           </td>
-          <td class="px-6 py-4 text-sm text-gray-600">{{$kegiatan->tgl_kegiatan}}</td>
+          <td class="px-6 py-4 text-sm text-gray-600">{{$formattedKegiatanDate}}</td>
           <td class="px-6 py-4 text-sm text-gray-600">{{$formattedPenutupanDate}}</td>
           <td class="px-6 py-4 flex">
             <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
