@@ -61,21 +61,39 @@
       </thead>
       <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
         <?php $no = 1 ?>
-        @foreach($mitra->kegiatans as $kegiatan)
-        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+        @foreach($kegiatans as $kegiatan)
+        <tr id="activity" class="activity cursor-pointer hover:bg-button_hover2"
+          data-id-kegiatan="{{ $kegiatan->id_kegiatan }}"
+          data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}"
+          data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}"
+          data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}" 
+          data-logo="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}"
+          data-sistem-kegiatan="{{ $kegiatan->sistem_kegiatan}}"
+          data-pendaftar-count ="{{ $kegiatan->pendaftars_count}} applied"
+          data-deskripsi-kegiatan="{{ $kegiatan->deskripsi }}"
+          data-nama-kriteria="{{ implode(',', $kegiatan->kriterias->pluck('nama_kriteria')->toArray()) }}"
+          data-nama-benefit="{{ implode(',', $kegiatan->benefits->pluck('nama_benefit')->toArray()) }}"
+          data-tgl-kegiatan="{{ $kegiatan->formatted_kegiatan_date }}"
+          data-tgl-penutupan="{{ $kegiatan->formatted_penutupan_date }}">
+          
           <td class="px-6 py-4 text-sm text-gray-800">
             <span class="font-semibold">{{$kegiatan->nama_kegiatan}}</span>
-
             <p class="text-sm text-gray-500">{{$kegiatan->lokasi_kegiatan}}</p>
           </td>
-          <td class="px-6 py-4 text-sm text-gray-600">{{$formattedKegiatanDate}}</td>
-          <td class="px-6 py-4 text-sm text-gray-600">{{$formattedPenutupanDate}}</td>
+          <td class="px-6 py-4 text-sm text-gray-600">{{$kegiatan->formatted_kegiatan_date}}</td>
+          <td class="px-6 py-4 text-sm text-gray-600">{{$kegiatan->formatted_penutupan_date}}</td>
           <td class="px-6 py-4 flex">
-            <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="m18 6-.8 12.013c-.071 1.052-.106 1.578-.333 1.977a2 2 0 0 1-.866.81c-.413.2-.94.2-1.995.2H9.994c-1.055 0-1.582 0-1.995-.2a2 2 0 0 1-.866-.81c-.227-.399-.262-.925-.332-1.977L6 6M4 6h16m-4 0-.27-.812c-.263-.787-.394-1.18-.637-1.471a2 2 0 0 0-.803-.578C13.938 3 13.524 3 12.694 3h-1.388c-.829 0-1.244 0-1.596.139a2 2 0 0 0-.803.578c-.243.29-.374.684-.636 1.471L8 6"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            <form action="{{ route('mitra.delete-kegiatan-action', ['id' => $mitra->id_mitra, 'id_keg' => $kegiatan->id_kegiatan]) }}" method="POST" style="display:inline;">
+              @csrf
+              @method('DELETE')
+              <button type="submit">
+                <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="m18 6-.8 12.013c-.071 1.052-.106 1.578-.333 1.977a2 2 0 0 1-.866.81c-.413.2-.94.2-1.995.2H9.994c-1.055 0-1.582 0-1.995-.2a2 2 0 0 1-.866-.81c-.227-.399-.262-.925-.332-1.977L6 6M4 6h16m-4 0-.27-.812c-.263-.787-.394-1.18-.637-1.471a2 2 0 0 0-.803-.578C13.938 3 13.524 3 12.694 3h-1.388c-.829 0-1.244 0-1.596.139a2 2 0 0 0-.803.578c-.243.29-.374.684-.636 1.471L8 6"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </form>
           </td>
         </tr>
         @endforeach
@@ -100,11 +118,9 @@
         class="absolute -bottom-8 left-2 max-w-16 bg-transparent rounded-full" />
     </div>
     <div class="mt-9 p-4">
-      <h1 class="font-medium text-lg line-clamp-3">
-        Volunteer Senang - Senang
+      <h1 class="namaKegiatan font-medium text-lg line-clamp-3">
       </h1>
-      <h2 class="mt-2 text-slate-600 font-light text-sm">
-        Nama Mitra Mitra Volunteer
+      <h2 class="namaMitra mt-2 text-slate-600 font-light text-sm">
       </h2>
     </div>
     <div class="pl-4 mt-2 flex gap-4">
@@ -114,7 +130,7 @@
             d="M3 19v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1m0-8a3 3 0 1 0 0-6m6 14v-1a4 4 0 0 0-4-4h-.5M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
-        <p class="leading-none text-sm text-slate-600">200</p>
+        <p class="pendaftarCount leading-none text-sm text-slate-600"></p>
       </div>
       <div class="flex items-center gap-2">
         <svg class="w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -125,7 +141,7 @@
             <path d="M5 22h2c2 0 3-1 3-3v-2c0-2-1-3-3-3H5c-2 0-3 1-3 3v2c0 2 1 3 3 3Z" />
           </g>
         </svg>
-        <p class="leading-none text-sm text-slate-600">Offline</p>
+        <p class="sistemKegiatan leading-none text-sm text-slate-600">Offline</p>
       </div>
       <div class="flex items-center gap-2">
         <svg class="w-4 fill-slate-600" viewBox="-4 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -133,7 +149,7 @@
             d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm0-8a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 22c-1.663.009-10-12.819-10-17C2 6.478 6.477 2 12 2s10 4.478 10 10c0 4.125-8.363 17.009-10 17Zm0-29C5.373 0 0 5.373 0 12c0 5.018 10.005 20.011 12 20 1.964.011 12-15.05 12-20 0-6.627-5.373-12-12-12Z"
             fill-rule="evenodd" />
         </svg>
-        <p class="leading-none text-sm text-slate-600">Yogyakarta</p>
+        <p class="lokasiKegiatan leading-none text-sm text-slate-600">Yogyakarta</p>
       </div>
     </div>
     <div class="w-full p-4">
@@ -144,20 +160,16 @@
     <div class="px-4 flex justify-evenly gap-2">
       <div class="w-1/2 bg-red-200 rounded-lg p-2">
         <span class="text-sm font-normal">Registration closed :</span>
-        <p class="text-sm leading-none font-light">24 December 2024</p>
+        <p class="tglPenutupan text-sm leading-none font-light">24 December 2024</p>
       </div>
       <div class="w-1/2 bg-sky-200 rounded-lg p-2">
         <span class="text-sm font-normal">Volunteering begin :</span>
-        <p class="text-sm leading-none font-light">25 December 2025</p>
+        <p class="tglKegiatan text-sm leading-none font-light">25 December 2025</p>
       </div>
     </div>
     <div class="px-4 pt-5">
       <h2 class="font-semibold">Description</h2>
-      <p class="text-sm text-justify">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-        explicabo distinctio sint aliquid dolorem molestias quibusdam ut
-        placeat eligendi magni!
-      </p>
+      <p class="deskripsiKegiatan text-sm text-justify"></p>
     </div>
     <div class="px-4 pt-5">
       <div class="flex justify-between items-center">
@@ -170,10 +182,9 @@
         </a>
       </div>
 
-      <div class="flex gap-2 flex-wrap mt-2">
-        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem ipsum</span>
-        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem</span>
-        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Lorem ipsum dolor</span>
+      <div class="kriteriaContainer flex gap-2 flex-wrap mt-2">
+        <span class="namaKriteria px-4 py-1 bg-sky-200 text-sm rounded-lg"></span>
+        <span class="namaKriteria px-4 py-1 bg-red-200 text-sm rounded-lg"></span>
       </div>
     </div>
     <div class="px-4 pt-5">
@@ -186,10 +197,9 @@
           Add benefit
         </a>
       </div>
-      <div class="flex gap-2 flex-wrap mt-2">
-        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Paid</span>
-        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Unpaid</span>
-        <span class="px-4 py-1 bg-sky-200 text-sm rounded-lg">Menambah Relasi</span>
+      <div class="benefitContainer flex gap-2 flex-wrap mt-2">
+        <span class="namaBenefit px-4 py-1 bg-sky-200 text-sm rounded-lg"></span>
+        <span class="namaBenefit px-4 py-1 bg-red-200 text-sm rounded-lg"></span>
       </div>
     </div>
   </div>

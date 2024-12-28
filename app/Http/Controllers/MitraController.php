@@ -27,20 +27,30 @@ class MitraController extends Controller
     public function showKegiatanPage($id)
     {
         $mitra = Mitra::find($id);
-        $kegiatans = Kegiatan::where('id_mitra', $mitra->id_mitra)->get();
-        foreach ($kegiatans as $kegiatan) 
-        {
+        
+        $kegiatans = Kegiatan::withCount('pendaftars')
+                            ->where('id_mitra', $mitra->id_mitra)
+                            ->get();
+
+        foreach ($kegiatans as $kegiatan) {
+            // Format tanggal kegiatan
             if ($kegiatan->tgl_kegiatan) {
                 $kegiatanDate = Carbon::parse($kegiatan->tgl_kegiatan);
-                $formattedKegiatanDate = $kegiatanDate->translatedFormat('d F Y');
+                $kegiatan->formatted_kegiatan_date = $kegiatanDate->translatedFormat('d F Y');
+            } else {
+                $kegiatan->formatted_kegiatan_date = null; // Tanggal tidak tersedia
             }
 
+            // Format tanggal penutupan
             if ($kegiatan->tgl_penutupan) {
                 $penutupanDate = Carbon::parse($kegiatan->tgl_penutupan);
-                $formattedPenutupanDate = $penutupanDate->translatedFormat('d F Y');
+                $kegiatan->formatted_penutupan_date = $penutupanDate->translatedFormat('d F Y');
+            } else {
+                $kegiatan->formatted_penutupan_date = null; // Tanggal tidak tersedia
             }
         }
-        return view('mitra.layout.activity', compact('mitra', 'kegiatans','formattedPenutupanDate', 'formattedKegiatanDate'));
+
+        return view('mitra.layout.activity', compact('mitra', 'kegiatans', 'kegiatan'));
     }
 
     public function showAddKegiatanPage($id)
@@ -132,6 +142,18 @@ class MitraController extends Controller
         $kegiatan->save();
 
         return view('mitra.layout.detail-kegiatan', compact('mitra', 'kegiatan'))->with('success', 'Kegiatan berhasil diupdate.');
+    }
+
+    public function removeKegiatanAction($id, $id_keg)
+    {
+        $mitra = Mitra::find($id);
+        $kegiatan = Kegiatan::where('id_mitra', $mitra->id_mitra)
+                            ->where('id_kegiatan', $id_keg)
+                            ->first();
+
+        $kegiatan->delete();
+
+        return redirect()->back();
     }
 
     // All About Kegiatan Benefit

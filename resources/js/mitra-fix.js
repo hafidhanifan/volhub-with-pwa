@@ -107,3 +107,81 @@ document.addEventListener("DOMContentLoaded", () => {
         activateTab(targetContentId);
     });
 });
+
+
+// LIST DAN DETAIL KEGIATAN
+document.addEventListener('DOMContentLoaded', () => {
+    const detailContainer = document.getElementById('detailVolunteer');
+
+    document.querySelectorAll('.activity').forEach(card => {
+        card.addEventListener('click', () => {
+
+            // Ambil data dari atribut data-*
+            // const idKegiatan = card.dataset.idKegiatan;
+            const namaKegiatan = card.dataset.namaKegiatan;
+            const namaMitra = card.dataset.namaMitra;
+            const lokasiKegiatan = card.dataset.lokasiKegiatan;
+            const logo = card.dataset.logo;
+            const sistemKegiatan = card.dataset.sistemKegiatan;
+            const pendaftarCount = card.dataset.pendaftarCount;
+            const deskripsiKegiatan = card.dataset.deskripsiKegiatan;
+            const namaKriteria = card.dataset.namaKriteria;
+            const namaBenefit = card.dataset.namaBenefit;
+            const tglKegiatan = card.dataset.tglKegiatan;
+            const tglPenutupan = card.dataset.tglPenutupan;
+
+            // Tampilkan data di bagian detail
+            detailContainer.querySelector('.namaKegiatan').textContent = namaKegiatan;
+            detailContainer.querySelector('.namaMitra').textContent = namaMitra;
+            detailContainer.querySelector('.lokasiKegiatan').textContent = lokasiKegiatan;
+            detailContainer.querySelector('img').src = logo;
+            detailContainer.querySelector('.sistemKegiatan').textContent = sistemKegiatan;
+            detailContainer.querySelector('.pendaftarCount').textContent = pendaftarCount;
+            detailContainer.querySelector('.deskripsiKegiatan').textContent = deskripsiKegiatan;
+            detailContainer.querySelector('.tglKegiatan').textContent = tglKegiatan;
+            detailContainer.querySelector('.tglPenutupan').textContent = tglPenutupan;
+            
+
+            const kriteriaContainer = detailContainer.querySelector('.kriteriaContainer'); // Ambil container kriteria
+            kriteriaContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
+            
+            if (namaKriteria && namaKriteria.trim() !== '') {
+                // Jika data kriteria ada
+                const kriteriaArray = namaKriteria.split(','); // Pisahkan berdasarkan koma
+                kriteriaArray.forEach(kriteria => {
+                    const kriteriaSpan = document.createElement('span');
+                    kriteriaSpan.classList.add('namaKriteria', 'px-4', 'py-1', 'bg-sky-200', 'text-sm', 'rounded-lg');
+                    kriteriaSpan.textContent = kriteria.trim(); // Hapus spasi berlebih
+                    kriteriaContainer.appendChild(kriteriaSpan);
+                });
+            } else {
+                // Jika data kriteria kosong, tampilkan pesan
+                const emptyMessage = document.createElement('span');
+                emptyMessage.classList.add('namaKriteria', 'px-4', 'py-1', 'bg-red-200', 'text-sm', 'rounded-lg');
+                emptyMessage.textContent = 'Mitra belum mengisikan data';
+                kriteriaContainer.appendChild(emptyMessage);
+            }
+            
+            const benefitContainer = detailContainer.querySelector('.benefitContainer'); // Ambil container kriteria
+            benefitContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
+            
+            if (namaBenefit && namaBenefit.trim() !== '') {
+                // Jika data kriteria ada
+                const benefitArray = namaBenefit.split(','); // Pisahkan berdasarkan koma
+                benefitArray.forEach(benefit => {
+                    const benefitSpan = document.createElement('span');
+                    benefitSpan.classList.add('namaBenefit', 'px-4', 'py-1', 'bg-sky-200', 'text-sm', 'rounded-lg');
+                    benefitSpan.textContent = benefit.trim(); // Hapus spasi berlebih
+                    benefitContainer.appendChild(benefitSpan);
+                });
+            } else {
+                // Jika data kriteria kosong, tampilkan pesan
+                const emptyMessage = document.createElement('span');
+                emptyMessage.classList.add('namaBenefit', 'px-4', 'py-1', 'bg-red-200', 'text-sm', 'rounded-lg');
+                emptyMessage.textContent = 'Mitra belum mengisikan data';
+                benefitContainer.appendChild(emptyMessage);
+            }
+
+        });
+    });
+});

@@ -103,6 +103,7 @@ Route::prefix('mitra')->group(function () {
         Route::get('detail-kegiatan/{id}/{id_keg}', [MitraController::class, 'showDetailKegiatanPage'])->name('mitra.detail-kegiatan-page');
         Route::get('edit-kegiatan/{id}/{id_keg}', [MitraController::class, 'showEditKegiatanPage'])->name('mitra.edit-kegiatan-page');
         Route::put('edit-kegiatan/{id}/{id_keg}', [MitraController::class, 'editKegiatanAction'])->name('mitra.edit-kegiatan-action');
+        Route::delete('remove-kegiatan/{id}/{id_keg}', [MitraController::class, 'removeKegiatanAction'])->name('mitra.delete-kegiatan-action');
 
         Route::get('add-benefit-kegiatan/{id}/{id_keg}', [MitraController::class, 'showAddBenefitKegiatanPage'])->name('mitra.add-benefit-kegiatan-page');
         Route::post('add-benefit-kegiatan/{id_keg}', [MitraController::class, 'addBenefitKegiatanAction'])->name('mitra.add-benefit-kegiatan-action');
