@@ -110,19 +110,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Showing detail volunteer in small screen
-document.addEventListener("DOMContentLoaded", () => {
-    const volunteerCard = document.getElementById("volunteerCard");
-    const detailVolunteerCard = document.getElementById("detailVolunteer");
-    const backButton = document.getElementById("backBtn");
+// document.addEventListener("DOMContentLoaded", () => {
+//     const volunteerCard = document.getElementById("volunteerCard");
+//     const detailVolunteerCard = document.getElementById("detailVolunteer");
+//     const backButton = document.getElementById("backBtn");
 
-    volunteerCard.addEventListener("click", () => {
-        detailVolunteerCard.classList.remove("translate-y-full");
-    });
+//     volunteerCard.addEventListener("click", () => {
+//         detailVolunteerCard.classList.remove("translate-y-full");
+//     });
 
-    backButton.addEventListener("click", () => {
-        detailVolunteerCard.classList.add("translate-y-full");
-    });
-});
+//     backButton.addEventListener("click", () => {
+//         detailVolunteerCard.classList.add("translate-y-full");
+//     });
+// });
 
 //JAVASCRIPT LIST DAN DETAIL KEGIATAN
 document.addEventListener('DOMContentLoaded', () => {
@@ -138,12 +138,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const registrationForm = document.getElementById('registrationForm');
     const motivationTextarea = document.getElementById('motivation');
 
+    const backButton = document.getElementById("backBtn");
+
     // Tampilkan pesan default saat halaman dimuat
     defaultMessage.classList.remove('hidden');
     detailContent.classList.add('hidden');
 
     document.querySelectorAll('.volunteerCard').forEach(card => {
         card.addEventListener('click', () => {
+
+            detailContainer.classList.remove("translate-y-full");
 
             defaultMessage.classList.add('hidden');
             detailContent.classList.remove('hidden');
@@ -240,6 +244,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+    backButton.addEventListener("click", () => {
+        detailContainer.classList.add("translate-y-full");
+    });
+
     submitButton.addEventListener("click", () => {
         applyModal.classList.add("opacity-0", "pointer-events-none");
         applyModal.querySelector(".transform").classList.add("scale-95");
