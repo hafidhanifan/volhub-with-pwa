@@ -41,9 +41,11 @@
                   @php
                     $user = auth()->user();
                   @endphp
-                    <img class="w-12 rounded-full" src="../src/image/profile-img.png" alt="Avatar" />
-                @else
-                  <img class="w-12 rounded-full" src="{{asset('img/default-profile.png')}}" alt="Avatar" />
+                    @if(!empty($user->foto_profile))
+                    <img class="h-10 w-full rounded-full" src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="Avatar" />
+                  @else
+                    <img class="h-10 w-full rounded-full" src="{{asset('img/logo-user.png')}}" alt="Avatar" />
+                  @endif
                 @endif
               </button>
             </div>
@@ -93,19 +95,24 @@
       @php
       $user = auth()->user();
       @endphp
-      <div class="p-3" <div class="flex items-center mb-4">
-        <img class="h-10 w-10 rounded-full" src="../src/image/profile-img.png" alt="Avatar" />
-        <div class="ml-3">
-          <div class="text-base font-medium text-gray-800">
-            {{$user->nama_user}}
+      <div class="p-3">
+        <div class="flex items-center mb-4">
+          @if(!empty($user->foto_profile))
+            <img class="h-10 w-10 rounded-full" src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="Avatar" />
+          @else
+            <img class="h-10 w-10 rounded-full" src="{{asset('img/logo-user.png')}}" alt="Avatar" />
+          @endif
+          <div class="ml-3">
+            <div class="text-base font-medium text-gray-800">
+              {{$user->nama_user}}
+            </div>
+            <div class="text-sm font-light">{{$user->email_user}}</div>
           </div>
-          <div class="text-sm font-light">{{$user->email_user}}</div>
         </div>
+        <a href="{{ route('user.detail-profile-page', ['id' => $user->id]) }}" class="block px-2 py-2 mt-3 mb-1 text-base font-light rounded-lg hover:bg-button_hover">Profile</a>
+        <a href="{{route('user.logout')}}"
+          class="block px-2 py-2 text-base font-light text-red-600 hover:text-white hover:bg-button_alert rounded-lg">Logout</a>
       </div>
-      <a href="{{ route('user.detail-profile-page', ['id' => $user->id]) }}" class="block px-2 py-2 mt-3 mb-1 text-base font-light rounded-lg hover:bg-button_hover">Profile</a>
-      <a href="{{route('user.logout')}}"
-        class="block px-2 py-2 text-base font-light text-red-600 hover:text-white hover:bg-button_alert rounded-lg">Logout</a>
-    </div>
     @endif
     </div>
   </nav>
