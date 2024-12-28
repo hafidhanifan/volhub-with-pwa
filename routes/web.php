@@ -94,7 +94,7 @@ Route::prefix('mitra')->group(function () {
     Route::get('logout', [AuthController::class, 'logoutMitra'])->name('mitra.logout');
         
     Route::middleware(['auth:mitra', 'separate.session:mitra'])->group(function () {
-        Route::get('dashboard/{id}', [MitraController::class, 'showDashboard'])->name('mitra.dashboard');
+        // Route::get('dashboard/{id}', [MitraController::class, 'showDashboard'])->name('mitra.dashboard');
 
         // Kelola Kegiatan
         Route::get('kegiatan/{id}', [MitraController::class, 'showKegiatanPage'])->name('mitra.kegiatan');

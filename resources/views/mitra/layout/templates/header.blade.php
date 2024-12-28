@@ -7,7 +7,7 @@
   <meta name="dicoding:f1836yb034@dicoding.org" content="hafidhanifan33@gmail.com">
   <title>VolunteerHub</title>
 
-  @vite(['resources/css/app.css','resources/js/user-fix.js',])
+  @vite(['resources/css/app.css','resources/js/mitra-fix.js',])
 
 
   <link rel="shortcut icon" href="{{ asset('/img/logo-putih.png') }}" type="image/x-icon" />

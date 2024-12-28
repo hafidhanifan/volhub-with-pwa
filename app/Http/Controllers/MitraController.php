@@ -24,22 +24,20 @@ use Illuminate\Validation\ValidationException;
 
 class MitraController extends Controller
 {
-    public function showDashboard($id) 
-    {
-        $mitra = Mitra::find($id);
-        $kegiatan = Kegiatan::all();
-        $pendaftar = Pendaftar::all();
-
-        $totalKegiatan = $kegiatan->count();
-        $totalPendaftar = $pendaftar->count();
-        return view('mitra.layout.dashboard', compact('kegiatan', 'pendaftar', 'mitra', 'totalKegiatan', 'totalPendaftar'));
-    }
-
     public function showKegiatanPage($id)
     {
         $mitra = Mitra::find($id);
         $kegiatans = Kegiatan::where('id_mitra', $mitra->id_mitra)->get();
-        return view('mitra.layout.kegiatan', compact('mitra'));
+        foreach ($kegiatans as $kegiatan) 
+        {
+            if ($kegiatan->tgl_penutupan) {
+                $penutupanDate = Carbon::parse($kegiatan->tgl_penutupan);
+                $formattedPenutupanDate = $penutupanDate->translatedFormat('d F Y');
+            } else {
+                $kegiatan->formatted_tgl_penutupan = null;
+            }
+        }
+        return view('mitra.layout.activity', compact('mitra', 'kegiatans','formattedPenutupanDate'));
     }
 
     public function showAddKegiatanPage($id)
@@ -258,11 +256,11 @@ class MitraController extends Controller
     
             // Mengubah base64 menjadi file
             $cropped_image = $request->input('cropped_image');
-            $image = Image::make($cropped_image);
+            // $image = Image::make($cropped_image);
             $newName = $mitra->nama_mitra . '-' . now()->timestamp . '.png';
             $path = 'logo/' . $newName;
     
-            Storage::disk('public')->put($path, (string) $image->encode());
+            // Storage::disk('public')->put($path, (string) $image->encode());
     
             // Simpan path gambar ke database
             $mitra->logo = $newName;
