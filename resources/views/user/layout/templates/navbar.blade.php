@@ -43,9 +43,11 @@
                   @endphp
                     @if(!empty($user->foto_profile))
                     <img class="h-10 w-full rounded-full" src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="Avatar" />
-                  @else
-                    <img class="h-10 w-full rounded-full" src="{{asset('img/logo-user.png')}}" alt="Avatar" />
-                  @endif
+                    @else
+                      <img class="h-10 w-full rounded-full" src="{{asset('img/logo-user.png')}}" alt="Avatar" />
+                    @endif
+                @else
+                    <img class="h-10 w-full rounded-full" src="{{asset('img/default-profile.png')}}" alt="Avatar" />
                 @endif
               </button>
             </div>
