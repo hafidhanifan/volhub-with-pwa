@@ -1,566 +1,304 @@
 @include('mitra.layout.templates.header')
 @include('mitra.layout.templates.sidebar')
-@include('mitra.layout.templates.navbar') 
-<!-- ========== section start ========== -->
-<section class="section">
-        <div class="container-fluid">
+@include('mitra.layout.templates.navbar')
+<!-- Content Start -->
+<section class="flex flex-col w-full md:flex-row md:bg-gray-100 md:px-10 md:pt-8 lg:h-screen">
+  <div class="p-4 md:mt-4">
+    <h1 class="text-lg font-semibold">Registrant information</h1>
+    <div
+      class="mt-4 md:border md:p-8 md:bg-white md:max-w-80 md:rounded-lg md:h-[calc(100vh-120px)] lg:h-[calc(100vh-120px)] lg:overflow-y-auto">
+      <div class="flex items-center gap-4">
+        <img src="../src/image/profile-img.png" alt="Profile Image" class="max-w-20" />
+        <div class="">
+          <h2 class="">Dinda Dandi</h2>
+          <p class="line-clamp-2 text-sm text-gray-500">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id
+            explicabo ab ducimus officiis assumenda error eligendi natus
+            possimus deleniti, quae dolorem asperiores? Tempora, accusamus
+            iste.
+          </p>
+        </div>
+      </div>
+      <div class="mt-4 p-4 rounded-md border-2 border-sky-200 bg-sky-50">
+        <div class="flex justify-between py-2">
+          <span class="text-xs font-normal">Applied Volunteer</span>
+          <span class="text-xs text-gray-500">100 days ago</span>
+        </div>
+        <div class="border my-2"></div>
+        <p class="font-semibold text-sm">
+          Volunteer pura pura senang pura pura bahagia woakoakw
+        </p>
+      </div>
+      <div class="mt-4 flex gap-2">
+        <button class="w-3/4 py-2 border-2 border-sky-200 rounded-md bg-sky-50">
+          Scheduled
+        </button>
+        <button class="w-1/4 py-2 border-2 border-sky-200 rounded-md flex justify-center bg-sky-50">
+          <svg class="w-8 stroke-sky-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M7 4a4 4 0 0 0-4 4v5.264a4 4 0 0 0 4 4V19.9a.1.1 0 0 0 .162.078l3.438-2.714H17a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4H7Z"
+              stroke-width="2" stroke-linecap="round" />
+            <path
+              d="M9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM13 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM17 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+              fill="#000" />
+          </svg>
+        </button>
+      </div>
+      <div class="border my-4"></div>
+      <div class="mb-2">
+        <h3 class="font-semibold">Contact</h3>
+      </div>
+      <div class="flex flex-col gap-4">
+        <div class="flex gap-5 items-start">
+          <svg class="w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M3.75 5.25 3 6v12l.75.75h16.5L21 18V6l-.75-.75H3.75Zm.75 2.446v9.554h15V7.695L12 14.514 4.5 7.696Zm13.81-.946H5.69L12 12.486l6.31-5.736Z"
+              fill="#080341" />
+          </svg>
+          <div class="">
+            <span class="text-gray-500 font-semibold">Email</span>
+            <p class="font-semibold">dindadandi@gmail.com</p>
+          </div>
+        </div>
+        <div class="flex gap-5 items-start">
+          <svg class="w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M5.733 2.043c1.217-1.21 3.221-.995 4.24.367l1.262 1.684c.83 1.108.756 2.656-.229 3.635l-.238.238a.653.653 0 0 0-.008.306c.063.408.404 1.272 1.832 2.692 1.428 1.42 2.298 1.76 2.712 1.824a.668.668 0 0 0 .315-.009l.408-.406c.876-.87 2.22-1.033 3.304-.444l1.91 1.04c1.637.888 2.05 3.112.71 4.445l-1.421 1.412c-.448.445-1.05.816-1.784.885-1.81.169-6.027-.047-10.46-4.454-4.137-4.114-4.931-7.702-5.032-9.47l.749-.042-.749.042c-.05-.894.372-1.65.91-2.184l1.569-1.561Zm3.04 1.266c-.507-.677-1.451-.731-1.983-.202l-1.57 1.56c-.33.328-.488.69-.468 1.036.08 1.405.72 4.642 4.592 8.492 4.062 4.038 7.813 4.159 9.263 4.023.296-.027.59-.181.865-.454l1.42-1.413c.578-.574.451-1.62-.367-2.064l-1.91-1.039c-.528-.286-1.146-.192-1.53.19l-.455.453-.53-.532c.53.532.529.533.528.533l-.001.002-.003.003-.007.006-.015.014a1.11 1.11 0 0 1-.136.106c-.08.053-.186.112-.319.161-.27.101-.628.155-1.07.087-.867-.133-2.016-.724-3.543-2.242-1.526-1.518-2.122-2.66-2.256-3.526-.069-.442-.014-.8.088-1.07a1.527 1.527 0 0 1 .238-.42l.032-.035.014-.015.006-.006.003-.003.002-.002.53.53-.53-.531.288-.285c.428-.427.488-1.134.085-1.673L8.773 3.309Z"
+              fill="#000" />
+          </svg>
+          <div class="">
+            <span class="text-gray-500 font-semibold">Email</span>
+            <p class="font-semibold">08180002234</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Border, md screen is hidden (start)-->
+  <div class="border my-6 mx-4 md:hidden"></div>
+  <!-- Border, md screen is hidden (end) -->
 
-          <!-- ========== title-wrapper start ========== -->
-          <div class="title-wrapper pt-30">
-            <div class="row align-items-center">
-              <div class="col-md-6">
-                <div class="title">
-                  <h2>Informasi Pendaftar</h2>
+  <div
+    class="px-4 md:border md:bg-white md:mt-[76px] md:rounded-lg md:p-8 md:w-3/4 md:h-[calc(100vh-120px)] lg:h-[calc(100vh-120px)] md:overflow-y-auto">
+    <div id="tabRegistrationContainer" class="flex justify-between md:justify-normal md:gap-12 md:mb-8">
+      <button data-target="applicantProfileContent"
+        class="tab-btn font-semibold text-gray-500 pb-1 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-1 after:w-0 after:bg-sky-500 after:rounded-lg after:transition-all after:duration-300 hover:after:w-full">
+        Applicant Profile
+      </button>
+
+      <button data-target="hiringProgressContent"
+        class="tab-btn font-semibold text-gray-500 pb-1 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-1 after:w-0 after:bg-sky-500 after:rounded-lg after:transition-all after:duration-300 hover:after:w-full">
+        Hiring Progress
+      </button>
+    </div>
+    <!-- Applicant Profile Content Start -->
+    <div id="applicantProfileContent" class="tab-content mt-4 w-full">
+      <div class="border rounded-lg">
+        <div class="flex justify-between items-start p-4 border-b">
+          <span class="max-w-64 font-semibold">Dinda Dandi</span>
+          <svg class="w-6" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <path fill="#0A66C2"
+              d="M12.225 12.225h-1.778V9.44c0-.664-.012-1.519-.925-1.519-.926 0-1.068.724-1.068 1.47v2.834H6.676V6.498h1.707v.783h.024c.348-.594.996-.95 1.684-.925 1.802 0 2.135 1.185 2.135 2.728l-.001 3.14zM4.67 5.715a1.037 1.037 0 0 1-1.032-1.031c0-.566.466-1.032 1.032-1.032.566 0 1.031.466 1.032 1.032 0 .566-.466 1.032-1.032 1.032zm.889 6.51h-1.78V6.498h1.78v5.727zM13.11 2H2.885A.88.88 0 0 0 2 2.866v10.268a.88.88 0 0 0 .885.866h10.226a.882.882 0 0 0 .889-.866V2.865a.88.88 0 0 0-.889-.864z" />
+          </svg>
+        </div>
+        <div class="p-4">
+          <span class="text-gray-500">Email</span>
+          <div class="flex gap-3">
+            <p class="font-semibold">dindadandi@gmail.com</p>
+            <button>
+              <svg class="w-5 fill-sky-400" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M19.53 8 14 2.47a.75.75 0 0 0-.53-.22H11A2.75 2.75 0 0 0 8.25 5v1.25H7A2.75 2.75 0 0 0 4.25 9v10A2.75 2.75 0 0 0 7 21.75h7A2.75 2.75 0 0 0 16.75 19v-1.25H17A2.75 2.75 0 0 0 19.75 15V8.5a.75.75 0 0 0-.22-.5Zm-5.28-3.19 2.94 2.94h-2.94V4.81Zm1 14.19A1.25 1.25 0 0 1 14 20.25H7A1.25 1.25 0 0 1 5.75 19V9A1.25 1.25 0 0 1 7 7.75h1.25V15A2.75 2.75 0 0 0 11 17.75h4.25V19ZM17 16.25h-6A1.25 1.25 0 0 1 9.75 15V5A1.25 1.25 0 0 1 11 3.75h1.75V8.5a.76.76 0 0 0 .75.75h4.75V15A1.25 1.25 0 0 1 17 16.25Z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 border rounded-lg">
+        <div class="border-b p-4">
+          <span class="font-semibold">About</span>
+        </div>
+        <p id="aboutText"
+          class="p-4 text-justify text-sm max-h-[7.5rem] line-clamp-5 overflow-hidden transition-all duration-300">
+          Lorem ipsum dolor
+        </p>
+        <button id="showAllAboutBtn" class="ml-4 text-sm text-sky-600 lg:hidden">
+          More
+        </button>
+      </div>
+      <div class="mt-4 border rounded-lg">
+        <div class="border-b p-4">
+          <span class="font-semibold">Skill</span>
+        </div>
+        <div class="p-4 flex flex-wrap gap-2">
+          <!-- Contoh elemen span, nanti data dari database -->
+          <span
+            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
+            Front End
+          </span>
+          <span
+            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
+            Public speaking yang sangat panjang
+          </span>
+          <span
+            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
+            Design
+          </span>
+          <span
+            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
+            Content Creation
+          </span>
+          <span
+            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
+            Content Creation
+          </span>
+          <span
+            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
+            turu
+          </span>
+          <span
+            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
+            turu
+          </span>
+        </div>
+      </div>
+      <div class="mt-4 border rounded-lg">
+        <div class="border-b p-4">
+          <span class="font-semibold">Last Activity</span>
+        </div>
+        <div id="userExperienceContainer" class="p-4">
+          <div class="flex items-start gap-4">
+            <img src="../src/image/mitra-logo-3.jpg" alt="Logo Mitra" class="w-16 rounded-full" />
+            <div>
+              <p class="font-semibold line-clamp-2">
+                Volunteer pura pura senang pura pura bahagia woaowkaok
+              </p>
+              <p class="text-gray-500 text-sm">Mitra insane</p>
+              <p class="line-clamp-1 text-sm text-gray-500">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Laboriosam quasi ad et vero tempora quaerat tenetur, cumque
+                sunt aliquid quae mollitia quidem sapiente unde, rerum modi
+                doloremque quisquam repellendus voluptatum?
+              </p>
+            </div>
+          </div>
+
+          <div class="experience-item hidden flex items-start gap-4 mt-4">
+            <img src="../src/image/mitra-logo-3.jpg" alt="Logo Mitra" class="w-16 rounded-full" />
+            <div>
+              <p class="font-semibold line-clamp-2">
+                Volunteer pura pura senang pura pura bahagia woaowkaok
+              </p>
+              <p class="text-gray-500 text-sm">Mitra insane</p>
+              <p class="line-clamp-1 text-sm text-gray-500">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Laboriosam quasi ad et vero tempora quaerat tenetur, cumque
+                sunt aliquid quae mollitia quidem sapiente unde, rerum modi
+                doloremque quisquam repellendus voluptatum?
+              </p>
+            </div>
+          </div>
+        </div>
+        <button id="showMoreUserExperienceBtn" class="ml-2 mb-2 px-2 pb-2 text-xs text-sky-600 cursor-pointer">
+          Show more experience
+        </button>
+      </div>
+    </div>
+    <!-- Applicant Profile Content End -->
+
+    <!-- Applicant Hiring Progress Start -->
+    <div id="hiringProgressContent" class="tab-content hidden p-4 w-full">
+      <div class="w-full">
+        <h3 class="font-semibold">Current Stage</h3>
+        <div class="w-full mt-2 overflow-x-auto flex scrollbar-hide md:grid md:grid-cols-4">
+          <button data-target="inReview"
+            class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+            In-review
+          </button>
+          <button data-target="shortlisted"
+            class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+            Shortlisted
+          </button>
+          <button data-target="interview"
+            class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+            Interview
+          </button>
+          <button data-target="hiredReject"
+            class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+            Hired / Reject
+          </button>
+        </div>
+
+        <div class="currentStageContent w-full">
+          <div id="inReviewContent" class="current-stage-content hidden w-full">
+            <!-- In-riview content start-->
+            <div class="mt-4">
+              <h4 class="font-semibold text-gray-500">Stage Info</h4>
+              <div class="mt-4 flex flex-col gap-4">
+                <div class="border rounded-lg">
+                  <span class="block p-4 border-b font-semibold">Motivation</span>
+                  <p class="p-4 text-sm text-justify">Lorem ipsum</p>
                 </div>
+
+                <div class="border rounded-lg">
+                  <span class="block p-4 border-b font-semibold">Curriculum Vitae</span>
+                  <div class="p-4 flex gap-2 items-center">
+                    <span class="text-sm">Lorem ipsum dolor sit amet.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide md:justify-between">
+                <div class="flex gap-4">
+                  <button class="w-32 rounded-sm py-2 cursor-pointer border border-sky-500 text-sky-500 bg-sky-50">
+                    Shortlist
+                  </button>
+                  <button
+                    class="w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50">
+                    Hire
+                  </button>
+                </div>
+                <div>
+                  <button class="w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50">
+                    Reject
+                  </button>
+                </div>
+              </div>
+              <!-- In-riview content end-->
+            </div>
+          </div>
+          <div id="shortlistedContent" class="current-stage-content hidden">
+            <div class="mt-4 w-full">
+              <h4 class="font-semibold text-gray-500">Stage Info</h4>
+              <p class="w-full">This applicant is not in Shortlist.</p>
+            </div>
+            <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide md:justify-between">
+              <div class="flex gap-4">
+                <button class="w-32 rounded-sm py-2 cursor-pointer border border-sky-500 text-sky-500 bg-sky-50">
+                  Shortlist
+                </button>
+                <button
+                  class="w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50">
+                  Hire
+                </button>
+              </div>
+              <div>
+                <button class="w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50">
+                  Reject
+                </button>
               </div>
             </div>
           </div>
-          <!-- ========== title-wrapper end ========== -->
-
-          <div class="informasi-pendaftaran__wrapper">
-
-            <div class="row informasi_pendaftaran_card">
-                <div class="invoice-card card-style mb-30">
-                    <div class="detail_profile_pendaftar">
-                      <img class="detail_foto_profile" src="{{asset('storage/foto-profile/'.$pendaftar->user->foto_profile)}}" alt="Profile">
-                      <div class="detail_profile_identity">
-                        <p class="detail_profile_name">{{$pendaftar->user->nama_user}}</p>
-                        <p class="detail_profile_bio">{{$pendaftar->user->bio}}</p>
-                      </div>  
-                    </div>
-                  <div class="informasi_kegiatan_pendaftar">
-                    <div class="informasi_kegiatan_pendaftar_judul">
-                      <h3>Applied Volunteer</h3>
-                      <p>{{ $daysAgo }} ago</p>
-                    </div>
-                    <hr class="hr_informasi_kegiatan">
-                    <div class="informasi_kegiatan_pendaftar_isi">
-                      <p>{{$pendaftar->kegiatan->nama_kegiatan}}</p>
-                      {{-- <p>{{$kegiatans->mitra->nama_mitra}}</p> --}}
-                    </div>
-                  </div>
-                  <div class="informasi_pendaftar_button">
-                    <div class="button_schedule">
-                      <button type="button" class="schedule-button" id="openModalSchedule" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="interview"
-                        style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                        @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
-                        {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Scheduled' : 'Schedule' }}
-                      </button>
-                        <i class="button_message fa-regular fa-comment-dots"></i>
-                    </div>
-                  </div>
-                  <hr class="informasi_pendaftaran_hr">
-                  <div class="informasi_kontak_pendaftar"> 
-                    <h3>Contact</h3>
-                    <div class="kontak_pendaftar_wrap">
-
-                      <div class="kontak_pendaftar_card">
-                        <div class="kontak_pendaftaran_icon">
-                          <i class="fa-regular fa-envelope"></i>
-                        </div>
-                        <div class="kontak_pendaftar">
-                          <span>Email</span>
-                          <h3>{{$pendaftar->user->email_user}}</h3>
-                        </div>
-                      </div>
-
-                      <div class="kontak_pendaftar_card">
-                        <div class="kontak_pendaftaran_icon">
-                          <i class="fa-solid fa-mobile-screen"></i>
-                        </div>
-                        <div class="kontak_pendaftar">
-                          <span>Phone</span>
-                          <h3>{{$pendaftar->user->nomor_telephone}}</h3>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-              </div>
-            </div>
-
-             {{-- MODAL SCHEDULE --}}
-              <div id="modalSchdule" class="modal__interview">
-                <div class="modal__schedule">
-                  <div class="modal__headerSchedule">
-                    <span id="closeModalSchedule" class="close">&times;</span>
-                    <h3>Schedule Interview</h3>
-                  </div>
-                  <div class="modal__formSchedule">
-                    <form id="scheduleForm" action="{{ route('mitra.add-interview-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST" class="schedule-interview-form">
-                      @csrf
-                      
-                      <div class="schedule-interview-information">
-                        <div class="interview-date-form">
-                          <label>Interview Date</label>
-                          <input type="date" name="tgl_interview" value="{{ isset($pendaftar->tgl_interview) ? $pendaftar->tgl_interview : '' }}" />
-                        </div>
-                        <div class="interview-location-form">
-                          <label>Interview Location</label>
-                          <textarea rows="3" name="lokasi_interview">{{ old('lokasi_interview', isset($pendaftar->tgl_interview) ? $pendaftar->lokasi_interview : '') }}</textarea>
-                        </div>
-                      </div>
-                      <button type="submit" class="main-btn-kategori primary-btn rounded btn-hover right-align" id="scheduleAction">
-                        {{ isset($pendaftar->tgl_interview) ? 'Update Schedule' : 'Set Schedule' }}
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-
-            <div class="row informasi_pendaftaran_menu">
-              <div class="invoice-card card-style mb-30">
-                <div class="button_menu_pendaftaran">
-                  <ul class="nav">
-                    <li><a href="/applicant-profile" class="nav-applicant" data-target="applicant-profile">Applicant Profile</a></li>
-                    <li><a href="/applicant-progress" class="nav-applicant" data-target="applicant-progress">Hiring Progress</a></li>
-                  </ul>
-                </div>
-                <div id="applicant-profile" class="content-section show">
-                  <div class="applicant-profile-information">
-                    <div class="applicant-profile">
-                      <h3>{{$pendaftar->user->nama_user}}</h3>
-                      <i class="fa-brands fa-linkedin"></i>
-                    </div>
-                    <div class="applicant-profile-personal">
-                      <div class="applicant-profile-personal-info">
-                        <p>Email</p>
-                        <div class="applicant-profile-personal__info">
-                          <h3 id="text-to-copy">{{$pendaftar->user->email_user}}</h3>
-                          <i id="copy-button" class="fa-regular fa-copy"></i>
-                        </div>
-                      </div>
-                      <hr class="divider">
-                      <div class="applicant-profile-personal-info">
-                        <p>Rank</p>
-                        <div class="applicant-profile-personal__info-rank">
-                          <h3>Champion</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="applicant-profile-info-about">
-                    <div class="applicant-profile-about">
-                      <h3>About</h3>
-                    </div>
-                    <div class="applicant-profile-about">
-                      <div class="applicant-profile-about-info">
-                        <p>
-                          <span class="short-text">{{ Str::limit($pendaftar->user->deskripsi, 100, '...') }}</span>
-                          <span class="more-text" style="display: none;">{{ $pendaftar->user->deskripsi }}</span>
-                          <a href="javascript:void(0);" onclick="toggleText(this)" class="read-more">More</a>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="applicant-profile-info-about">
-                    <div class="applicant-profile-about">
-                      <h3>Skill</h3>
-                    </div>
-                    <div class="applicant-profile-about">
-                      <div class="applicant-profile-skill-info">
-                          <?php $no = 1 ?>
-                          @foreach($pendaftar->user->skills as $skill)
-                          <div class="application-profile-skill-list">
-                            <p>{{$skill->nama_skill}}</p>
-                          </div>
-                          @endforeach
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="applicant-profile-info-lastActivity">
-
-                    <div class="applicant-profile-lastActivity">
-                      <h3>Last Activity</h3>
-                    </div>
-
-                    <div class="applicant-profile-lastActivity">
-                      <?php $no = 1 ?>
-                      @php
-                          $hasAcceptedExperience = $acceptedExperienceCount > 0;
-                      @endphp
-                  
-                      @foreach($acceptedKegiatans as $index => $kegiatan)
-                          @if($index == 0)
-                              <div class="applicant-profile-lastActivity-info">
-                                  <img class="detail_foto_profile" src="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}" alt="Logo Mitra">
-                                  <div class="detail_mitra_identity">
-                                      <p class="detail_mitra_kegiatan">{{ $kegiatan->nama_kegiatan }}</p>
-                                      <p class="detail_mitra_name">{{ $kegiatan->mitra->nama_mitra }}</p>
-                                      <p class="detail_mitra_desc">
-                                          @if(strlen($kegiatan->deskripsi) > 100)
-                                              <span class="short-desc">{{ Str::limit($kegiatan->deskripsi, 50, '...') }}</span>
-                                              <span class="more-desc" style="display: none;">{{ $kegiatan->deskripsi }}</span>
-                                              <a href="javascript:void(0);" class="more" onclick="toggleTextDesc(this)">More</a>
-                                          @else
-                                              {{ $kegiatan->deskripsi }}
-                                          @endif
-                                      </p>
-                                  </div>
-                              </div>
-                          @else
-                              <div class="applicant-profile-lastActivity-info additional-experience">
-                                  <img class="detail_foto_profile" src="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}" alt="Logo Mitra">
-                                  <div class="detail_mitra_identity">
-                                      <p class="detail_mitra_kegiatan">{{ $kegiatan->nama_kegiatan }}</p>
-                                      <p class="detail_mitra_name">{{ $kegiatan->mitra->nama_mitra }}</p>
-                                      <p class="detail_mitra_desc">
-                                          @if(strlen($kegiatan->deskripsi) > 100)
-                                              <span class="short-desc">{{ Str::limit($kegiatan->deskripsi, 50, '...') }}</span>
-                                              <span class="more-desc" style="display: none;">{{ $kegiatan->deskripsi }}</span>
-                                              <a href="javascript:void(0);" class="more" onclick="toggleTextDesc(this)">More</a>
-                                          @else
-                                              {{ $kegiatan->deskripsi }}
-                                          @endif
-                                      </p>
-                                  </div>
-                              </div>
-                          @endif
-                      @endforeach
-                  
-                      @if(!$hasAcceptedExperience)
-                          <p class="no-experience">The applicant has no experience data.</p>
-                      @elseif($hasAcceptedExperience && $acceptedExperienceCount > 1)
-                          <div class="show-more-container">
-                              <a class="more" href="javascript:void(0);" onclick="toggleExperience()">Show More Experience</a>
-                          </div>
-                      @endif
-                    </div>
-                  </div> 
-                </div>
-                
-                <div id="applicant-progress" class="content-section show">
-                  <div class="applicant-hiring-information">
-                    <h3>Current Stage</h3>
-                    <div class="button_menu_hiring_stage">
-                      <ul class="progress-bar">
-                        <li class="progress-item"><a href="/in-review" data-target="in-review" id="inReviewBtn">In-Review</a></li>
-                        <li class="progress-item"><a href="/shortlisted" data-target="shortlisted" id="shortlistedBtn" disabled>Shortlisted</a></li>
-                        <li class="progress-item"><a href="/interview" data-target="interview" id="interviewBtn"disabled>Interview</a></li>
-                        <li class="progress-item"><a href="/hiredOrReject" data-target="hiredOrReject" id="hiredRejectBtn">Hired / Reject</a></li>
-                      </ul>
-                    </div>
-
-                    <div id="in-review" class="content-section-hiring show">
-                      <p class="stage-info-hiring">Stage Info</p>
-                      <div class="in-review-information">
-                        <div class="in-review-information-motivasi">
-                          <div class="applicant-profile-about">
-                            <h3>Motivation</h3>
-                          </div>
-                          <div class="applicant-profile-about">
-                            <div class="applicant-profile-about-info">
-                              <p>
-                                <span class="short-text">{{ Str::limit($pendaftar->motivasi, 100, '...') }}</span>
-                                <span class="more-text" style="display: none;">{{ $pendaftar->motivasi }}</span>
-                                @if (Str::length($pendaftar->motivasi) > 100)
-                                  <a href="javascript:void(0);" onclick="toggleText(this)" class="read-more">More</a>
-                                @endif
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="in-review-information-cv">
-                          <div class="applicant-profile-about">
-                            <h3>Curriculum Vitae</h3>
-                          </div>
-                          <div class="applicant-profile-about">
-                            <div class="applicant-profile-about-info">
-                              <a href="{{ asset('storage/cv/' . $pendaftar->user->cv) }}" target="_blank" class="in-review-cv-download d-flex align-items-center text-primary text-decoration-none" download>
-                                <i class="fa-regular fa-file-pdf"></i> 
-                                <p>{{$pendaftar->user->cv}}</p>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="informasi_pendaftaran-next-step">
-                        <div class="button_next-step-all">
-                          <div class="button_next-step">
-                            <form id="shortlistForm" action="{{ route('applicant.shortlist', ['id' => $mitra->id_mitra, 'id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
-                              @csrf
-                              <button type="button" class="next-step-button" id="shortlistActionBtn" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="shortlisted" 
-                                style="{{ in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                                @if (in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject'])) disabled @endif>
-                                {{ in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject']) ? 'Shortlisted' : 'Shortlist' }}
-                              </button>
-                            </form>
-                              <button class="hire-button" id="openModalHireNote" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="hiredOrReject"
-                                style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                                @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
-                                {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Hired' : 'Hire' }}
-                              </button>
-                          </div>
-                          <button class="declined-button" id="openModalRejectNote" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="hiredOrReject"
-                            style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                            @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
-                            {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Rejected' : 'Reject' }}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div id="shortlisted" class="content-section-hiring show">
-                      <p class="stage-info-hiring">Stage Info</p>
-                      <div class="shortlisted-information">
-                          @php
-                              $kegiatan = $kegiatans->first();
-                          @endphp
-                            @if($pendaftar->status_applicant === 'Shortlist')
-                              <p class="shortlisted-info">This applicant is currently <b>shortlisted.</b> You have <b>{{ $kegiatan->sisa_hari }} days remaining</b> before the activity closes.</p>
-                            @else
-                              <p class="shortlisted-info">This applicant is not in Shortlist</p>
-                            @endif 
-                      </div>                       
-                      <div class="informasi_pendaftaran-next-step">
-                        <div class="button_next-step-all">
-                          <div class="button_next-step">
-                            <form id="interviewForm" action="{{ route('applicant.interview', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
-                              @csrf
-                              <button type="button" class="next-step-button" id="interviewAction" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="interview"
-                                style="{{ in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                                @if (in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject'])) disabled @endif>
-                                {{ in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject']) ? 'Interviewed' : 'Interview' }}
-                              </button>
-                            </form>
-                            <button class="hire-button" id="openModalHireShortlist" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="hiredOrReject"
-                              style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                              @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
-                              {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Hired' : 'Hire' }}
-                            </button>
-                          </div>
-                          <button class="declined-button" id="openModalRejectShortlist" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="hiredOrReject"
-                            style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                            @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
-                            {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Rejected' : 'Reject' }}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div id="interview" class="content-section-hiring show">
-                      <p class="stage-info-hiring">Stage Info</p>
-                      <div class="interview-info">
-                        <div class="interview-information">
-                          <div class="interview-information__date">
-                            <p class="interview-information-title">Interview Date</p>
-                            @if ($pendaftar->tgl_interview)
-                              <p class="interview-information-isi" id="interview-date">{{ $formattedInterviewDate }}</p>
-                            @else
-                              <p id="interview-date">Set schedule first</p>
-                            @endif
-                          </div>
-                          <div class="interview-information__date">
-                            <p class="interview-information-title">Interview Status</p>
-                            <div class="interview-information-isi-status">
-                              @if ($pendaftar->status_applicant === 'Hire' || $pendaftar->status_applicant === 'Reject')
-                                @if ($pendaftar->tgl_interview)
-                                  @if ($pendaftar->status_interview === 'Interview Completed')
-                                    <p id="status_interview" class="status-completed">{{ ucfirst($pendaftar->status_interview) }}</p>
-                                  @else
-                                    <p id="status_interview" class="status-completed">Interview Completed</p>
-                                  @endif
-                                @else
-                                  <p id="status_interview" class="status-not-scheduled">Not scheduled yet</p>
-                                @endif
-                              @else
-                                @if ($pendaftar->tgl_interview)
-                                  <p id="status_interview" class="
-                                    @if ($pendaftar->status_interview === 'Not scheduled yet')
-                                      status-not-scheduled
-                                    @elseif ($pendaftar->status_interview === 'On progress')
-                                      status-on-progress
-                                    @elseif ($pendaftar->status_interview === 'Interview Completed')
-                                      status-completed
-                                    @endif
-                                  ">
-                                    {{ ucfirst($pendaftar->status_interview) }}
-                                  </p>
-                                @else
-                                  <p class="status-not-scheduled">Not scheduled yet</p>
-                                @endif
-                              @endif
-                            </div>
-                          </div>
-                        </div>
-                        <div class="interview-information__location">
-                          <p class="interview-information-title">Interview Location</p>
-                          @if ($pendaftar->tgl_interview)
-                            <p class="interview-information-isi" id="interview-location">{{ $pendaftar->lokasi_interview }}</p>
-                          @else
-                            <p id="interview-location">Set schedule first</p>
-                          @endif
-                        </div>
-                      </div>
-                      <div class="informasi_pendaftaran-next-step">
-                        <div class="button_next-step-all">
-                          <div class="button_next-step">
-                            <button class="hire-button" id="openModalHireNoteInterview" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="hiredOrReject"
-                              style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                              @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
-                              {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Hired' : 'Hire' }}
-                            </button>
-                          </div>
-                          <button class="declined-button" id="openModalRejectInterview" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="hiredOrReject"
-                            style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                            @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
-                            {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Rejected' : 'Reject' }}
-                          </button>
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="note-inter">
-                        <div class="note-interview">
-                          <p>Note</p>
-                          <div class="add-button-note">
-                            @if ($pendaftar->tgl_interview && $pendaftar->note_interview)
-                              <i class="fa-solid fa-pen"></i>
-                              <button class="add-note-button" id="openModalAddNote">
-                                Update Note
-                              </button>
-                            @else 
-                              <i class="fa-solid fa-plus"></i>
-                              <button class="add-note-button" id="openModalAddNote">
-                                Add Note
-                              </button>
-                            @endif
-                          </div>
-                        </div>
-                        <div class="note-interview-container">
-                          <div class="note-interview-wrap">
-                            <div class="note-interview-title">
-                              <i class="fa-solid fa-book"></i>
-                              <p> INTERVIEW NOTE</p>
-                            </div>
-                            <p class="note-interview-date">{{$formattedNoteDate}}</p>
-                          </div>
-                          @if ($pendaftar->tgl_interview && $pendaftar->note_interview)
-                            <div class="note-interview-isi">
-                              {{-- <p>{{$pendaftar->interview->note_interview}}</p> --}}
-                              <p class="short-note">{{ Str::limit($pendaftar->note_interview, 150, '...') }}</p>
-                              <p class="more-note" style="display: none;">{{ $pendaftar->note_interview }}</p>
-                              <a href="javascript:void(0);" onclick="toggleNote(this)" class="read-more-note">More</a>
-                            </div>
-                          </div>
-                          @else
-                              <p>No note</p>
-                          @endif
-                        </div>
-                    </div>
-
-                    <div id="hiredOrReject" class="content-section-hiring show">
-                      <p class="stage-info-hiring">Stage Info</p>
-                      <div class="informasi_pendaftaran-next-step">
-                        <div class="note-interview-container">
-                          <div class="note-interview-wrap">
-                            <div class="note-interview-title">
-                              <i class="fa-solid fa-book"></i>
-                              <p> MESSAGE TO APPLICANT</p>
-                            </div>
-                            <p class="note-interview-date">{{$formattedNoteDate}}</p>
-                          </div>
-                          @if ($pendaftar->tgl_interview && $pendaftar->note_to_applicant)
-                              <div class="note-interview-isi">
-                                  <p class="short-note">{{ Str::limit($pendaftar->note_to_applicant, 150, '...') }}</p>
-                                  <p class="more-note" style="display: none;">{{ $pendaftar->note_to_applicant }}</p>
-                                  @if (Str::length($pendaftar->note_to_applicant) > 100)
-                                      <a href="javascript:void(0);" onclick="toggleNote(this)" class="read-more-note">More</a>
-                                  @endif
-                              </div>
-                          @endif
-                        </div>
-                      </div>
-                    </div>
-                  
-                  </div>
-                </div>
-
-                    {{-- MODAL ADD NOTE --}}
-                    <div id="modalAddNote" class="modal__interview">
-                      <div class="modal__schedule">
-                        @if (!isset($pendaftar->tgl_interview))
-                            <p class="text-warning">Please set the schedule first before adding or updating a note.</p>
-                        @else
-                          <div class="modal__headerSchedule">
-                              <span id="closeModalAddNote" class="close">&times;</span>
-                              <h3>New Note</h3>
-                          </div>
-                          <div class="modal__formSchedule">
-                            <form action="{{ route('mitra.add-note-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}"
-                              method="POST" class="schedule-interview-form">
-                              @csrf
-                            
-                                <div class="interview-location-form">
-                                  <label>Note</label>
-                                  <input type="date" name="tgl_note" value="{{ isset($pendaftar->tgl_interview) ? $pendaftar->tgl_note : '' }}" ></input>
-                                  <textarea rows="3" name="note_interview">{{ old('note_interview', isset($pendaftar->tgl_interview) ? $pendaftar->note_interview : '') }}</textarea>
-                                </div>
-                                <button type="submit" class="main-btn-kategori primary-btn rounded btn-hover right-align">
-                                  {{ isset($pendaftar->tgl_interview) && $pendaftar->note_interview ? 'Update Note' : 'Add New Note' }}
-                                </button>
-                            </form>
-                          </div>
-                        @endif
-                        </div>
-                    </div>
-
-                    {{-- MODAL HIRE NOTE --}}
-                    <div id="modalHireNote" class="modal__interview">
-                      <div class="modal__schedule">
-                        <div class="modal__headerSchedule">
-                          <span id="closeHireNote" class="close">&times;</span>
-                          <h3>New Note</h3>
-                        </div>
-                        <div class="modal__formSchedule">
-                          <form id="hireForm" action="{{ route('applicant.hire', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
-                            @csrf
-                            <div class="interview-location-form">
-                              <label>Send Note to Applicant</label>
-                              <textarea rows="3" name="note_to_applicant"></textarea>
-                            </div>
-                            <button type="submit" id="hireAction" class="main-btn-kategori primary-btn rounded btn-hover right-align">
-                              Send Note
-                            </button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-                  {{-- MODAL REJECT NOTE --}}
-                    <div id="modalRejectNote" class="modal__interview">
-                      <div class="modal__schedule">
-                          <div class="modal__headerSchedule">
-                              <span id="closeRejectNote" class="close">&times;</span>
-                              <h3>New Note</h3>
-                          </div>
-                          <div class="modal__formSchedule">
-                            <form id="rejectForm" action="{{ route('applicant.reject', ['id_pendaftar' => $pendaftar->id_pendaftar,])}}" method="POST">
-                              @csrf
-                                <div class="interview-location-form">
-                                  <label>Send Note to Applicant</label>
-                                  <textarea rows="3" name="note_to_applicant"></textarea>
-                                </div>
-                                <button type="submit" id="rejectAction" class="main-btn-kategori primary-btn rounded btn-hover right-align">
-                                  Send Note
-                                </button>
-                            </form>
-                          </div>
-                        </div>
-                    </div>
-                    
-
-              </div>
-            </div>
-
+          <div id="interviewContent" class="current-stage-content hidden">
+            <p>Interview Content</p>
           </div>
-
-          
-      </section>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <!-- ========== section end ========== -->
-      
-      @include('mitra.layout.templates.footer')
+          <div id="hiredRejectContent" class="current-stage-content hidden">
+            <p>Hired / Reject Content</p>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="mt-96"></div> -->
+    </div>
+    <!-- Applicant Hiring Progress End -->
+  </div>
+</section>
+<!-- Content End -->
