@@ -68,47 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.addEventListener("click", hideDetail);
 });
 
-// Registration proccess
-document.addEventListener("DOMContentLoaded", () => {
-    const tabRegistrationContainer = document.getElementById(
-        "tabRegistrationContainer"
-    );
-    const buttons = document.querySelectorAll(".tab-btn");
-    const contents = document.querySelectorAll(".tab-content");
-
-    const activateTab = (targetId) => {
-        // Reset all buttons and hide all content
-        buttons.forEach((btn) => {
-            btn.classList.remove("text-sky-500", "after:w-full");
-            btn.classList.add("text-gray-500");
-        });
-        contents.forEach((content) => content.classList.add("hidden"));
-
-        // Activate the target button and content
-        const targetButton = [...buttons].find(
-            (btn) => btn.dataset.target === targetId
-        );
-        const targetContent = document.getElementById(targetId);
-
-        targetButton.classList.add("text-sky-500", "after:w-full");
-        targetButton.classList.remove("text-gray-500");
-        targetContent.classList.remove("hidden");
-    };
-
-    // Initialize with applicant profile active
-    activateTab("applicantProfileContent");
-
-    // Event delegation for button clicks
-    tabRegistrationContainer.addEventListener("click", (event) => {
-        const targetButton = event.target.closest(".tab-btn");
-        if (!targetButton) return; // Ignore clicks outside buttons
-
-        const targetContentId = targetButton.dataset.target;
-        activateTab(targetContentId);
-    });
-});
-
-
 // LIST DAN DETAIL KEGIATAN
 document.addEventListener('DOMContentLoaded', () => {
     const detailContainer = document.getElementById('detailVolunteer');
@@ -195,8 +154,86 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/* Registration Manegement */
+// APPLICANT PROFILE
+document.addEventListener("DOMContentLoaded", () => {
+    const tabRegistrationContainer = document.getElementById(
+        "tabRegistrationContainer"
+    );
+    const buttons = document.querySelectorAll(".tab-btn");
+    const contents = document.querySelectorAll(".tab-content");
 
-// DETAIL PENDAFTAR
+    const activateTab = (targetId) => {
+        // Reset all buttons and hide all content
+        buttons.forEach((btn) => {
+            btn.classList.remove("text-sky-500", "after:w-full");
+            btn.classList.add("text-gray-500");
+        });
+        contents.forEach((content) => content.classList.add("hidden"));
+
+        // Activate the target button and content
+        const targetButton = [...buttons].find(
+            (btn) => btn.dataset.target === targetId
+        );
+        const targetContent = document.getElementById(targetId);
+
+        targetButton.classList.add("text-sky-500", "after:w-full");
+        targetButton.classList.remove("text-gray-500");
+        targetContent.classList.remove("hidden");
+    };
+
+    // Initialize with applicant profile active
+    activateTab("applicantProfileContent");
+
+    // Event delegation for button clicks
+    tabRegistrationContainer.addEventListener("click", (event) => {
+        const targetButton = event.target.closest(".tab-btn");
+        if (!targetButton) return; // Ignore clicks outside buttons
+
+        const targetContentId = targetButton.dataset.target;
+        activateTab(targetContentId);
+    });
+});
+
+// HIRING PROGRES
+document.addEventListener("DOMContentLoaded", () => {
+    const currentStageContainer = document.getElementById(
+        "currentStageContainer"
+    );
+    const currentStage = document.querySelectorAll(".current-stage-button");
+    const currentStageContent = document.querySelectorAll(".current-stage-content");
+
+    const activateTab = (targetId) => {
+        // Reset all buttons and hide all content
+        currentStage.forEach((btn) => {
+            btn.classList.remove("text-sky-500", "after:w-full");
+            btn.classList.add("text-gray-500");
+        });
+        currentStageContent.forEach((content) => content.classList.add("hidden"));
+
+        // Activate the target button and content
+        const targetButton = [...currentStage].find(
+            (btn) => btn.dataset.target === targetId
+        );
+        const targetContent = document.getElementById(targetId);
+
+        targetButton.classList.add("text-sky-500", "after:w-full");
+        targetButton.classList.remove("text-gray-500");
+        targetContent.classList.remove("hidden");
+    };
+
+    // Initialize with applicant profile active
+    activateTab("inReview");
+
+    // Event delegation for button clicks
+    currentStageContainer.addEventListener("click", (event) => {
+        const targetButton = event.target.closest(".current-stage-button");
+        if (!targetButton) return; // Ignore clicks outside buttons
+
+        const targetContentId = targetButton.dataset.target;
+        activateTab(targetContentId);
+    });
+});
 
 // copy email
 document.getElementById("copy-button").addEventListener("click", function() {
@@ -245,57 +282,4 @@ document.getElementById('btn-more-desc-exp').addEventListener('click', function 
         moreDesc.classList.add('hidden');
         element.textContent = "More";
     }
-});
-
-/*Pendaftaran Hiring*/
-document.addEventListener('DOMContentLoaded', function() {
-    // Sembunyikan semua konten stage saat load pertama kali
-    document.querySelectorAll('.current-stage-content').forEach(function(section) {
-        section.style.display = 'none';
-    });
-
-    // Tampilkan konten default "In-review"
-    const defaultStage = document.getElementById('inReview');
-    if (defaultStage) {
-        defaultStage.style.display = 'flex';
-        defaultStage.style.flexDirection = 'column';
-        defaultStage.style.gap = '20px';
-    }
-
-    // Tambahkan kelas "active" ke tombol "In-review"
-    const defaultButton = document.querySelector('.button_menu_hiring_stage a[data-target="inReview"]');
-    if (defaultButton) {
-        defaultButton.classList.add('active');
-    }
-
-    // Event listener untuk navigasi tab
-    document.querySelectorAll('.button_menu_hiring_stage a').forEach(function(button) {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            // Hapus kelas "active" dari semua tombol
-            document.querySelectorAll('.button_menu_hiring_stage a').forEach(function(btn) {
-                btn.classList.remove('active');
-            });
-
-            // Tambahkan kelas "active" ke tombol yang diklik
-            button.classList.add('active');
-
-            // Sembunyikan semua konten stage
-            document.querySelectorAll('.current-stage-content').forEach(function(content) {
-                content.style.display = 'none';
-            });
-
-            // Tampilkan konten yang sesuai dengan tombol yang diklik
-            const targetId = button.getAttribute('data-target');
-            const targetContent = document.getElementById(targetId);
-            if (targetContent) {
-                targetContent.style.display = targetId === 'inReview' ? 'flex' : 'block';
-                if (targetId === 'inReview') {
-                    targetContent.style.flexDirection = 'column';
-                    targetContent.style.gap = '20px';
-                }
-            }
-        });
-    });
 });

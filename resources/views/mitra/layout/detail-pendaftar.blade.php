@@ -80,15 +80,15 @@
   <div
     class="px-4 md:border md:bg-white md:mt-[76px] md:rounded-lg md:p-8 md:w-3/4 md:h-[calc(100vh-120px)] lg:h-[calc(100vh-120px)] md:overflow-y-auto">
     <div id="tabRegistrationContainer" class="flex justify-between md:justify-normal md:gap-12 md:mb-8">
-      <button data-target="applicantProfileContent"
+      <a data-target="applicantProfileContent"
         class="tab-btn font-semibold text-gray-500 pb-1 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-1 after:w-0 after:bg-sky-500 after:rounded-lg after:transition-all after:duration-300 hover:after:w-full">
         Applicant Profile
-      </button>
+      </a>
 
-      <button data-target="hiringProgressContent"
+      <a data-target="hiringProgressContent"
         class="tab-btn font-semibold text-gray-500 pb-1 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-1 after:w-0 after:bg-sky-500 after:rounded-lg after:transition-all after:duration-300 hover:after:w-full">
         Hiring Progress
-      </button>
+      </a>
     </div>
     <!-- Applicant Profile Content Start -->
     <div id="applicantProfileContent" class="tab-content mt-4 w-full">
@@ -198,8 +198,8 @@
     <div id="hiringProgressContent" class="tab-content hidden p-4 w-full">
       <div class="w-full">
         <h3 class="font-semibold">Current Stage</h3>
-        <div class="button_menu_hiring_stage w-full mt-2 overflow-x-auto flex scrollbar-hide md:grid md:grid-cols-4">
-          <a data-target="inReview" href="/in-review" id="inReviewBtn"
+        <div id="currentStageContainer" class="button_menu_hiring_stage w-full mt-2 overflow-x-auto flex scrollbar-hide md:grid md:grid-cols-4">
+          <a data-target="inReview" id="inReviewBtn"
             class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
             In-review
           </a>
@@ -225,7 +225,7 @@
               <div class="mt-4 flex flex-col gap-4">
                 <div class="border rounded-lg">
                   <span class="block p-4 border-b font-semibold">Motivation</span>
-                  <p class="p-4 text-sm text-justify">Lorem ipsum</p>
+                  <p class="p-4 text-sm text-justify">{{$pendaftar->motivasi}}</p>
                 </div>
 
                 <div class="border rounded-lg">
