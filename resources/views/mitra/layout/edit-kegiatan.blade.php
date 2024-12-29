@@ -1,10 +1,9 @@
 @include('mitra.layout.templates.header')
 @include('mitra.layout.templates.sidebar')
-@include('mitra.layout.templates.navbar')
 <!-- Content Start -->
 <section class="w-full">
   <div class="py-8 px-12 max-w-5xl">
-    <h1 class="mb-4 text-xl font-normal">Add a new volunteer</h1>
+    <h1 class="mb-4 text-xl font-normal">Edit {{$kegiatan->nama_kegiatan}}</h1>
     <form action="#">
       <div class="grid gap-4 mt-8 sm:grid-cols-2 sm:gap-6">
         <div class="col-span-2">
@@ -68,4 +67,3 @@
   </div>
 </section>
 <!-- Content End -->
-@include('mitra.layout.templates.footer')

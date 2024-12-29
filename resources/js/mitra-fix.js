@@ -112,12 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // LIST DAN DETAIL KEGIATAN
 document.addEventListener('DOMContentLoaded', () => {
     const detailContainer = document.getElementById('detailVolunteer');
+    const editButton = document.getElementById("editBtn");
 
     document.querySelectorAll('.activity').forEach(card => {
         card.addEventListener('click', () => {
 
             // Ambil data dari atribut data-*
-            // const idKegiatan = card.dataset.idKegiatan;
+            const id_keg = card.dataset.idKegiatan;
             const namaKegiatan = card.dataset.namaKegiatan;
             const namaMitra = card.dataset.namaMitra;
             const lokasiKegiatan = card.dataset.lokasiKegiatan;
@@ -182,6 +183,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 benefitContainer.appendChild(emptyMessage);
             }
 
+            const id = detailContainer.dataset.idMitra;
+
+            editButton.href = `/mitra/edit-kegiatan/${id}/${id_keg}`;
+            
         });
     });
 });

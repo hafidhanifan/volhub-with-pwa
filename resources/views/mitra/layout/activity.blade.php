@@ -104,6 +104,7 @@
   </div>
   <!-- Detail volunteer start -->
   <div id="detailVolunteer"
+  data-id-mitra="{{ auth()->user()->id_mitra }}"
     class="fixed w-full h-screen top-0 bg-white transform translate-x-full transition-transform duration-500 ease-in-out z-50 overflow-y-auto lg:w-1/3 lg:right-0">
     <div class="relative h-20 rounded-t-lg bg-slate-100">
       <div class="absolute right-2 top-2">
@@ -153,9 +154,9 @@
       </div>
     </div>
     <div class="w-full p-4">
-      <button class="w-full py-3 text-white font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
+      <a id="editBtn" href="#" class="w-full py-3 text-white font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
         Edit Volunteer
-      </button>
+      </a>
     </div>
     <div class="px-4 flex justify-evenly gap-2">
       <div class="w-1/2 bg-red-200 rounded-lg p-2">
