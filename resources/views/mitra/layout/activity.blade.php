@@ -18,7 +18,7 @@
         <p class="text-gray-500 text-sm">Manage your volunteer data</p>
       </div>
       <div class="pl-4 md:pr-4">
-        <a href="../public/add-volunteer.html"
+        <a href="{{ route('mitra.add-kegiatan-page', ['id' => $mitra->id_mitra]) }}"
           class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
           Add Volunteer
         </a>
@@ -32,7 +32,7 @@
       <p class="text-gray-500 text-sm">Manage your volunteer data</p>
     </div>
     <div class="pr-4">
-      <a href="../public/add-volunteer.html"
+      <a href="{{ route('mitra.add-kegiatan-page', ['id' => $mitra->id_mitra]) }}"
         class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
         Add Volunteer
       </a>
@@ -104,6 +104,7 @@
   </div>
   <!-- Detail volunteer start -->
   <div id="detailVolunteer"
+  data-id-mitra="{{ auth()->user()->id_mitra }}"
     class="fixed w-full h-screen top-0 bg-white transform translate-x-full transition-transform duration-500 ease-in-out z-50 overflow-y-auto lg:w-1/3 lg:right-0">
     <div class="relative h-20 rounded-t-lg bg-slate-100">
       <div class="absolute right-2 top-2">
@@ -153,9 +154,9 @@
       </div>
     </div>
     <div class="w-full p-4">
-      <button class="w-full py-3 text-white font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
+      <a id="editBtn" href="#" class="w-full block text-center py-3 text-white font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
         Edit Volunteer
-      </button>
+      </a>
     </div>
     <div class="px-4 flex justify-evenly gap-2">
       <div class="w-1/2 bg-red-200 rounded-lg p-2">
@@ -174,7 +175,7 @@
     <div class="px-4 pt-5">
       <div class="flex justify-between items-center">
         <h2 class="font-semibold">Requirement</h2>
-        <a href="../public/add-requirement.html" class="text-sm text-sky-700 cursor-pointer flex items-center">
+        <a id="addRequirementBtn" href="#" class="text-sm text-sky-700 cursor-pointer flex items-center">
           <svg class="w-4 stroke-sky-700" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 12h16m-8-8v16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -190,7 +191,7 @@
     <div class="px-4 pt-5">
       <div class="flex justify-between items-center">
         <h2 class="font-semibold">Benefit</h2>
-        <a class="text-sm text-sky-700 cursor-pointer flex items-center">
+        <a id="addBenefitBtn" href="#" class="text-sm text-sky-700 cursor-pointer flex items-center">
           <svg class="w-4 stroke-sky-700" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 12h16m-8-8v16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
