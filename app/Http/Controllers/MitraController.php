@@ -115,36 +115,40 @@ class MitraController extends Controller
         $kegiatan->tgl_penutupan = $request->tgl_penutupan;
         $kegiatan->tgl_kegiatan = $request->tgl_kegiatan;
 
-        if ($request->hasFile('gambar')) {
-            if ($kegiatan->gambar) {
-                $oldImage = storage_path('app/public/gambar/' . $kegiatan->gambar);
-                if (File::exists($oldImage)) {
-                    File::delete($oldImage);
-                }
-            }
-
-            $extension = $request->file('gambar')->getClientOriginalExtension();
-            $newName = $request->nama_kegiatan.'-'.now()->timestamp.'.'.$extension;
-            $request->file('gambar')->storeAs('gambar', $newName);
-            
-            $kegiatan->gambar = $request['gambar'] = $newName;
-    }
+       
         Alert::success('Hore!', 'Data Berhasil Diedit');
         $kegiatan->save();
 
-        return view('mitra.layout.detail-kegiatan', compact('mitra', 'kegiatan'))->with('success', 'Kegiatan berhasil diupdate.');
+        return redirect()->route('mitra.kegiatan', ['id' => $mitra->id_mitra])->with('success', 'Kegiatan berhasil diupdate.');
     }
 
     public function removeKegiatanAction($id, $id_keg)
     {
         $mitra = Mitra::find($id);
+
+        if (!$mitra) {
+            return redirect()->back()->with('error', 'Mitra tidak ditemukan.');
+        }
+
         $kegiatan = Kegiatan::where('id_mitra', $mitra->id_mitra)
                             ->where('id_kegiatan', $id_keg)
                             ->first();
 
+        if (!$kegiatan) {
+            return redirect()->back()->with('error', 'Kegiatan tidak ditemukan.');
+        }
+
+        // Cek apakah ada pendaftar pada kegiatan ini
+        $pendaftar = Pendaftar::where('id_kegiatan', $id_keg)->exists();
+
+        if ($pendaftar) {
+            return redirect()->route('mitra.kegiatan', ['id' => $mitra->id_mitra])->with('error', 'Oops! Sepertinya masih ada pendaftar yang mengikuti kegiatan ini.');
+        }
+
+        // Hapus kegiatan
         $kegiatan->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Data berhasil dihapus.');
     }
 
     // All About Kegiatan Benefit
@@ -204,10 +208,10 @@ class MitraController extends Controller
         return redirect()->back()->with('success', 'Kriteria berhasil ditambahkan.');
     }
 
-    public function removeKriteria($id, $id_kriteria)
+    public function removeKriteria($id_keg, $id_kriteria)
     {
         
-        $kegiatan = Kegiatan::findOrFail($id);
+        $kegiatan = Kegiatan::findOrFail($id_keg);
 
         if (!$kegiatan) {
             Alert::error('Oops !', 'Data Tidak Ditemukan');

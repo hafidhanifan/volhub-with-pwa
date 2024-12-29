@@ -113,6 +113,8 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('DOMContentLoaded', () => {
     const detailContainer = document.getElementById('detailVolunteer');
     const editButton = document.getElementById("editBtn");
+    const addRequirementButton = document.getElementById("addRequirementBtn");
+    const addBenefitButton = document.getElementById("addBenefitButton");
 
     document.querySelectorAll('.activity').forEach(card => {
         card.addEventListener('click', () => {
@@ -184,8 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const id = detailContainer.dataset.idMitra;
-
             editButton.href = `/mitra/edit-kegiatan/${id}/${id_keg}`;
+
+            addRequirementButton.href=`/mitra/add-kriteria-kegiatan/${id}/${id_keg}`;
+            addBenefitButton.href=`/mitra/add-benefit-kegiatan/${id}/${id_keg}`;
             
         });
     });

@@ -111,7 +111,7 @@ Route::prefix('mitra')->group(function () {
 
         Route::get('add-kriteria-kegiatan/{id}/{id_keg}', [MitraController::class, 'showAddKriteriaKegiatanPage'])->name('mitra.add-kriteria-kegiatan-page');
         Route::post('add-kriteria-kegiatan/{id_keg}', [MitraController::class, 'addKriteriaKegiatanAction'])->name('mitra.add-kriteria-kegiatan-action');
-        Route::delete('{id}/remove-kriteria/{id_kriteria}', [MitraController::class, 'removeKriteria'])->name('mitra.remove-kriteria-action');
+        Route::delete('{id_keg}/remove-kriteria/{id_kriteria}', [MitraController::class, 'removeKriteria'])->name('mitra.remove-kriteria-action');
 
         // Route untuk Kelola Pendaftar
         Route::get('pendaftar/{id}', [MitraController::class, 'showPendaftarPage'])->name('mitra.pendaftar');

@@ -175,7 +175,7 @@
     <div class="px-4 pt-5">
       <div class="flex justify-between items-center">
         <h2 class="font-semibold">Requirement</h2>
-        <a href="../public/add-requirement.html" class="text-sm text-sky-700 cursor-pointer flex items-center">
+        <a id="addRequirementBtn" href="#" class="text-sm text-sky-700 cursor-pointer flex items-center">
           <svg class="w-4 stroke-sky-700" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 12h16m-8-8v16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -191,7 +191,7 @@
     <div class="px-4 pt-5">
       <div class="flex justify-between items-center">
         <h2 class="font-semibold">Benefit</h2>
-        <a class="text-sm text-sky-700 cursor-pointer flex items-center">
+        <a id="addBenefitBtn" href="#" class="text-sm text-sky-700 cursor-pointer flex items-center">
           <svg class="w-4 stroke-sky-700" viewBox="0 0 24 24" fill="" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 12h16m-8-8v16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
