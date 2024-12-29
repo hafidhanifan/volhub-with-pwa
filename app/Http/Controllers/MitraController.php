@@ -56,9 +56,12 @@ class MitraController extends Controller
     public function showAddKegiatanPage($id)
     {
         $mitra = Mitra::find($id);
+        $kegiatan = Kegiatan::where('id_mitra', $mitra->id_mitra)
+                            ->first();
+                            
         $kategori = Kategori::all();
         $sistemKegiatan = ['offline', 'online'];
-        return view('mitra.layout.add-kegiatan', compact('kategori', 'sistemKegiatan', 'mitra'));
+        return view('mitra.layout.add-kegiatan', compact('kategori', 'sistemKegiatan', 'mitra', 'kegiatan'));
     }
 
     public function addKegiatanAction(Request $request, $id)

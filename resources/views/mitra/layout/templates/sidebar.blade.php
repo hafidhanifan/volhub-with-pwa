@@ -3,7 +3,10 @@
   class="w-9/12 h-screen z-10 fixed left-0 top-0 transform -translate-x-full transition-transform duration-300 bg-white lg:w-1/4 lg:relative lg:border-r lg:translate-x-0">
   <div class="px-2 py-4 flex items-center gap-3 border-b">
     <img src="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}" alt="Logo Mitra" class="max-w-14 bg-transparent rounded-full" />
-    <h1 class="text-xl line-clamp-1">Mitra Volunteer</h1>
+    <div class="">
+      <h1 class="text-xl line-clamp-1">{{$mitra->nama_mitra}}</h1>
+      <p class="text-gray-500 text-sm">{{$mitra->email_mitra}}</p>
+    </div>
   </div>
   <ul class="flex flex-col">
     <li class="py-4 hover:bg-button_hover2">
