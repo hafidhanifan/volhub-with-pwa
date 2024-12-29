@@ -154,7 +154,7 @@
       </div>
     </div>
     <div class="w-full p-4">
-      <a id="editBtn" href="#" class="w-full py-3 text-white font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
+      <a id="editBtn" href="#" class="w-full block text-center py-3 text-white font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
         Edit Volunteer
       </a>
     </div>

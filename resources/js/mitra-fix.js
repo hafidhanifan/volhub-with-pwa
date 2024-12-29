@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const detailContainer = document.getElementById('detailVolunteer');
     const editButton = document.getElementById("editBtn");
     const addRequirementButton = document.getElementById("addRequirementBtn");
-    const addBenefitButton = document.getElementById("addBenefitButton");
+    const addBenefitButton = document.getElementById("addBenefitBtn");
 
     document.querySelectorAll('.activity').forEach(card => {
         card.addEventListener('click', () => {

@@ -169,9 +169,9 @@ class MitraController extends Controller
         return redirect()->back();
     }
 
-    public function removeBenefit($id, $id_benefit)
+    public function removeBenefit($id_keg, $id_benefit)
     {     
-        $kegiatan = Kegiatan::findOrFail($id);
+        $kegiatan = Kegiatan::findOrFail($id_keg);
 
         if (!$kegiatan) {
             Alert::error('Oops !', 'Data Tidak Ditemukan');
