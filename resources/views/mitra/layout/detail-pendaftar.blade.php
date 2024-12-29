@@ -1,6 +1,6 @@
 @include('mitra.layout.templates.header')
 @include('mitra.layout.templates.sidebar')
-@include('mitra.layout.templates.navbar')
+
 <!-- Content Start -->
 <section class="flex flex-col w-full md:flex-row md:bg-gray-100 md:px-10 md:pt-8 lg:h-screen">
   <div class="p-4 md:mt-4">
@@ -8,30 +8,29 @@
     <div
       class="mt-4 md:border md:p-8 md:bg-white md:max-w-80 md:rounded-lg md:h-[calc(100vh-120px)] lg:h-[calc(100vh-120px)] lg:overflow-y-auto">
       <div class="flex items-center gap-4">
-        <img src="../src/image/profile-img.png" alt="Profile Image" class="max-w-20" />
+        <img src="{{asset('storage/foto-profile/'.$pendaftar->user->foto_profile)}}" alt="Profile Image" class="max-w-20" />
         <div class="">
-          <h2 class="">Dinda Dandi</h2>
+          <h2 class="">{{$pendaftar->user->nama_user}}</h2>
           <p class="line-clamp-2 text-sm text-gray-500">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id
-            explicabo ab ducimus officiis assumenda error eligendi natus
-            possimus deleniti, quae dolorem asperiores? Tempora, accusamus
-            iste.
+            {{$pendaftar->user->bio}}
           </p>
         </div>
       </div>
       <div class="mt-4 p-4 rounded-md border-2 border-sky-200 bg-sky-50">
         <div class="flex justify-between py-2">
           <span class="text-xs font-normal">Applied Volunteer</span>
-          <span class="text-xs text-gray-500">100 days ago</span>
+          <span class="text-xs text-gray-500">{{ $daysAgo }} ago</span>
         </div>
         <div class="border my-2"></div>
         <p class="font-semibold text-sm">
-          Volunteer pura pura senang pura pura bahagia woakoakw
+          {{$pendaftar->kegiatan->nama_kegiatan}}
         </p>
       </div>
       <div class="mt-4 flex gap-2">
-        <button class="w-3/4 py-2 border-2 border-sky-200 rounded-md bg-sky-50">
-          Scheduled
+        <button class="w-3/4 py-2 border-2 border-sky-200 rounded-md bg-sky-50" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="interview"
+          style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+          @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
+          {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Scheduled' : 'Schedule' }}
         </button>
         <button class="w-1/4 py-2 border-2 border-sky-200 rounded-md flex justify-center bg-sky-50">
           <svg class="w-8 stroke-sky-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +56,7 @@
           </svg>
           <div class="">
             <span class="text-gray-500 font-semibold">Email</span>
-            <p class="font-semibold">dindadandi@gmail.com</p>
+            <p class="font-semibold">{{$pendaftar->user->email_user}}</p>
           </div>
         </div>
         <div class="flex gap-5 items-start">
@@ -67,8 +66,8 @@
               fill="#000" />
           </svg>
           <div class="">
-            <span class="text-gray-500 font-semibold">Email</span>
-            <p class="font-semibold">08180002234</p>
+            <span class="text-gray-500 font-semibold">Phone</span>
+            <p class="font-semibold">{{$pendaftar->user->nomor_telephone}}</p>
           </div>
         </div>
       </div>
@@ -95,7 +94,7 @@
     <div id="applicantProfileContent" class="tab-content mt-4 w-full">
       <div class="border rounded-lg">
         <div class="flex justify-between items-start p-4 border-b">
-          <span class="max-w-64 font-semibold">Dinda Dandi</span>
+          <span class="max-w-64 font-semibold">{{$pendaftar->user->nama_user}}</span>
           <svg class="w-6" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
             <path fill="#0A66C2"
               d="M12.225 12.225h-1.778V9.44c0-.664-.012-1.519-.925-1.519-.926 0-1.068.724-1.068 1.47v2.834H6.676V6.498h1.707v.783h.024c.348-.594.996-.95 1.684-.925 1.802 0 2.135 1.185 2.135 2.728l-.001 3.14zM4.67 5.715a1.037 1.037 0 0 1-1.032-1.031c0-.566.466-1.032 1.032-1.032.566 0 1.031.466 1.032 1.032 0 .566-.466 1.032-1.032 1.032zm.889 6.51h-1.78V6.498h1.78v5.727zM13.11 2H2.885A.88.88 0 0 0 2 2.866v10.268a.88.88 0 0 0 .885.866h10.226a.882.882 0 0 0 .889-.866V2.865a.88.88 0 0 0-.889-.864z" />
@@ -104,8 +103,8 @@
         <div class="p-4">
           <span class="text-gray-500">Email</span>
           <div class="flex gap-3">
-            <p class="font-semibold">dindadandi@gmail.com</p>
-            <button>
+            <p id="text-to-copy" class="font-semibold">{{$pendaftar->user->email_user}}</p>
+            <button id="copy-button">
               <svg class="w-5 fill-sky-400" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M19.53 8 14 2.47a.75.75 0 0 0-.53-.22H11A2.75 2.75 0 0 0 8.25 5v1.25H7A2.75 2.75 0 0 0 4.25 9v10A2.75 2.75 0 0 0 7 21.75h7A2.75 2.75 0 0 0 16.75 19v-1.25H17A2.75 2.75 0 0 0 19.75 15V8.5a.75.75 0 0 0-.22-.5Zm-5.28-3.19 2.94 2.94h-2.94V4.81Zm1 14.19A1.25 1.25 0 0 1 14 20.25H7A1.25 1.25 0 0 1 5.75 19V9A1.25 1.25 0 0 1 7 7.75h1.25V15A2.75 2.75 0 0 0 11 17.75h4.25V19ZM17 16.25h-6A1.25 1.25 0 0 1 9.75 15V5A1.25 1.25 0 0 1 11 3.75h1.75V8.5a.76.76 0 0 0 .75.75h4.75V15A1.25 1.25 0 0 1 17 16.25Z" />
@@ -118,90 +117,79 @@
         <div class="border-b p-4">
           <span class="font-semibold">About</span>
         </div>
-        <p id="aboutText"
+        <p
           class="p-4 text-justify text-sm max-h-[7.5rem] line-clamp-5 overflow-hidden transition-all duration-300">
-          Lorem ipsum dolor
+          @if (strlen($pendaftar->user->deskripsi) > 200)
+            <span class="short-desc">{{ Str::limit($pendaftar->user->deskripsi, 200, '...') }}</span>
+            <span class="more-desc hidden">{{ $pendaftar->user->deskripsi }}</span>
+            <a href="javascript:void(0);"
+                class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
+                id="btn-more-desc">More</a>
+          @else
+            {{ $pendaftar->user->deskripsi }}
+          @endif
         </p>
-        <button id="showAllAboutBtn" class="ml-4 text-sm text-sky-600 lg:hidden">
-          More
-        </button>
       </div>
       <div class="mt-4 border rounded-lg">
         <div class="border-b p-4">
           <span class="font-semibold">Skill</span>
         </div>
         <div class="p-4 flex flex-wrap gap-2">
-          <!-- Contoh elemen span, nanti data dari database -->
+        @if($pendaftar->user->skills->isEmpty())
+        <div class="flex items-start gap-4">
+          <div class="mb-4">
+            <p class="font-small text-sm line-clamp-2">
+              The applicant has no skill data.
+            </p>
+          </div>
+        </div>
+        @else
+          @foreach($pendaftar->user->skills as $skill)
           <span
             class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
-            Front End
+            {{$skill->nama_skill}}
           </span>
-          <span
-            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
-            Public speaking yang sangat panjang
-          </span>
-          <span
-            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
-            Design
-          </span>
-          <span
-            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
-            Content Creation
-          </span>
-          <span
-            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
-            Content Creation
-          </span>
-          <span
-            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
-            turu
-          </span>
-          <span
-            class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
-            turu
-          </span>
+          @endforeach
+        @endif
         </div>
       </div>
       <div class="mt-4 border rounded-lg">
         <div class="border-b p-4">
-          <span class="font-semibold">Last Activity</span>
+          <span class="font-semibold">Experience</span>
         </div>
         <div id="userExperienceContainer" class="p-4">
+          @if($pendaftar->user->experiences->isEmpty())
           <div class="flex items-start gap-4">
-            <img src="../src/image/mitra-logo-3.jpg" alt="Logo Mitra" class="w-16 rounded-full" />
-            <div>
-              <p class="font-semibold line-clamp-2">
-                Volunteer pura pura senang pura pura bahagia woaowkaok
-              </p>
-              <p class="text-gray-500 text-sm">Mitra insane</p>
-              <p class="line-clamp-1 text-sm text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam quasi ad et vero tempora quaerat tenetur, cumque
-                sunt aliquid quae mollitia quidem sapiente unde, rerum modi
-                doloremque quisquam repellendus voluptatum?
+            <div class="mb-4">
+              <p class="font-small text-sm line-clamp-2">
+                The applicant has no experience data.
               </p>
             </div>
           </div>
-
-          <div class="experience-item hidden flex items-start gap-4 mt-4">
-            <img src="../src/image/mitra-logo-3.jpg" alt="Logo Mitra" class="w-16 rounded-full" />
-            <div>
-              <p class="font-semibold line-clamp-2">
-                Volunteer pura pura senang pura pura bahagia woaowkaok
-              </p>
-              <p class="text-gray-500 text-sm">Mitra insane</p>
-              <p class="line-clamp-1 text-sm text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Laboriosam quasi ad et vero tempora quaerat tenetur, cumque
-                sunt aliquid quae mollitia quidem sapiente unde, rerum modi
-                doloremque quisquam repellendus voluptatum?
-              </p>
-            </div>
-          </div>
+          @else
+            @foreach($pendaftar->user->experiences as $experience)
+              <div class="flex items-start gap-4">
+                <div class="mb-4">
+                  <p class="font-semibold line-clamp-2">
+                    {{$experience->judul_kegiatan}}
+                  </p>
+                  <p class="text-gray-500 text-sm">{{$experience->mitra}}</p>
+                  <p class="line-clamp-1 text-sm text-gray-500">
+                    @if (strlen($experience->deskripsi) > 50)
+                      <span class="short-desc">{{ Str::limit($experience->deskripsi, 50, '...') }}</span>
+                      <span class="more-desc hidden">{{ $experience->deskripsi }}</span>
+                      <a href="javascript:void(0);"
+                          class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
+                          id="btn-more-desc-exp">More</a>
+                    @else
+                      {{ $experience->deskripsi }}
+                    @endif
+                  </p>
+                </div>
+              </div>
+            @endforeach
+          @endif
         </div>
-        <button id="showMoreUserExperienceBtn" class="ml-2 mb-2 px-2 pb-2 text-xs text-sky-600 cursor-pointer">
-          Show more experience
-        </button>
       </div>
     </div>
     <!-- Applicant Profile Content End -->

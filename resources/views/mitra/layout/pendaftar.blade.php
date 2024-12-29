@@ -1,6 +1,5 @@
 @include('mitra.layout.templates.header')
 @include('mitra.layout.templates.sidebar')
-@include('mitra.layout.templates.navbar')
 <!-- Content Start -->
 <section class="w-full">
   <!-- Header Content Start -->
@@ -46,108 +45,37 @@
         </tr>
       </thead>
       <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
-        <tr data-url="../public/detail-pendaftar.html" onclick="window.location.href=this.dataset.url;" data-info=""
+        <?php $no = 1 ?>
+        @foreach($pendaftar as $pendaftar) 
+        <tr onclick="window.location='{{ route('mitra.detail.pendaftar', ['id' => $mitra->id_mitra, 'id_pendaftar' => $pendaftar->id_pendaftar]) }}';" data-info=""
           class="cursor-pointer hover:bg-button_hover2">
           <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
-            <img src="../src/image/profile-img.png" alt="Profile photo" class="w-12 rounded-full" />
+            <img src="{{asset('storage/foto-profile/'.$pendaftar->user->foto_profile)}}" alt="Profile photo" class="w-12 rounded-full" />
             <div>
-              <span class="font-semibold">Dinda dandi</span>
-              <p class="text-sm text-gray-500">Ini bio</p>
+              <span class="font-semibold">{{$pendaftar->user->nama_user}}</span>
+              <p class="text-sm text-gray-500">{{$pendaftar->user->bio}}</p>
             </div>
           </td>
           <td class="px-6 py-4 text-sm text-gray-600">
-            dindadandi@gmail.com
+            {{$pendaftar->user->email_user}}
           </td>
           <td class="px-6 py-4 text-sm text-gray-600">
-            Pembersihan pantai indrayanti
+            {{$pendaftar->kegiatan->nama_kegiatan}}
           </td>
           <td class="px-6 py-4">
             <span
-              class="block w-24 py-1 text-center text-sm border border-emerald-500 rounded-2xl text-emerald-500 bg-emerald-50">Hired</span>
+              class="block w-24 py-1 text-center text-sm border border-emerald-500 rounded-2xl text-emerald-500 bg-emerald-50
+              @if($pendaftar->status_applicant === 'In-review') border border-sky-500 text-sky-500 bg-sky-50 
+              @elseif($pendaftar->status_applicant === 'Interview') border border-violet-500 text-violet-500 bg-violet-50 
+              @elseif($pendaftar->status_applicant === 'Shortlist') border border-amber-500 text-amber-500 bg-amber-50 
+              @elseif($pendaftar->status_applicant === 'Hire') border border-emerald-500 text-emerald-500 bg-emerald-50 
+              @elseif($pendaftar->status_applicant === 'Reject') border border-rose-500 text-rose-500 bg-rose-50 
+              @else bg-gray-500 text-white border-gray-600 
+              @endif"> {{ $pendaftar->status_applicant }} 
+            </span>
           </td>
         </tr>
-
-        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
-          <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
-            <img src="../src/image/profile-img.png" alt="Profile photo" class="w-12 rounded-full" />
-            <div>
-              <span class="font-semibold">Dinda dandi</span>
-              <p class="text-sm text-gray-500">Ini bio</p>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-sm text-gray-600">
-            dindadandi@gmail.com
-          </td>
-          <td class="px-6 py-4 text-sm text-gray-600">
-            Pembersihan pantai indrayanti
-          </td>
-          <td class="px-6 py-4">
-            <span
-              class="block w-24 py-1 text-center text-sm border border-rose-500 rounded-2xl text-rose-500 bg-rose-50">Rejected</span>
-          </td>
-        </tr>
-
-        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
-          <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
-            <img src="../src/image/profile-img.png" alt="Profile photo" class="w-12 rounded-full" />
-            <div>
-              <span class="font-semibold">Dinda dandi</span>
-              <p class="text-sm text-gray-500">Ini bio</p>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-sm text-gray-600">
-            dindadandi@gmail.com
-          </td>
-          <td class="px-6 py-4 text-sm text-gray-600">
-            Pembersihan pantai indrayanti
-          </td>
-          <td class="px-6 py-4">
-            <span
-              class="block w-24 py-1 text-center text-sm border border-amber-500 rounded-2xl text-amber-500 bg-amber-50">Shortlist</span>
-          </td>
-        </tr>
-
-        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
-          <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
-            <img src="../src/image/profile-img.png" alt="Profile photo" class="w-12 rounded-full" />
-            <div>
-              <span class="font-semibold">Dinda dandi</span>
-              <p class="text-sm text-gray-500">Ini bio</p>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-sm text-gray-600">
-            dindadandi@gmail.com
-          </td>
-          <td class="px-6 py-4 text-sm text-gray-600">
-            Pembersihan pantai indrayanti
-          </td>
-          <td class="px-6 py-4">
-            <span
-              class="block w-24 py-1 text-center text-sm border border-violet-500 rounded-2xl text-violet-500 bg-violet-50">Interview</span>
-          </td>
-        </tr>
-
-        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
-          <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
-            <img src="../src/image/profile-img.png" alt="Profile photo" class="w-12 rounded-full" />
-            <div>
-              <span class="font-semibold">Dinda dandi</span>
-              <p class="text-sm text-gray-500">Ini bio</p>
-            </div>
-          </td>
-          <td class="px-6 py-4 text-sm text-gray-600">
-            dindadandi@gmail.com
-          </td>
-          <td class="px-6 py-4 text-sm text-gray-600">
-            Pembersihan pantai indrayanti
-          </td>
-          <td class="px-6 py-4">
-            <span
-              class="block w-24 py-1 text-center text-sm border border-sky-500 rounded-2xl text-sky-500 bg-sky-50">In
-              Review</span>
-          </td>
-        </tr>
-
+        @endforeach
         <!-- Tambahkan baris lainnya sesuai data -->
       </tbody>
     </table>

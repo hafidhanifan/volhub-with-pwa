@@ -10,6 +10,7 @@ use App\Models\Pendaftar;
 use App\Models\Kategori;
 use App\Models\Benefit;
 use App\Models\Kriteria;
+use App\Models\User;
 use App\Models\Interview;
 use App\Models\Note;
 use Illuminate\Http\Request;
@@ -56,8 +57,6 @@ class MitraController extends Controller
     public function showAddKegiatanPage($id)
     {
         $mitra = Mitra::find($id);
-        $kegiatan = Kegiatan::where('id_mitra', $mitra->id_mitra)
-                            ->first();
                             
         $kategori = Kategori::all();
         $sistemKegiatan = ['offline', 'online'];
@@ -360,16 +359,11 @@ class MitraController extends Controller
         $tglPendaftaran = Carbon::parse($pendaftar->tgl_pendaftaran);
         $daysAgo = $tglPendaftaran->diffInDays(Carbon::now(), false); // Menggunakan diffInDays tanpa syntax
 
-        // Mengambil ID kegiatan dari pendaftar dengan status diterima
-        $acceptedKegiatanIds = DB::table('data_pendaftar')
-            ->where('id_user', $id_user)
-            ->where('status_applicant', 'Hire')
-            ->pluck('id_kegiatan');
 
         // Mengambil data kegiatan berdasarkan ID yang diperoleh
-        $acceptedKegiatans = Kegiatan::whereIn('id_kegiatan', $acceptedKegiatanIds)->get();
+        $experienceCount = User::find($id_user)->experiences()->count();
 
-        $acceptedExperienceCount = $acceptedKegiatans->count();
+        // $acceptedExperienceCount = $acceptedKegiatans->count();
 
         foreach ($kegiatans as $kegiatan) {
             // Menghitung sisa hari dengan penutupan dihitung sampai akhir hari (23:59:59)
@@ -377,7 +371,7 @@ class MitraController extends Controller
             $kegiatan->sisa_hari = Carbon::now()->diffInDays($endOfDay, false);
         }
 
-        return view('mitra.layout.detail-pendaftar', compact('mitra', 'kegiatans', 'pendaftar', 'daysAgo', 'acceptedExperienceCount', 'acceptedKegiatans', 'statusInterview', 'formattedInterviewDate', 'formattedNoteDate'));
+        return view('mitra.layout.detail-pendaftar', compact('mitra', 'kegiatans', 'pendaftar', 'daysAgo', 'experienceCount', 'statusInterview', 'formattedInterviewDate', 'formattedNoteDate'));
     }
 
     public function addInterviewAction(Request $request, $id_pendaftar)

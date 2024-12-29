@@ -195,3 +195,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+// DETAIL PENDAFTAR
+
+// copy email
+document.getElementById("copy-button").addEventListener("click", function() {
+  // Pilih elemen teks yang akan disalin
+  var textToCopy = document.getElementById("text-to-copy").innerText;
+
+  // Gunakan API Clipboard untuk menyalin teks ke clipboard
+  navigator.clipboard.writeText(textToCopy).then(function() {
+    alert("Teks berhasil disalin ke clipboard!");
+  }).catch(function(error) {
+    alert("Gagal menyalin teks: " + error);
+  });
+});
+
+// short text description
+document.getElementById('btn-more-desc').addEventListener('click', function (event) {
+    const element = event.target;
+    const parent = element.parentElement;
+    const shortDesc = parent.querySelector('.short-desc');
+    const moreDesc = parent.querySelector('.more-desc');
+
+    if (moreDesc.classList.contains('hidden')) {
+        shortDesc.classList.add('hidden');
+        moreDesc.classList.remove('hidden');
+        element.textContent = "Less";
+    } else {
+        shortDesc.classList.remove('hidden');
+        moreDesc.classList.add('hidden');
+        element.textContent = "More";
+    }
+});
+
+// short text description experience
+document.getElementById('btn-more-desc-exp').addEventListener('click', function (event) {
+    const element = event.target;
+    const parent = element.parentElement;
+    const shortDesc = parent.querySelector('.short-desc');
+    const moreDesc = parent.querySelector('.more-desc');
+
+    if (moreDesc.classList.contains('hidden')) {
+        shortDesc.classList.add('hidden');
+        moreDesc.classList.remove('hidden');
+        element.textContent = "Less";
+    } else {
+        shortDesc.classList.remove('hidden');
+        moreDesc.classList.add('hidden');
+        element.textContent = "More";
+    }
+});
