@@ -254,7 +254,7 @@
               <!-- In-riview content end-->
             </div>
           </div>
-          <div id="shortlistedContent" class="current-stage-content hidden">
+          <div id="shortlisted" class="current-stage-content hidden">
             <div class="mt-4 w-full">
               <h4 class="font-semibold text-gray-500">Stage Info</h4>
               <p class="w-full">This applicant is not in Shortlist.</p>
