@@ -2,69 +2,61 @@
 @include('mitra.layout.templates.sidebar')
 @include('mitra.layout.templates.navbar')
 
-<!-- ========== section start ========== -->
-<section class="section">
-  <div class="container-fluid">
-    <!-- ========== title-wrapper start ========== -->
-    <div class="title-wrapper pt-30">
-      <div class="row align-items-center">
-        <div class="col-md-6">
-          <div class="title">
-            <h2>Tambah Benefit {{$kegiatan->nama_kegiatan}}</h2>
-          </div>
-        </div>
-        <!-- end col -->
-      </div>
-      <!-- end row -->
-    </div>
-      <!-- ========== title-wrapper end ========== -->
-      <div class="form-elements-wrapper">
-        <div class="row">
-          <div class="col-lg-6">
-            <!-- input style start -->
-              <div class="card-style mb-30 d-flex flex-column">
-                <div class="edit-skill__list">
-                  <div class="edit-skill__headline mb-50">
-                    <p class="fs-4">Benefit</p>
-                  </div>
-                  <ul>
-                    @foreach ($kegiatan->Benefits as $benefit)
-                      <div class="button_custom_kegiatan">
-                        <li>{{ $benefit->nama_benefit }}</li>
-                        <form action="{{ route('mitra.remove-benefit-action', ['id' => $kegiatan->id_kegiatan, 'id_benefit' => $benefit->id_benefit])}}" method="POST" style="display: inline;">
-                          @csrf
-                          @method('DELETE')
-                          <button onclick="confirmDelete(event)" type="submit"><i class="fa-solid fa-trash"></i></button>
-                        </form>
-                      </div>
-                      <hr>
-                    @endforeach
-                  </ul>
-                </div>
-
-                <form action="{{ route('mitra.add-benefit-kegiatan-action', ['id' => $mitra->id_mitra,'id_keg' => $kegiatan->id_kegiatan]) }}" method="POST">
-                  @csrf
-                    <div class="input-style-1">
-                      <input name="nama_benefit" type="text" placeholder="Benefit" required/>
-                    </div>
-                    <button type="submit" href="#0" class="main-btn-kategori primary-btn rounded btn-hover right-align">Tambah Benefit</button>
-                </form>
-              </div>
-                  <a
-                    href="{{ route('mitra.detail-kegiatan-page', ['id' => $mitra->id_mitra,'id_keg' => $kegiatan->id_kegiatan]) }}"
-                    id="detailProject"
-                    class="main-btn primary-btn btn-hover"
-                    ></i>Kembali</a>
-
-                <!-- end card -->
-          </div>
-          <!-- end col -->
-        </div>
-        <!-- end row -->
-      </div>
+<!-- Content start -->
+<section class="w-full">
+  <div class="p-4">
+    <h1 class="font-normal text-lg">Add requirement</h1>
+    <p class="text-gray-500 text-sm">
+      Add requirements according to your needs
+    </p>
   </div>
-  <!-- end container -->
+  <div class="p-4 max-w-lg">
+    <ul class="divide-y divide-gray-200">
+      <li class="flex justify-between items-center py-2 gap-4">
+        <span>Paid</span>
+        <button>
+          <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m18 6-.8 12.013c-.071 1.052-.106 1.578-.333 1.977a2 2 0 0 1-.866.81c-.413.2-.94.2-1.995.2H9.994c-1.055 0-1.582 0-1.995-.2a2 2 0 0 1-.866-.81c-.227-.399-.262-.925-.332-1.977L6 6M4 6h16m-4 0-.27-.812c-.263-.787-.394-1.18-.637-1.471a2 2 0 0 0-.803-.578C13.938 3 13.524 3 12.694 3h-1.388c-.829 0-1.244 0-1.596.139a2 2 0 0 0-.803.578c-.243.29-.374.684-.636 1.471L8 6"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </li>
+      <li class="flex justify-between items-center py-2 gap-4">
+        <span>Unpaid</span>
+        <button>
+          <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m18 6-.8 12.013c-.071 1.052-.106 1.578-.333 1.977a2 2 0 0 1-.866.81c-.413.2-.94.2-1.995.2H9.994c-1.055 0-1.582 0-1.995-.2a2 2 0 0 1-.866-.81c-.227-.399-.262-.925-.332-1.977L6 6M4 6h16m-4 0-.27-.812c-.263-.787-.394-1.18-.637-1.471a2 2 0 0 0-.803-.578C13.938 3 13.524 3 12.694 3h-1.388c-.829 0-1.244 0-1.596.139a2 2 0 0 0-.803.578c-.243.29-.374.684-.636 1.471L8 6"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </li>
+      <li class="flex justify-between items-center py-2 gap-4">
+        <span>Relasi banyak</span>
+        <button>
+          <svg class="w-7 stroke-red-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m18 6-.8 12.013c-.071 1.052-.106 1.578-.333 1.977a2 2 0 0 1-.866.81c-.413.2-.94.2-1.995.2H9.994c-1.055 0-1.582 0-1.995-.2a2 2 0 0 1-.866-.81c-.227-.399-.262-.925-.332-1.977L6 6M4 6h16m-4 0-.27-.812c-.263-.787-.394-1.18-.637-1.471a2 2 0 0 0-.803-.578C13.938 3 13.524 3 12.694 3h-1.388c-.829 0-1.244 0-1.596.139a2 2 0 0 0-.803.578c-.243.29-.374.684-.636 1.471L8 6"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="p-4 max-w-lg">
+    <label for="" class="block mb-2 text-sm font-medium">Add benefit</label>
+    <input type="text" name="" id="" class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+      placeholder="Volunteer requirement" required="" />
+  </div>
+  <div class="flex justify-end max-w-lg">
+    <button type="submit"
+      class="px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-sky-500 text-white rounded-lg hover:bg-sky-600">
+      Add benefit
+    </button>
+  </div>
 </section>
-<!-- ========== section end ========== -->
+<!-- Content end -->
 
 @include('mitra.layout.templates.footer');
