@@ -1,88 +1,157 @@
 @include('mitra.layout.templates.header')
 @include('mitra.layout.templates.sidebar')
-@include('mitra.layout.templates.navbar')  
-  <!-- ========== section start ========== -->
-  <section class="section">
-        <div class="container-fluid">
-          <!-- ========== title-wrapper start ========== -->
-          <div class="title-wrapper pt-30">
-            <div class="row align-items-center">
-              <div class="col-md-6">
-                <div class="title">
-                  <h2>Informasi Pendaftar</h2>
-                </div>
-              </div>
+@include('mitra.layout.templates.navbar')
+<!-- Content Start -->
+<section class="w-full">
+  <!-- Header Content Start -->
+  <!-- Mobile header -->
+  <div class="lg:hidden">
+    <button id="toggleSidebar" class="h-14 z-40 p-2">
+      <svg class="w-7 stroke-gray-500" viewBox="0 0 24 24">
+        <path d="M4 12h16m0 0-4-4m4 4-4 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <div class="w-full flex flex-col justify-between md:items-center md:flex-row">
+      <div class="pl-4 pb-3">
+        <h1 class="font-normal text-lg">All applicant</h1>
+        <p class="text-gray-500 text-sm">Manage your applicant</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden w-full lg:flex justify-between items-center">
+    <div class="p-4">
+      <h1 class="font-normal text-lg">All applicant</h1>
+      <p class="text-gray-500 text-sm">Manage your applicant</p>
+    </div>
+  </div>
+  <!-- Header Content End -->
+  <div class="mt-8 overflow-x-auto w-full lg:mt-0 lg:p-4">
+    <!-- Applicant list start -->
+    <table class="min-w-full table-auto border-separate border-spacing-0 border border-gray-200 lg:rounded-lg">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
+            Applicant listing
+          </th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
+            Email
+          </th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
+            Activity
+          </th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
+            Status
+          </th>
+        </tr>
+      </thead>
+      <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
+        <tr data-url="../public/detail-pendaftar.html" onclick="window.location.href=this.dataset.url;" data-info=""
+          class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
+            <img src="../src/image/profile-img.png" alt="Profile photo" class="w-12 rounded-full" />
+            <div>
+              <span class="font-semibold">Dinda dandi</span>
+              <p class="text-sm text-gray-500">Ini bio</p>
             </div>
-            <!-- end row -->
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="card-style mb-30">
-                  <div class="table-wrapper table-responsive">
-                    <table class="table ">
-                      <thead>
-                        <tr>
-                          <th>
-                            <h6 class="foto_profile">Nama</h6>
-                          </th>
-                          <th>
-                            <h6>Email</h6>
-                          </th>
-                          <th>
-                            <h6>Kegiatan</h6>
-                          </th>
-                          <th>
-                            <h6>Status</h6>
-                          </th>
-                        </tr>
-                        <!-- end table row-->
-                      </thead>
-                      <tbody>
-                        <?php $no = 1 ?>
-                      @foreach($pendaftar as $pendaftar) 
-                      <div>
-                        <tr onclick="window.location='{{ route('mitra.detail.pendaftar', ['id' => $mitra->id_mitra, 'id_pendaftar' => $pendaftar->id_pendaftar]) }}';" class="informasi-pendaftar">
-                          <td class="list_profile_pendaftar ">
-                            <img class="foto_profile" src="{{asset('storage/foto-profile/'.$pendaftar->user->foto_profile)}}" alt="Profile">
-                            <div class="profile_identity">
-                                <p class="profile_name">{{$pendaftar->user->nama_user}}</p>
-                                <p class="profile_bio">{{$pendaftar->user->bio}}</p>
-                            </div>    
-                          </td>
-                          <td class="list_email_pendaftar">
-                            <p class="email_pendaftar">{{$pendaftar->user->email_user}}</p>
-                          </td>
-                          <td class="list_kegiatan_pendaftar">
-                            <p class="kegiatan_pendaftar">{{$pendaftar->kegiatan->nama_kegiatan}}</p>
-                          </td>
-                          <td class="min-width">
-                            <button class="announcement status-btn primary-btn btn-hover"
-                              @if($pendaftar->status_pendaftaran == 'Dalam Review') 
-                                  style="background-color: #fcb87543; color: #f79738; font-weight:600;" 
-                              @elseif($pendaftar->status_pendaftaran == 'Diterima') 
-                                  style="background-color: green;" 
-                              @elseif($pendaftar->status_pendaftaran == 'Ditolak') 
-                                  style="background-color: red;" 
-                              @endif>
-                              {{ $pendaftar->status_pendaftaran }}
-                            </button>  
-                          </td>
-                        {{-- </div> --}}
-                        </tr>
-                        <!-- end table row -->
-                        @endforeach
-                      </tbody>
-                    </table>
-                    <!-- end table -->
-                  </div>
-                </div>
-                <!-- end card -->
-              </div>
-              <!-- end col -->
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            dindadandi@gmail.com
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            Pembersihan pantai indrayanti
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="block w-24 py-1 text-center text-sm border border-emerald-500 rounded-2xl text-emerald-500 bg-emerald-50">Hired</span>
+          </td>
+        </tr>
+
+        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
+            <img src="../src/image/profile-img.png" alt="Profile photo" class="w-12 rounded-full" />
+            <div>
+              <span class="font-semibold">Dinda dandi</span>
+              <p class="text-sm text-gray-500">Ini bio</p>
             </div>
-          </div>
-          <!-- ========== title-wrapper end ========== -->
-        </div>
-        <!-- end container -->
-      </section>
-      <!-- ========== section end ========== -->
-      @include('mitra.layout.templates.footer')
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            dindadandi@gmail.com
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            Pembersihan pantai indrayanti
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="block w-24 py-1 text-center text-sm border border-rose-500 rounded-2xl text-rose-500 bg-rose-50">Rejected</span>
+          </td>
+        </tr>
+
+        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
+            <img src="../src/image/profile-img.png" alt="Profile photo" class="w-12 rounded-full" />
+            <div>
+              <span class="font-semibold">Dinda dandi</span>
+              <p class="text-sm text-gray-500">Ini bio</p>
+            </div>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            dindadandi@gmail.com
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            Pembersihan pantai indrayanti
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="block w-24 py-1 text-center text-sm border border-amber-500 rounded-2xl text-amber-500 bg-amber-50">Shortlist</span>
+          </td>
+        </tr>
+
+        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
+            <img src="../src/image/profile-img.png" alt="Profile photo" class="w-12 rounded-full" />
+            <div>
+              <span class="font-semibold">Dinda dandi</span>
+              <p class="text-sm text-gray-500">Ini bio</p>
+            </div>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            dindadandi@gmail.com
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            Pembersihan pantai indrayanti
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="block w-24 py-1 text-center text-sm border border-violet-500 rounded-2xl text-violet-500 bg-violet-50">Interview</span>
+          </td>
+        </tr>
+
+        <tr data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
+            <img src="../src/image/profile-img.png" alt="Profile photo" class="w-12 rounded-full" />
+            <div>
+              <span class="font-semibold">Dinda dandi</span>
+              <p class="text-sm text-gray-500">Ini bio</p>
+            </div>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            dindadandi@gmail.com
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-600">
+            Pembersihan pantai indrayanti
+          </td>
+          <td class="px-6 py-4">
+            <span
+              class="block w-24 py-1 text-center text-sm border border-sky-500 rounded-2xl text-sky-500 bg-sky-50">In
+              Review</span>
+          </td>
+        </tr>
+
+        <!-- Tambahkan baris lainnya sesuai data -->
+      </tbody>
+    </table>
+    <!-- Applicant list end -->
+  </div>
+</section>
+<!-- Content End -->
