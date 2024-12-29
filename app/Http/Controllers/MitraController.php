@@ -63,10 +63,6 @@ class MitraController extends Controller
 
     public function addKegiatanAction(Request $request, $id)
     {
-        $request->validate([
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif'
-        ]);
-
         $mitra = Mitra::find($id);
 
         $kegiatan = new Kegiatan;
@@ -81,11 +77,6 @@ class MitraController extends Controller
         $kegiatan->tgl_penutupan = $request->tgl_penutupan;
         $kegiatan->tgl_kegiatan = $request->tgl_kegiatan;
 
-        $extension = $request->file('gambar')->getClientOriginalExtension();
-        $newName = $request->nama_kegiatan.'-'.now()->timestamp.'.'.$extension;
-        $request->file('gambar')->storeAs('gambar', $newName);
-        
-        $kegiatan->gambar = $request['gambar'] = $newName;
         $kegiatan->save();
 
         Alert::success('Hore!', 'Data Berhasil Ditambahkan');
