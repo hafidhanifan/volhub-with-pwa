@@ -8,6 +8,7 @@
   <title>VolunteerHub</title>
 
   @vite(['resources/css/app.css','resources/js/user-fix.js','resources/css/mitra.css','resources/css/bootstrap.css'])
+  @vite(['resources/css/app.css','resources/js/mitra-fix.js',])
 
 
   <link rel="shortcut icon" href="{{ asset('/img/logo-putih.png') }}" type="image/x-icon" />

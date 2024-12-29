@@ -84,7 +84,7 @@ class AuthController extends Controller
 
         if (Auth::guard('mitra')->attempt($credentials)) {
             $mitra = Auth::guard('mitra')->user();
-            return redirect()->route('mitra.dashboard', ['id' => $mitra->id_mitra]);
+            return redirect()->route('mitra.kegiatan', ['id' => $mitra->id_mitra]);
         }
     
 

@@ -24,22 +24,33 @@ use Illuminate\Validation\ValidationException;
 
 class MitraController extends Controller
 {
-    public function showDashboard($id) 
-    {
-        $mitra = Mitra::find($id);
-        $kegiatan = Kegiatan::all();
-        $pendaftar = Pendaftar::all();
-
-        $totalKegiatan = $kegiatan->count();
-        $totalPendaftar = $pendaftar->count();
-        return view('mitra.layout.dashboard', compact('kegiatan', 'pendaftar', 'mitra', 'totalKegiatan', 'totalPendaftar'));
-    }
-
     public function showKegiatanPage($id)
     {
         $mitra = Mitra::find($id);
-        $kegiatans = Kegiatan::where('id_mitra', $mitra->id_mitra)->get();
-        return view('mitra.layout.kegiatan', compact('mitra'));
+        
+        $kegiatans = Kegiatan::withCount('pendaftars')
+                            ->where('id_mitra', $mitra->id_mitra)
+                            ->get();
+
+        foreach ($kegiatans as $kegiatan) {
+            // Format tanggal kegiatan
+            if ($kegiatan->tgl_kegiatan) {
+                $kegiatanDate = Carbon::parse($kegiatan->tgl_kegiatan);
+                $kegiatan->formatted_kegiatan_date = $kegiatanDate->translatedFormat('d F Y');
+            } else {
+                $kegiatan->formatted_kegiatan_date = null; // Tanggal tidak tersedia
+            }
+
+            // Format tanggal penutupan
+            if ($kegiatan->tgl_penutupan) {
+                $penutupanDate = Carbon::parse($kegiatan->tgl_penutupan);
+                $kegiatan->formatted_penutupan_date = $penutupanDate->translatedFormat('d F Y');
+            } else {
+                $kegiatan->formatted_penutupan_date = null; // Tanggal tidak tersedia
+            }
+        }
+
+        return view('mitra.layout.activity', compact('mitra', 'kegiatans', 'kegiatan'));
     }
 
     public function showAddKegiatanPage($id)
@@ -131,6 +142,18 @@ class MitraController extends Controller
         $kegiatan->save();
 
         return view('mitra.layout.detail-kegiatan', compact('mitra', 'kegiatan'))->with('success', 'Kegiatan berhasil diupdate.');
+    }
+
+    public function removeKegiatanAction($id, $id_keg)
+    {
+        $mitra = Mitra::find($id);
+        $kegiatan = Kegiatan::where('id_mitra', $mitra->id_mitra)
+                            ->where('id_kegiatan', $id_keg)
+                            ->first();
+
+        $kegiatan->delete();
+
+        return redirect()->back();
     }
 
     // All About Kegiatan Benefit
@@ -258,11 +281,11 @@ class MitraController extends Controller
     
             // Mengubah base64 menjadi file
             $cropped_image = $request->input('cropped_image');
-            $image = Image::make($cropped_image);
+            // $image = Image::make($cropped_image);
             $newName = $mitra->nama_mitra . '-' . now()->timestamp . '.png';
             $path = 'logo/' . $newName;
     
-            Storage::disk('public')->put($path, (string) $image->encode());
+            // Storage::disk('public')->put($path, (string) $image->encode());
     
             // Simpan path gambar ke database
             $mitra->logo = $newName;

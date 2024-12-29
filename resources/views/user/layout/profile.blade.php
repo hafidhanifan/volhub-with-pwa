@@ -730,11 +730,11 @@
             <span
                 class="
                     font-medium text-sm p-2 rounded-xl flex-1 text-center
-                    @if($pendaftar->status_applicant === 'In-review') bg-blue-500 text-white border-blue-600 
-                    @elseif($pendaftar->status_applicant === 'Interview') bg-purple-500 text-white border-purple-600 
-                    @elseif($pendaftar->status_applicant === 'Shortlist') bg-yellow-500 text-white border-yellow-600 
-                    @elseif($pendaftar->status_applicant === 'Hire') bg-green-500 text-white border-green-600 
-                    @elseif($pendaftar->status_applicant === 'Reject') bg-red-500 text-white border-red-600 
+                    @if($pendaftar->status_applicant === 'In-review') border border-sky-500 text-sky-500 bg-sky-50 
+                    @elseif($pendaftar->status_applicant === 'Interview') border border-violet-500 text-violet-500 bg-violet-50 
+                    @elseif($pendaftar->status_applicant === 'Shortlist') border border-amber-500 text-amber-500 bg-amber-50 
+                    @elseif($pendaftar->status_applicant === 'Hire') border border-emerald-500 text-emerald-500 bg-emerald-50 
+                    @elseif($pendaftar->status_applicant === 'Reject') border border-rose-500 text-rose-500 bg-rose-50 
                     @else bg-gray-500 text-white border-gray-600 
                     @endif
                 ">
