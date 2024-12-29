@@ -246,3 +246,56 @@ document.getElementById('btn-more-desc-exp').addEventListener('click', function 
         element.textContent = "More";
     }
 });
+
+/*Pendaftaran Hiring*/
+document.addEventListener('DOMContentLoaded', function() {
+    // Sembunyikan semua konten stage saat load pertama kali
+    document.querySelectorAll('.current-stage-content').forEach(function(section) {
+        section.style.display = 'none';
+    });
+
+    // Tampilkan konten default "In-review"
+    const defaultStage = document.getElementById('inReview');
+    if (defaultStage) {
+        defaultStage.style.display = 'flex';
+        defaultStage.style.flexDirection = 'column';
+        defaultStage.style.gap = '20px';
+    }
+
+    // Tambahkan kelas "active" ke tombol "In-review"
+    const defaultButton = document.querySelector('.button_menu_hiring_stage a[data-target="inReview"]');
+    if (defaultButton) {
+        defaultButton.classList.add('active');
+    }
+
+    // Event listener untuk navigasi tab
+    document.querySelectorAll('.button_menu_hiring_stage a').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            // Hapus kelas "active" dari semua tombol
+            document.querySelectorAll('.button_menu_hiring_stage a').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+
+            // Tambahkan kelas "active" ke tombol yang diklik
+            button.classList.add('active');
+
+            // Sembunyikan semua konten stage
+            document.querySelectorAll('.current-stage-content').forEach(function(content) {
+                content.style.display = 'none';
+            });
+
+            // Tampilkan konten yang sesuai dengan tombol yang diklik
+            const targetId = button.getAttribute('data-target');
+            const targetContent = document.getElementById(targetId);
+            if (targetContent) {
+                targetContent.style.display = targetId === 'inReview' ? 'flex' : 'block';
+                if (targetId === 'inReview') {
+                    targetContent.style.flexDirection = 'column';
+                    targetContent.style.gap = '20px';
+                }
+            }
+        });
+    });
+});

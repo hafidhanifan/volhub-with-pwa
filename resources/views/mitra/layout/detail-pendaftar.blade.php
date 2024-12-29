@@ -198,27 +198,27 @@
     <div id="hiringProgressContent" class="tab-content hidden p-4 w-full">
       <div class="w-full">
         <h3 class="font-semibold">Current Stage</h3>
-        <div class="w-full mt-2 overflow-x-auto flex scrollbar-hide md:grid md:grid-cols-4">
-          <button data-target="inReview"
+        <div class="button_menu_hiring_stage w-full mt-2 overflow-x-auto flex scrollbar-hide md:grid md:grid-cols-4">
+          <a data-target="inReview" href="/in-review" id="inReviewBtn"
             class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
             In-review
-          </button>
-          <button data-target="shortlisted"
+          </a>
+          <a data-target="shortlisted"
             class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
             Shortlisted
-          </button>
-          <button data-target="interview"
+          </a>
+          <a data-target="interview"
             class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
             Interview
-          </button>
-          <button data-target="hiredReject"
+          </a>
+          <a data-target="hiredReject"
             class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
             Hired / Reject
-          </button>
+          </a>
         </div>
 
         <div class="currentStageContent w-full">
-          <div id="inReviewContent" class="current-stage-content hidden w-full">
+          <div id="inReview" class="current-stage-content hidden w-full">
             <!-- In-riview content start-->
             <div class="mt-4">
               <h4 class="font-semibold text-gray-500">Stage Info</h4>

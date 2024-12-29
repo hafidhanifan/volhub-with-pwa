@@ -23,6 +23,10 @@ module.exports = {
                 button_hover2: "#5aa6cf40",
                 button_alert: "#C96868",
                 button_alert_hover: "",
+                currentStageBorder: "#5aa6cf40",
+                currentStageBg: "#5aa6cf0d",
+                currentStageBorderHover: "#5aa6cf40",
+                currentStageFont: "#5aa6cf",
             },
             width: {
                 "7/10": "70%",
