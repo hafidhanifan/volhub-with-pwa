@@ -1,6 +1,5 @@
 @include('mitra.layout.templates.header')
 @include('mitra.layout.templates.sidebar')
-@include('mitra.layout.templates.navbar')
 <!-- Content Start -->
 <section class="w-full">
   <div class="py-8 px-12 max-w-5xl">
@@ -68,4 +67,3 @@
   </div>
 </section>
 <!-- Content End -->
-@include('mitra.layout.templates.footer')

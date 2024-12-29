@@ -18,7 +18,7 @@
         <p class="text-gray-500 text-sm">Manage your volunteer data</p>
       </div>
       <div class="pl-4 md:pr-4">
-        <a href="../public/add-volunteer.html"
+        <a href="{{ route('mitra.add-kegiatan-page', ['id' => $mitra->id_mitra]) }}"
           class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
           Add Volunteer
         </a>
@@ -32,7 +32,7 @@
       <p class="text-gray-500 text-sm">Manage your volunteer data</p>
     </div>
     <div class="pr-4">
-      <a href="../public/add-volunteer.html"
+      <a href="{{ route('mitra.add-kegiatan-page', ['id' => $mitra->id_mitra]) }}"
         class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
         Add Volunteer
       </a>
