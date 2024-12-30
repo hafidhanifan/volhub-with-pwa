@@ -288,42 +288,64 @@ document.getElementById("copy-button").addEventListener("click", function () {
         });
 });
 
-// short text description
-document
-    .getElementById("btn-more-desc")
-    .addEventListener("click", function (event) {
-        const element = event.target;
-        const parent = element.parentElement;
-        const shortDesc = parent.querySelector(".short-desc");
-        const moreDesc = parent.querySelector(".more-desc");
+// // short text description
+// document
+//     .getElementById("btn-more-desc")
+//     .addEventListener("click", function (event) {
+//         const element = event.target;
+//         const parent = element.parentElement;
+//         const shortDesc = parent.querySelector(".short-desc");
+//         const moreDesc = parent.querySelector(".more-desc");
 
-        if (moreDesc.classList.contains("hidden")) {
-            shortDesc.classList.add("hidden");
-            moreDesc.classList.remove("hidden");
-            element.textContent = "Less";
-        } else {
-            shortDesc.classList.remove("hidden");
-            moreDesc.classList.add("hidden");
-            element.textContent = "More";
-        }
-    });
+//         if (moreDesc.classList.contains("hidden")) {
+//             shortDesc.classList.add("hidden");
+//             moreDesc.classList.remove("hidden");
+//             element.textContent = "Less";
+//         } else {
+//             shortDesc.classList.remove("hidden");
+//             moreDesc.classList.add("hidden");
+//             element.textContent = "More";
+//         }
+//     });
 
-// short text description experience
-document
-    .getElementById("btn-more-desc-exp")
-    .addEventListener("click", function (event) {
-        const element = event.target;
-        const parent = element.parentElement;
-        const shortDesc = parent.querySelector(".short-desc");
-        const moreDesc = parent.querySelector(".more-desc");
+// // short text description experience
+// document
+//     .getElementById("btn-more-desc-exp")
+//     .addEventListener("click", function (event) {
+//         const element = event.target;
+//         const parent = element.parentElement;
+//         const shortDesc = parent.querySelector(".short-desc");
+//         const moreDesc = parent.querySelector(".more-desc");
 
-        if (moreDesc.classList.contains("hidden")) {
-            shortDesc.classList.add("hidden");
-            moreDesc.classList.remove("hidden");
-            element.textContent = "Less";
-        } else {
-            shortDesc.classList.remove("hidden");
-            moreDesc.classList.add("hidden");
-            element.textContent = "More";
-        }
-    });
+//         if (moreDesc.classList.contains("hidden")) {
+//             shortDesc.classList.add("hidden");
+//             moreDesc.classList.remove("hidden");
+//             element.textContent = "Less";
+//         } else {
+//             shortDesc.classList.remove("hidden");
+//             moreDesc.classList.add("hidden");
+//             element.textContent = "More";
+//         }
+//     });
+document.addEventListener("DOMContentLoaded", () => {
+    // Modal Add Note
+    const modalNote = document.getElementById("addNoteModal");
+    const openNoteBtn = document.getElementById("addNoteModalBtn");
+    const closeNoteBtn = document.getElementById("closeModalBtn");
+
+    if (modalNote && openNoteBtn && closeNoteBtn) {
+        openNoteBtn.addEventListener("click", () => {
+            modalNote.classList.remove("hidden");
+        });
+
+        closeNoteBtn.addEventListener("click", () => {
+            modalNote.classList.add("hidden");
+        });
+
+        modalNote.addEventListener("click", (e) => {
+            if (e.target === modalNote) {
+                modalNote.classList.add("hidden");
+            }
+        });
+    }
+});
