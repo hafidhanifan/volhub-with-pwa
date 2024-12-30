@@ -8,7 +8,8 @@
     <div
       class="mt-4 md:border md:p-8 md:bg-white md:max-w-80 md:rounded-lg md:h-[calc(100vh-120px)] lg:h-[calc(100vh-120px)] lg:overflow-y-auto">
       <div class="flex items-center gap-4">
-        <img src="{{asset('storage/foto-profile/'.$pendaftar->user->foto_profile)}}" alt="Profile Image" class="max-w-20" />
+        <img src="{{asset('storage/foto-profile/'.$pendaftar->user->foto_profile)}}" alt="Profile Image"
+          class="max-w-20" />
         <div class="">
           <h2 class="">{{$pendaftar->user->nama_user}}</h2>
           <p class="line-clamp-2 text-sm text-gray-500">
@@ -27,7 +28,8 @@
         </p>
       </div>
       <div class="mt-4 flex gap-2">
-        <button class="w-3/4 py-2 border-2 border-sky-200 rounded-md bg-sky-50" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="interview"
+        <button class="w-3/4 py-2 border-2 border-sky-200 rounded-md bg-sky-50"
+          data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="interview"
           style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
           @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
           {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Scheduled' : 'Schedule' }}
@@ -117,16 +119,15 @@
         <div class="border-b p-4">
           <span class="font-semibold">About</span>
         </div>
-        <p
-          class="p-4 text-justify text-sm max-h-[7.5rem] line-clamp-5 overflow-hidden transition-all duration-300">
+        <p class="p-4 text-justify text-sm max-h-[7.5rem] line-clamp-5 overflow-hidden transition-all duration-300">
           @if (strlen($pendaftar->user->deskripsi) > 200)
-            <span class="short-desc">{{ Str::limit($pendaftar->user->deskripsi, 200, '...') }}</span>
-            <span class="more-desc hidden">{{ $pendaftar->user->deskripsi }}</span>
-            <a href="javascript:void(0);"
-                class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
-                id="btn-more-desc">More</a>
+          <span class="short-desc">{{ Str::limit($pendaftar->user->deskripsi, 200, '...') }}</span>
+          <span class="more-desc hidden">{{ $pendaftar->user->deskripsi }}</span>
+          <a href="javascript:void(0);"
+            class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
+            id="btn-more-desc">More</a>
           @else
-            {{ $pendaftar->user->deskripsi }}
+          {{ $pendaftar->user->deskripsi }}
           @endif
         </p>
       </div>
@@ -135,22 +136,22 @@
           <span class="font-semibold">Skill</span>
         </div>
         <div class="p-4 flex flex-wrap gap-2">
-        @if($pendaftar->user->skills->isEmpty())
-        <div class="flex items-start gap-4">
-          <div class="mb-4">
-            <p class="font-small text-sm line-clamp-2">
-              The applicant has no skill data.
-            </p>
+          @if($pendaftar->user->skills->isEmpty())
+          <div class="flex items-start gap-4">
+            <div class="mb-4">
+              <p class="font-small text-sm line-clamp-2">
+                The applicant has no skill data.
+              </p>
+            </div>
           </div>
-        </div>
-        @else
+          @else
           @foreach($pendaftar->user->skills as $skill)
           <span
             class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">
             {{$skill->nama_skill}}
           </span>
           @endforeach
-        @endif
+          @endif
         </div>
       </div>
       <div class="mt-4 border rounded-lg">
@@ -167,27 +168,27 @@
             </div>
           </div>
           @else
-            @foreach($pendaftar->user->experiences as $experience)
-              <div class="flex items-start gap-4">
-                <div class="mb-4">
-                  <p class="font-semibold line-clamp-2">
-                    {{$experience->judul_kegiatan}}
-                  </p>
-                  <p class="text-gray-500 text-sm">{{$experience->mitra}}</p>
-                  <p class="line-clamp-1 text-sm text-gray-500">
-                    @if (strlen($experience->deskripsi) > 50)
-                      <span class="short-desc">{{ Str::limit($experience->deskripsi, 50, '...') }}</span>
-                      <span class="more-desc hidden">{{ $experience->deskripsi }}</span>
-                      <a href="javascript:void(0);"
-                          class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
-                          id="btn-more-desc-exp">More</a>
-                    @else
-                      {{ $experience->deskripsi }}
-                    @endif
-                  </p>
-                </div>
-              </div>
-            @endforeach
+          @foreach($pendaftar->user->experiences as $experience)
+          <div class="flex items-start gap-4">
+            <div class="mb-4">
+              <p class="font-semibold line-clamp-2">
+                {{$experience->judul_kegiatan}}
+              </p>
+              <p class="text-gray-500 text-sm">{{$experience->mitra}}</p>
+              <p class="line-clamp-1 text-sm text-gray-500">
+                @if (strlen($experience->deskripsi) > 50)
+                <span class="short-desc">{{ Str::limit($experience->deskripsi, 50, '...') }}</span>
+                <span class="more-desc hidden">{{ $experience->deskripsi }}</span>
+                <a href="javascript:void(0);"
+                  class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
+                  id="btn-more-desc-exp">More</a>
+                @else
+                {{ $experience->deskripsi }}
+                @endif
+              </p>
+            </div>
+          </div>
+          @endforeach
           @endif
         </div>
       </div>
@@ -198,21 +199,22 @@
     <div id="hiringProgressContent" class="tab-content hidden p-4 w-full">
       <div class="w-full">
         <h3 class="font-semibold">Current Stage</h3>
-        <div id="currentStageContainer" class="button_menu_hiring_stage w-full mt-2 overflow-x-auto flex scrollbar-hide md:grid md:grid-cols-4">
+        <div id="currentStageContainer"
+          class="button_menu_hiring_stage w-full mt-2 overflow-x-auto flex scrollbar-hide lg:grid lg:grid-cols-4">
           <a data-target="inReview" id="inReviewBtn"
-            class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
             In-review
           </a>
           <a data-target="shortlisted"
-            class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
             Shortlisted
           </a>
-          <a data-target="interview"
-            class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+          <a data-target="interviewContent"
+            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
             Interview
           </a>
-          <a data-target="hiredReject"
-            class="current-stage-button flex-shrink-0 px-4 py-2 font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+          <a data-target="hiredRejectContent"
+            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
             Hired / Reject
           </a>
         </div>
@@ -257,7 +259,7 @@
           <div id="shortlisted" class="current-stage-content hidden">
             <div class="mt-4 w-full">
               <h4 class="font-semibold text-gray-500">Stage Info</h4>
-              <p class="w-full">This applicant is not in Shortlist.</p>
+              <p class="mt-4 w-full">This applicant is not in Shortlist.</p>
             </div>
             <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide md:justify-between">
               <div class="flex gap-4">
@@ -277,16 +279,49 @@
             </div>
           </div>
           <div id="interviewContent" class="current-stage-content hidden">
-            <p>Interview Content</p>
-          </div>
-          <div id="hiredRejectContent" class="current-stage-content hidden">
-            <p>Hired / Reject Content</p>
+            <div class="mt-4 w-full">
+              <h4 class="font-semibold text-gray-500">Stage Info</h4>
+              <div class="mt-4 flex flex-col justify-between lg:flex-row">
+                <div class="flex flex-col">
+                  <span class="block text-gray-500">Interview Date</span>
+                  <p class="py-1">32 December 2024</p>
+                </div>
+                <div class="flex flex-col mt-6 lg:mt-0">
+                  <span class="block text-gray-500 lg:px-2">Interview Status</span>
+                  <span
+                    class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">Interview
+                    Completed</span>
+                </div>
+              </div>
+              <div class="mt-6">
+                <span class="text-gray-500">Interview Location</span>
+                <p>Jl. Pogung Lor, Mlati, Sleman, Yogyakarta, Indonesia</p>
+              </div>
+              <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide justify-between">
+                <div>
+                  <button
+                    class="w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50">
+                    Hire
+                  </button>
+                </div>
+                <div>
+                  <button class="w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50">
+                    Reject
+                  </button>
+                </div>
+              </div>
+              <div class=""></div>
+            </div>
           </div>
         </div>
+        <div id="hiredRejectContent" class="current-stage-content hidden">
+          <p>Hired / Reject Content</p>
+        </div>
       </div>
-      <!-- <div class="mt-96"></div> -->
     </div>
-    <!-- Applicant Hiring Progress End -->
+    <!-- <div class="mt-96"></div> -->
+  </div>
+  <!-- Applicant Hiring Progress End -->
   </div>
 </section>
 <!-- Content End -->
