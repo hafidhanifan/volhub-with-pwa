@@ -1,4 +1,3 @@
-
 /* 
   === Javascript For Mitra Page ===
 */
@@ -69,15 +68,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // LIST DAN DETAIL KEGIATAN
-document.addEventListener('DOMContentLoaded', () => {
-    const detailContainer = document.getElementById('detailVolunteer');
+document.addEventListener("DOMContentLoaded", () => {
+    const detailContainer = document.getElementById("detailVolunteer");
     const editButton = document.getElementById("editBtn");
     const addRequirementButton = document.getElementById("addRequirementBtn");
     const addBenefitButton = document.getElementById("addBenefitBtn");
 
-    document.querySelectorAll('.activity').forEach(card => {
-        card.addEventListener('click', () => {
-
+    document.querySelectorAll(".activity").forEach((card) => {
+        card.addEventListener("click", () => {
             // Ambil data dari atribut data-*
             const id_keg = card.dataset.idKegiatan;
             const namaKegiatan = card.dataset.namaKegiatan;
@@ -93,63 +91,98 @@ document.addEventListener('DOMContentLoaded', () => {
             const tglPenutupan = card.dataset.tglPenutupan;
 
             // Tampilkan data di bagian detail
-            detailContainer.querySelector('.namaKegiatan').textContent = namaKegiatan;
-            detailContainer.querySelector('.namaMitra').textContent = namaMitra;
-            detailContainer.querySelector('.lokasiKegiatan').textContent = lokasiKegiatan;
-            detailContainer.querySelector('img').src = logo;
-            detailContainer.querySelector('.sistemKegiatan').textContent = sistemKegiatan;
-            detailContainer.querySelector('.pendaftarCount').textContent = pendaftarCount;
-            detailContainer.querySelector('.deskripsiKegiatan').textContent = deskripsiKegiatan;
-            detailContainer.querySelector('.tglKegiatan').textContent = tglKegiatan;
-            detailContainer.querySelector('.tglPenutupan').textContent = tglPenutupan;
-            
+            detailContainer.querySelector(".namaKegiatan").textContent =
+                namaKegiatan;
+            detailContainer.querySelector(".namaMitra").textContent = namaMitra;
+            detailContainer.querySelector(".lokasiKegiatan").textContent =
+                lokasiKegiatan;
+            detailContainer.querySelector("img").src = logo;
+            detailContainer.querySelector(".sistemKegiatan").textContent =
+                sistemKegiatan;
+            detailContainer.querySelector(".pendaftarCount").textContent =
+                pendaftarCount;
+            detailContainer.querySelector(".deskripsiKegiatan").textContent =
+                deskripsiKegiatan;
+            detailContainer.querySelector(".tglKegiatan").textContent =
+                tglKegiatan;
+            detailContainer.querySelector(".tglPenutupan").textContent =
+                tglPenutupan;
 
-            const kriteriaContainer = detailContainer.querySelector('.kriteriaContainer'); // Ambil container kriteria
-            kriteriaContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
-            
-            if (namaKriteria && namaKriteria.trim() !== '') {
+            const kriteriaContainer =
+                detailContainer.querySelector(".kriteriaContainer"); // Ambil container kriteria
+            kriteriaContainer.innerHTML = ""; // Kosongkan container sebelum menambah elemen baru
+
+            if (namaKriteria && namaKriteria.trim() !== "") {
                 // Jika data kriteria ada
-                const kriteriaArray = namaKriteria.split(','); // Pisahkan berdasarkan koma
-                kriteriaArray.forEach(kriteria => {
-                    const kriteriaSpan = document.createElement('span');
-                    kriteriaSpan.classList.add('namaKriteria', 'px-4', 'py-1', 'bg-sky-200', 'text-sm', 'rounded-lg');
+                const kriteriaArray = namaKriteria.split(","); // Pisahkan berdasarkan koma
+                kriteriaArray.forEach((kriteria) => {
+                    const kriteriaSpan = document.createElement("span");
+                    kriteriaSpan.classList.add(
+                        "namaKriteria",
+                        "px-4",
+                        "py-1",
+                        "bg-sky-200",
+                        "text-sm",
+                        "rounded-lg"
+                    );
                     kriteriaSpan.textContent = kriteria.trim(); // Hapus spasi berlebih
                     kriteriaContainer.appendChild(kriteriaSpan);
                 });
             } else {
                 // Jika data kriteria kosong, tampilkan pesan
-                const emptyMessage = document.createElement('span');
-                emptyMessage.classList.add('namaKriteria', 'px-4', 'py-1', 'bg-red-200', 'text-sm', 'rounded-lg');
-                emptyMessage.textContent = 'Mitra belum mengisikan data';
+                const emptyMessage = document.createElement("span");
+                emptyMessage.classList.add(
+                    "namaKriteria",
+                    "px-4",
+                    "py-1",
+                    "bg-red-200",
+                    "text-sm",
+                    "rounded-lg"
+                );
+                emptyMessage.textContent = "Mitra belum mengisikan data";
                 kriteriaContainer.appendChild(emptyMessage);
             }
-            
-            const benefitContainer = detailContainer.querySelector('.benefitContainer'); // Ambil container kriteria
-            benefitContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
-            
-            if (namaBenefit && namaBenefit.trim() !== '') {
+
+            const benefitContainer =
+                detailContainer.querySelector(".benefitContainer"); // Ambil container kriteria
+            benefitContainer.innerHTML = ""; // Kosongkan container sebelum menambah elemen baru
+
+            if (namaBenefit && namaBenefit.trim() !== "") {
                 // Jika data kriteria ada
-                const benefitArray = namaBenefit.split(','); // Pisahkan berdasarkan koma
-                benefitArray.forEach(benefit => {
-                    const benefitSpan = document.createElement('span');
-                    benefitSpan.classList.add('namaBenefit', 'px-4', 'py-1', 'bg-sky-200', 'text-sm', 'rounded-lg');
+                const benefitArray = namaBenefit.split(","); // Pisahkan berdasarkan koma
+                benefitArray.forEach((benefit) => {
+                    const benefitSpan = document.createElement("span");
+                    benefitSpan.classList.add(
+                        "namaBenefit",
+                        "px-4",
+                        "py-1",
+                        "bg-sky-200",
+                        "text-sm",
+                        "rounded-lg"
+                    );
                     benefitSpan.textContent = benefit.trim(); // Hapus spasi berlebih
                     benefitContainer.appendChild(benefitSpan);
                 });
             } else {
                 // Jika data kriteria kosong, tampilkan pesan
-                const emptyMessage = document.createElement('span');
-                emptyMessage.classList.add('namaBenefit', 'px-4', 'py-1', 'bg-red-200', 'text-sm', 'rounded-lg');
-                emptyMessage.textContent = 'Mitra belum mengisikan data';
+                const emptyMessage = document.createElement("span");
+                emptyMessage.classList.add(
+                    "namaBenefit",
+                    "px-4",
+                    "py-1",
+                    "bg-red-200",
+                    "text-sm",
+                    "rounded-lg"
+                );
+                emptyMessage.textContent = "Mitra belum mengisikan data";
                 benefitContainer.appendChild(emptyMessage);
             }
 
             const id = detailContainer.dataset.idMitra;
             editButton.href = `/mitra/edit-kegiatan/${id}/${id_keg}`;
 
-            addRequirementButton.href=`/mitra/add-kriteria-kegiatan/${id}/${id_keg}`;
-            addBenefitButton.href=`/mitra/add-benefit-kegiatan/${id}/${id_keg}`;
-            
+            addRequirementButton.href = `/mitra/add-kriteria-kegiatan/${id}/${id_keg}`;
+            addBenefitButton.href = `/mitra/add-benefit-kegiatan/${id}/${id_keg}`;
         });
     });
 });
@@ -201,7 +234,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "currentStageContainer"
     );
     const currentStage = document.querySelectorAll(".current-stage-button");
-    const currentStageContent = document.querySelectorAll(".current-stage-content");
+    const currentStageContent = document.querySelectorAll(
+        ".current-stage-content"
+    );
 
     const activateTab = (targetId) => {
         // Reset all buttons and hide all content
@@ -209,7 +244,9 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.classList.remove("text-sky-500", "after:w-full");
             btn.classList.add("text-gray-500");
         });
-        currentStageContent.forEach((content) => content.classList.add("hidden"));
+        currentStageContent.forEach((content) =>
+            content.classList.add("hidden")
+        );
 
         // Activate the target button and content
         const targetButton = [...currentStage].find(
@@ -236,50 +273,57 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // copy email
-document.getElementById("copy-button").addEventListener("click", function() {
-  // Pilih elemen teks yang akan disalin
-  var textToCopy = document.getElementById("text-to-copy").innerText;
+document.getElementById("copy-button").addEventListener("click", function () {
+    // Pilih elemen teks yang akan disalin
+    var textToCopy = document.getElementById("text-to-copy").innerText;
 
-  // Gunakan API Clipboard untuk menyalin teks ke clipboard
-  navigator.clipboard.writeText(textToCopy).then(function() {
-    alert("Teks berhasil disalin ke clipboard!");
-  }).catch(function(error) {
-    alert("Gagal menyalin teks: " + error);
-  });
+    // Gunakan API Clipboard untuk menyalin teks ke clipboard
+    navigator.clipboard
+        .writeText(textToCopy)
+        .then(function () {
+            alert("Teks berhasil disalin ke clipboard!");
+        })
+        .catch(function (error) {
+            alert("Gagal menyalin teks: " + error);
+        });
 });
 
 // short text description
-document.getElementById('btn-more-desc').addEventListener('click', function (event) {
-    const element = event.target;
-    const parent = element.parentElement;
-    const shortDesc = parent.querySelector('.short-desc');
-    const moreDesc = parent.querySelector('.more-desc');
+document
+    .getElementById("btn-more-desc")
+    .addEventListener("click", function (event) {
+        const element = event.target;
+        const parent = element.parentElement;
+        const shortDesc = parent.querySelector(".short-desc");
+        const moreDesc = parent.querySelector(".more-desc");
 
-    if (moreDesc.classList.contains('hidden')) {
-        shortDesc.classList.add('hidden');
-        moreDesc.classList.remove('hidden');
-        element.textContent = "Less";
-    } else {
-        shortDesc.classList.remove('hidden');
-        moreDesc.classList.add('hidden');
-        element.textContent = "More";
-    }
-});
+        if (moreDesc.classList.contains("hidden")) {
+            shortDesc.classList.add("hidden");
+            moreDesc.classList.remove("hidden");
+            element.textContent = "Less";
+        } else {
+            shortDesc.classList.remove("hidden");
+            moreDesc.classList.add("hidden");
+            element.textContent = "More";
+        }
+    });
 
 // short text description experience
-document.getElementById('btn-more-desc-exp').addEventListener('click', function (event) {
-    const element = event.target;
-    const parent = element.parentElement;
-    const shortDesc = parent.querySelector('.short-desc');
-    const moreDesc = parent.querySelector('.more-desc');
+document
+    .getElementById("btn-more-desc-exp")
+    .addEventListener("click", function (event) {
+        const element = event.target;
+        const parent = element.parentElement;
+        const shortDesc = parent.querySelector(".short-desc");
+        const moreDesc = parent.querySelector(".more-desc");
 
-    if (moreDesc.classList.contains('hidden')) {
-        shortDesc.classList.add('hidden');
-        moreDesc.classList.remove('hidden');
-        element.textContent = "Less";
-    } else {
-        shortDesc.classList.remove('hidden');
-        moreDesc.classList.add('hidden');
-        element.textContent = "More";
-    }
-});
+        if (moreDesc.classList.contains("hidden")) {
+            shortDesc.classList.add("hidden");
+            moreDesc.classList.remove("hidden");
+            element.textContent = "Less";
+        } else {
+            shortDesc.classList.remove("hidden");
+            moreDesc.classList.add("hidden");
+            element.textContent = "More";
+        }
+    });
