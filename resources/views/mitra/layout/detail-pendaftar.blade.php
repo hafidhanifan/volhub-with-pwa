@@ -20,7 +20,7 @@
       <div class="mt-4 p-4 rounded-md border-2 border-sky-200 bg-sky-50">
         <div class="flex justify-between py-2">
           <span class="text-xs font-normal">Applied Volunteer</span>
-          <span class="text-xs text-gray-500">{{ $daysAgo }} ago</span>
+          <span class="text-xs text-gray-500">{{ $daysAgo }}</span>
         </div>
         <div class="border my-2"></div>
         <p class="font-semibold text-sm">
@@ -112,15 +112,24 @@
   <div
     class="px-4 md:border md:bg-white md:mt-[76px] md:rounded-lg md:p-8 md:w-3/4 md:h-[calc(100vh-120px)] lg:h-[calc(100vh-120px)] md:overflow-y-auto">
     <div id="tabRegistrationContainer" class="flex justify-between md:justify-normal md:gap-12 md:mb-8">
-      <a data-target="applicantProfileContent"
-        class="tab-btn font-semibold text-gray-500 pb-1 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-1 after:w-0 after:bg-sky-500 after:rounded-lg after:transition-all after:duration-300 hover:after:w-full">
-        Applicant Profile
-      </a>
+      <div class="w-full flex justify-normal gap-8">
+        <a data-target="applicantProfileContent"
+          class="tab-btn font-semibold text-gray-500 pb-1 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-1 after:w-0 after:bg-sky-500 after:rounded-lg after:transition-all after:duration-300 hover:after:w-full">
+          Applicant Profile
+        </a>
 
-      <a data-target="hiringProgressContent"
-        class="tab-btn font-semibold text-gray-500 pb-1 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-1 after:w-0 after:bg-sky-500 after:rounded-lg after:transition-all after:duration-300 hover:after:w-full">
-        Hiring Progress
-      </a>
+        <a data-target="hiringProgressContent"
+          class="tab-btn font-semibold text-gray-500 pb-1 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-1 after:w-0 after:bg-sky-500 after:rounded-lg after:transition-all after:duration-300 hover:after:w-full">
+          Hiring Progress
+        </a>
+      </div>
+        <div class="flex justify-end">
+          @if(isset($statusPenutupan) && $statusPenutupan === 'Closed')
+            <span class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-rose-500 text-rose-500 bg-rose-50"> Closed</span>
+          @else
+            <span class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50"> Open</span>
+          @endif
+        </div>
     </div>
     <!-- Applicant Profile Content Start -->
     <div id="applicantProfileContent" class="tab-content mt-4 w-full">
@@ -233,85 +242,96 @@
           class="button_menu_hiring_stage w-full mt-2 overflow-x-auto flex scrollbar-hide lg:grid lg:grid-cols-4">
           <a data-target="inReview" id="inReviewBtn"
             class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
-            style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
+            style="{{ in_array($pendaftar->status_applicant, ['Shortlist','Interview','Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
             In-review
           </a>
           <a data-target="shortlisted"
             class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
-            style="{{ in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
-            Shortlisted
+            style="{{ in_array($pendaftar->status_applicant, ['In-review','Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
+            Shortlist
           </a>
           <a data-target="interviewContent"
             class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
-            style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
+            style="{{ in_array($pendaftar->status_applicant, ['In-review','Shortlist','Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
             Interview
           </a>
           <a data-target="hiredRejectContent"
-            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
-            Hired / Reject
+            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
+            style="{{ in_array($pendaftar->status_applicant, ['In-review','Shortlist', 'Interview']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
+            Hire / Reject
           </a>
         </div>
 
         <div class="currentStageContent w-full">
           <div id="inReview" class="current-stage-content hidden w-full">
             <!-- In-riview content start-->
-            <div class="mt-4">
-              <h4 class="font-semibold text-gray-500">Stage Info</h4>
-              <div class="mt-4 flex flex-col gap-4">
-                <div class="border rounded-lg">
-                  <span class="block p-4 border-b font-semibold">Motivation</span>
-                  <p class="p-4 text-sm text-justify">{{$pendaftar->motivasi}}</p>
-                </div>
+              <div class="mt-4">
+                <h4 class="font-semibold text-gray-500">Stage Info</h4>
+                @if(isset($statusPenutupan) && $statusPenutupan === 'Closed')
+                  <p class="text-center mt-20">The activity is <b>Closed</b>.</p>
+                @endif
+                <div class="mt-4 flex flex-col gap-4">
+                  <div class="border rounded-lg">
+                    <span class="block p-4 border-b font-semibold">Motivation</span>
+                    <p class="p-4 text-sm text-justify">{{$pendaftar->motivasi}}</p>
+                  </div>
 
-                <div class="border rounded-lg">
-                  <span class="block p-4 border-b font-semibold">Curriculum Vitae</span>
-                  <div class="p-4 flex gap-2 items-center">
-                    <a href="{{ asset('storage/cv/'. $pendaftar->user->cv) }}" target="_blank" download>
-                      <span class="text-sm">{{$pendaftar->user->cv}}</span>
-                    </a>
+                  <div class="border rounded-lg">
+                    <span class="block p-4 border-b font-semibold">Curriculum Vitae</span>
+                    <div class="p-4 flex gap-2 items-center">
+                      <a href="{{ asset('storage/cv/'. $pendaftar->user->cv) }}" target="_blank" download>
+                        <span class="text-sm">{{$pendaftar->user->cv}}</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide md:justify-between">
+                  <div class="flex gap-4">
+                    <form id="shortlistForm" action="{{ route('applicant.shortlist', ['id' => $mitra->id_mitra, 'id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
+                      @csrf
+                      <button class="w-32 rounded-sm py-2 cursor-pointer border border-sky-500 text-sky-500 bg-sky-50"
+                        type="submit" id="shortlistActionBtn" data-target="shortlisted" 
+                        style="{{ in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject']) || (isset($statusPenutupan) && $statusPenutupan === 'Closed')  ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                        @if (in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject'])) disabled @endif>
+                        {{ in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject']) ? 'Shortlisted' : 'Shortlist' }}
+                      </button>
+                    </form>
+                    <button
+                      class="hireButton w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50"
+                      style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) || (isset($statusPenutupan) && $statusPenutupan === 'Closed') ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                      @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
+                      {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Hired' : 'Hire' }}
+                    </button>
+                  </div>
+                  <div>
+                    <button class="rejectButton w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50"
+                      style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) || (isset($statusPenutupan) && $statusPenutupan === 'Closed') ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                      @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
+                      {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Rejected' : 'Reject' }}
+                    </button>
                   </div>
                 </div>
               </div>
-              <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide md:justify-between">
-                <div class="flex gap-4">
-                  <form id="shortlistForm" action="{{ route('applicant.shortlist', ['id' => $mitra->id_mitra, 'id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
-                    @csrf
-                    <button class="w-32 rounded-sm py-2 cursor-pointer border border-sky-500 text-sky-500 bg-sky-50"
-                      type="submit" id="shortlistActionBtn" data-target="shortlisted" 
-                      style="{{ in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                      @if (in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject'])) disabled @endif>
-                      {{ in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject']) ? 'Shortlisted' : 'Shortlist' }}
-                    </button>
-                  </form>
-                  <button
-                    class="hireButton w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50"
-                    style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                    @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
-                    {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Hired' : 'Hire' }}
-                  </button>
-                </div>
-                <div>
-                  <button class="rejectButton w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50"
-                    style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
-                    @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
-                    {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Rejected' : 'Reject' }}
-                  </button>
-                </div>
-              </div>
-              <!-- In-riview content end-->
-            </div>
+            <!-- In-riview content end-->
           </div>
           <div id="shortlisted" class="current-stage-content hidden">
             <div class="mt-4 w-full">
               <h4 class="font-semibold text-gray-500">Stage Info</h4>
-              @php
-              $kegiatan = $kegiatans->first();
-              @endphp
-              @if($pendaftar->status_applicant === 'Shortlist')
-              <p class="mt-4 w-full">This applicant is currently <b>shortlisted.</b> You have <b>{{ $kegiatan->sisa_hari
-                  }} days remaining</b> before the activity closes.</p>
-              @else
-              <p class="mt-4 w-full">This applicant is not in Shortlist.</p>
+              @if ($kegiatan)
+                @if ($pendaftar->status_applicant === 'Shortlist')
+                  <p class="mt-4 w-full">
+                      This applicant is currently <b>shortlisted.</b> 
+                      @if (isset($statusPenutupan) && $statusPenutupan === 'Today')
+                          The activity closes <b>Today</b>.
+                      @elseif (isset($statusPenutupan) && $statusPenutupan === 'Closed')
+                          The activity is <b>Closed</b>.
+                      @else
+                          You have <b>{{ $kegiatan->sisa_hari }} days remaining</b> before the activity closes.
+                      @endif
+                  </p>
+                @else
+                  <p class="mt-4 w-full">This applicant is not in Shortlist.</p>
+                @endif
               @endif
             </div>
             <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide md:justify-between">
@@ -319,21 +339,21 @@
                 <form id="interviewForm" action="{{ route('applicant.interview', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
                   @csrf
                   <button type="submit" class="w-32 rounded-sm py-2 cursor-pointer border border-sky-500 text-sky-500 bg-sky-50" id="interviewAction" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="interview"
-                    style="{{ in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                    style="{{ in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject']) || (isset($statusPenutupan) && $statusPenutupan === 'Closed')  ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
                     @if (in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject'])) disabled @endif>
                     {{ in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject']) ? 'Interviewed' : 'Interview' }}
                   </button>
                 </form>
                 <button
                   class="hireButton w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50"
-                  style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                  style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) || (isset($statusPenutupan) && $statusPenutupan === 'Closed')  ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
                   @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
                   {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Hired' : 'Hire' }}
                 </button>
               </div>
               <div>
                 <button class="rejectButton w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50"
-                  style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                  style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) || (isset($statusPenutupan) && $statusPenutupan === 'Closed')  ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
                   @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
                   {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Rejected' : 'Reject' }}
                 </button>
@@ -346,103 +366,95 @@
               <div class="mt-4 flex flex-col justify-between lg:flex-row">
                 <div class="flex flex-col">
                   <span class="block text-gray-500">Interview Date</span>
-                  @if ($pendaftar->tgl_interview)
-                    <p class="py-1">{{ $formattedInterviewDate }}</p>
-                  @else
-                    <p class="py-1">Set schedule first</p>
-                  @endif
+                    @if ($pendaftar->tgl_interview)
+                      <p class="py-1">{{ $formattedInterviewDate }}</p>
+                    @else
+                      <p class="py-1">Set schedule first</p>
+                    @endif
                 </div>
                 <div class="flex flex-col mt-6 lg:mt-0">
                   <span class="block text-gray-500 lg:px-2">Interview Status</span>
-                  @if ($pendaftar->status_applicant === 'Hire' || $pendaftar->status_applicant === 'Reject')
-                    @if ($pendaftar->tgl_interview)
-                      @if ($pendaftar->status_interview === 'Interview Completed')
-                      <span
-                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">
-                        {{ ucfirst($pendaftar->status_interview) }}
-                      </span>
+                    @if ($pendaftar->status_applicant === 'Hire' || $pendaftar->status_applicant === 'Reject')
+                      @if ($pendaftar->tgl_interview)
+                        @if ($pendaftar->status_interview === 'Interview Completed')
+                          <span
+                            class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">
+                            {{ ucfirst($pendaftar->status_interview) }}
+                          </span>
+                        @else
+                        <span
+                          class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">On
+                          progress
+                        </span>
+                        @endif
                       @else
-                      <span
-                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">On
-                        progress
-                      </span>
+                        <span
+                          class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">Not
+                          scheduled yet
+                          Not scheduled yet
+                        </span>
                       @endif
                     @else
-                      <span
-                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">Not
-                        scheduled yet
-                        Not scheduled yet
-                      </span>
+                      @if($pendaftar->tgl_interview)
+                        <span class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl 
+                          @if ($pendaftar->status_interview === 'On progress') 
+                            border border-sky-500 text-sky-500 bg-sky-50
+                          @else
+                            border border-emerald-500 text-emerald-500 bg-emerald-50
+                          @endif">
+                          {{ ucfirst($pendaftar->status_interview) }}
+                        </span>
+                      @else
+                        <span
+                          class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-amber-500 text-amber-500 bg-amber-50">
+                          Not scheduled yet
+                        </span>
+                      @endif
                     @endif
-                  @else
-                    @if($pendaftar->tgl_interview)
-                      <span class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl 
-                        @if ($pendaftar->status_interview === 'On progress') 
-                          border border-sky-500 text-sky-500 bg-sky-50
-                        @else ($pendaftar->status_interview === 'Interview Completed') 
-                          border border-emerald-500 text-emerald-500 bg-emerald-50
-                        @endif">
-                        {{ ucfirst($pendaftar->status_interview) }}
-                      </span>
-                    @else
-                      <span
-                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-amber-500 text-amber-500 bg-amber-50">
-                        Not scheduled yet
-                      </span>
-                    @endif
-                  @endif
                 </div>
               </div>
               <div class="mt-6">
                 <span class="text-gray-500">Interview Location</span>
-                @if ($pendaftar->tgl_interview)
-                <p>{{ $pendaftar->lokasi_interview }}</p>
-                @else
-                <p>Set schedule first</p>
-                @endif
+                  @if ($pendaftar->tgl_interview)
+                    <p>{{ $pendaftar->lokasi_interview }}</p>
+                  @else
+                    <p>Set schedule first</p>
+                  @endif
               </div>
               <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide justify-between">
                 <div>
                   <button
                     class="hireButton w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50"
-                    style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                    style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) || (isset($statusPenutupan) && $statusPenutupan === 'Closed')  ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
                     @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
                     {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Hired' : 'Hire' }}
                   </button>
                 </div>
                 <div>
                   <button class="rejectButton w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50"
-                    style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                    style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) || (isset($statusPenutupan) && $statusPenutupan === 'Closed')  ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
                     @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
                     {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Rejected' : 'Reject' }}
                   </button>
                 </div>
               </div>
-
               <div class="border my-6"></div>
               <div class="flex justify-between">
                 <h4 class="font-semibold text-gray-500">Note</h4>
-                {{--<button class="flex gap-2 items-center text-sky-600">
-                  <svg class="w-5 stroke-sky-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M20.15 7.94 8.28 19.81c-1.06 1.07-4.23 1.56-4.95.85-.72-.71-.21-3.88.85-4.95L16.05 3.84a2.9 2.9 0 0 1 4.1 4.1v0Z"
-                      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>Update Note</button> --}}
-                @if ($pendaftar->tgl_interview && $pendaftar->note_interview)
-                <button id="addNoteModalBtn" class="flex items-center text-sky-600">
-                  <svg class="w-5 stroke-sky-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 12h12m-6-6v12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>Update Note
-                </button>
-                @else
-                <button id="addNoteModalBtn" class="flex items-center text-sky-600">
-                  <svg class="w-5 stroke-sky-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 12h12m-6-6v12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>Add Note
-                </button>
-                @endif
+                  @if ($pendaftar->tgl_interview && $pendaftar->note_interview)
+                    <button id="addNoteModalBtn" class="flex items-center text-sky-600">
+                      <svg class="w-5 stroke-sky-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 12h12m-6-6v12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>Update Note
+                    </button>
+                  @else
+                    <button id="addNoteModalBtn" class="flex items-center text-sky-600">
+                      <svg class="w-5 stroke-sky-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 12h12m-6-6v12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>Add Note
+                    </button>
+                  @endif
               </div>
-
               {{-- Modal add / update note start --}}
               <div id="addNoteModal"
                 class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -451,58 +463,58 @@
                     &times;
                   </button>
                   @if (!isset($pendaftar->tgl_interview))
-                  <h2 class="text-lg font-bold mb-4">Hmm...</h2>
-                  <span class="mt-8 block w-fit text-sm font-medium">
-                    Please set the schedule first before adding or updating a note.
-                  </span>
+                    <h2 class="text-lg font-bold mb-4">Hmm...</h2>
+                    <span class="mt-8 block w-fit text-sm font-medium">
+                      Please set the schedule first before adding or updating a note.
+                    </span>
                   @else
-                  <h2 class="text-lg font-bold mb-4">Add Note</h2>
-                  <form id="addNoteForm"
-                    action="{{ route('mitra.add-note-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}"
-                    method="POST">
-                    @csrf
-                    <div class="mb-4">
-                      <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-                      <input type="date" id="date" name="tgl_note" value={{ isset($pendaftar->tgl_interview) ?
-                      $pendaftar->tgl_note : '' }}
-                      class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500
-                      focus:border-sky-500">
-                    </div>
-                    <div class="mb-4">
-                      <label for="note" class="block text-sm font-medium text-gray-700">Note</label>
-                      <textarea id="note" name="note_interview" rows="4"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">{{ old('note_interview', isset($pendaftar->tgl_interview) ? $pendaftar->note_interview : '') }}</textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">{{
-                      isset($pendaftar->tgl_interview) && $pendaftar->note_interview ? 'Update Note' : 'Add New Note' }}
-                    </button>
-                  </form>
+                    <h2 class="text-lg font-bold mb-4">Add Note</h2>
+                    <form id="addNoteForm"
+                      action="{{ route('mitra.add-note-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}"
+                      method="POST">
+                      @csrf
+                      <div class="mb-4">
+                        <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                        <input type="date" id="date" name="tgl_note" value={{ isset($pendaftar->tgl_interview) ?
+                        $pendaftar->tgl_note : '' }}
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500
+                        focus:border-sky-500">
+                      </div>
+                      <div class="mb-4">
+                        <label for="note" class="block text-sm font-medium text-gray-700">Note</label>
+                        <textarea id="note" name="note_interview" rows="4"
+                          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">{{ old('note_interview', isset($pendaftar->tgl_interview) ? $pendaftar->note_interview : '') }}</textarea>
+                      </div>
+                      <button type="submit" class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">{{
+                        isset($pendaftar->tgl_interview) && $pendaftar->note_interview ? 'Update Note' : 'Add New Note' }}
+                      </button>
+                    </form>
                   @endif
                 </div>
               </div>
-              {{-- Modal add / update note end --}}
-              @if($pendaftar->tgl_interview && $pendaftar->note_interview)
-              <div class="border rounded-lg mt-4 p-4">
-                <div class="flex justify-between">
-                  <div class="flex gap-2">
-                    <svg class="w-5 stroke-gray-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M19.82 14H15.6c-.56 0-.84 0-1.054.109a1 1 0 0 0-.437.437C14 14.76 14 15.04 14 15.6v4.22m6-7.093V7.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C18.48 4 17.92 4 16.8 4H7.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C4 5.52 4 6.08 4 7.2v9.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C5.52 20 6.08 20 7.2 20h5.75c.508 0 .762 0 1-.06a2 2 0 0 0 .595-.256c.207-.132.381-.317.73-.686l3.85-4.073c.324-.342.485-.513.6-.71.103-.174.178-.363.224-.56.051-.223.051-.458.051-.928Z"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    <span class="text-gray-500">Interview Note</span>
+                {{-- Modal add / update note end --}}
+                @if($pendaftar->tgl_interview && $pendaftar->note_interview)
+                  <div class="border rounded-lg mt-4 p-4">
+                    <div class="flex justify-between">
+                      <div class="flex gap-2">
+                        <svg class="w-5 stroke-gray-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M19.82 14H15.6c-.56 0-.84 0-1.054.109a1 1 0 0 0-.437.437C14 14.76 14 15.04 14 15.6v4.22m6-7.093V7.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C18.48 4 17.92 4 16.8 4H7.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C4 5.52 4 6.08 4 7.2v9.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C5.52 20 6.08 20 7.2 20h5.75c.508 0 .762 0 1-.06a2 2 0 0 0 .595-.256c.207-.132.381-.317.73-.686l3.85-4.073c.324-.342.485-.513.6-.71.103-.174.178-.363.224-.56.051-.223.051-.458.051-.928Z"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span class="text-gray-500">Interview Note</span>
+                      </div>
+                      <span class="text-gray-500">{{$formattedNoteDate}}</span>
+                    </div>
+                    <div class="mt-4">
+                      <p>{{ $pendaftar->note_interview }}</p>
+                    </div>
                   </div>
-                  <span class="text-gray-500">{{$formattedNoteDate}}</span>
-                </div>
-                <div class="mt-4">
-                  <p>{{ $pendaftar->note_interview }}</p>
-                </div>
-              </div>
-              @else
-              <span class="mt-8 block w-fit text-sm font-medium">
-                Please set the schedule first before adding or updating a note.
-              </span>
-              @endif
+                @else
+                  <span class="mt-8 block w-fit text-sm font-medium">
+                    Please set the schedule first before adding or updating a note.
+                  </span>
+                @endif
             </div>
           </div>
           <div id="hiredRejectContent" class="current-stage-content hidden">
@@ -516,6 +528,7 @@
               </div>
             </div>
           </div>
+
           {{-- Hire modal start --}}
           <div id="hireModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div class="bg-white rounded-lg w-96 p-6 relative">
@@ -527,7 +540,7 @@
                 @csrf
                 <div class="mb-4">
                   <label for="note" class="block text-sm font-medium text-gray-700">Hire Note</label>
-                  <textarea id="note" name="note" rows="4"
+                  <textarea id="note" name="note_to_applicant" rows="4"
                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"></textarea>
                 </div>
                 <button type="submit"
