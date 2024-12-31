@@ -53,11 +53,13 @@
             &times;
           </button>
           <h2 class="text-lg font-bold mb-4">Add Schedule</h2>
-          <form id="" action="{{ route('mitra.add-interview-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST" class="schedule-interview-form">
+          <form id="" action="{{ route('mitra.add-interview-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}"
+            method="POST" class="schedule-interview-form">
             @csrf
             <div class="mb-4">
               <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-              <input type="date" id="date" name="tgl_interview" value="{{ isset($pendaftar->tgl_interview) ? $pendaftar->tgl_interview : '' }}"
+              <input type="date" id="date" name="tgl_interview"
+                value="{{ isset($pendaftar->tgl_interview) ? $pendaftar->tgl_interview : '' }}"
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
             </div>
             <div class="mb-4">
@@ -465,30 +467,32 @@
                     &times;
                   </button>
                   @if (!isset($pendaftar->tgl_interview))
-                    <h2 class="text-lg font-bold mb-4">Hmm...</h2>
-                    <span class="mt-8 block w-fit text-sm font-medium">
-                      Please set the schedule first before adding or updating a note.
-                    </span>
+                  <h2 class="text-lg font-bold mb-4">Hmm...</h2>
+                  <span class="mt-8 block w-fit text-sm font-medium">
+                    Please set the schedule first before adding or updating a note.
+                  </span>
                   @else
-                    <h2 class="text-lg font-bold mb-4">Add Note</h2>
-                    <form id="addNoteForm"
-                      action="{{ route('mitra.add-note-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}"
-                      method="POST">
-                      @csrf
-                      <div class="mb-4">
-                        <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-                        <input type="date" id="date" name="tgl_note" value={{ isset($pendaftar->tgl_interview) ? $pendaftar->tgl_note : '' }}
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
-                      </div>
-                      <div class="mb-4">
-                        <label for="note" class="block text-sm font-medium text-gray-700">Note</label>
-                        <textarea id="note" name="note_interview" rows="4"
-                          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">{{ old('note_interview', isset($pendaftar->tgl_interview) ? $pendaftar->note_interview : '') }}</textarea>
-                      </div>
-                      <button type="submit" class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">{{
-                        isset($pendaftar->tgl_interview) && $pendaftar->note_interview ? 'Update Note' : 'Add New Note' }}
-                      </button>
-                    </form>
+                  <h2 class="text-lg font-bold mb-4">Add Note</h2>
+                  <form id="addNoteForm"
+                    action="{{ route('mitra.add-note-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}"
+                    method="POST">
+                    @csrf
+                    <div class="mb-4">
+                      <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                      <input type="date" id="date" name="tgl_note" value={{ isset($pendaftar->tgl_interview) ?
+                      $pendaftar->tgl_note : '' }}
+                      class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500
+                      focus:border-sky-500">
+                    </div>
+                    <div class="mb-4">
+                      <label for="note" class="block text-sm font-medium text-gray-700">Note</label>
+                      <textarea id="note" name="note_interview" rows="4"
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">{{ old('note_interview', isset($pendaftar->tgl_interview) ? $pendaftar->note_interview : '') }}</textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">{{
+                      isset($pendaftar->tgl_interview) && $pendaftar->note_interview ? 'Update Note' : 'Add New Note' }}
+                    </button>
+                  </form>
                   @endif
                 </div>
               </div>
@@ -519,7 +523,16 @@
           </div>
         </div>
         <div id="hiredRejectContent" class="current-stage-content hidden">
-          <p>Hired / Reject Content</p>
+          <div class="mt-4">
+            <h4 class="font-semibold text-gray-500">Stage Info</h4>
+            <div class="border rounded-lg p-4">
+              <div class="flex justify-between">
+                <span>Message to applicant</span>
+                <span>31 December 2025</span>
+              </div>
+              <p>Message disini</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
