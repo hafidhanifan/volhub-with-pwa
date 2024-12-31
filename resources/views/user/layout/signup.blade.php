@@ -1,69 +1,110 @@
 @include('user.layout.templates.header')
-    <div class="container">
-      <div class="container-left">
-        <header class="container-left__header">
-          <div class="container-left__content">
-            <img class="content-logo" src="{{ asset('img/volhub-small-logo.png') }}" />
-          </div>
-        </header>
-        <div class="main-container-signup">
-          <main class="main-content">
-            <div class="content-left__text">
-              <p class="content-left__text-up">Buat Akun Pribadi</p>
-              <p class="content-left__text-down">Jadilah bagian dari VolHub!</p>
-            </div>
-            <form  action={{ route('user.register.action')}} method="POST">
-              @csrf
-              <div class="form-signup">
-                <div class="form-signup-container">
-                  <div class="form-signup-item">
-                    <label for="nama">Nama Lengkap</label>
-                    <input type="text" id="nama" name="nama_user" required />
-                  </div>
-                  <div class="form-signup-item">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required />
-                  </div>
-                  <div class="form-signup-item">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email_user" required />
-                  </div>
-                  <div class="form-signup-item">
-                    <label for="password">Kata Sandi</label>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      required
-                    />
-                  </div>
-                  <div class="form-signup-item">
-                    <label for="nomor">Nomor Handphone</label>
-                    <input type="text" id="nomor" name="nomor_telephone" required />
-                  </div>
-                  <div></div>
-                </div>
-                <div class="form-signup-container__button">
-                  <button class="form-signup-button__signup" type="submit">Buat Akun</button>
-                  <a href="{{route('user.login')}}" class="form-signup-button__login">Sudah Punya Akun?</a>
-                </div>
-              </div>
-            </form>
-          </main>
-        </div>
+
+<body class="relative bg-[url('../image/login-bg.jpg')] bg-cover bg-center bg-no-repeat w-full min-h-screen">
+  <div class="absolute z-0 inset-0 bg-black bg-opacity-20"></div>
+  <!-- Content start -->
+  <div class="absolute w-full top-0 z-20 flex justify-between px-2 py-4">
+    <span class="block text-lg font-medium py-1 px-4 text-white">User</span>
+    <button class="text-lg font-medium text-white px-4 py-1 rounded-lg hover:bg-white hover:text-sky-600">
+      Sign In
+    </button>
+  </div>
+
+  <!-- wrapper -->
+  <div class="relative z-10 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 w-5/6 mx-auto my-auto rounded-lg lg:w-3/6">
+      <div class="flex flex-col gap-2 mx-auto max-w-52 md:max-w-64">
+        <h1 class="text-center font-semibold md:text-xl">Register User</h1>
+        <p class="py-2 text-center text-xs md:text-sm">
+          Hey, Enter your details to get sign in to your account
+        </p>
       </div>
-      <div class="container-right">
-        <div class="container-right__content">
-          <img class="content__hero-image" src="/img/hero.jpg" />
-          <div class="content__hero-tagline">
-            <h1 class="content__hero-tagline__text">
-              Muda, <br> 
-              Bergerak, Bertindak.
-            </h1>
-          </div>
+      <form action="#" method="POST"
+        class="mt-6 space-y-4 p-2 h-60 overflow-y-auto lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
+        <!-- Username Input -->
+        <div class="mt-1">
+          <input type="text" id="username" name="username"
+            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+            placeholder="Enter your username" required />
         </div>
+
+        <!-- Password Input -->
+        <div class="mt-1">
+          <input type="password" id="password" name="password"
+            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 p-2.5 placeholder-gray-400"
+            placeholder="Enter your password" required />
+        </div>
+
+        <!-- Email Input -->
+        <div class="mt-1">
+          <input type="email" id="email" name="email"
+            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+            placeholder="Enter your email" required />
+        </div>
+
+        <!-- Name Input -->
+        <div class="mt-1">
+          <input type="text" id="name" name="name"
+            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+            placeholder="Enter your full name" required />
+        </div>
+
+        <!-- Phone Number Input -->
+        <div class="mt-1">
+          <input type="tel" id="phone" name="phone"
+            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+            placeholder="Enter your phone number" required />
+        </div>
+
+        <!-- Education Input -->
+        <div class="mt-1">
+          <select id="education" name="education"
+            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500"
+            required>
+            <option value="" disabled selected>Select your education</option>
+            <option value="sd">SD</option>
+            <option value="smp">SMP</option>
+            <option value="sma">SMA</option>
+            <option value="d3">D3</option>
+            <option value="s1">S1</option>
+          </select>
+        </div>
+
+        <!-- Address Input -->
+        <div class="mt-1">
+          <textarea id="address" name="address" rows="3"
+            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+            placeholder="Enter your address" required></textarea>
+        </div>
+
+        <!-- Gender Input -->
+        <div class="mt-1 flex items-center gap-4">
+          <label class="flex items-center">
+            <input type="radio" id="male" name="gender" value="male" class="text-sky-500 focus:ring-sky-500" required />
+            <span class="ml-2 text-sm">Male</span>
+          </label>
+          <label class="flex items-center">
+            <input type="radio" id="female" name="gender" value="female" class="text-sky-500 focus:ring-sky-500"
+              required />
+            <span class="ml-2 text-sm">Female</span>
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button type="submit"
+            class="w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1">
+            Register
+          </button>
+        </div>
+      </form>
+      <div class="mt-6 flex justify-center gap-1">
+        <p class="text-xs md:text-sm">Don't have account?</p>
+        <a href="" class="text-sky-500 text-xs md:text-sm">Register Now</a>
       </div>
     </div>
-    @include('sweetalert::alert')
-  </body>
+  </div>
+  <!-- Content end -->
+</body>
+
 </html>
