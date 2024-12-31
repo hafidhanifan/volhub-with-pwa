@@ -233,7 +233,9 @@
                 <div class="border rounded-lg">
                   <span class="block p-4 border-b font-semibold">Curriculum Vitae</span>
                   <div class="p-4 flex gap-2 items-center">
-                    <span class="text-sm">Lorem ipsum dolor sit amet.</span>
+                    <a href="{{ asset('storage/cv/'. $pendaftar->user->cv) }}" target="_blank" download>
+                      <span class="text-sm">{{$pendaftar->user->cv}}</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -259,7 +261,14 @@
           <div id="shortlisted" class="current-stage-content hidden">
             <div class="mt-4 w-full">
               <h4 class="font-semibold text-gray-500">Stage Info</h4>
-              <p class="mt-4 w-full">This applicant is not in Shortlist.</p>
+              @php
+                $kegiatan = $kegiatans->first();
+              @endphp
+                @if($pendaftar->status_applicant === 'Shortlist')
+                  <p class="mt-4 w-full">This applicant is currently <b>shortlisted.</b> You have <b>{{ $kegiatan->sisa_hari }} days remaining</b> before the activity closes.</p>
+                @else
+                  <p class="mt-4 w-full">This applicant is not in Shortlist.</p>
+                @endif
             </div>
             <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide md:justify-between">
               <div class="flex gap-4">
@@ -284,18 +293,59 @@
               <div class="mt-4 flex flex-col justify-between lg:flex-row">
                 <div class="flex flex-col">
                   <span class="block text-gray-500">Interview Date</span>
-                  <p class="py-1">32 December 2024</p>
+                  @if ($pendaftar->tgl_interview)
+                    <p class="py-1">{{ $formattedInterviewDate }}</p>
+                  @else
+                    <p class="py-1">Set schedule first</p>
+                  @endif
                 </div>
                 <div class="flex flex-col mt-6 lg:mt-0">
                   <span class="block text-gray-500 lg:px-2">Interview Status</span>
-                  <span
-                    class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">Interview
-                    Completed</span>
+                  @if ($pendaftar->status_applicant === 'Hire' || $pendaftar->status_applicant === 'Reject')
+                    @if ($pendaftar->tgl_interview)
+                      @if ($pendaftar->status_interview === 'Interview Completed')
+                      <span
+                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">
+                        {{ ucfirst($pendaftar->status_interview) }}
+                      </span>
+                      @else
+                      <span
+                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">On progress
+                      </span>
+                      @endif
+                    @else
+                      <span
+                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">Not scheduled yet
+                        Not scheduled yet
+                      </span>
+                    @endif
+                  @else
+                    @if($pendaftar->tgl_interview)
+                      <span
+                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl 
+                        @if ($pendaftar->status_interview === 'On progress') 
+                          border border-sky-500 text-sky-500 bg-sky-50
+                        @else ($pendaftar->status_interview === 'Interview Completed') 
+                          border border-emerald-500 text-emerald-500 bg-emerald-50
+                        @endif">
+                        {{ ucfirst($pendaftar->status_interview) }}
+                      </span>
+                    @else
+                      <span
+                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-amber-500 text-amber-500 bg-amber-50">
+                        Not scheduled yet
+                      </span>
+                    @endif
+                  @endif
                 </div>
               </div>
               <div class="mt-6">
                 <span class="text-gray-500">Interview Location</span>
-                <p>Jl. Pogung Lor, Mlati, Sleman, Yogyakarta, Indonesia</p>
+                @if ($pendaftar->tgl_interview)
+                  <p>{{ $pendaftar->lokasi_interview }}</p>
+                @else
+                  <p>Set schedule first</p>
+                @endif
               </div>
               <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide justify-between">
                 <div>
