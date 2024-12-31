@@ -369,11 +369,19 @@
                       d="M20.15 7.94 8.28 19.81c-1.06 1.07-4.23 1.56-4.95.85-.72-.71-.21-3.88.85-4.95L16.05 3.84a2.9 2.9 0 0 1 4.1 4.1v0Z"
                       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>Update Note</button> --}}
-
+                @if ($pendaftar->tgl_interview && $pendaftar->note_interview)
                 <button id="addNoteModalBtn" class="flex items-center text-sky-600">
                   <svg class="w-5 stroke-sky-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M6 12h12m-6-6v12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>Add Note</button>
+                  </svg>Update Note
+                </button>
+                @else
+                <button id="addNoteModalBtn" class="flex items-center text-sky-600">
+                  <svg class="w-5 stroke-sky-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 12h12m-6-6v12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>Add Note
+                </button>
+                @endif
               </div>
 
               {{-- Modal add / update note start --}}
@@ -383,45 +391,57 @@
                   <button id="closeModalBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
                     &times;
                   </button>
-                  <h2 class="text-lg font-bold mb-4">Add Note</h2>
-                  <form id="addNoteForm">
-                    <div class="mb-4">
-                      <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-                      <input type="date" id="date" name="date"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
-                    </div>
-                    <div class="mb-4">
-                      <label for="note" class="block text-sm font-medium text-gray-700">Note</label>
-                      <textarea id="note" name="note" rows="4"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"></textarea>
-                    </div>
-                    <button type="submit"
-                      class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">Add</button>
-                  </form>
+                  @if (!isset($pendaftar->tgl_interview))
+                    <h2 class="text-lg font-bold mb-4">Hmm...</h2>
+                    <span
+                      class="mt-8 block w-fit text-sm font-medium">
+                      Please set the schedule first before adding or updating a note.
+                    </span>
+                  @else
+                    <h2 class="text-lg font-bold mb-4">Add Note</h2>
+                    <form id="addNoteForm" action="{{ route('mitra.add-note-action', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
+                      @csrf
+                      <div class="mb-4">
+                        <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                        <input type="date" id="date" name="tgl_note" value ={{ isset($pendaftar->tgl_interview) ? $pendaftar->tgl_note : '' }}
+                          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
+                      </div>
+                      <div class="mb-4">
+                        <label for="note" class="block text-sm font-medium text-gray-700">Note</label>
+                        <textarea id="note" name="note_interview" rows="4"
+                          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">{{ old('note_interview', isset($pendaftar->tgl_interview) ? $pendaftar->note_interview : '') }}</textarea>
+                      </div>
+                      <button type="submit"
+                        class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">{{ isset($pendaftar->tgl_interview) && $pendaftar->note_interview ? 'Update Note' : 'Add New Note' }}
+                      </button>
+                    </form>
+                  @endif
                 </div>
               </div>
               {{-- Modal add / update note end --}}
-
-              <div class="border rounded-lg mt-4 p-4">
-                <div class="flex justify-between">
-                  <div class="flex gap-2">
-                    <svg class="w-5 stroke-gray-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M19.82 14H15.6c-.56 0-.84 0-1.054.109a1 1 0 0 0-.437.437C14 14.76 14 15.04 14 15.6v4.22m6-7.093V7.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C18.48 4 17.92 4 16.8 4H7.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C4 5.52 4 6.08 4 7.2v9.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C5.52 20 6.08 20 7.2 20h5.75c.508 0 .762 0 1-.06a2 2 0 0 0 .595-.256c.207-.132.381-.317.73-.686l3.85-4.073c.324-.342.485-.513.6-.71.103-.174.178-.363.224-.56.051-.223.051-.458.051-.928Z"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    <span class="text-gray-500">Interview Note</span>
+              @if($pendaftar->tgl_interview && $pendaftar->note_interview)
+                <div class="border rounded-lg mt-4 p-4">
+                  <div class="flex justify-between">
+                    <div class="flex gap-2">
+                      <svg class="w-5 stroke-gray-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M19.82 14H15.6c-.56 0-.84 0-1.054.109a1 1 0 0 0-.437.437C14 14.76 14 15.04 14 15.6v4.22m6-7.093V7.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C18.48 4 17.92 4 16.8 4H7.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C4 5.52 4 6.08 4 7.2v9.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C5.52 20 6.08 20 7.2 20h5.75c.508 0 .762 0 1-.06a2 2 0 0 0 .595-.256c.207-.132.381-.317.73-.686l3.85-4.073c.324-.342.485-.513.6-.71.103-.174.178-.363.224-.56.051-.223.051-.458.051-.928Z"
+                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                      <span class="text-gray-500">Interview Note</span>
+                    </div>
+                    <span class="text-gray-500">{{$formattedNoteDate}}</span>
                   </div>
-                  <span class="text-gray-500">33 December 2021</span>
+                  <div class="mt-4">
+                    <p>{{ $pendaftar->note_interview }}</p>
+                  </div>
                 </div>
-                <div class="mt-4">
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro repellat architecto harum
-                    excepturi
-                    atque molestiae enim nam similique quia neque? Suscipit vitae atque dignissimos quidem laborum
-                    autem
-                    voluptates, velit iusto?</p>
-                </div>
-              </div>
+              @else
+                <span
+                  class="mt-8 block w-fit text-sm font-medium">
+                  Please set the schedule first before adding or updating a note.
+                </span>
+              @endif
             </div>
           </div>
         </div>
