@@ -224,13 +224,13 @@
     <!-- Applicant Profile Content End -->
 
     <!-- Applicant Hiring Progress Start -->
-    <div id="hiringProgressContent" class="tab-content hidden p-4 w-full">
+    <div id="hiringProgressContent" class="tab-content p-4 w-full">
       <div class="w-full">
         <h3 class="font-semibold">Current Stage</h3>
         <div id="currentStageContainer"
           class="button_menu_hiring_stage w-full mt-2 overflow-x-auto flex scrollbar-hide lg:grid lg:grid-cols-4">
           <a data-target="inReview" id="inReviewBtn"
-            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover active">
             In-review
           </a>
           <a data-target="shortlisted"
@@ -269,9 +269,15 @@
               </div>
               <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide md:justify-between">
                 <div class="flex gap-4">
-                  <button class="w-32 rounded-sm py-2 cursor-pointer border border-sky-500 text-sky-500 bg-sky-50">
-                    Shortlist
-                  </button>
+                  <form id="shortlistForm" action="{{ route('applicant.shortlist', ['id' => $mitra->id_mitra, 'id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
+                    @csrf
+                    <button class="w-32 rounded-sm py-2 cursor-pointer border border-sky-500 text-sky-500 bg-sky-50"
+                      type="submit" id="shortlistActionBtn" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="shortlisted" 
+                      style="{{ in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                      @if (in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject'])) disabled @endif>
+                      {{ in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject']) ? 'Shortlisted' : 'Shortlist' }}
+                    </button>
+                  </form>
                   <button
                     class="w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50">
                     Hire
@@ -301,9 +307,14 @@
             </div>
             <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide md:justify-between">
               <div class="flex gap-4">
-                <button class="w-32 rounded-sm py-2 cursor-pointer border border-sky-500 text-sky-500 bg-sky-50">
-                  Shortlist
-                </button>
+                <form id="interviewForm" action="{{ route('applicant.interview', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
+                  @csrf
+                  <button type="submit" class="w-32 rounded-sm py-2 cursor-pointer border border-sky-500 text-sky-500 bg-sky-50" id="interviewAction" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="interview"
+                    style="{{ in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                    @if (in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject'])) disabled @endif>
+                    {{ in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject']) ? 'Interviewed' : 'Interview' }}
+                  </button>
+                </form>
                 <button
                   class="w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50">
                   Hire

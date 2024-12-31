@@ -228,6 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+
 // HIRING PROGRES
 document.addEventListener("DOMContentLoaded", () => {
     const currentStageContainer = document.getElementById(
@@ -254,13 +255,32 @@ document.addEventListener("DOMContentLoaded", () => {
         );
         const targetContent = document.getElementById(targetId);
 
-        targetButton.classList.add("text-sky-500", "after:w-full");
-        targetButton.classList.remove("text-gray-500");
-        targetContent.classList.remove("hidden");
+        if (targetButton) {
+            targetButton.classList.add("text-sky-500", "after:w-full");
+            targetButton.classList.remove("text-gray-500");
+        }
+        if (targetContent) {
+            targetContent.classList.remove("hidden");
+        }
+
+        // **Tambahkan logika untuk inReview jika Hiring Progress diaktifkan**
+        if (targetId === "hiringProgressContent") {
+            const inReviewContent = document.getElementById("inReview");
+            if (inReviewContent) {
+                inReviewContent.classList.remove("hidden");
+            }
+            const inReviewButton = [...currentStage].find(
+                (btn) => btn.dataset.target === "inReview"
+            );
+            if (inReviewButton) {
+                inReviewButton.classList.add("text-sky-500", "after:w-full");
+                inReviewButton.classList.remove("text-gray-500");
+            }
+        }
     };
 
-    // Initialize with applicant profile active
-    activateTab("inReview");
+    const targetStage = "{{ session('targetStage', 'inReview') }}"; // Default ke 'inReview'
+    activateTab(targetStage);
 
     // Event delegation for button clicks
     currentStageContainer.addEventListener("click", (event) => {
@@ -269,6 +289,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const targetContentId = targetButton.dataset.target;
         activateTab(targetContentId);
+    });
+
+    // **Tambahkan fitur iterasi langsung jika diperlukan**
+    document.querySelectorAll(".current-stage-button").forEach((button) => {
+        button.addEventListener("click", () => {
+            const targetId = button.getAttribute("data-target");
+            activateTab(targetId); // Gunakan fungsi activateTab untuk konsistensi
+        });
     });
 });
 

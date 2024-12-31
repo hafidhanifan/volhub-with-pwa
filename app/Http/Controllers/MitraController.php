@@ -473,7 +473,7 @@ class MitraController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Status pendaftaran berhasil diperbarui.');
+        return redirect()->back()->with('targetStage', 'shortlisted');
     }
 
     public function interview($id_pendaftar)
@@ -489,7 +489,7 @@ class MitraController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Status pendaftaran berhasil diperbarui.');
+        return redirect()->back()->with('targetStage', 'interviewContent');
     }
 
     public function hire(Request $request, $id_pendaftar)
