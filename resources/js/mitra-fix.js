@@ -378,8 +378,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// Schedule modal
 document.addEventListener("DOMContentLoaded", () => {
-    // Modal Add Note
     const scheduleModal = document.getElementById("scheduleModal");
     const scheduleButton = document.getElementById("scheduleButton");
     const closeSchedule = document.getElementById("closeScheduleBtn");
@@ -396,6 +396,49 @@ document.addEventListener("DOMContentLoaded", () => {
         scheduleModal.addEventListener("click", (e) => {
             if (e.target === scheduleModal) {
                 scheduleModal.classList.add("hidden");
+            }
+        });
+    }
+});
+
+// Hire modal
+document.addEventListener("DOMContentLoaded", () => {
+    const hireModal = document.getElementById("hireModal");
+    const hireButton = document.getElementById("hireButton");
+    const closeHireButton = document.getElementById("closeHireBtn");
+
+    const rejectModal = document.getElementById("rejectModal");
+    const rejectButton = document.getElementById("rejectButton");
+    const closeRejectButton = document.getElementById("closeRejectBtn");
+
+    if (hireModal && hireButton && closeHireButton) {
+        hireButton.addEventListener("click", () => {
+            hireModal.classList.remove("hidden");
+        });
+
+        closeHireButton.addEventListener("click", () => {
+            hireModal.classList.add("hidden");
+        });
+
+        hireModal.addEventListener("click", (e) => {
+            if (e.target === hireModal) {
+                hireModal.classList.add("hidden");
+            }
+        });
+    }
+
+    if (rejectModal && rejectButton && closeRejectButton) {
+        rejectButton.addEventListener("click", () => {
+            rejectModal.classList.remove("hidden");
+        });
+
+        closeRejectButton.addEventListener("click", () => {
+            rejectModal.classList.add("hidden");
+        });
+
+        rejectModal.addEventListener("click", (e) => {
+            if (e.target === rejectModal) {
+                rejectModal.classList.add("hidden");
             }
         });
     }
