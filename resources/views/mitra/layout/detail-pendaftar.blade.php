@@ -241,23 +241,22 @@
         <div id="currentStageContainer"
           class="button_menu_hiring_stage w-full mt-2 overflow-x-auto flex scrollbar-hide lg:grid lg:grid-cols-4">
           <a data-target="inReview" id="inReviewBtn"
-            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
-            style="{{ in_array($pendaftar->status_applicant, ['Shortlist','Interview','Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
+            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
             In-review
           </a>
           <a data-target="shortlisted"
             class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
-            style="{{ in_array($pendaftar->status_applicant, ['In-review','Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
+            style="{{ in_array($pendaftar->status_applicant, ['In-review']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
             Shortlist
           </a>
           <a data-target="interviewContent"
             class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
-            style="{{ in_array($pendaftar->status_applicant, ['In-review','Shortlist','Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
+            style="{{ in_array($pendaftar->status_applicant, ['In-review', 'Shortlist']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
             Interview
           </a>
           <a data-target="hiredRejectContent"
             class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
-            style="{{ in_array($pendaftar->status_applicant, ['In-review','Shortlist', 'Interview']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
+            style="{{ in_array($pendaftar->status_applicant, ['In-review', 'Shortlist','Interview']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
             Hire / Reject
           </a>
         </div>
