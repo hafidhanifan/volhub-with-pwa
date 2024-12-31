@@ -329,11 +329,16 @@
               {{-- Modal add / update note start --}}
               <div id="addNoteModal"
                 class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                <div class="bg-white rounded-lg w-96 p-6 relative">
-                  <button id="closeModalBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
-                    &times;
-                  </button>
-                  <h2 class="text-lg font-bold mb-4">Add Note</h2>
+                <div class="bg-white rounded-lg w-4/5 p-6 relative lg:max-w-md">
+                  <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-lg font-bold">Add Note</h2>
+                    <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+                      <svg class="w-6" viewBox="0 -0.5 25 25" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M6.97 16.47a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 1 0-1.06-1.06l1.06 1.06Zm-1.06-1.06a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 0 0-1.06-1.06l1.06 1.06Zm-5 3.94a.75.75 0 1 0-1.06 1.06l1.06-1.06Zm3.94 6.06a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-5-5a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM8.03 6.47a.75.75 0 0 0-1.06 1.06l1.06-1.06Zm0 11.06 5-5-1.06-1.06-5 5 1.06 1.06Zm5-5 5-5-1.06-1.06-5 5 1.06 1.06Zm-1.06 0 5 5 1.06-1.06-5-5-1.06 1.06Zm1.06-1.06-5-5-1.06 1.06 5 5 1.06-1.06Z" />
+                      </svg>
+                    </button>
+                  </div>
                   <form id="addNoteForm">
                     <div class="mb-4">
                       <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
@@ -345,15 +350,18 @@
                       <textarea id="note" name="note" rows="4"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"></textarea>
                     </div>
-                    <button type="submit"
-                      class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">Add</button>
+                    <div class="flex w-full justify-end">
+                      <button type="submit"
+                        class="w-fit bg-sky-500 text-white py-2 px-2 rounded-md hover:bg-sky-600">Add New
+                        Note</button>
+                    </div>
                   </form>
                 </div>
               </div>
               {{-- Modal add / update note end --}}
 
               <div class="border rounded-lg mt-4 p-4">
-                <div class="flex justify-between">
+                <div class="flex flex-col gap-2 md:flex-row md:gap-0 md:justify-between">
                   <div class="flex gap-2">
                     <svg class="w-5 stroke-gray-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
