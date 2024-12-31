@@ -377,17 +377,60 @@
               </div>
               <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide justify-between">
                 <div>
-                  <button
+                  <button id="hireButton"
                     class="w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50">
                     Hire
                   </button>
                 </div>
                 <div>
-                  <button class="w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50">
+                  <button id="rejectButton"
+                    class="w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50">
                     Reject
                   </button>
                 </div>
               </div>
+
+              {{-- Hire modal start --}}
+              <div id="hireModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div class="bg-white rounded-lg w-96 p-6 relative">
+                  <button id="closeHireBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                    &times;
+                  </button>
+                  <h2 class="text-lg font-bold mb-4">Add Reject Note</h2>
+                  <form id="">
+                    <div class="mb-4">
+                      <label for="note" class="block text-sm font-medium text-gray-700">Reject Note</label>
+                      <textarea id="note" name="note" rows="4"
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"></textarea>
+                    </div>
+                    <button type="submit"
+                      class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">Add</button>
+                  </form>
+                </div>
+              </div>
+              {{-- Hire modal end --}}
+
+              {{-- Reject modal start --}}
+              <div id="rejectModal"
+                class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <div class="bg-white rounded-lg w-96 p-6 relative">
+                  <button id="closeRejectBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                    &times;
+                  </button>
+                  <h2 class="text-lg font-bold mb-4">Add Hire Note</h2>
+                  <form id="">
+                    <div class="mb-4">
+                      <label for="note" class="block text-sm font-medium text-gray-700">Hire Note</label>
+                      <textarea id="note" name="note" rows="4"
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"></textarea>
+                    </div>
+                    <button type="submit"
+                      class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">Add</button>
+                  </form>
+                </div>
+              </div>
+              {{-- Reject modal end --}}
+
               <div class="border my-6"></div>
               <div class="flex justify-between">
                 <h4 class="font-semibold text-gray-500">Note</h4>
