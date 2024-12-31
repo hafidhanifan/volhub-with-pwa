@@ -60,7 +60,7 @@ class MitraController extends Controller
                             
         $kategori = Kategori::all();
         $sistemKegiatan = ['offline', 'online'];
-        return view('mitra.layout.add-kegiatan', compact('kategori', 'sistemKegiatan', 'mitra', 'kegiatan'));
+        return view('mitra.layout.add-kegiatan', compact('kategori', 'sistemKegiatan', 'mitra'));
     }
 
     public function addKegiatanAction(Request $request, $id)
@@ -315,63 +315,79 @@ class MitraController extends Controller
     public function showDetailPendaftarPage($id, $id_pendaftar)
     {
         $mitra = Mitra::find($id);
-        $kegiatans = Kegiatan::where('id_mitra', $mitra->id_mitra)->get();
         $statusInterview = ['Not scheduled yet', 'On progress', 'Interview Completed'];
         $pendaftar = Pendaftar::with(['user'])->find($id_pendaftar);
 
         if (!$pendaftar) {
             return redirect()->route('mitra.pendaftar')->with('error', 'Pendaftar tidak ditemukan.');
-        } 
-
-        $formattedInterviewDate = null;  // Default value
-        $formattedNoteDate = null; 
-
-        // Pengecekan status interview dan pembaruan status sesuai kondisi
-        
-
-            // Cek apakah tgl_interview dan lokasi_interview sudah diatur
-            if ($pendaftar->tgl_interview && $pendaftar->lokasi_interview) {
-                // Format tanggal interview menjadi "26 August 2024"
-                $interviewDate = Carbon::parse($pendaftar->tgl_interview);
-                $formattedInterviewDate = $interviewDate->translatedFormat('d F Y');
-
-                // Cek jika tanggal interview sudah lewat
-                $endOfInterviewDay = $interviewDate->endOfDay();
-                if (Carbon::now()->greaterThan($endOfInterviewDay)) {
-                    $pendaftar->status_interview = 'Interview Completed';
-                } else {
-                    $pendaftar->status_interview = 'On progress';
-                }
-                $pendaftar->save();
-            } else {
-                $pendaftar->status_interview = 'Not scheduled yet';
-                $pendaftar->save();
-            }
-
-            if ($pendaftar->tgl_note) {
-                $formattedNoteDate = Carbon::parse($pendaftar->tgl_note)->translatedFormat('d F Y');
-            }
-        
-
-        $id_user = $pendaftar->user->id;
-
-        // Menghitung jumlah hari yang telah berlalu sejak tanggal pendaftaran
-        $tglPendaftaran = Carbon::parse($pendaftar->tgl_pendaftaran);
-        $daysAgo = $tglPendaftaran->diffInDays(Carbon::now(), false); // Menggunakan diffInDays tanpa syntax
-
-
-        // Mengambil data kegiatan berdasarkan ID yang diperoleh
-        $experienceCount = User::find($id_user)->experiences()->count();
-
-        // $acceptedExperienceCount = $acceptedKegiatans->count();
-
-        foreach ($kegiatans as $kegiatan) {
-            // Menghitung sisa hari dengan penutupan dihitung sampai akhir hari (23:59:59)
-            $endOfDay = Carbon::parse($kegiatan->tgl_penutupan)->endOfDay();
-            $kegiatan->sisa_hari = Carbon::now()->diffInDays($endOfDay, false);
         }
 
-        return view('mitra.layout.detail-pendaftar', compact('mitra', 'kegiatans', 'pendaftar', 'daysAgo', 'experienceCount', 'statusInterview', 'formattedInterviewDate', 'formattedNoteDate'));
+        // Ambil kegiatan berdasarkan id_kegiatan dari pendaftar
+        $kegiatan = Kegiatan::find($pendaftar->id_kegiatan);
+
+        $statusPenutupan = null; // Status default
+
+        if ($kegiatan) {
+            $tglPenutupan = Carbon::parse($kegiatan->tgl_penutupan);
+            $endOfDay = $tglPenutupan->endOfDay();
+            
+            if (Carbon::now()->isSameDay($tglPenutupan)) {
+                $statusPenutupan = 'Today';
+            } elseif (Carbon::now()->greaterThan($endOfDay)) {
+                $statusPenutupan = 'Closed';
+            } else {
+                $kegiatan->sisa_hari = Carbon::now()->diffInDays($endOfDay, false);
+            }
+        }
+
+        $formattedInterviewDate = null;
+        $formattedNoteDate = null;
+
+        // Pengecekan status interview
+        if ($pendaftar->tgl_interview && $pendaftar->lokasi_interview) {
+            // Format tanggal interview
+            $interviewDate = Carbon::parse($pendaftar->tgl_interview);
+            $formattedInterviewDate = $interviewDate->translatedFormat('d F Y');
+
+            // Cek jika tanggal interview sudah lewat
+            $endOfInterviewDay = $interviewDate->endOfDay();
+            if (Carbon::now()->greaterThan($endOfInterviewDay)) {
+                $pendaftar->status_interview = 'Interview Completed';
+            } else {
+                $pendaftar->status_interview = 'On progress';
+            }
+        } else {
+            $pendaftar->status_interview = 'Not scheduled yet';
+        }
+        $pendaftar->save();
+
+        // Format tanggal note jika ada
+        if ($pendaftar->tgl_note) {
+            $formattedNoteDate = Carbon::parse($pendaftar->tgl_note)->translatedFormat('d F Y');
+        }
+
+        // Menghitung jumlah hari sejak tanggal pendaftaran
+        $tglPendaftaran = Carbon::parse($pendaftar->tgl_pendaftaran);
+        if ($tglPendaftaran->isToday()) {
+            $daysAgo = 'Today';
+        } else {
+            $daysAgo = $tglPendaftaran->diffInDays(Carbon::now(), false) . ' days ago';
+        }
+
+        // Menghitung jumlah pengalaman user
+        $experienceCount = $pendaftar->user->experiences()->count();
+
+        return view('mitra.layout.detail-pendaftar', compact(
+            'mitra',
+            'kegiatan',
+            'pendaftar',
+            'daysAgo',
+            'experienceCount',
+            'statusInterview',
+            'formattedInterviewDate',
+            'formattedNoteDate',
+            'statusPenutupan'
+        ));
     }
 
     public function addInterviewAction(Request $request, $id_pendaftar)
@@ -464,16 +480,8 @@ class MitraController extends Controller
             $kegiatan->sisa_hari = max($sisaHari, 0);
         }
         $pendaftar->save();
-        
-        // Jika request adalah AJAX, kirim respons JSON
-        if (request()->ajax()) {
-            return response()->json([
-                'status' => 'success',
-                'sisa_hari' => $kegiatan->sisa_hari,
-            ]);
-        }
 
-        return redirect()->back()->with('success', 'Status pendaftaran berhasil diperbarui.');
+        return redirect()->back()->with('targetStage', 'shortlisted');
     }
 
     public function interview($id_pendaftar)
@@ -489,7 +497,7 @@ class MitraController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Status pendaftaran berhasil diperbarui.');
+        return redirect()->back()->with('targetStage', 'interviewContent');
     }
 
     public function hire(Request $request, $id_pendaftar)
