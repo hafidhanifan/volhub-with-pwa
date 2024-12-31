@@ -110,7 +110,7 @@ class UserController extends Controller
 
             $extension = $request->file('cv')->getClientOriginalExtension();
             $newName = $request->nama_user.'-'.'cv'.'-'.now()->timestamp.'.'.$extension;
-            $request->file('cv')->storeAs('cv', $newName);
+            $request->file('cv')->storeAs('cv', $newName, 'public');
             
             // Update field 'cv' di tabel users
             $user->cv = $request['cv'] = $newName;
@@ -315,7 +315,7 @@ class UserController extends Controller
 
             $extension = $request->file('cv')->getClientOriginalExtension();
             $newName = $request->nama_user.'-'.'cv'.'-'.now()->timestamp.'.'.$extension;
-            $request->file('cv')->storeAs('cv', $newName);
+            $request->file('cv')->storeAs('cv', $newName, 'public');
             
             // Update field 'cv' di tabel users
             $user->cv = $request['cv'] = $newName;
