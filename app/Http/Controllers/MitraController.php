@@ -403,16 +403,15 @@ class MitraController extends Controller
         }
 
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Interview schedule added successfully',
-            'tgl_interview' => $formattedInterviewDate,
-            'lokasi_interview' => $pendaftar->lokasi_interview,
-            'status_interview' => $statusInterview,
-        ]);
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Interview schedule added successfully',
+        //     'tgl_interview' => $formattedInterviewDate,
+        //     'lokasi_interview' => $pendaftar->lokasi_interview,
+        //     'status_interview' => $statusInterview,
+        // ]);
 
-        return redirect()->back()
-                 ->with('success', 'Status pendaftaran berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Status pendaftaran berhasil diperbarui.');
     }
 
     public function addNoteAction(Request $request, $id_pendaftar)
