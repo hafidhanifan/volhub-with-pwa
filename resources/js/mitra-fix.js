@@ -349,3 +349,26 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Modal Add Note
+    const scheduleModal = document.getElementById("scheduleModal");
+    const scheduleButton = document.getElementById("scheduleButton");
+    const closeSchedule = document.getElementById("closeScheduleBtn");
+
+    if (scheduleModal && scheduleButton && closeSchedule) {
+        scheduleButton.addEventListener("click", () => {
+            scheduleModal.classList.remove("hidden");
+        });
+
+        closeSchedule.addEventListener("click", () => {
+            scheduleModal.classList.add("hidden");
+        });
+
+        scheduleModal.addEventListener("click", (e) => {
+            if (e.target === scheduleModal) {
+                scheduleModal.classList.add("hidden");
+            }
+        });
+    }
+});

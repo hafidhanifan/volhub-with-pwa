@@ -34,6 +34,7 @@
           @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
           {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Scheduled' : 'Schedule' }}
         </button>
+        <button id="scheduleButton">Scheduled</button>
         <button class="w-1/4 py-2 border-2 border-sky-200 rounded-md flex justify-center bg-sky-50">
           <svg class="w-8 stroke-sky-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -45,6 +46,31 @@
           </svg>
         </button>
       </div>
+
+      {{-- Schedule modal start --}}
+      <div id="scheduleModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg w-96 p-6 relative">
+          <button id="closeScheduleBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+            &times;
+          </button>
+          <h2 class="text-lg font-bold mb-4">Add Schedule</h2>
+          <form id="">
+            <div class="mb-4">
+              <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+              <input type="date" id="date" name="date"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500">
+            </div>
+            <div class="mb-4">
+              <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+              <textarea id="location" name="note" rows="4"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">Add</button>
+          </form>
+        </div>
+      </div>
+      {{-- Schedule modal end --}}
+
       <div class="border my-4"></div>
       <div class="mb-2">
         <h3 class="font-semibold">Contact</h3>
