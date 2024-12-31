@@ -232,15 +232,18 @@
         <div id="currentStageContainer"
           class="button_menu_hiring_stage w-full mt-2 overflow-x-auto flex scrollbar-hide lg:grid lg:grid-cols-4">
           <a data-target="inReview" id="inReviewBtn"
-            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover active">
+            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-l-2 border-t-2 border-r-2 text-currentStageFont border-b-2 border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
+            style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
             In-review
           </a>
           <a data-target="shortlisted"
-            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
+            style="{{ in_array($pendaftar->status_applicant, ['Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
             Shortlisted
           </a>
           <a data-target="interviewContent"
-            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover">
+            class="current-stage-button flex-shrink-0 px-4 py-2 cursor-pointer font-medium border-t-2 border-r-2 border-b-2 text-currentStageFont border-currentStageBorder hover:bg-currentStageBg hover:border-currentStageBorderHover"
+            style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}">
             Interview
           </a>
           <a data-target="hiredRejectContent"
@@ -274,20 +277,24 @@
                   <form id="shortlistForm" action="{{ route('applicant.shortlist', ['id' => $mitra->id_mitra, 'id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
                     @csrf
                     <button class="w-32 rounded-sm py-2 cursor-pointer border border-sky-500 text-sky-500 bg-sky-50"
-                      type="submit" id="shortlistActionBtn" data-applicant-id="{{ $pendaftar->id_pendaftar }}" data-target="shortlisted" 
+                      type="submit" id="shortlistActionBtn" data-target="shortlisted" 
                       style="{{ in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
                       @if (in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject'])) disabled @endif>
                       {{ in_array($pendaftar->status_applicant, ['Shortlist', 'Interview', 'Hire', 'Reject']) ? 'Shortlisted' : 'Shortlist' }}
                     </button>
                   </form>
                   <button
-                    class="w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50">
-                    Hire
+                    class="hireButton w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50"
+                    style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                    @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
+                    {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Hired' : 'Hire' }}
                   </button>
                 </div>
                 <div>
-                  <button class="w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50">
-                    Reject
+                  <button class="rejectButton w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50"
+                    style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                    @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
+                    {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Rejected' : 'Reject' }}
                   </button>
                 </div>
               </div>
@@ -318,13 +325,17 @@
                   </button>
                 </form>
                 <button
-                  class="w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50">
-                  Hire
+                  class="hireButton w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50"
+                  style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                  @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
+                  {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Hired' : 'Hire' }}
                 </button>
               </div>
               <div>
-                <button class="w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50">
-                  Reject
+                <button class="rejectButton w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50"
+                  style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                  @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
+                  {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Rejected' : 'Reject' }}
                 </button>
               </div>
             </div>
@@ -336,49 +347,49 @@
                 <div class="flex flex-col">
                   <span class="block text-gray-500">Interview Date</span>
                   @if ($pendaftar->tgl_interview)
-                  <p class="py-1">{{ $formattedInterviewDate }}</p>
+                    <p class="py-1">{{ $formattedInterviewDate }}</p>
                   @else
-                  <p class="py-1">Set schedule first</p>
+                    <p class="py-1">Set schedule first</p>
                   @endif
                 </div>
                 <div class="flex flex-col mt-6 lg:mt-0">
                   <span class="block text-gray-500 lg:px-2">Interview Status</span>
                   @if ($pendaftar->status_applicant === 'Hire' || $pendaftar->status_applicant === 'Reject')
-                  @if ($pendaftar->tgl_interview)
-                  @if ($pendaftar->status_interview === 'Interview Completed')
-                  <span
-                    class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">
-                    {{ ucfirst($pendaftar->status_interview) }}
-                  </span>
+                    @if ($pendaftar->tgl_interview)
+                      @if ($pendaftar->status_interview === 'Interview Completed')
+                      <span
+                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">
+                        {{ ucfirst($pendaftar->status_interview) }}
+                      </span>
+                      @else
+                      <span
+                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">On
+                        progress
+                      </span>
+                      @endif
+                    @else
+                      <span
+                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">Not
+                        scheduled yet
+                        Not scheduled yet
+                      </span>
+                    @endif
                   @else
-                  <span
-                    class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">On
-                    progress
-                  </span>
-                  @endif
-                  @else
-                  <span
-                    class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-emerald-500 text-emerald-500 bg-emerald-50">Not
-                    scheduled yet
-                    Not scheduled yet
-                  </span>
-                  @endif
-                  @else
-                  @if($pendaftar->tgl_interview)
-                  <span class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl 
+                    @if($pendaftar->tgl_interview)
+                      <span class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl 
                         @if ($pendaftar->status_interview === 'On progress') 
                           border border-sky-500 text-sky-500 bg-sky-50
                         @else ($pendaftar->status_interview === 'Interview Completed') 
                           border border-emerald-500 text-emerald-500 bg-emerald-50
                         @endif">
-                    {{ ucfirst($pendaftar->status_interview) }}
-                  </span>
-                  @else
-                  <span
-                    class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-amber-500 text-amber-500 bg-amber-50">
-                    Not scheduled yet
-                  </span>
-                  @endif
+                        {{ ucfirst($pendaftar->status_interview) }}
+                      </span>
+                    @else
+                      <span
+                        class="block w-fit px-2 py-1 text-sm font-semibold rounded-xl border border-amber-500 text-amber-500 bg-amber-50">
+                        Not scheduled yet
+                      </span>
+                    @endif
                   @endif
                 </div>
               </div>
@@ -392,59 +403,21 @@
               </div>
               <div class="mt-12 flex gap-4 w-full overflow-x-auto scrollbar-hide justify-between">
                 <div>
-                  <button id="hireButton"
-                    class="w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50">
-                    Hire
+                  <button
+                    class="hireButton w-32 rounded-sm py-2 cursor-pointer border border-emerald-500 text-emerald-500 bg-emerald-50"
+                    style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                    @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
+                    {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Hired' : 'Hire' }}
                   </button>
                 </div>
                 <div>
-                  <button id="rejectButton"
-                    class="w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50">
-                    Reject
+                  <button class="rejectButton w-32 rounded-sm py-2 cursor-pointer border border-rose-500 text-rose-500 bg-rose-50"
+                    style="{{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'color: gray; opacity: 0.5; pointer-events: none;' : '' }}"
+                    @if (in_array($pendaftar->status_applicant, ['Hire', 'Reject'])) disabled @endif>
+                    {{ in_array($pendaftar->status_applicant, ['Hire', 'Reject']) ? 'Rejected' : 'Reject' }}
                   </button>
                 </div>
               </div>
-
-              {{-- Hire modal start --}}
-              <div id="hireModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                <div class="bg-white rounded-lg w-96 p-6 relative">
-                  <button id="closeHireBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
-                    &times;
-                  </button>
-                  <h2 class="text-lg font-bold mb-4">Add Reject Note</h2>
-                  <form id="">
-                    <div class="mb-4">
-                      <label for="note" class="block text-sm font-medium text-gray-700">Reject Note</label>
-                      <textarea id="note" name="note" rows="4"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"></textarea>
-                    </div>
-                    <button type="submit"
-                      class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">Add</button>
-                  </form>
-                </div>
-              </div>
-              {{-- Hire modal end --}}
-
-              {{-- Reject modal start --}}
-              <div id="rejectModal"
-                class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                <div class="bg-white rounded-lg w-96 p-6 relative">
-                  <button id="closeRejectBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
-                    &times;
-                  </button>
-                  <h2 class="text-lg font-bold mb-4">Add Hire Note</h2>
-                  <form id="">
-                    <div class="mb-4">
-                      <label for="note" class="block text-sm font-medium text-gray-700">Hire Note</label>
-                      <textarea id="note" name="note" rows="4"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"></textarea>
-                    </div>
-                    <button type="submit"
-                      class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">Add</button>
-                  </form>
-                </div>
-              </div>
-              {{-- Reject modal end --}}
 
               <div class="border my-6"></div>
               <div class="flex justify-between">
@@ -532,18 +505,60 @@
               @endif
             </div>
           </div>
-        </div>
-        <div id="hiredRejectContent" class="current-stage-content hidden">
-          <div class="mt-4">
-            <h4 class="font-semibold text-gray-500">Stage Info</h4>
-            <div class="border rounded-lg p-4">
-              <div class="flex justify-between">
-                <span>Message to applicant</span>
-                <span>31 December 2025</span>
+          <div id="hiredRejectContent" class="current-stage-content hidden">
+            <div class="mt-4 flex flex-col gap-4">
+              <h4 class="font-semibold text-gray-500">Stage Info</h4>
+              <div class="border rounded-lg p-4">
+                <div class="flex justify-between">
+                  <p class="font-semibold mb-4">Message to applicant</p>
+                </div>
+                <p>{{$pendaftar->note_to_applicant}}</p>
               </div>
-              <p>Message disini</p>
             </div>
           </div>
+          {{-- Hire modal start --}}
+          <div id="hireModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white rounded-lg w-96 p-6 relative">
+              <button id="closeHireBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                &times;
+              </button>
+              <h2 class="text-lg font-bold mb-4">Add Hire Note</h2>
+              <form id="hireForm" action="{{ route('applicant.hire', ['id_pendaftar' => $pendaftar->id_pendaftar]) }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                  <label for="note" class="block text-sm font-medium text-gray-700">Hire Note</label>
+                  <textarea id="note" name="note" rows="4"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"></textarea>
+                </div>
+                <button type="submit"
+                  class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">Add</button>
+              </form>
+            </div>
+          </div>
+          {{-- Hire modal end --}}
+
+          {{-- Reject modal start --}}
+          <div id="rejectModal"
+            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white rounded-lg w-96 p-6 relative">
+              <button id="closeRejectBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                &times;
+              </button>
+              <form id="rejectForm" action="{{ route('applicant.reject', ['id_pendaftar' => $pendaftar->id_pendaftar,])}}" method="POST">
+                @csrf
+                <h2 class="text-lg font-bold mb-4">Add Reject Note</h2>
+                  <div class="mb-4">
+                    <label for="note" class="block text-sm font-medium text-gray-700">Reject Note</label>
+                    <textarea id="note" name="note_to_applicant" rows="4"
+                      class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"></textarea>
+                  </div>
+                  <button type="submit"
+                    class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-sky-700">Add
+                  </button>
+              </form>
+            </div>
+          </div>
+          {{-- Reject modal end --}}
         </div>
       </div>
     </div>

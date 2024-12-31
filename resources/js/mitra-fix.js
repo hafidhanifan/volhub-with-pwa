@@ -404,16 +404,18 @@ document.addEventListener("DOMContentLoaded", () => {
 // Hire modal
 document.addEventListener("DOMContentLoaded", () => {
     const hireModal = document.getElementById("hireModal");
-    const hireButton = document.getElementById("hireButton");
+    const hireButtons = document.querySelectorAll(".hireButton"); // Menggunakan class
     const closeHireButton = document.getElementById("closeHireBtn");
 
     const rejectModal = document.getElementById("rejectModal");
-    const rejectButton = document.getElementById("rejectButton");
+    const rejectButtons = document.querySelectorAll(".rejectButton"); // Menggunakan class
     const closeRejectButton = document.getElementById("closeRejectBtn");
 
-    if (hireModal && hireButton && closeHireButton) {
-        hireButton.addEventListener("click", () => {
-            hireModal.classList.remove("hidden");
+    if (hireModal && hireButtons.length && closeHireButton) {
+        hireButtons.forEach((hireButton) => {
+            hireButton.addEventListener("click", () => {
+                hireModal.classList.remove("hidden");
+            });
         });
 
         closeHireButton.addEventListener("click", () => {
@@ -427,9 +429,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (rejectModal && rejectButton && closeRejectButton) {
-        rejectButton.addEventListener("click", () => {
-            rejectModal.classList.remove("hidden");
+    if (rejectModal && rejectButtons.length && closeRejectButton) {
+        rejectButtons.forEach((rejectButton) => {
+            rejectButton.addEventListener("click", () => {
+                rejectModal.classList.remove("hidden");
+            });
         });
 
         closeRejectButton.addEventListener("click", () => {
