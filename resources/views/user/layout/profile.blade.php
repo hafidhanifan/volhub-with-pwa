@@ -58,9 +58,13 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium">Instagram</span>
-            <a class="text-sm hover:text-blueText block"
-              href="{{ (strpos($user->instagram, 'http://') === 0 || strpos($user->instagram, 'https://') === 0) ? $user->instagram : 'https://' . $user->instagram }}"
-              target="_blank">{{$user->instagram}}</a>
+            @if($user->instagram)
+              <a class="text-sm hover:text-blueText block"
+                href="{{ (strpos($user->instagram, 'http://') === 0 || strpos($user->instagram, 'https://') === 0) ? $user->instagram : 'https://' . $user->instagram }}"
+                target="_blank">{{$user->instagram}}</a>
+            @else
+              <p class="text-sm">You haven't added your Instagram link</p>
+            @endif
           </div>
         </div>
 
@@ -76,8 +80,12 @@
           </svg>
           <div class="flex flex-col">
             <span class="font-medium">Linkedin</span>
-            <a href="{{ (strpos($user->linkedIn, 'http://') === 0 || strpos($user->linkedIn, 'https://') === 0) ? $user->linkedIn : 'https://' . $user->linkedIn }}"
-              class="text-sm block hover:text-blueText">{{$user->linkedIn}}</a>
+            @if($user->instagram)
+              <a href="{{ (strpos($user->linkedIn, 'http://') === 0 || strpos($user->linkedIn, 'https://') === 0) ? $user->linkedIn : 'https://' . $user->linkedIn }}"
+                class="text-sm block hover:text-blueText">{{$user->linkedIn}}</a>
+            @else
+              <p class="text-sm">You haven't added your LinkedIn link</p>
+            @endif
           </div>
         </div>
 
@@ -337,7 +345,7 @@
                 <span class="text-lg font-semibold">Description</span>
               </div>
               @if($user->deskripsi)
-                <div class="overflow-hidden px-3 pt-4">
+                <div class="overflow-hidden px-3 pt-4 pb-4">
                   <p class="text-base mt-2">
                     @if (strlen($user->deskripsi) > 200)
                     <span class="short-desc">{{ Str::limit($user->deskripsi, 200, '...') }}</span>

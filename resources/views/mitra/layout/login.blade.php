@@ -1,48 +1,60 @@
 @include('user.layout.templates.header')
-    <div class="container">
-        <div class="container-left">
-            <header class="container-left__header">
-                <div class="container-left__content">
-                    <img class="content-logo" src="{{asset('img/logo.png')}}">
-                </div>
-            </header>
-            <div class="main-container-login">
-                <main class="main-content">
-                    <div class="content-left__text">
-                        <p class="content-left__text-up">Selamat Datang!</p>
-                        <p class="content-left__text-down">Rekrut volunteer cepat dan tepat!</p>
-                    </div>
-                        <form {{ route('mitra.login.action') }} method="POST" class="login-form">
-                            @csrf
-                            <div class="form-signup">
-                                <div class="form-login-container">
-                                    <div class="form-signup-item">
-                                        <label for="username">Username</label>
-                                        <input type="text" id="username" name="username" required>
-                                    </div>
-                                    <div class="form-login-item">
-                                        <label for="password">Kata Sandi</label>
-                                        <input type="password" id="password" name="password" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-signup-container__button">
-                                <button class="form-login-button__login" type="submit">Masuk</button>
-                                <a href="{{route('mitra.register')}}" class="form-login-button__signup">Belum Punya Akun?</a>
-                            </div>
-                        </form>
-                </main>
+
+<body class="relative bg-[url('../image/login-bg.jpg')] bg-cover bg-center bg-no-repeat w-full min-h-screen">
+    <div class="absolute z-0 inset-0 bg-black bg-opacity-20"></div>
+    <!-- Content start -->
+    <div class="absolute w-full top-0 z-20 flex justify-between px-2 py-4">
+        <a href="{{route('home')}}" class="block text-lg font-medium py-1 px-4 text-white">Employer</a>
+        <a href="{{route('mitra.register')}}" class="text-lg font-medium text-white px-4 py-1 rounded-lg hover:bg-white hover:text-sky-500">
+            Sign Up
+        </a>
+    </div>
+
+    <!-- wrapper -->
+    <div class="relative z-10 flex items-center justify-center min-h-screen">
+        <div class="bg-white p-8 w-5/6 mx-auto my-auto rounded-lg sm:max-w-80">
+            <div class="flex flex-col gap-2 mx-auto max-w-52 md:max-w-64">
+                <h1 class="text-center font-semibold md:text-xl">Employer Sign In</h1>
+                <p class="py-2 text-center text-xs md:text-sm">
+                    Hey, Enter your details to get sign in to your account
+                </p>
             </div>
-        </div>
-        <div class="container-right">
-            <div class="container-right__content">
-                <img class="content__hero-image" src="{{asset('img/hero.jpg')}}">
-                <div class="content__hero-tagline">
-                    <h1 class="content__hero-tagline__text">Muda, Bergerak, Bertindak.</h1>
+            <form action="{{ route('mitra.login.action') }}" method="POST" class="mt-6 space-y-4">
+                @csrf
+                <!-- Username Input -->
+
+                <div class="mt-1">
+                    <label class="text-sm ">Username</label>
+                    <input type="text" id="username" name="username"
+                        class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+                        placeholder="Enter your username" required />
                 </div>
+
+                <!-- Password Input -->
+
+                <div class="mt-1">
+                    <label class="text-sm ">Password</label>
+                    <input type="password" id="password" name="password"
+                        class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 p-2.5 placeholder-gray-400"
+                        placeholder="Enter your password" required />
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit"
+                        class="w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1">
+                        Sign In
+                    </button>
+                </div>
+            </form>
+            <div class="mt-6 flex justify-center gap-1">
+                <p class="text-xs md:text-sm">Don't have account?</p>
+                <a href="{{route('mitra.register')}}" class="text-sky-500 text-xs md:text-sm">Register Now</a>
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
+    <!-- Content end -->
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </html>
+@include('sweetalert::alert')

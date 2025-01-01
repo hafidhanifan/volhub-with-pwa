@@ -4,26 +4,26 @@
   <div class="absolute z-0 inset-0 bg-black bg-opacity-20"></div>
   <!-- Content start -->
   <div class="absolute w-full top-0 z-20 flex justify-between px-2 py-4">
-    <span class="block text-lg font-medium py-1 px-4 text-white">User</span>
-    <button class="text-lg font-medium text-white px-4 py-1 rounded-lg hover:bg-white hover:text-sky-600">
+    <a href="{{route('home')}}" class="block text-lg font-medium py-1 px-4 text-white">Volunteer</a>
+    <a href="{{route('user.login')}}" class="text-lg font-medium text-white px-4 py-1 rounded-lg hover:bg-white hover:text-sky-600">
       Sign In
-    </button>
+    </a>
   </div>
 
   <!-- wrapper -->
   <div class="relative z-10 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 w-5/6 mx-auto my-auto rounded-lg lg:w-2/6">
       <div class="flex flex-col gap-2 mx-auto max-w-52 md:max-w-64">
-        <h1 class="text-center font-semibold md:text-xl">Register User</h1>
+        <h1 class="text-center font-semibold md:text-xl">Register Volunteer</h1>
         <p class="py-2 text-center text-xs md:text-sm">
-          Hey, Enter your details to get sign in to your account
+          Hey, Enter your details to get Register your account
         </p>
       </div>
       <form action="{{ route('user.register.action')}}" method="POST">
         @csrf
         <div class="mt-6 space-y-4 p-2 overflow-y-auto lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
         <!-- Username Input -->
-          <div class="mt-1">
+          <div class="">
             <label class="text-sm ">Username</label>
             <input type="text" id="username" name="username"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
@@ -31,15 +31,15 @@
           </div>
 
           <!-- Password Input -->
-          <div class="mt-1">
+          <div class="">
             <label class="text-sm ">Password</label>
             <input type="password" id="password" name="password"
-              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 p-2.5 placeholder-gray-400"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
               placeholder="Enter your password" required />
           </div>
 
           <!-- Email Input -->
-          <div class="mt-1">
+          <div class="">
             <label class="text-sm ">Email</label>
             <input type="email" id="email" name="email_user"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
@@ -47,7 +47,7 @@
           </div>
 
           <!-- Name Input -->
-          <div class="mt-1">
+          <div class="">
             <label class="text-sm ">Full name</label>
             <input type="text" id="name" name="nama_user"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
@@ -55,7 +55,7 @@
           </div>
 
           <!-- Phone Number Input -->
-          <div class="mt-1">
+          <div class="">
             <label class="text-sm ">Phone number</label>
             <input type="tel" id="phone" name="nomor_telephone"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
@@ -72,8 +72,8 @@
         </div>
       </form>
       <div class="mt-6 flex justify-center gap-1">
-        <p class="text-xs md:text-sm">Don't have account?</p>
-        <a href="" class="text-sky-500 text-xs md:text-sm">Register Now</a>
+        <p class="text-xs md:text-sm">Already have account?</p>
+        <a href="{{route('user.login')}}" class="text-sky-500 text-xs md:text-sm">Sign In</a>
       </div>
     </div>
   </div>

@@ -4,17 +4,17 @@
     <div class="absolute z-0 inset-0 bg-black bg-opacity-20"></div>
     <!-- Content start -->
     <div class="absolute w-full top-0 z-20 flex justify-between px-2 py-4">
-        <span class="block text-lg font-medium py-1 px-4 text-white">Volunteer</span>
-        <button class="text-lg font-medium text-white px-4 py-1 rounded-lg hover:bg-white hover:text-sky-600">
+        <a href="{{route('home')}}"class="block text-lg font-medium py-1 px-4 text-white">Volunteer</a>
+        <a href="{{route('user.register')}}" class="text-lg font-medium text-white px-4 py-1 rounded-lg hover:bg-white hover:text-sky-500">
             Sign Up
-        </button>
+        </a>
     </div>
 
     <!-- wrapper -->
     <div class="relative z-10 flex items-center justify-center min-h-screen">
         <div class="bg-white p-8 w-5/6 mx-auto my-auto rounded-lg sm:max-w-80">
             <div class="flex flex-col gap-2 mx-auto max-w-52 md:max-w-64">
-                <h1 class="text-center font-semibold md:text-xl">Volunteer Login</h1>
+                <h1 class="text-center font-semibold md:text-xl">Volunteer Sign In</h1>
                 <p class="py-2 text-center text-xs md:text-sm">
                     Hey, Enter your details to get sign in to your account
                 </p>
@@ -43,7 +43,7 @@
                 <div>
                     <button type="submit"
                         class="w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1">
-                        Login
+                        Sign In
                     </button>
                 </div>
             </form>

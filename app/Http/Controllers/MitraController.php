@@ -51,7 +51,7 @@ class MitraController extends Controller
             }
         }
 
-        return view('mitra.layout.activity', compact('mitra', 'kegiatans', 'kegiatan'));
+        return view('mitra.layout.activity', compact('mitra', 'kegiatans'));
     }
 
     public function showAddKegiatanPage($id)
