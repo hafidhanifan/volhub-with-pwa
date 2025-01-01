@@ -1,10 +1,14 @@
 <!-- Sidebar Start -->
 <aside id="sidebar"
-  class="w-9/12 h-screen z-20 fixed left-0 top-0 transform -translate-x-full transition-transform duration-300 bg-white lg:w-1/4 lg:relative lg:border-r lg:translate-x-0">
+  class="w-3/5 h-screen z-20 fixed left-0 top-0 transform -translate-x-full transition-transform duration-300 bg-white md:w-2/6 lg:w-1/4 lg:relative lg:border-r lg:translate-x-0">
   <div class="px-2 py-4 flex items-center gap-3 border-b">
-    <img src="{{ asset('storage/logo/'.$mitra->logo) }}" alt="Logo Mitra"
-      class="max-w-14 bg-transparent rounded-full" />
-    <div class="">
+    @if(!empty($mitra->logo))
+    <img src="{{ asset('storage/logo/'.$mitra->logo) }}" alt="Logo Mitra" class="w-12 h-12 object-cover rounded-full" />
+    @else
+    <img class="w-12 h-12 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}" alt="Avatar" />
+    @endif
+
+    <div>
       <h1 class="text-xl line-clamp-1">{{$mitra->nama_mitra}}</h1>
       <p class="text-gray-500 text-sm">{{$mitra->email_mitra}}</p>
     </div>

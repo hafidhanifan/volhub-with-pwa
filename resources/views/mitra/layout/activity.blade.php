@@ -17,7 +17,7 @@
         <h1 class="font-normal text-lg">Volunteer Management</h1>
         <p class="text-gray-500 text-sm">Manage your volunteer data</p>
       </div>
-      <div class="pl-4 md:pr-4">
+      <div class="pl-4 mt-2 md:pr-4 md:mt-0">
         <a href="{{ route('mitra.add-kegiatan-page', ['id' => $mitra->id_mitra]) }}"
           class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
           Add Volunteer
@@ -63,19 +63,17 @@
         <?php $no = 1 ?>
         @foreach($kegiatans as $kegiatan)
         <tr id="activity" class="activity cursor-pointer hover:bg-button_hover2"
-          data-id-kegiatan="{{ $kegiatan->id_kegiatan }}"
-          data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}"
-          data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}"
-          data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}" 
+          data-id-kegiatan="{{ $kegiatan->id_kegiatan }}" data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}"
+          data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}" data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}"
           data-logo="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}"
           data-sistem-kegiatan="{{ $kegiatan->sistem_kegiatan}}"
-          data-pendaftar-count ="{{ $kegiatan->pendaftars_count}} applied"
+          data-pendaftar-count="{{ $kegiatan->pendaftars_count}} applied"
           data-deskripsi-kegiatan="{{ $kegiatan->deskripsi }}"
           data-nama-kriteria="{{ implode(',', $kegiatan->kriterias->pluck('nama_kriteria')->toArray()) }}"
           data-nama-benefit="{{ implode(',', $kegiatan->benefits->pluck('nama_benefit')->toArray()) }}"
           data-tgl-kegiatan="{{ $kegiatan->formatted_kegiatan_date }}"
           data-tgl-penutupan="{{ $kegiatan->formatted_penutupan_date }}">
-          
+
           <td class="px-6 py-4 text-sm text-gray-800">
             <span class="font-semibold">{{$kegiatan->nama_kegiatan}}</span>
             <p class="text-sm text-gray-500">{{$kegiatan->lokasi_kegiatan}}</p>
@@ -83,7 +81,9 @@
           <td class="px-6 py-4 text-sm text-gray-600">{{$kegiatan->formatted_kegiatan_date}}</td>
           <td class="px-6 py-4 text-sm text-gray-600">{{$kegiatan->formatted_penutupan_date}}</td>
           <td class="px-6 py-4 flex">
-            <form action="{{ route('mitra.delete-kegiatan-action', ['id' => $mitra->id_mitra, 'id_keg' => $kegiatan->id_kegiatan]) }}" method="POST" style="display:inline;">
+            <form
+              action="{{ route('mitra.delete-kegiatan-action', ['id' => $mitra->id_mitra, 'id_keg' => $kegiatan->id_kegiatan]) }}"
+              method="POST" style="display:inline;">
               @csrf
               @method('DELETE')
               <button type="submit" onclick="event.stopPropagation();">
@@ -103,8 +103,7 @@
     <!-- Volunteer list end -->
   </div>
   <!-- Detail volunteer start -->
-  <div id="detailVolunteer"
-  data-id-mitra="{{ auth()->user()->id_mitra }}"
+  <div id="detailVolunteer" data-id-mitra="{{ auth()->user()->id_mitra }}"
     class="fixed w-full h-screen top-0 bg-white transform translate-x-full transition-transform duration-500 ease-in-out z-50 overflow-y-auto lg:w-1/3 lg:right-0">
     <div class="relative h-20 rounded-t-lg bg-slate-100">
       <div class="absolute right-2 top-2">
@@ -154,7 +153,8 @@
       </div>
     </div>
     <div class="w-full p-4">
-      <a id="editBtn" href="#" class="w-full block text-center py-3 text-white font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
+      <a id="editBtn" href="#"
+        class="w-full block text-center py-3 text-white font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
         Edit Volunteer
       </a>
     </div>
