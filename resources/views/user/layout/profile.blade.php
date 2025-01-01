@@ -8,11 +8,11 @@
       <div class="flex items-center gap-4">
         @if(!empty($user->foto_profile))
         <img src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="profile user"
-          class="w-20 overflow-hidden rounded-full" />
+          class="w-16 h-16 object-cover rounded-full" />
         @else
         <img src="{{asset('img/logo-user.png')}}" alt="profile user" class="w-20 rounded-full" />
         @endif
-        <div class="">
+        <div>
           <h1 class="font-medium text-lg line-clamp-1">{{$user->nama_user}}</h1>
           <p class="text-sm line-clamp-2">
             {{$user->bio}}
@@ -59,11 +59,11 @@
           <div class="flex flex-col">
             <span class="font-medium">Instagram</span>
             @if($user->instagram)
-              <a class="text-sm hover:text-blueText block"
-                href="{{ (strpos($user->instagram, 'http://') === 0 || strpos($user->instagram, 'https://') === 0) ? $user->instagram : 'https://' . $user->instagram }}"
-                target="_blank">{{$user->instagram}}</a>
+            <a class="text-sm hover:text-blueText block"
+              href="{{ (strpos($user->instagram, 'http://') === 0 || strpos($user->instagram, 'https://') === 0) ? $user->instagram : 'https://' . $user->instagram }}"
+              target="_blank">{{$user->instagram}}</a>
             @else
-              <p class="text-sm">You haven't added your Instagram link</p>
+            <p class="text-sm">You haven't added your Instagram link</p>
             @endif
           </div>
         </div>
@@ -81,10 +81,10 @@
           <div class="flex flex-col">
             <span class="font-medium">Linkedin</span>
             @if($user->instagram)
-              <a href="{{ (strpos($user->linkedIn, 'http://') === 0 || strpos($user->linkedIn, 'https://') === 0) ? $user->linkedIn : 'https://' . $user->linkedIn }}"
-                class="text-sm block hover:text-blueText">{{$user->linkedIn}}</a>
+            <a href="{{ (strpos($user->linkedIn, 'http://') === 0 || strpos($user->linkedIn, 'https://') === 0) ? $user->linkedIn : 'https://' . $user->linkedIn }}"
+              class="text-sm block hover:text-blueText">{{$user->linkedIn}}</a>
             @else
-              <p class="text-sm">You haven't added your LinkedIn link</p>
+            <p class="text-sm">You haven't added your LinkedIn link</p>
             @endif
           </div>
         </div>
@@ -143,10 +143,13 @@
                   <img src="{{asset('img/logo-user.png')}}" alt="profile user" class="w-20 rounded-full" />
                   @endif
                   <div class="flex flex-col md:flex-row gap-4">
-                    <form id="updateProfilePictureForm" action="{{ route('user.edit-foto-profile-action', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+                    <form id="updateProfilePictureForm"
+                      action="{{ route('user.edit-foto-profile-action', ['id' => $user->id]) }}" method="POST"
+                      enctype="multipart/form-data">
                       @method('PUT')
                       @csrf
-                      <input type="file" id="uploadPictureInput" name="foto_profile" accept="image/*" style="display: none;">
+                      <input type="file" id="uploadPictureInput" name="foto_profile" accept="image/*"
+                        style="display: none;">
                       <button type="button" id="changePictureBtn"
                         class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Change Picture
@@ -183,7 +186,8 @@
                     <!-- Modal Alert Delete Picture End -->
                   </div>
                 </div>
-                <form class="mt-8" action="{{ route('user.edit-profile-action', ['id' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+                <form class="mt-8" action="{{ route('user.edit-profile-action', ['id' => $user->id]) }}" method="POST"
+                  enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
                   <div class="grid gap-6 mb-6">
@@ -203,11 +207,12 @@
                       <label for="genderUser" class="block mb-2 font-medium text-gray-900">Gender</label>
                       <select id="gender" name="gender"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert your gender" name="gender"> 
+                        placeholder="Insert your gender" name="gender">
                         <option value="">Choose Gender</option>
-                          @foreach($gender as $gender)
-                            <option value="{{ $gender }}" @if(old('gender', $user->gender) == $gender) selected @endif>{{ ucfirst($gender) }}</option>
-                          @endforeach
+                        @foreach($gender as $gender)
+                        <option value="{{ $gender }}" @if(old('gender', $user->gender) == $gender) selected @endif>{{
+                          ucfirst($gender) }}</option>
+                        @endforeach
                       </select>
                     </div>
                     <div>
@@ -228,9 +233,10 @@
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
                         placeholder="Insert your last education" name="pendidikan_terakhir">
                         <option value="">Choose Last Education</option>
-                          @foreach($pendidikanTerakhir as $pendidikan)
-                            <option value="{{ $pendidikan }}"@if(old('pendidikan', $user->pendidikan_terakhir) == $pendidikan) selected @endif>{{ ucfirst($pendidikan) }}</option>
-                          @endforeach
+                        @foreach($pendidikanTerakhir as $pendidikan)
+                        <option value="{{ $pendidikan }}" @if(old('pendidikan', $user->pendidikan_terakhir) ==
+                          $pendidikan) selected @endif>{{ ucfirst($pendidikan) }}</option>
+                        @endforeach
                       </select>
                     </div>
                     <div>
@@ -256,7 +262,8 @@
                 </form>
               </div>
               <div id="contactContent" class="hidden">
-                <form class="md:p-8" action="{{ route('user.edit-contact-action', ['id' => $user->id]) }}" method="POST">
+                <form class="md:p-8" action="{{ route('user.edit-contact-action', ['id' => $user->id]) }}"
+                  method="POST">
                   @csrf
                   @method('PUT')
                   <div class="grid gap-6 mb-6">
@@ -264,25 +271,29 @@
                       <label for="emailUser" class="block mb-2 font-medium text-gray-900">Email</label>
                       <input type="email" id="emailUser"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert your Email" name="email_user" value="{{ old('user', $user->email_user) }}"  />
+                        placeholder="Insert your Email" name="email_user"
+                        value="{{ old('user', $user->email_user) }}" />
                     </div>
                     <div>
                       <label for="phone" class="block mb-2 font-medium text-gray-900">Phone</label>
                       <input type="text" id="phone"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert your phone number" name="nomor_telephone" value="{{ old('user', $user->nomor_telephone) }}"  />
+                        placeholder="Insert your phone number" name="nomor_telephone"
+                        value="{{ old('user', $user->nomor_telephone) }}" />
                     </div>
                     <div>
                       <label for="instagramUser" class="block mb-2 font-medium text-gray-900">Instagram</label>
                       <input type="url" id="instagramUser"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert your instagram link" name="instagram" value="{{ old('user', $user->instagram) }}"  />
+                        placeholder="Insert your instagram link" name="instagram"
+                        value="{{ old('user', $user->instagram) }}" />
                     </div>
                     <div>
                       <label for="linkedInUser" class="block mb-2 font-medium text-gray-900">LinkedIn</label>
                       <input type="url" id="linkedInUser"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert your linkedIn link" name="linkedIn" value="{{ old('user', $user->linkedIn) }}"  />
+                        placeholder="Insert your linkedIn link" name="linkedIn"
+                        value="{{ old('user', $user->linkedIn) }}" />
                     </div>
                   </div>
                   <div class="flex justify-end">
@@ -308,7 +319,7 @@
                       <label for="passwordUser" class="block mb-2 font-medium text-gray-900">Password</label>
                       <input type="password" id="passwordUser" name="password"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert your bio" value="{{ old('user', $user->password) }}"  />
+                        placeholder="Insert your bio" value="{{ old('user', $user->password) }}" />
                     </div>
                   </div>
                   <div class="flex justify-end">
@@ -355,22 +366,22 @@
                 <span class="text-lg font-semibold">Description</span>
               </div>
               @if($user->deskripsi)
-                <div class="overflow-hidden px-3 pt-4 pb-4">
-                  <p class="text-base mt-2">
-                    @if (strlen($user->deskripsi) > 200)
-                    <span class="short-desc">{{ Str::limit($user->deskripsi, 200, '...') }}</span>
-                    <span class="more-desc hidden">{{ $user->deskripsi }}</span>
-                    <a href="javascript:void(0);"
-                      class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
-                      id="btn-more-desc">More</a>
-                    @else
-                    {{ $user->deskripsi }}
-                    @endif
-                  </p>
-                </div>
-                @else
-                  <p class="font-medium text-center mt-8 mb-8">Description information is not available</p>
-                @endif
+              <div class="overflow-hidden px-3 pt-4 pb-4">
+                <p class="text-base mt-2">
+                  @if (strlen($user->deskripsi) > 200)
+                  <span class="short-desc">{{ Str::limit($user->deskripsi, 200, '...') }}</span>
+                  <span class="more-desc hidden">{{ $user->deskripsi }}</span>
+                  <a href="javascript:void(0);"
+                    class="text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
+                    id="btn-more-desc">More</a>
+                  @else
+                  {{ $user->deskripsi }}
+                  @endif
+                </p>
+              </div>
+              @else
+              <p class="font-medium text-center mt-8 mb-8">Description information is not available</p>
+              @endif
             </div>
             <!-- CV Card Start -->
             <div class="lg:mt-8 border border-slate-300 rounded-2xl lg:w-2/6">
@@ -411,7 +422,7 @@
                   download>{{$user->cv}}</a>
               </div>
               @else
-                <p class="font-medium text-center mt-8 mb-8">CV is not available</p>
+              <p class="font-medium text-center mt-8 mb-8">CV is not available</p>
               @endif
             </div>
           </div>
@@ -474,9 +485,7 @@
                           Cancel
                         </button>
                         @isset($skill)
-                        <form id="confirmDeleteSkillButton"
-                          action=""
-                          method="POST">
+                        <form id="confirmDeleteSkillButton" action="" method="POST">
                           @csrf
                           @method('DELETE')
                           <button type="submit"
@@ -506,15 +515,15 @@
               <!-- Modal Add Skill End -->
             </div>
             @if($user->skills->isNotEmpty())
-              <div class="p-4 flex flex-wrap gap-2">
-                <?php $no = 1 ?>
-                @foreach($user->skills as $skill)
-                <span
-                  class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">{{$skill->nama_skill}}</span>
-                @endforeach
-              </div>
+            <div class="p-4 flex flex-wrap gap-2">
+              <?php $no = 1 ?>
+              @foreach($user->skills as $skill)
+              <span
+                class="bg-snippet text-white text-sm p-2 rounded-xl text-center break-words shrink-0 min-w-[100px] max-w-[300px] flex-grow">{{$skill->nama_skill}}</span>
+              @endforeach
+            </div>
             @else
-              <p class="font-medium text-center mt-8 mb-8">Skill information is not available</p>
+            <p class="font-medium text-center mt-8 mb-8">Skill information is not available</p>
             @endif
           </div>
           <!-- Skill End -->
@@ -532,53 +541,48 @@
               </button>
             </div>
             @if($user->experiences->isNotEmpty())
-              <?php $no = 1 ?>
-              @foreach($user->experiences as $experience)
-              <div class="rounded-2xl m-4 flex">
-                <div class="">
-                  <div class="flex items-center gap-4 px-4 pb-2">
-                    <div class="overflow-hidden">
-                      <h2 class="text-lg font-semibold line-clamp-2">
-                        {{$experience->judul_kegiatan}}
-                      </h2>
-                      <p class="text-sm">{{$experience->mitra}}</p>
-                    </div>
-                  </div>
-                  <div class="max-h-32 overflow-hidden">
-                    <p class="text-sm text-gray-700 line-clamp-2 px-4">
-                      @if (strlen($experience->deskripsi) > 100)
-                      <span class="short-desc">{{ Str::limit($experience->deskripsi, 100, '...') }}</span>
-                      <span class="more-desc hidden">{{ $experience->deskripsi }}</span>
-                      <a href="javascript:void(0);"
-                        class="btn-more-desc-exp text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold"
-                        >More</a>
-                      @else
-                      {{ $experience->deskripsi }}
-                      @endif
-                    </p>
-                    {{-- <button class="px-4">More</button> --}}
+            <?php $no = 1 ?>
+            @foreach($user->experiences as $experience)
+            <div class="rounded-2xl m-4 flex">
+              <div class="">
+                <div class="flex items-center gap-4 px-4 pb-2">
+                  <div class="overflow-hidden">
+                    <h2 class="text-lg font-semibold line-clamp-2">
+                      {{$experience->judul_kegiatan}}
+                    </h2>
+                    <p class="text-sm">{{$experience->mitra}}</p>
                   </div>
                 </div>
-                <div class="">
-                  <button id="editExperienceBtn{{ $experience->id_experience }}" class="edit-experience-btn"
-                    data-id-experience="{{ $experience->id_experience }}" 
-                    data-id="{{ $user->id }}"
-                    data-judul-kegiatan="{{$experience->judul_kegiatan}}"
-                    data-mitra="{{$experience->mitra}}"
-                    data-lokasi-kegiatan="{{$experience->lokasi_kegiatan}}"
-                    data-tgl-mulai="{{$experience->tgl_mulai}}"
-                    data-tgl-selesai="{{$experience->tgl_selesai}}"
-                    data-deskripsi="{{$experience->deskripsi}}">
-                    <svg class="w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                          d="m21.28 6.4-9.54 9.54c-.95.95-3.77 1.39-4.4.76-.63-.63-.2-3.45.75-4.4l9.55-9.55a2.58 2.58 0 1 1 3.64 3.65v0Z" />
-                        <path d="M11 4H6a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h11c2.21 0 3-1.8 3-4v-5" />
-                      </g>
-                    </svg>
-                  </button>
+                <div class="max-h-32 overflow-hidden">
+                  <p class="text-sm text-gray-700 line-clamp-2 px-4">
+                    @if (strlen($experience->deskripsi) > 100)
+                    <span class="short-desc">{{ Str::limit($experience->deskripsi, 100, '...') }}</span>
+                    <span class="more-desc hidden">{{ $experience->deskripsi }}</span>
+                    <a href="javascript:void(0);"
+                      class="btn-more-desc-exp text-[#5aa6cf] font-medium text-sm cursor-pointer no-underline hover:no-underline hover:font-semibold">More</a>
+                    @else
+                    {{ $experience->deskripsi }}
+                    @endif
+                  </p>
+                  {{-- <button class="px-4">More</button> --}}
                 </div>
               </div>
+              <div class="">
+                <button id="editExperienceBtn{{ $experience->id_experience }}" class="edit-experience-btn"
+                  data-id-experience="{{ $experience->id_experience }}" data-id="{{ $user->id }}"
+                  data-judul-kegiatan="{{$experience->judul_kegiatan}}" data-mitra="{{$experience->mitra}}"
+                  data-lokasi-kegiatan="{{$experience->lokasi_kegiatan}}" data-tgl-mulai="{{$experience->tgl_mulai}}"
+                  data-tgl-selesai="{{$experience->tgl_selesai}}" data-deskripsi="{{$experience->deskripsi}}">
+                  <svg class="w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path
+                        d="m21.28 6.4-9.54 9.54c-.95.95-3.77 1.39-4.4.76-.63-.63-.2-3.45.75-4.4l9.55-9.55a2.58 2.58 0 1 1 3.64 3.65v0Z" />
+                      <path d="M11 4H6a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4h11c2.21 0 3-1.8 3-4v-5" />
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            </div>
             <!-- Modal Edit Experience Start -->
             <div id="editExperienceModal"
               class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full bg-black bg-opacity-50 items-center justify-center">
@@ -607,7 +611,7 @@
                       <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Company</label>
                       <input type="text" id="company" name="mitra"
                         class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Insert company name"required />
+                        placeholder="Insert company name" required />
                     </div>
                     <div class="mt-1">
                       <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Location</label>
@@ -642,7 +646,8 @@
                     </button>
                   </div>
                 </form>
-                <button id="delete-experience-btn{{ $experience->id_experience }}" data-id="{{ $user->id }}" data-id-experience="{{ $experience->id_experience }}" type="submit"
+                <button id="delete-experience-btn{{ $experience->id_experience }}" data-id="{{ $user->id }}"
+                  data-id-experience="{{ $experience->id_experience }}" type="submit"
                   class="delete-experience-btn text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                   Delete
                 </button>
@@ -675,73 +680,73 @@
               </div>
             </div>
             <!-- Modal Alert Delete Experience End -->
-              @endforeach
+            @endforeach
             @else
-              <p class="font-medium text-center mt-8 mb-8">Experience information is not available</p>
+            <p class="font-medium text-center mt-8 mb-8">Experience information is not available</p>
             @endif
             <!-- Modal Add Experience Start -->
             <div id="addExperienceModal"
-                class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full bg-black bg-opacity-50 items-center justify-center">
-                <div class="bg-white p-6 rounded-lg shadow-lg w-[80vw] md:w-[70vw] lg:w-[40vw]">
-                  <div class="pb-2 flex items-center justify-between border-b-2">
-                    <h2 class="text-xl font-semibold">Add Experience</h2>
-                    <button id="closeAddModalExperienceBtn" class="text-gray-600 hover:text-gray-900">
-                      <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
-                          fill="#0F0F0F" />
-                      </svg>
+              class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full bg-black bg-opacity-50 items-center justify-center">
+              <div class="bg-white p-6 rounded-lg shadow-lg w-[80vw] md:w-[70vw] lg:w-[40vw]">
+                <div class="pb-2 flex items-center justify-between border-b-2">
+                  <h2 class="text-xl font-semibold">Add Experience</h2>
+                  <button id="closeAddModalExperienceBtn" class="text-gray-600 hover:text-gray-900">
+                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"
+                        fill="#0F0F0F" />
+                    </svg>
+                  </button>
+                </div>
+                <form action="{{ route ('user.add-experience-action', ['id' => $user->id]) }}" method="POST" class="">
+                  @csrf
+                  <div class="mt-6 space-y-4 p-2 overflow-y-auto lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
+                    <div class=" mt-1">
+                      <label for="activity-name" class="block mb-2 font-medium text-gray-900">Activity Name</label>
+                      <input type="text" id="activityName" name="judul_kegiatan"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert activity name" required />
+                    </div>
+                    <div class="mt-1">
+                      <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Company</label>
+                      <input type="text" id="partnerActivity" name="mitra"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert company name" required />
+                    </div>
+                    <div class="mt-1">
+                      <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Location</label>
+                      <input type="text" id="partnerActivity" name="lokasi_kegiatan"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert location" />
+                    </div>
+                    <div class="mt-1">
+                      <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Start Date</label>
+                      <input type="date" id="partnerActivity" name="tgl_mulai"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert start date" required />
+                    </div>
+                    <div class="mt-1">
+                      <label for="partner-activity" class="block mb-2 font-medium text-gray-900">End Date</label>
+                      <input type="date" id="partnerActivity" name="tgl_selesai"
+                        class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                        placeholder="Insert end date" />
+                    </div>
+                  </div>
+                  <div class="p-2 mt-1">
+                    <label for="description" class="block mb-2 font-medium text-gray-900">Description</label>
+                    <textarea id="description" name="deskripsi"
+                      class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
+                      placeholder="Tell about activity" required>
+                      </textarea>
+                  </div>
+                  <div class="mt-8 flex justify-end">
+                    <button type="submit"
+                      class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                      Add
                     </button>
                   </div>
-                  <form action="{{ route ('user.add-experience-action', ['id' => $user->id]) }}" method="POST" class="">
-                    @csrf
-                    <div class="mt-6 space-y-4 p-2 overflow-y-auto lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
-                      <div class=" mt-1">
-                        <label for="activity-name" class="block mb-2 font-medium text-gray-900">Activity Name</label>
-                        <input type="text" id="activityName" name="judul_kegiatan"
-                          class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                          placeholder="Insert activity name" required />
-                      </div>
-                      <div class="mt-1">
-                        <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Company</label>
-                        <input type="text" id="partnerActivity" name="mitra"
-                          class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                          placeholder="Insert company name" required />
-                      </div>
-                      <div class="mt-1">
-                        <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Location</label>
-                        <input type="text" id="partnerActivity" name="lokasi_kegiatan"
-                          class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                          placeholder="Insert location" />
-                      </div>
-                      <div class="mt-1">
-                        <label for="partner-activity" class="block mb-2 font-medium text-gray-900">Start Date</label>
-                        <input type="date" id="partnerActivity" name="tgl_mulai"
-                          class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                          placeholder="Insert start date" required />
-                      </div>
-                      <div class="mt-1">
-                        <label for="partner-activity" class="block mb-2 font-medium text-gray-900">End Date</label>
-                        <input type="date" id="partnerActivity" name="tgl_selesai"
-                          class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                          placeholder="Insert end date" />
-                      </div>
-                    </div>
-                    <div class="p-2 mt-1">
-                      <label for="description" class="block mb-2 font-medium text-gray-900">Description</label>
-                      <textarea id="description" name="deskripsi"
-                        class="w-full h-52 lg:h-32 resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
-                        placeholder="Tell about activity" required>
-                      </textarea>
-                    </div>
-                    <div class="mt-8 flex justify-end">
-                      <button type="submit"
-                        class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
-                        Add
-                      </button>
-                    </div>
-                  </form>
-                </div>
+                </form>
+              </div>
             </div>
             <!-- Modal Add Experience End -->
           </div>
@@ -750,26 +755,25 @@
       </div>
       <div id="appliedContent" class="hidden container mt-8">
         @if(isset($user->pendaftars) && $user->pendaftars->isNotEmpty())
-          <?php $no = 1 ?>
-          @foreach($user->pendaftars as $pendaftar)
-          <div class="border border-slate-300 rounded-2xl">
-            <div class="flex items-center gap-4 p-4">
-              <img src="{{asset('storage/logo/'.$pendaftar->kegiatan->mitra->logo)}}" alt="" class="w-16 rounded-full" />
-              <div class="overflow-hidden">
-                <h2 class="text-xl font-semibold line-clamp-2">
-                  {{$pendaftar->kegiatan->nama_kegiatan}}
-                </h2>
-                <p class="text-sm">Mitra VolHub</p>
-              </div>
+        <?php $no = 1 ?>
+        @foreach($user->pendaftars as $pendaftar)
+        <div class="border border-slate-300 rounded-2xl">
+          <div class="flex items-center gap-4 p-4">
+            <img src="{{asset('storage/logo/'.$pendaftar->kegiatan->mitra->logo)}}" alt="" class="w-16 rounded-full" />
+            <div class="overflow-hidden">
+              <h2 class="text-xl font-semibold line-clamp-2">
+                {{$pendaftar->kegiatan->nama_kegiatan}}
+              </h2>
+              <p class="text-sm">Mitra VolHub</p>
             </div>
-            <div class="mt-4 max-h-32 overflow-hidden">
-              <p class="text-sm text-gray-700 line-clamp-3 px-4">
-                {{ $pendaftar->kegiatan->deskripsi }}
-              </p>
-            </div>
-            <div class="mt-4 flex flex-wrap justify-evenly gap-2 px-4">
-              <span
-                  class="
+          </div>
+          <div class="mt-4 max-h-32 overflow-hidden">
+            <p class="text-sm text-gray-700 line-clamp-3 px-4">
+              {{ $pendaftar->kegiatan->deskripsi }}
+            </p>
+          </div>
+          <div class="mt-4 flex flex-wrap justify-evenly gap-2 px-4">
+            <span class="
                       font-medium text-sm p-2 rounded-xl flex-1 text-center
                       @if($pendaftar->status_applicant === 'In-review') border border-sky-500 text-sky-500 bg-sky-50 
                       @elseif($pendaftar->status_applicant === 'Interview') border border-violet-500 text-violet-500 bg-violet-50 
@@ -779,16 +783,16 @@
                       @else bg-gray-500 text-white border-gray-600 
                       @endif
                   ">
-                  {{ $pendaftar->status_applicant }}
-              </span>
-            </div>
-            <div class="mt-8 border-t border-gray-200">
-              <div class="flex items-center pt-2 px-4 pb-2 gap-2">
-                <!-- SVG disembunyikan -->
-                <span class="text-sm text-gray-700">{{ $pendaftar->kegiatan->lokasi_kegiatan }}</span>
-              </div>
+              {{ $pendaftar->status_applicant }}
+            </span>
+          </div>
+          <div class="mt-8 border-t border-gray-200">
+            <div class="flex items-center pt-2 px-4 pb-2 gap-2">
+              <!-- SVG disembunyikan -->
+              <span class="text-sm text-gray-700">{{ $pendaftar->kegiatan->lokasi_kegiatan }}</span>
             </div>
           </div>
+        </div>
         @endforeach
         @else
         <div class="flex items-center justify-center h-screen">
