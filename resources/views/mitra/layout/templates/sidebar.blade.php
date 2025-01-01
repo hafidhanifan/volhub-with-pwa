@@ -1,8 +1,9 @@
 <!-- Sidebar Start -->
 <aside id="sidebar"
-  class="w-9/12 h-screen z-10 fixed left-0 top-0 transform -translate-x-full transition-transform duration-300 bg-white lg:w-1/4 lg:relative lg:border-r lg:translate-x-0">
+  class="w-9/12 h-screen z-20 fixed left-0 top-0 transform -translate-x-full transition-transform duration-300 bg-white lg:w-1/4 lg:relative lg:border-r lg:translate-x-0">
   <div class="px-2 py-4 flex items-center gap-3 border-b">
-    <img src="{{ asset('storage/logo/'.$mitra->logo) }}" alt="Logo Mitra" class="max-w-14 bg-transparent rounded-full" />
+    <img src="{{ asset('storage/logo/'.$mitra->logo) }}" alt="Logo Mitra"
+      class="max-w-14 bg-transparent rounded-full" />
     <div class="">
       <h1 class="text-xl line-clamp-1">{{$mitra->nama_mitra}}</h1>
       <p class="text-gray-500 text-sm">{{$mitra->email_mitra}}</p>
@@ -39,7 +40,8 @@
         </svg>Profile</a>
     </li>
     <li class="py-4 hover:bg-button_hover2">
-      <a href="{{ route('mitra.logout') }}" class="flex"><svg class="w-6 mr-4 ml-2" viewBox="0 0 100 100" xml:space="preserve">
+      <a href="{{ route('mitra.logout') }}" class="flex"><svg class="w-6 mr-4 ml-2" viewBox="0 0 100 100"
+          xml:space="preserve">
           <path
             d="M80 71.2V74c0 3.3-2.7 6-6 6H26c-3.3 0-6-2.7-6-6v-2.8c0-7.3 8.5-11.7 16.5-15.2.3-.1.5-.2.8-.4.6-.3 1.3-.3 1.9.1C42.4 57.8 46.1 59 50 59c3.9 0 7.6-1.2 10.8-3.2.6-.4 1.3-.4 1.9-.1.3.1.5.2.8.4 8 3.4 16.5 7.8 16.5 15.1z" />
           <ellipse cx="50" cy="36.5" rx="14.9" ry="16.5" />
