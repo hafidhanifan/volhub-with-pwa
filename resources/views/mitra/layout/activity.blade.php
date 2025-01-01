@@ -135,8 +135,11 @@
           </svg>
         </button>
       </div>
-      <img src="../src/image/mitra-logo-3.jpg" alt="Logo Mitra"
-        class="absolute -bottom-8 left-2 max-w-16 bg-transparent rounded-full" />
+      @if(empty($mitra->logo))
+      <img src="{{ asset('img/default-profile.png') }}"
+        class="w-12 h-12 absolute -bottom-8 left-2 object-cover rounded-full" alt="Avatar" />
+      @endif
+
     </div>
     <div class="mt-9 p-4">
       <h1 class="namaKegiatan font-medium text-lg line-clamp-3">
