@@ -58,17 +58,19 @@
                   data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}" 
                   data-logo="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}"
                   data-sistem-kegiatan="{{ $kegiatan->sistem_kegiatan}}"
-                  data-sisa-hari="
-                    @if($kegiatan->sisa_hari > 0)
-                      {{ $kegiatan->sisa_hari }} days left
-                    @else
-                      Closed
-                    @endif
-                  "
+                  {{-- data-sisa-hari="{{ $kegiatan->sisa_hari }}" --}}
                   data-pendaftar-count ="{{ $kegiatan->pendaftars_count}} applied"
                   data-deskripsi="{{ $kegiatan->deskripsi}}"
                   data-nama-kriteria="{{ implode(',', $kegiatan->kriterias->pluck('nama_kriteria')->toArray()) }}"
                   data-nama-benefit="{{ implode(',', $kegiatan->benefits->pluck('nama_benefit')->toArray()) }}"
+                  data-sisa-hari="
+                   @if($kegiatan->sisa_hari > 0)
+                      {{ $kegiatan->sisa_hari }} days left
+                  @else
+                      Closed
+                  @endif
+                  "
+                  data-button="{{ $kegiatan->sisa_hari > 0 ? 'Apply' : 'Closed' }}"
                 >
                 <div class="max-w-16">
                   <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt=""
@@ -146,9 +148,8 @@
                 </div>
               </div>
               <div class="mt-4 gap-2 border-b pb-4">
-                <button id="applyBtn" class="px-6 py-2 bg-cyan-500 hover:bg-button_hover rounded-lg text-sm text-white">
-                  Apply
-                </button>
+                  <button id="applyBtn" class="button px-6 py-2 bg-cyan-500 hover:bg-button_hover rounded-lg text-sm text-white">
+                  </button>
                 <button class="px-6 py-2 border border-sky-300 hover:bg-sky-300 rounded-lg text-sm">
                   Save
                 </button>

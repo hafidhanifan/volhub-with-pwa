@@ -36,6 +36,7 @@ class UserController extends Controller
         $kegiatans = Kegiatan::withCount('pendaftars')->get();
         $totalKegiatan = $kegiatans->count();
         $kategori = Kategori::all();
+        
         foreach ($kegiatans as $kegiatan) {
             // Menghitung sisa hari dengan penutupan dihitung sampai akhir hari (23:59:59)
             $kegiatan->sisa_hari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);

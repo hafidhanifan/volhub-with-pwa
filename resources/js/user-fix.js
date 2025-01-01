@@ -144,11 +144,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const lokasiKegiatan = card.dataset.lokasiKegiatan;
             const logo = card.dataset.logo;
             const sistemKegiatan = card.dataset.sistemKegiatan;
-            const sisaHari = card.dataset.sisaHari;
+            const sisaHari = parseInt(card.dataset.sisaHari, 10);
             const pendaftarCount  = card.dataset.pendaftarCount;
             const deskripsi = card.dataset.deskripsi;
             const namaKriteria = card.dataset.namaKriteria;
             const namaBenefit = card.dataset.namaBenefit;
+            const button = card.dataset.button;
 
             // Tampilkan data di bagian detail
             detailContainer.querySelector('.namaKegiatan').textContent = namaKegiatan;
@@ -159,6 +160,17 @@ document.addEventListener('DOMContentLoaded', () => {
             detailContainer.querySelector('.sisaHari').textContent = sisaHari;
             detailContainer.querySelector('.pendaftarCount').textContent = pendaftarCount;
             detailContainer.querySelector('.deskripsi').textContent = deskripsi;
+            detailContainer.querySelector('.button').textContent = button;
+
+            if (button === 'Apply') {
+                applyButton.classList.remove('bg-gray-400', 'cursor-not-allowed', 'opacity-50');
+                applyButton.classList.add('bg-cyan-500', 'hover:bg-button_hover', 'cursor-pointer');
+                applyButton.disabled = false; // Aktifkan tombol
+            } else if (button === 'Closed') {
+                applyButton.classList.remove('bg-cyan-500', 'hover:bg-button_hover', 'cursor-pointer');
+                applyButton.classList.add('bg-gray-400', 'cursor-not-allowed', 'opacity-50');
+                applyButton.disabled = true; // Nonaktifkan tombol
+            }
             
             const kriteriaContainer = detailContainer.querySelector('.kriteriaContainer'); // Ambil container kriteria
             kriteriaContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
@@ -216,8 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update placeholder pada motivation
             motivationTextarea.placeholder = `Write your motivation for joining "${namaKegiatan}" from "${namaMitra}"...`;
-
-
+            
             applyButton.addEventListener("click", () => {
                 // Perbarui action form pendaftaran
                 const form = document.querySelector('#registrationForm');
