@@ -26,7 +26,7 @@ module.exports = {
                 currentStageBorder: "#5aa6cf40",
                 currentStageBg: "#5aa6cf0d",
                 currentStageBorderHover: "#5aa6cf40",
-                currentStageFont: "#5aa6cf",
+                currentStageFont: "#5aa6cf",
             },
             width: {
                 "7/10": "70%",
@@ -37,6 +37,10 @@ module.exports = {
             },
             fontFamily: {
                 sans: ["Poppins", "sans-serif"],
+            },
+            backgroundImage: {
+                "login-register-image":
+                    "url('/img/registration-login-image/registration-login-image.jpg')",
             },
         },
     },
