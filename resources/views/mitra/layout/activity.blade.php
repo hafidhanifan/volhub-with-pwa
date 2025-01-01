@@ -72,8 +72,7 @@
                     @else
                     {{ asset('img/default-profile.png') }}
                     @endif
-                  "
-          data-sistem-kegiatan="{{ $kegiatan->sistem_kegiatan}}"
+                  " data-sistem-kegiatan="{{ $kegiatan->sistem_kegiatan}}"
           data-pendaftar-count="{{ $kegiatan->pendaftars_count}} applied"
           data-deskripsi-kegiatan="{{ $kegiatan->deskripsi }}"
           data-nama-kriteria="{{ implode(',', $kegiatan->kriterias->pluck('nama_kriteria')->toArray()) }}"
@@ -81,12 +80,12 @@
           data-tgl-kegiatan="{{ $kegiatan->formatted_kegiatan_date }}"
           data-tgl-penutupan="{{ $kegiatan->formatted_penutupan_date }}">
 
-          <td class="px-6 py-4 text-sm text-gray-800">
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
             <span class="font-semibold">{{$kegiatan->nama_kegiatan}}</span>
             <p class="text-sm text-gray-500">{{$kegiatan->lokasi_kegiatan}}</p>
           </td>
-          <td class="px-6 py-4 text-sm text-gray-600">{{$kegiatan->formatted_kegiatan_date}}</td>
-          <td class="px-6 py-4 text-sm text-gray-600">{{$kegiatan->formatted_penutupan_date}}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{$kegiatan->formatted_kegiatan_date}}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{$kegiatan->formatted_penutupan_date}}</td>
           <td class="px-6 py-4 flex">
             <form
               action="{{ route('mitra.delete-kegiatan-action', ['id' => $mitra->id_mitra, 'id_keg' => $kegiatan->id_kegiatan]) }}"
@@ -126,7 +125,6 @@
       </svg>
     </div>
     @endif
-
     <!-- Volunteer list end -->
   </div>
   <!-- Detail volunteer start -->
@@ -141,10 +139,19 @@
           </svg>
         </button>
       </div>
-
-      <img src=""
-        class="w-12 h-12 absolute -bottom-8 left-2 object-cover rounded-full img" alt="Avatar" />
-
+      <div class="absolute -bottom-8 left-2">
+        <div class="relative group">
+          <img class="img w-16 h-16 object-cover rounded-full" alt="Avatar" />
+          <div
+            class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
+            !
+          </div>
+          <div
+            class="absolute left-10 mb-2 w-60 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
+            You have not uploaded the company logo
+          </div>
+        </div>
+      </div>
     </div>
     <div class="mt-9 p-4">
       <h1 class="namaKegiatan font-medium text-lg line-clamp-3">
