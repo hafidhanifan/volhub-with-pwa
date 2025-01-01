@@ -42,7 +42,7 @@
 
   <!-- Volunteer list start -->
   <div class="mt-8 overflow-x-auto w-full lg:mt-0 lg:p-4">
-    @forelse($kegiatans as $kegiatan)
+    @if(!empty($kegiatans))
     <table class="min-w-full table-auto border-separate border-spacing-0 border border-gray-200 lg:rounded-lg">
       <thead class="bg-gray-100">
         <tr>
@@ -103,7 +103,7 @@
     </table>
 
     {{-- If data is empty --}}
-    @empty
+    @else
     <div class="w-full h-[calc(100vh-200px)] flex flex-col gap-3 items-center justify-center ">
       <p class="text-center">Hmm, it seems the data is still empty. Please add volunteer data first !</p>
       <svg class="w-10" viewBox="0 0 91 91" id="Layer_1" version="1.1" xml:space="preserve"
@@ -119,7 +119,7 @@
         </g>
       </svg>
     </div>
-    @endforelse
+    @endif
 
     <!-- Volunteer list end -->
   </div>
@@ -135,6 +135,7 @@
           </svg>
         </button>
       </div>
+
       @if(empty($mitra->logo))
       <img src="{{ asset('img/default-profile.png') }}"
         class="w-12 h-12 absolute -bottom-8 left-2 object-cover rounded-full" alt="Avatar" />
