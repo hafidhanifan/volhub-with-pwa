@@ -50,7 +50,7 @@
         <tr onclick="window.location='{{ route('mitra.detail.pendaftar', ['id' => $mitra->id_mitra, 'id_pendaftar' => $pendaftar->id_pendaftar]) }}';" data-info=""
           class="cursor-pointer hover:bg-button_hover2">
           <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
-            <img src="{{asset('storage/foto-profile/'.$pendaftar->user->foto_profile)}}" alt="Profile photo" class="w-12 rounded-full" />
+            <img src="{{asset('storage/foto-profile/'.$pendaftar->user->foto_profile)}}" alt="Profile photo" class="w-12 h-12 object-cover rounded-full" />
             <div>
               <span class="font-semibold">{{$pendaftar->user->nama_user}}</span>
               <p class="text-sm text-gray-500">{{$pendaftar->user->bio}}</p>

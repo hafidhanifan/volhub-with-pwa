@@ -42,7 +42,7 @@
                     $user = auth()->user();
                   @endphp
                     @if(!empty($user->foto_profile))
-                    <img class="h-10 w-full rounded-full" src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="Avatar" />
+                    <img class="w-12 h-12 object-cover rounded-full" src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="Avatar" />
                     @else
                       <img class="h-10 w-full rounded-full" src="{{asset('img/logo-user.png')}}" alt="Avatar" />
                     @endif
