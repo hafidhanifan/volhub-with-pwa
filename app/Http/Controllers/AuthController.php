@@ -27,7 +27,7 @@ class AuthController extends Controller
             return redirect()->intended(route('admin.dashboard', ['id' => Auth::guard('admin')->user()->id]));
         }
 
-        Alert::error('Oops !', 'Username atau Password salah :(');
+        Alert::error('Oops !', 'The username or password you entered is incorrect 🫣');
 
         return back();
     }
@@ -147,7 +147,7 @@ class AuthController extends Controller
             return redirect()->intended('/user/kegiatan/{id}');
         }
 
-        Alert::error('Oops !', 'Username atau Password salah :(');
+        Alert::error('Oops !', 'The username or password you entered is incorrect 🫣');
         return back();
     }
 

@@ -136,10 +136,17 @@
       <div class="border rounded-lg">
         <div class="flex justify-between items-start p-4 border-b">
           <span class="max-w-64 font-semibold">{{$pendaftar->user->nama_user}}</span>
-          <svg class="w-6" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
-            <path fill="#0A66C2"
-              d="M12.225 12.225h-1.778V9.44c0-.664-.012-1.519-.925-1.519-.926 0-1.068.724-1.068 1.47v2.834H6.676V6.498h1.707v.783h.024c.348-.594.996-.95 1.684-.925 1.802 0 2.135 1.185 2.135 2.728l-.001 3.14zM4.67 5.715a1.037 1.037 0 0 1-1.032-1.031c0-.566.466-1.032 1.032-1.032.566 0 1.031.466 1.032 1.032 0 .566-.466 1.032-1.032 1.032zm.889 6.51h-1.78V6.498h1.78v5.727zM13.11 2H2.885A.88.88 0 0 0 2 2.866v10.268a.88.88 0 0 0 .885.866h10.226a.882.882 0 0 0 .889-.866V2.865a.88.88 0 0 0-.889-.864z" />
-          </svg>
+          @if($pendaftar->user->linkedIn)
+            <a href="{{ (strpos($pendaftar->user->linkedIn, 'http://') === 0 || strpos($pendaftar->user->linkedIn, 'https://') === 0) ? $pendaftar->user->linkedIn : 'https://' . $user->linkedIn }}" 
+              class="text-sm block hover:text-blueText" 
+              target="_blank" 
+              rel="noopener noreferrer">
+              <svg class="w-6" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <path fill="#0A66C2"
+                  d="M12.225 12.225h-1.778V9.44c0-.664-.012-1.519-.925-1.519-.926 0-1.068.724-1.068 1.47v2.834H6.676V6.498h1.707v.783h.024c.348-.594.996-.95 1.684-.925 1.802 0 2.135 1.185 2.135 2.728l-.001 3.14zM4.67 5.715a1.037 1.037 0 0 1-1.032-1.031c0-.566.466-1.032 1.032-1.032.566 0 1.031.466 1.032 1.032 0 .566-.466 1.032-1.032 1.032zm.889 6.51h-1.78V6.498h1.78v5.727zM13.11 2H2.885A.88.88 0 0 0 2 2.866v10.268a.88.88 0 0 0 .885.866h10.226a.882.882 0 0 0 .889-.866V2.865a.88.88 0 0 0-.889-.864z" />
+              </svg>
+            </a>
+          @endif
         </div>
         <div class="p-4">
           <span class="text-gray-500">Email</span>

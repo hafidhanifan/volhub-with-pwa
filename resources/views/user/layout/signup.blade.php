@@ -4,94 +4,67 @@
   <div class="absolute z-0 inset-0 bg-black bg-opacity-20"></div>
   <!-- Content start -->
   <div class="absolute w-full top-0 z-20 flex justify-between px-2 py-4">
-    <span class="block text-lg font-medium py-1 px-4 text-white">User</span>
-    <button class="text-lg font-medium text-white px-4 py-1 rounded-lg hover:bg-white hover:text-sky-600">
+    <a href="{{route('home')}}" class="block text-lg font-medium py-1 px-4 text-white">Volunteer</a>
+    <a href="{{route('user.login')}}" class="text-lg font-medium text-white px-4 py-1 rounded-lg hover:bg-white hover:text-sky-600">
       Sign In
-    </button>
+    </a>
   </div>
 
   <!-- wrapper -->
   <div class="relative z-10 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 w-5/6 mx-auto my-auto rounded-lg lg:w-3/6">
+    <div class="bg-white p-8 w-5/6 mx-auto my-auto rounded-lg lg:w-2/6">
       <div class="flex flex-col gap-2 mx-auto max-w-52 md:max-w-64">
-        <h1 class="text-center font-semibold md:text-xl">Register User</h1>
+        <h1 class="text-center font-semibold md:text-xl">Register Volunteer</h1>
         <p class="py-2 text-center text-xs md:text-sm">
-          Hey, Enter your details to get sign in to your account
+          Hey, Enter your details to get Register your account
         </p>
       </div>
-      <form action="#" method="POST"
-        class="mt-6 space-y-4 p-2 h-60 overflow-y-auto lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
+      <form action="{{ route('user.register.action')}}" method="POST">
+        @csrf
+        <div class="mt-6 space-y-4 p-2 overflow-y-auto lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0">
         <!-- Username Input -->
-        <div class="mt-1">
-          <input type="text" id="username" name="username"
-            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
-            placeholder="Enter your username" required />
-        </div>
+          <div class="">
+            <label class="text-sm ">Username</label>
+            <input type="text" id="username" name="username"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your username" required />
+          </div>
 
-        <!-- Password Input -->
-        <div class="mt-1">
-          <input type="password" id="password" name="password"
-            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 p-2.5 placeholder-gray-400"
-            placeholder="Enter your password" required />
-        </div>
+          <!-- Password Input -->
+          <div class="">
+            <label class="text-sm ">Password</label>
+            <input type="password" id="password" name="password"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your password" required />
+          </div>
 
-        <!-- Email Input -->
-        <div class="mt-1">
-          <input type="email" id="email" name="email"
-            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
-            placeholder="Enter your email" required />
-        </div>
+          <!-- Email Input -->
+          <div class="">
+            <label class="text-sm ">Email</label>
+            <input type="email" id="email" name="email_user"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your email" required />
+          </div>
 
-        <!-- Name Input -->
-        <div class="mt-1">
-          <input type="text" id="name" name="name"
-            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
-            placeholder="Enter your full name" required />
-        </div>
+          <!-- Name Input -->
+          <div class="">
+            <label class="text-sm ">Full name</label>
+            <input type="text" id="name" name="nama_user"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your full name" required />
+          </div>
 
-        <!-- Phone Number Input -->
-        <div class="mt-1">
-          <input type="tel" id="phone" name="phone"
-            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
-            placeholder="Enter your phone number" required />
-        </div>
-
-        <!-- Education Input -->
-        <div class="mt-1">
-          <select id="education" name="education"
-            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500"
-            required>
-            <option value="" disabled selected>Select your education</option>
-            <option value="sd">SD</option>
-            <option value="smp">SMP</option>
-            <option value="sma">SMA</option>
-            <option value="d3">D3</option>
-            <option value="s1">S1</option>
-          </select>
-        </div>
-
-        <!-- Address Input -->
-        <div class="mt-1">
-          <textarea id="address" name="address" rows="3"
-            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
-            placeholder="Enter your address" required></textarea>
-        </div>
-
-        <!-- Gender Input -->
-        <div class="mt-1 flex items-center gap-4">
-          <label class="flex items-center">
-            <input type="radio" id="male" name="gender" value="male" class="text-sky-500 focus:ring-sky-500" required />
-            <span class="ml-2 text-sm">Male</span>
-          </label>
-          <label class="flex items-center">
-            <input type="radio" id="female" name="gender" value="female" class="text-sky-500 focus:ring-sky-500"
-              required />
-            <span class="ml-2 text-sm">Female</span>
-          </label>
+          <!-- Phone Number Input -->
+          <div class="">
+            <label class="text-sm ">Phone number</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your phone number" required />
+          </div>
         </div>
 
         <!-- Submit Button -->
-        <div>
+        <div class="mt-6 p-2">
           <button type="submit"
             class="w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1">
             Register
@@ -99,12 +72,13 @@
         </div>
       </form>
       <div class="mt-6 flex justify-center gap-1">
-        <p class="text-xs md:text-sm">Don't have account?</p>
-        <a href="" class="text-sky-500 text-xs md:text-sm">Register Now</a>
+        <p class="text-xs md:text-sm">Already have account?</p>
+        <a href="{{route('user.login')}}" class="text-sky-500 text-xs md:text-sm">Sign In</a>
       </div>
     </div>
   </div>
   <!-- Content end -->
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </html>
+@include('sweetalert::alert')
