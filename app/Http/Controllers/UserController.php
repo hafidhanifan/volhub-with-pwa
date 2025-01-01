@@ -129,38 +129,32 @@ class UserController extends Controller
     
     public function editFotoProfileAction(Request $request, $id)
     {
-        {
-            $request->validate([
-                'cropped_image' => 'required',
-            ]);
-    
-            $user = User::find($id);
-    
-            // Menghapus gambar lama
-            if ($user->foto_profile) {
-                $oldImage = storage_path('app/public/foto-profile/' . $user->foto_profile);
-                if (File::exists($oldImage)) {
-                    File::delete($oldImage);
-                }
+
+        // Ambil user berdasarkan ID
+        $user = User::findOrFail($id);
+
+        // Menghapus gambar lama jika ada
+        if ($user->foto_profile) {
+            $oldImage = storage_path('app/public/foto-profile/' . $user->foto_profile);
+            if (File::exists($oldImage)) {
+                File::delete($oldImage);
             }
-    
-            // Mengubah base64 menjadi file
-            $cropped_image = $request->input('cropped_image');
-            // $image = Image::make($cropped_image);
-            $newName = $user->nama_user . '-' . now()->timestamp . '.png';
-            $path = 'foto-profile/' . $newName;
-    
-            // Storage::disk('public')->put($path, (string) $image->encode());
-    
-            // Simpan path gambar ke database
+        }
+
+        // Proses file upload
+        if ($request->hasFile('foto_profile')) {
+            $file = $request->file('foto_profile');
+            $newName = $user->nama_user . '-' . now()->timestamp . '.' . $file->getClientOriginalExtension(); // Nama unik
+            $path = $file->storeAs('public/foto-profile', $newName); // Simpan ke storage
+
+            // Simpan nama file ke database
             $user->foto_profile = $newName;
             $user->save();
-    
-            return redirect()->back()->with('success', 'Foto User berhasil diupdate.');
+
+            return redirect()->back()->with('success', 'Foto profil berhasil diupdate.');
         }
 
         return redirect()->back()->with('error', 'Gagal mengupload foto.');
-
     }
 
     public function editContactAction(Request $request, $id) 
