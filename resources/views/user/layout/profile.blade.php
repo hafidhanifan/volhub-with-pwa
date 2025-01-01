@@ -8,7 +8,7 @@
       <div class="flex items-center gap-4">
         @if(!empty($user->foto_profile))
         <img src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="profile user"
-          class="w-20 overflow-hidden rounded-full" />
+          class="w-16 h-16 object-cover rounded-full" />
         @else
         <img src="{{asset('img/logo-user.png')}}" alt="profile user" class="w-20 rounded-full" />
         @endif
