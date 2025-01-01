@@ -6,24 +6,17 @@
     <img src="{{ asset('storage/logo/'.$mitra->logo) }}" alt="Logo Mitra" class="w-12 h-12 object-cover rounded-full" />
     @else
     <div class="relative group">
-      <!-- User Image -->
       <img class="w-12 h-12 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}" alt="Avatar" />
-
-      <!-- Red Exclamation Icon -->
       <div
         class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
         !
       </div>
-
-      <!-- Tooltip -->
       <div
-        class="absolute left-10 mb-2 w-60 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity lg:text-sm">
+        class="absolute left-10 mb-2 w-60 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
         You have not uploaded the company logo
       </div>
     </div>
-
     @endif
-
     <div>
       <h1 class="text-xl line-clamp-1">{{$mitra->nama_mitra}}</h1>
       <p class="text-gray-500 text-sm">{{$mitra->email_mitra}}</p>
@@ -59,12 +52,15 @@
           <ellipse cx="50" cy="36.5" rx="14.9" ry="16.5" />
         </svg>Profile</a>
     </li>
-    <li class="py-4 hover:bg-button_hover2">
-      <a href="{{ route('mitra.logout') }}" class="flex"><svg class="w-6 mr-4 ml-2" viewBox="0 0 100 100"
-          xml:space="preserve">
-          <path
-            d="M80 71.2V74c0 3.3-2.7 6-6 6H26c-3.3 0-6-2.7-6-6v-2.8c0-7.3 8.5-11.7 16.5-15.2.3-.1.5-.2.8-.4.6-.3 1.3-.3 1.9.1C42.4 57.8 46.1 59 50 59c3.9 0 7.6-1.2 10.8-3.2.6-.4 1.3-.4 1.9-.1.3.1.5.2.8.4 8 3.4 16.5 7.8 16.5 15.1z" />
-          <ellipse cx="50" cy="36.5" rx="14.9" ry="16.5" />
+    <li class="py-4 hover:bg-rose-200">
+      <a href="{{ route('mitra.logout') }}" class="flex"><svg class="w-6 mr-4 ml-2" viewBox="0 0 24 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <g fill="#000000">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M16.125 12a.75.75 0 0 0-.75-.75H4.402l1.961-1.68a.75.75 0 1 0-.976-1.14l-3.5 3a.75.75 0 0 0 0 1.14l3.5 3a.75.75 0 1 0 .976-1.14l-1.96-1.68h10.972a.75.75 0 0 0 .75-.75Z" />
+            <path
+              d="M9.375 8c0 .702 0 1.053.169 1.306a1 1 0 0 0 .275.275c.253.169.604.169 1.306.169h4.25a2.25 2.25 0 0 1 0 4.5h-4.25c-.702 0-1.053 0-1.306.168a1 1 0 0 0-.275.276c-.169.253-.169.604-.169 1.306 0 2.828 0 4.243.879 5.121.878.879 2.292.879 5.12.879h1c2.83 0 4.243 0 5.122-.879.879-.878.879-2.293.879-5.121V8c0-2.828 0-4.243-.879-5.121C20.617 2 19.203 2 16.375 2h-1c-2.829 0-4.243 0-5.121.879-.879.878-.879 2.293-.879 5.121Z" />
+          </g>
         </svg>Logout</a>
     </li>
   </ul>
