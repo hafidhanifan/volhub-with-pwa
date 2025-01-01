@@ -75,26 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-document.getElementById('changePictureBtn').addEventListener('click', function () {
-    // Klik otomatis pada input file
-    document.getElementById('uploadPictureInput').click();
-});
-
-document.getElementById('uploadPictureInput').addEventListener('change', function () {
-    // Submit form secara otomatis jika file dipilih
-    if (this.files && this.files[0]) {
-        // Tampilkan pratinjau gambar (opsional)
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            document.getElementById('profilePicture').src = e.target.result;
-        };
-        reader.readAsDataURL(this.files[0]);
-
-        // Submit form
-        document.getElementById('updateProfilePictureForm').submit();
-    }
-});
-
 /* Volunteer Page */
 // Dropdown Categories
 document.addEventListener("DOMContentLoaded", () => {
@@ -701,4 +681,24 @@ document.querySelectorAll('.btn-more-desc-exp').forEach(button => {
             element.textContent = "More";
         }
     });
+});
+
+document.getElementById('changePictureBtn').addEventListener('click', function () {
+    // Klik otomatis pada input file
+    document.getElementById('uploadPictureInput').click();
+});
+
+document.getElementById('uploadPictureInput').addEventListener('change', function () {
+    // Submit form secara otomatis jika file dipilih
+    if (this.files && this.files[0]) {
+        // Tampilkan pratinjau gambar (opsional)
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById('profilePicture').src = e.target.result;
+        };
+        reader.readAsDataURL(this.files[0]);
+
+        // Submit form
+        document.getElementById('updateProfilePictureForm').submit();
+    }
 });
