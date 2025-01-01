@@ -508,31 +508,22 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (event) {
         if (event.target.closest(".deleteSkillBtn")) {
             const deleteButton = event.target.closest(".deleteSkillBtn");
-            skillIdToDelete = deleteButton.getAttribute("data-id");
+            const id = deleteButton.getAttribute("data-id-user");
+            const id_skill = deleteButton.getAttribute("data-id-skill");
 
-            deleteSkillAlert.classList.remove("hidden");
-            deleteSkillAlert.classList.add("flex");
-        }
-    });
+            console.log({ id, id_skill });
 
-    // Confirm delete skill
-
-    if (deleteSkillButton) {
-        deleteSkillButton.addEventListener("click", function () {
-            // Ambil data ID user dan skill dari atribut tombol
-            const userId = deleteSkillButton.getAttribute("data-id-user");
-            const skillId = deleteSkillButton.getAttribute("data-id-skill");
-
-            if (userId && skillId) {
+            if (id && id_skill) {
                 // Update action pada form
-                confirmDeleteSkillButton.action = `user/${id}/remove-skill/${id_skill}`;
+                confirmDeleteSkillButton.action = `/user/${id}/remove-skill/${id_skill}`;
+                console.log("Form action updated:", confirmDeleteSkillButton.action);
 
                 // Tampilkan modal konfirmasi
                 deleteSkillAlert.classList.remove("hidden");
                 deleteSkillAlert.classList.add("flex");
             }
-        });
-    }
+        }
+    });
 
     // Cancel Delete Skill
     cancelDeleteSkillButton.addEventListener("click", function () {
@@ -544,87 +535,98 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const addExperienceButton = document.getElementById("addExperienceBtn");
     const addExperienceModal = document.getElementById("addExperienceModal");
-    const closeAddExperienceModalButton = document.getElementById(
-        "closeAddModalExperienceBtn"
-    );
+    const closeAddExperienceModalButton = document.getElementById("closeAddModalExperienceBtn");
+    const editExperienceBtn = document.querySelectorAll(".edit-experience-btn");
+    const showExperienceModal = document.getElementById("editExperienceModal");
+    const closeEditExperienceModalButton = document.getElementById("closeModalExperienceBtn");
+    const deleteExperienceAlert = document.getElementById("deleteExperienceAlert");
+    const confirmDeleteExperienceButton = document.getElementById("confirmDeleteExperience");
+    const cancelDeleteExperienceButton = document.getElementById("cancelDeleteExperience");
 
     addExperienceButton.addEventListener("click", function () {
         addExperienceModal.classList.remove("hidden");
         addExperienceModal.classList.add("flex");
     });
-
     closeAddExperienceModalButton.addEventListener("click", function () {
         addExperienceModal.classList.add("hidden");
     });
 
-    // icon editnya
-    const editExperienceBtn = document.querySelectorAll(".edit-experience-btn");
-
-    // form editnya
-    const editExperienceAction = document.getElementById(
-        "editExperienceAction"
-      );
-
-    const showExperienceModal = document.getElementById("editExperienceModal");
-    const closeEditExperienceModalButton = document.getElementById("closeModalExperienceBtn");
+    closeEditExperienceModalButton.addEventListener("click", function () {
+        showExperienceModal.classList.add("hidden");
+    });
 
     editExperienceBtn.forEach(button => {
             button.addEventListener("click", function () {
             const experienceId = this.getAttribute('data-id-experience');
             const userId = this.getAttribute('data-id');
+            const judulKegiatan = this.getAttribute("data-judul-kegiatan");
+            const mitra = this.getAttribute("data-mitra");
+            const lokasiKegiatan = this.getAttribute("data-lokasi-kegiatan");
+            const tglMulai = this.getAttribute("data-tgl-mulai");
+            const tglSelesai = this.getAttribute("data-tgl-selesai");
+            const deskripsi = this.getAttribute("data-deskripsi");
 
-            const judulKegiatan = this.getAttribute('data-judul-kegiatan');
-            document.getElementById('activityName').value = judulKegiatan;
+            document.getElementById("activityName").value = judulKegiatan;
+            document.getElementById("company").value=mitra;
+            document.getElementById("location").value=lokasiKegiatan;
+            document.getElementById("startDate").value=tglMulai;
+            document.getElementById("endData").value=tglSelesai;
+            document.getElementById("description").value=deskripsi;
 
             const actionUrl = `/user/edit-experience/${userId}/${experienceId}`;
             document.getElementById('editExperienceAction').action = actionUrl;
             showExperienceModal.classList.remove("hidden");
             showExperienceModal.classList.add("flex");
 
+            document.addEventListener("click", function (event) {
+                if (event.target.closest(".delete-experience-btn")) {
+                    const deleteButton = event.target.closest(".delete-experience-btn");
+                    const id = deleteButton.getAttribute("data-id");
+                    const id_experience = deleteButton.getAttribute("data-id-experience");
+        
+                    if (id && id_experience) {
+                        // Update action pada form
+                        confirmDeleteExperienceButton.action = `/user/remove-experience/${id}/${id_experience}`;
+                        console.log("Form action updated:", confirmDeleteExperienceButton.action);
+        
+                        // Tampilkan modal konfirmasi
+                        deleteExperienceAlert.classList.remove("hidden");
+                        deleteExperienceAlert.classList.add("flex");
+                    }
+                }
+            });
+
         });
     });
 
-    closeEditExperienceModalButton.addEventListener("click", function () {
-        editExperienceModal.classList.add("hidden");
-    });
+    // Event Delegation untuk tombol delete skill
 
-    const deleteExperienceButton = document.document.querySelectorAll('.delete-experience-btn');
-    const deleteExperienceAlert = document.getElementById("deleteExperienceAlert");
-    const confirmDeleteExperienceButton = document.getElementById(
-        "confirmDeleteExperience"
-    );
-    const cancelDeleteExperienceButton = document.getElementById(
-        "cancelDeleteExperience"
-    );
+    // deleteButtons.forEach(button => {
+    //     button.addEventListener('click', () => {
+    //         selectedExperienceId = button.getAttribute('data-id-experience');
+    //         deleteExperienceAlert.classList.remove('hidden');
+    //     });
+    // });
 
-    let selectedExperienceId = null;
+    // // Konfirmasi Hapus
+    // deleteExperienceButton.forEach(button => {
+    //     button.addEventListener('click', (e) => {
+    //         e.preventDefault();
+    //         const actionUrl = button.closest('form').getAttribute('action');
+    //         confirmDeleteExperienceButton.setAttribute('action', actionUrl);
+    //         deleteExperienceAlert.classList.remove('hidden');
+    //         deleteExperienceAlert.classList.add("flex");
+    //     });
+    // });
 
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            selectedExperienceId = button.getAttribute('data-id-experience');
-            deleteExperienceAlert.classList.remove('hidden');
-        });
-    });
+    // deleteExperienceButton.addEventListener("click", function () {
+    //     deleteExperienceAlert.classList.remove("hidden");
+    //     deleteExperienceAlert.classList.add("flex");
+    // });
 
-    // Konfirmasi Hapus
-    deleteExperienceButton.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const actionUrl = button.closest('form').getAttribute('action');
-            confirmDeleteExperienceButton.setAttribute('action', actionUrl);
-            deleteExperienceAlert.classList.remove('hidden');
-            deleteExperienceAlert.classList.add("flex");
-        });
-    });
-
-    deleteExperienceButton.addEventListener("click", function () {
-        deleteExperienceAlert.classList.remove("hidden");
-        deleteExperienceAlert.classList.add("flex");
-    });
-
-    confirmDeleteExperienceButton.addEventListener("click", function () {
-        deleteExperienceAlert.classList.add("hidden");
-    });
+    // confirmDeleteExperienceButton.addEventListener("click", function () {
+    //     deleteExperienceAlert.classList.add("hidden");
+    // });
 
     cancelDeleteExperienceButton.addEventListener("click", function () {
         deleteExperienceAlert.classList.add("hidden");

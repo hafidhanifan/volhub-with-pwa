@@ -19,10 +19,12 @@
                     Hey, Enter your details to get sign in to your account
                 </p>
             </div>
-            <form action="#" method="POST" class="mt-6 space-y-4">
+            <form action="{{ route('user.login.action') }}" method="POST" class="mt-6 space-y-4">
+                @csrf
                 <!-- Username Input -->
 
                 <div class="mt-1">
+                    <label class="text-sm ">Username</label>
                     <input type="text" id="username" name="username"
                         class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
                         placeholder="Enter your username" required />
@@ -31,6 +33,7 @@
                 <!-- Password Input -->
 
                 <div class="mt-1">
+                    <label class="text-sm ">Password</label>
                     <input type="password" id="password" name="password"
                         class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 p-2.5 placeholder-gray-400"
                         placeholder="Enter your password" required />
@@ -46,11 +49,12 @@
             </form>
             <div class="mt-6 flex justify-center gap-1">
                 <p class="text-xs md:text-sm">Don't have account?</p>
-                <a href="" class="text-sky-500 text-xs md:text-sm">Register Now</a>
+                <a href="{{route('user.register')}}" class="text-sky-500 text-xs md:text-sm">Register Now</a>
             </div>
         </div>
     </div>
     <!-- Content end -->
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </html>
+@include('sweetalert::alert')
