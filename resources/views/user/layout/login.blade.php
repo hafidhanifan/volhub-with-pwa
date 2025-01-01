@@ -1,6 +1,7 @@
 @include('user.layout.templates.header')
 
-<body class="relative bg-[url('../image/login-bg.jpg')] bg-cover bg-center bg-no-repeat w-full min-h-screen">
+<body style="background-image: url('{{ asset('img/registration-login-image/registration-login-image.jpg') }}');"
+    class="relative bg-cover bg-center bg-no-repeat w-full min-h-screen">
     <div class="absolute z-0 inset-0 bg-black bg-opacity-20"></div>
     <!-- Content start -->
     <div class="absolute w-full top-0 z-20 flex justify-between px-2 py-4">
