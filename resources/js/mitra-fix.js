@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
             detailContainer.querySelector(".namaMitra").textContent = namaMitra;
             detailContainer.querySelector(".lokasiKegiatan").textContent =
                 lokasiKegiatan;
-            detailContainer.querySelector("img").src = logo;
+            detailContainer.querySelector(".img").src = logo;
             detailContainer.querySelector(".sistemKegiatan").textContent =
                 sistemKegiatan;
             detailContainer.querySelector(".pendaftarCount").textContent =

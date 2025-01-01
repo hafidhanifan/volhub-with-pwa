@@ -66,7 +66,13 @@
         <tr id="activity" class="activity cursor-pointer hover:bg-button_hover2"
           data-id-kegiatan="{{ $kegiatan->id_kegiatan }}" data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}"
           data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}" data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}"
-          data-logo="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}"
+          data-logo="
+                    @if($mitra->logo)
+                    {{ asset('storage/logo/'.$kegiatan->mitra->logo) }}
+                    @else
+                    {{ asset('img/default-profile.png') }}
+                    @endif
+                  "
           data-sistem-kegiatan="{{ $kegiatan->sistem_kegiatan}}"
           data-pendaftar-count="{{ $kegiatan->pendaftars_count}} applied"
           data-deskripsi-kegiatan="{{ $kegiatan->deskripsi }}"
@@ -136,10 +142,8 @@
         </button>
       </div>
 
-      @if(empty($mitra->logo))
-      <img src="{{ asset('img/default-profile.png') }}"
-        class="w-12 h-12 absolute -bottom-8 left-2 object-cover rounded-full" alt="Avatar" />
-      @endif
+      <img src=""
+        class="w-12 h-12 absolute -bottom-8 left-2 object-cover rounded-full img" alt="Avatar" />
 
     </div>
     <div class="mt-9 p-4">
