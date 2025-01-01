@@ -125,7 +125,7 @@
   </div>
   <!-- Detail volunteer start -->
   <div id="detailVolunteer" data-id-mitra="{{ auth()->user()->id_mitra }}"
-    class="fixed w-full h-screen top-0 bg-white transform translate-x-full transition-transform duration-500 ease-in-out z-50 overflow-y-auto lg:w-1/3 lg:right-0">
+    class="fixed w-full h-screen top-0 bg-white transform translate-x-full transition-transform duration-500 ease-in-out z-40 overflow-y-auto lg:w-1/3 lg:right-0">
     <div class="relative h-20 rounded-t-lg bg-slate-100">
       <div class="absolute right-2 top-2">
         <button id="closeDetailVolunteerMitraBtn">
