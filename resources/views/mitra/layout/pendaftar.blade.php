@@ -46,32 +46,33 @@
       </thead>
       <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
         <?php $no = 1 ?>
-        @foreach($pendaftar as $pendaftar) 
-        <tr onclick="window.location='{{ route('mitra.detail.pendaftar', ['id' => $mitra->id_mitra, 'id_pendaftar' => $pendaftar->id_pendaftar]) }}';" data-info=""
-          class="cursor-pointer hover:bg-button_hover2">
-          <td class="px-6 py-4 flex gap-2 items-center text-sm text-gray-800">
-            <img src="{{asset('storage/foto-profile/'.$pendaftar->user->foto_profile)}}" alt="Profile photo" class="w-12 h-12 object-cover rounded-full" />
+        @foreach($pendaftar as $pendaftar)
+        <tr
+          onclick="window.location='{{ route('mitra.detail.pendaftar', ['id' => $mitra->id_mitra, 'id_pendaftar' => $pendaftar->id_pendaftar]) }}';"
+          data-info="" class="cursor-pointer hover:bg-button_hover2">
+          <td class="px-6 py-4 whitespace-nowrap flex gap-2 items-center text-sm text-gray-800">
+            <img src="{{asset('storage/foto-profile/'.$pendaftar->user->foto_profile)}}" alt="Profile photo"
+              class="w-12 h-12 object-cover rounded-full" />
             <div>
               <span class="font-semibold">{{$pendaftar->user->nama_user}}</span>
               <p class="text-sm text-gray-500">{{$pendaftar->user->bio}}</p>
             </div>
           </td>
-          <td class="px-6 py-4 text-sm text-gray-600">
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
             {{$pendaftar->user->email_user}}
           </td>
-          <td class="px-6 py-4 text-sm text-gray-600">
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
             {{$pendaftar->kegiatan->nama_kegiatan}}
           </td>
           <td class="px-6 py-4">
-            <span
-              class="block w-24 py-1 text-center text-sm border border-emerald-500 rounded-2xl text-emerald-500 bg-emerald-50
+            <span class="block w-24 py-1 text-center text-sm border border-emerald-500 rounded-2xl text-emerald-500 bg-emerald-50
               @if($pendaftar->status_applicant === 'In-review') border border-sky-500 text-sky-500 bg-sky-50 
               @elseif($pendaftar->status_applicant === 'Interview') border border-violet-500 text-violet-500 bg-violet-50 
               @elseif($pendaftar->status_applicant === 'Shortlist') border border-amber-500 text-amber-500 bg-amber-50 
               @elseif($pendaftar->status_applicant === 'Hire') border border-emerald-500 text-emerald-500 bg-emerald-50 
               @elseif($pendaftar->status_applicant === 'Reject') border border-rose-500 text-rose-500 bg-rose-50 
               @else bg-gray-500 text-white border-gray-600 
-              @endif"> {{ $pendaftar->status_applicant }} 
+              @endif"> {{ $pendaftar->status_applicant }}
             </span>
           </td>
         </tr>
