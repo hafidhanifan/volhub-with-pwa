@@ -27,6 +27,7 @@
   <!-- Header Content End -->
   <div class="mt-8 overflow-x-auto w-full lg:mt-0 lg:p-4">
     <!-- Applicant list start -->
+    @if(!empty($pendaftars))
     <table class="min-w-full table-auto border-separate border-spacing-0 border border-gray-200 lg:rounded-lg">
       <thead class="bg-gray-100">
         <tr>
@@ -81,6 +82,25 @@
       </tbody>
     </table>
     <!-- Applicant list end -->
+
+    {{-- If data is empty --}}
+    @else
+    <div class="w-full h-[calc(100vh-200px)] flex flex-col gap-3 items-center justify-center ">
+      <p class="text-center">Hmm, it seems the data is still empty</p>
+      <svg class="w-10" viewBox="0 0 91 91" id="Layer_1" version="1.1" xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg" fill="#000">
+        <g id="SVGRepo_iconCarrier">
+          <style>
+            .st0 {
+              fill: #4e7a9e
+            }
+          </style>
+          <path class="st0"
+            d="M25.6 31.7c2.1 2.1 4.2 4.2 6.2 6.5 3 3.4 8.4-2.1 5-5-3.2-2.7-6.1-5.7-9.2-8.5-1.5-1.5-3.8-1.1-5 .6-2.5 3.8-5.4 7-8.8 10-1.7 1.4.1 4.6 2.2 3.8 3.8-1.5 7-4.3 9.6-7.4zM67.4 24.7c-1.5-1.5-3.8-1.1-5 .6-2.5 3.8-5.4 7-8.8 10-1.7 1.4.1 4.6 2.2 3.8 3.8-1.5 6.9-4.3 9.6-7.4 2.1 2.1 4.2 4.2 6.2 6.5 3 3.4 8.4-2.1 5-5-3.3-2.7-6.2-5.7-9.2-8.5zM67.5 57.2c-3.7 1.6-6.9 3.8-10.9 4.9-4 1.1-8.1 1.6-12.2 1.5-8 0-15-3.2-22.3-6-.8-.3-1.6.8-1.1 1.4 1.3 1.6 2.4 3.2 4.1 4.4 1.9 1.3 4 2.2 6.1 3.1 4.2 1.7 8.7 2.6 13.2 2.9 4.6.3 9.4-.3 13.8-1.5 4.3-1.2 9.6-2.9 12.8-6.2 2.4-2.4-.6-5.7-3.5-4.5z" />
+        </g>
+      </svg>
+    </div>
+    @endif
   </div>
 </section>
 <!-- Content End -->
