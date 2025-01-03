@@ -589,4 +589,11 @@ class MitraController extends Controller
         return redirect()->back()->with('success', 'Status pendaftaran berhasil diperbarui.');
     }
 
+
+    // Change password
+    public function showChangePasswordPage (Request $request, $id){
+    $mitra = Mitra::find($id);
+
+        return view('mitra.layout.change-password',compact('mitra'));
+    }
 }

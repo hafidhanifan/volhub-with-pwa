@@ -27,7 +27,7 @@
   </div>
   {{-- Desktop header end --}}
 
-  <div class="p-4">
+  <div class="p-4 h-[calc(100vh-81px)] overflow-y-auto">
     <div class="">
       <span class="block mb-4 text-sm text-gray-500">Company logo / picture</span>
       <div class="flex items-center gap-4">
@@ -46,10 +46,11 @@
             <input type="file" name="logo" id="uploadlogoMitra" class="hidden" accept="image/*">
             <button type="button" id="changeLogoBtn"
               class="w-24 text-sm px-4 py-1 rounded-lg bg-sky-400 hover:bg-sky-500">
-              Change Logo
+              Update
             </button>
           </form>
-          <form action="{{ route('mitra.delete-foto-profile-action', ['id'=> $mitra->id_mitra]) }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('mitra.delete-foto-profile-action', ['id'=> $mitra->id_mitra]) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('DELETE')
             <button type="submit" class="w-24 text-sm px-4 py-1 rounded-lg bg-rose-400 hover:bg-rose-500">
@@ -59,24 +60,95 @@
         </div>
       </div>
 
-      @if (session('success'))
-      <p class="text-green-500">{{ session('success') }}</p>
-      @endif
-
-      @if (session('error'))
-      <p class="text-red-500">{{ session('error') }}</p>
-      @endif
-
-
       {{-- Preview image before uploading start --}}
-      <div class="mt-4">
+      {{-- <div class="mt-4">
         <img id="image-preview" class="max-w-full max-h-96 mx-auto hidden" />
       </div>
       <button type="button" id="crop-button" data-id="{{ auth()->user()->id_mitra }}"
         class="mt-4 px-4 py-2 bg-green-500 text-white rounded hidden">
         Crop & Upload
-      </button>
+      </button> --}}
       {{-- Preview image before uploading end --}}
+    </div>
+    <div>
+      <form action="" method="POST">
+        @csrf
+        <div class="mt-6 space-y-4 p-2 overflow-y-auto sm:max-w-4xl sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0">
+
+          <!-- Email Input -->
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Email</label>
+            <input type="email" id="email" name="email_mitra"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your email" required />
+          </div>
+
+          <!-- Name Input -->
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Company name</label>
+            <input type="text" id="name" name="nama_mitra"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your full name" required />
+          </div>
+
+          <!-- Phone Number Input -->
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Phone number</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your phone number" required />
+          </div>
+
+          <!-- Industri Input -->
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Industry</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter industrial type" required />
+          </div>
+
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Company Size</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter company size" required />
+          </div>
+
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Site</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter company site" required />
+          </div>
+
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Bio</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter company bio" required />
+          </div>
+
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Address</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter company address" required />
+          </div>
+        </div>
+        <div class="mt-4 p-2 sm:max-w-4xl">
+          <label class="block text-sm mb-1 text-gray-500">Address</label>
+          <textarea name="" id="" cols="30" rows="10"
+            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-6 p-2 sm:flex sm:justify-end sm:max-w-4xl">
+          <button type="submit"
+            class="w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1 sm:w-24">
+            Save
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
