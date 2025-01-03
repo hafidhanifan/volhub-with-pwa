@@ -27,7 +27,7 @@
   <!-- Header Content End -->
   <div class="mt-8 overflow-x-auto w-full lg:mt-0 lg:p-4">
     <!-- Applicant list start -->
-    @if(!empty($pendaftars))
+    @if(!empty($pendaftar))
     <table class="min-w-full table-auto border-separate border-spacing-0 border border-gray-200 lg:rounded-lg">
       <thead class="bg-gray-100">
         <tr>

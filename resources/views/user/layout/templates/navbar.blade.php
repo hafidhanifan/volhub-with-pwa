@@ -72,7 +72,10 @@
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login User</a>
               <a href="{{ route('mitra.login') }}"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login
-                Partner</a>
+                Employer</a>
+              <a href="{{ route('api.mitra.login') }}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login API
+                Employer</a>
               @endif
             </div>
           </div>

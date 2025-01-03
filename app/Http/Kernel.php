@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'autologout' => \App\Http\Middleware\AutoLogout::class,
         // Middleware lainnya...
         'separate.session' => \App\Http\Middleware\SeparateSession::class,
+        'auth.api' => \App\Http\Middleware\CheckApiToken::class,
     ];
 }

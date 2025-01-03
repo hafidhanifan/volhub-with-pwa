@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ApiMitraController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MitraController;
-use App\Models\Admin;
 
 Route::get('/', [UserController::class, 'showHome'])->name('home');
 
@@ -184,3 +184,17 @@ Route::prefix('user')->group(function () {
 });
 
 Route::get('/home', [UserController::class, 'showHome'])->name('home');
+
+
+// ROUTE API
+Route::prefix('mitraApi')->group(function () {
+
+    Route::get('login', [ApiMitraController::class, 'showLoginMitra'])->name('api.mitra.login');
+    Route::post('login', [ApiMitraController::class, 'loginMitra'])->name('api.mitra.login.action');
+    Route::get('register', [ApiMitraController::class, 'showRegisterMitra'])->name('api.mitra.register');
+    Route::post('register', [ApiMitraController::class, 'registerMitraAction'])->name('api.mitra.register.action');
+
+    Route::middleware(['auth.api'])->group(function () {
+        Route::get('kegiatan/{id}', [ApiMitraController::class, 'showKegiatanPage'])->name('api.mitra.kegiatan');
+    });
+});
