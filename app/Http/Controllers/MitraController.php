@@ -14,8 +14,7 @@ use App\Models\User;
 use App\Models\Interview;
 use App\Models\Note;
 use Illuminate\Http\Request;
-// use Intervention\Image\Image;
-use Image;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -261,38 +260,38 @@ class MitraController extends Controller
 
     public function editFotoProfileAction(Request $request, $id)
     {
-        {
+        $mitra = Mitra::findOrFail($id);
+
+        if ($request->isMethod('post')) {
+            // Upload new image
             $request->validate([
-                'cropped_image' => 'required',
+                'profil_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
-    
-            $mitra = Mitra::find($id);
-    
-            // Menghapus gambar lama
-            if ($mitra->logo) {
-                $oldImage = storage_path('app/public/logo/' . $mitra->logo);
-                if (File::exists($oldImage)) {
-                    File::delete($oldImage);
-                }
+
+            if($mitra->logo && Storage::exist('public/logo/' . $mitra->logo)) {
+                // Delete old picture
+                Storage::delete('public/logo/' . $mitra->logo);
+            }
+
+            $filename = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
+            $request->file('profile_picture')->storeAs('public/logo', $filename);
+
+            $mitra->logo = $filename;
+            $mitra->save();
+
+            return back()->with('success', 'Foto berhasil diperbarui.');
+        } elseif ($request->isMethod('delete')) {
+            // Delete picture
+            if ($mitra->logo && Storage::exists('public/logo/' . $mitra->logo)) {
+                Storage::delete('public/logo/' . $mitra->logo);
             }
     
-            // Mengubah base64 menjadi file
-            $cropped_image = $request->input('cropped_image');
-            // $image = Image::make($cropped_image);
-            $newName = $mitra->nama_mitra . '-' . now()->timestamp . '.png';
-            $path = 'logo/' . $newName;
-    
-            // Storage::disk('public')->put($path, (string) $image->encode());
-    
-            // Simpan path gambar ke database
-            $mitra->logo = $newName;
+            $mitra->logo = null;
             $mitra->save();
     
-            return redirect()->back()->with('success', 'Foto Mitra berhasil diupdate.');
+            return back()->with('success', 'Foto berhasil dihapus.');
         }
-
-        return redirect()->back()->with('error', 'Gagal mengupload foto.');
-
+        return back()->with('error', 'Permintaan tidak valid.');
     }
 
     //All about Pendaftar

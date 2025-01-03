@@ -228,7 +228,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
 // HIRING PROGRES
 document.addEventListener("DOMContentLoaded", () => {
     const currentStageContainer = document.getElementById(
@@ -301,20 +300,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // copy email
-document.getElementById("copy-button").addEventListener("click", function () {
-    // Pilih elemen teks yang akan disalin
-    var textToCopy = document.getElementById("text-to-copy").innerText;
+// document.getElementById("copy-button").addEventListener("click", function () {
+//     // Pilih elemen teks yang akan disalin
+//     var textToCopy = document.getElementById("text-to-copy").innerText;
 
-    // Gunakan API Clipboard untuk menyalin teks ke clipboard
-    navigator.clipboard
-        .writeText(textToCopy)
-        .then(function () {
-            alert("Teks berhasil disalin ke clipboard!");
-        })
-        .catch(function (error) {
-            alert("Gagal menyalin teks: " + error);
-        });
-});
+//     // Gunakan API Clipboard untuk menyalin teks ke clipboard
+//     navigator.clipboard
+//         .writeText(textToCopy)
+//         .then(function () {
+//             alert("Teks berhasil disalin ke clipboard!");
+//         })
+//         .catch(function (error) {
+//             alert("Gagal menyalin teks: " + error);
+//         });
+// });
 
 // // short text description
 // document
@@ -447,3 +446,69 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// import Cropper from "cropperjs";
+// import "cropperjs/dist/cropper.css";
+
+// document.addEventListener("DOMContentLoaded", function () {
+//     const inputFile = document.getElementById("profile_picture");
+//     const imagePreview = document.getElementById("image-preview");
+//     const cropButton = document.getElementById("crop-button");
+//     const userId = cropButton.getAttribute("data-id");
+//     const csrfToken = document
+//         .querySelector('meta[name="csrf-token"]')
+//         .getAttribute("content");
+//     let cropper;
+
+//     inputFile.addEventListener("change", function (e) {
+//         const file = e.target.files[0];
+//         if (file) {
+//             const reader = new FileReader();
+//             reader.onload = function (e) {
+//                 imagePreview.src = e.target.result;
+//                 imagePreview.classList.remove("hidden");
+//                 cropButton.classList.remove("hidden");
+//                 if (cropper) cropper.destroy(); // Reset cropper if exists
+//                 cropper = new Cropper(imagePreview, {
+//                     aspectRatio: 1, // Square crop
+//                     viewMode: 1,
+//                 });
+//             };
+//             reader.readAsDataURL(file);
+//         }
+//     });
+
+//     cropButton.addEventListener("click", function () {
+//         const canvas = cropper.getCroppedCanvas();
+//         canvas.toBlob(function (blob) {
+//             const formData = new FormData();
+//             formData.append("profile_picture", blob);
+//             formData.append("_token", "{{ csrf_token() }}");
+
+//             fetch(`/mitra/edit-foto-profile/${userId}`, {
+//                 method: "PUT",
+//                 headers: {
+//                     "X-CSRF-TOKEN": csrfToken,
+//                 },
+//                 body: formData,
+//             })
+//                 .then((response) => {
+//                     if (!response.ok) {
+//                         throw new Error("HTTP error " + response.status);
+//                     }
+//                     return response.json();
+//                 })
+//                 .then((data) => {
+//                     if (data.success) {
+//                         alert("Upload successful!");
+//                         console.log(data.image); // URL gambar baru
+//                     } else {
+//                         alert("Upload failed: " + data.message);
+//                     }
+//                 })
+//                 .catch((error) => {
+//                     console.error("Upload error:", error);
+//                 });
+//         });
+//     });
+// });
