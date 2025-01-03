@@ -110,32 +110,31 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //(LOGIN) JAVASCRIPT LIST DAN DETAIL KEGIATAN
-document.addEventListener('DOMContentLoaded', () => {
-    const detailContainer = document.getElementById('detailVolunteer');
-    const defaultMessage = detailContainer.querySelector('.default-message');
-    const detailContent = detailContainer.querySelector('.detail-content');
+document.addEventListener("DOMContentLoaded", () => {
+    const detailContainer = document.getElementById("detailVolunteer");
+    const defaultMessage = detailContainer.querySelector(".default-message");
+    const detailContent = detailContainer.querySelector(".detail-content");
 
     const applyButton = document.getElementById("applyBtn");
     const applyModal = document.getElementById("applyMdl");
     const submitButton = document.getElementById("submitBtn");
     const closeModal = document.getElementById("closeApplyMdl");
     const notification = document.getElementById("notification");
-    const registrationForm = document.getElementById('registrationForm');
-    const motivationTextarea = document.getElementById('motivation');
+    const registrationForm = document.getElementById("registrationForm");
+    const motivationTextarea = document.getElementById("motivation");
 
     const backButton = document.getElementById("backBtn");
 
     // Tampilkan pesan default saat halaman dimuat
-    defaultMessage.classList.remove('hidden');
-    detailContent.classList.add('hidden');
+    defaultMessage.classList.remove("hidden");
+    detailContent.classList.add("hidden");
 
-    document.querySelectorAll('.volunteerCard').forEach(card => {
-        card.addEventListener('click', () => {
-
+    document.querySelectorAll(".volunteerCard").forEach((card) => {
+        card.addEventListener("click", () => {
             detailContainer.classList.remove("translate-y-full");
 
-            defaultMessage.classList.add('hidden');
-            detailContent.classList.remove('hidden');
+            defaultMessage.classList.add("hidden");
+            detailContent.classList.remove("hidden");
 
             // Ambil data dari atribut data-*
             const idKegiatan = card.dataset.idKegiatan;
@@ -145,82 +144,134 @@ document.addEventListener('DOMContentLoaded', () => {
             const logo = card.dataset.logo;
             const sistemKegiatan = card.dataset.sistemKegiatan;
             const sisaHari = parseInt(card.dataset.sisaHari, 10);
-            const pendaftarCount  = card.dataset.pendaftarCount;
+            const pendaftarCount = card.dataset.pendaftarCount;
             const deskripsi = card.dataset.deskripsi;
             const namaKriteria = card.dataset.namaKriteria;
             const namaBenefit = card.dataset.namaBenefit;
             const button = card.dataset.button;
 
             // Tampilkan data di bagian detail
-            detailContainer.querySelector('.namaKegiatan').textContent = namaKegiatan;
-            detailContainer.querySelector('.namaMitra').textContent = namaMitra;
-            detailContainer.querySelector('.lokasiKegiatan').textContent = lokasiKegiatan;
-            detailContainer.querySelector('img').src = logo;
-            detailContainer.querySelector('.sistemKegiatan').textContent = sistemKegiatan;
-            detailContainer.querySelector('.sisaHari').textContent = sisaHari;
-            detailContainer.querySelector('.pendaftarCount').textContent = pendaftarCount;
-            detailContainer.querySelector('.deskripsi').textContent = deskripsi;
-            detailContainer.querySelector('.button').textContent = button;
+            detailContainer.querySelector(".namaKegiatan").textContent =
+                namaKegiatan;
+            detailContainer.querySelector(".namaMitra").textContent = namaMitra;
+            detailContainer.querySelector(".lokasiKegiatan").textContent =
+                lokasiKegiatan;
+            detailContainer.querySelector("img").src = logo;
+            detailContainer.querySelector(".sistemKegiatan").textContent =
+                sistemKegiatan;
+            detailContainer.querySelector(".sisaHari").textContent = sisaHari;
+            detailContainer.querySelector(".pendaftarCount").textContent =
+                pendaftarCount;
+            detailContainer.querySelector(".deskripsi").textContent = deskripsi;
+            detailContainer.querySelector(".button").textContent = button;
 
-            if (button === 'Apply') {
-                applyButton.classList.remove('bg-gray-400', 'cursor-not-allowed', 'opacity-50');
-                applyButton.classList.add('bg-cyan-500', 'hover:bg-button_hover', 'cursor-pointer');
+            if (button === "Apply") {
+                applyButton.classList.remove(
+                    "bg-gray-400",
+                    "cursor-not-allowed",
+                    "opacity-50"
+                );
+                applyButton.classList.add(
+                    "bg-cyan-500",
+                    "hover:bg-button_hover",
+                    "cursor-pointer"
+                );
                 applyButton.disabled = false; // Aktifkan tombol
-            } else if (button === 'Closed') {
-                applyButton.classList.remove('bg-cyan-500', 'hover:bg-button_hover', 'cursor-pointer');
-                applyButton.classList.add('bg-gray-400', 'cursor-not-allowed', 'opacity-50');
+            } else if (button === "Closed") {
+                applyButton.classList.remove(
+                    "bg-cyan-500",
+                    "hover:bg-button_hover",
+                    "cursor-pointer"
+                );
+                applyButton.classList.add(
+                    "bg-gray-400",
+                    "cursor-not-allowed",
+                    "opacity-50"
+                );
                 applyButton.disabled = true; // Nonaktifkan tombol
             }
-            
-            const kriteriaContainer = detailContainer.querySelector('.kriteriaContainer'); // Ambil container kriteria
-            kriteriaContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
-            
-            if (namaKriteria && namaKriteria.trim() !== '') {
+
+            const kriteriaContainer =
+                detailContainer.querySelector(".kriteriaContainer"); // Ambil container kriteria
+            kriteriaContainer.innerHTML = ""; // Kosongkan container sebelum menambah elemen baru
+
+            if (namaKriteria && namaKriteria.trim() !== "") {
                 // Jika data kriteria ada
-                const kriteriaArray = namaKriteria.split(','); // Pisahkan berdasarkan koma
-                kriteriaArray.forEach(kriteria => {
-                    const kriteriaSpan = document.createElement('span');
-                    kriteriaSpan.classList.add('namaKriteria', 'px-4', 'py-1', 'bg-sky-200', 'text-sm', 'rounded-lg');
+                const kriteriaArray = namaKriteria.split(","); // Pisahkan berdasarkan koma
+                kriteriaArray.forEach((kriteria) => {
+                    const kriteriaSpan = document.createElement("span");
+                    kriteriaSpan.classList.add(
+                        "namaKriteria",
+                        "px-4",
+                        "py-1",
+                        "bg-sky-200",
+                        "text-sm",
+                        "rounded-lg"
+                    );
                     kriteriaSpan.textContent = kriteria.trim(); // Hapus spasi berlebih
                     kriteriaContainer.appendChild(kriteriaSpan);
                 });
             } else {
                 // Jika data kriteria kosong, tampilkan pesan
-                const emptyMessage = document.createElement('span');
-                emptyMessage.classList.add('namaKriteria', 'px-4', 'py-1', 'bg-red-200', 'text-sm', 'rounded-lg');
-                emptyMessage.textContent = 'Mitra belum mengisikan data';
+                const emptyMessage = document.createElement("span");
+                emptyMessage.classList.add(
+                    "namaKriteria",
+                    "px-4",
+                    "py-1",
+                    "bg-red-200",
+                    "text-sm",
+                    "rounded-lg"
+                );
+                emptyMessage.textContent = "Mitra belum mengisikan data";
                 kriteriaContainer.appendChild(emptyMessage);
             }
-            
-            const benefitContainer = detailContainer.querySelector('.benefitContainer'); // Ambil container kriteria
-            benefitContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
-            
-            if (namaBenefit && namaBenefit.trim() !== '') {
+
+            const benefitContainer =
+                detailContainer.querySelector(".benefitContainer"); // Ambil container kriteria
+            benefitContainer.innerHTML = ""; // Kosongkan container sebelum menambah elemen baru
+
+            if (namaBenefit && namaBenefit.trim() !== "") {
                 // Jika data kriteria ada
-                const benefitArray = namaBenefit.split(','); // Pisahkan berdasarkan koma
-                benefitArray.forEach(benefit => {
-                    const benefitSpan = document.createElement('span');
-                    benefitSpan.classList.add('namaBenefit', 'px-4', 'py-1', 'bg-sky-200', 'text-sm', 'rounded-lg');
+                const benefitArray = namaBenefit.split(","); // Pisahkan berdasarkan koma
+                benefitArray.forEach((benefit) => {
+                    const benefitSpan = document.createElement("span");
+                    benefitSpan.classList.add(
+                        "namaBenefit",
+                        "px-4",
+                        "py-1",
+                        "bg-sky-200",
+                        "text-sm",
+                        "rounded-lg"
+                    );
                     benefitSpan.textContent = benefit.trim(); // Hapus spasi berlebih
                     benefitContainer.appendChild(benefitSpan);
                 });
             } else {
                 // Jika data kriteria kosong, tampilkan pesan
-                const emptyMessage = document.createElement('span');
-                emptyMessage.classList.add('namaBenefit', 'px-4', 'py-1', 'bg-red-200', 'text-sm', 'rounded-lg');
-                emptyMessage.textContent = 'Mitra belum mengisikan data';
+                const emptyMessage = document.createElement("span");
+                emptyMessage.classList.add(
+                    "namaBenefit",
+                    "px-4",
+                    "py-1",
+                    "bg-red-200",
+                    "text-sm",
+                    "rounded-lg"
+                );
+                emptyMessage.textContent = "Mitra belum mengisikan data";
                 benefitContainer.appendChild(emptyMessage);
             }
 
-            const id = document.getElementById('applyMdl').dataset.idUser;
+            const id = document.getElementById("applyMdl").dataset.idUser;
             /// Isi form dengan ID kegiatan
-            const hiddenKegiatanInput = document.createElement('input');
-            hiddenKegiatanInput.type = 'hidden';
-            hiddenKegiatanInput.name = 'id_kegiatan';
+            const hiddenKegiatanInput = document.createElement("input");
+            hiddenKegiatanInput.type = "hidden";
+            hiddenKegiatanInput.name = "id_kegiatan";
             hiddenKegiatanInput.value = idKegiatan;
 
             // Hapus input hidden sebelumnya (jika ada) agar tidak duplikasi
-            const existingInput = registrationForm.querySelector('input[name="id_kegiatan"]');
+            const existingInput = registrationForm.querySelector(
+                'input[name="id_kegiatan"]'
+            );
             if (existingInput) existingInput.remove();
 
             // Tambahkan input hidden ke form
@@ -228,15 +279,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update placeholder pada motivation
             motivationTextarea.placeholder = `Write your motivation for joining "${namaKegiatan}" from "${namaMitra}"...`;
-            
+
             applyButton.addEventListener("click", () => {
                 // Perbarui action form pendaftaran
-                const form = document.querySelector('#registrationForm');
+                const form = document.querySelector("#registrationForm");
                 form.action = `${id}/add-pendaftaran/${idKegiatan}`;
 
                 applyModal.classList.remove("opacity-0", "pointer-events-none");
-                applyModal.querySelector(".transform").classList.remove("scale-95");
-
+                applyModal
+                    .querySelector(".transform")
+                    .classList.remove("scale-95");
             });
         });
     });
@@ -248,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
         applyModal.classList.add("opacity-0", "pointer-events-none");
         applyModal.querySelector(".transform").classList.add("scale-95");
         notification.classList.remove("opacity-0", "pointer-events-none");
-        
+
         // Menghilangkan notifikasi setelah 3 detik
         setTimeout(() => {
             notification.classList.add("opacity-0", "pointer-events-none");
@@ -256,44 +308,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Event untuk menutup modal
-    closeModal.addEventListener('click', () => {
-        applyModal.classList.add('opacity-0', 'pointer-events-none');
-        applyModal.classList.remove('opacity-100');
+    closeModal.addEventListener("click", () => {
+        applyModal.classList.add("opacity-0", "pointer-events-none");
+        applyModal.classList.remove("opacity-100");
     });
 
     // Event untuk menutup modal ketika klik di luar modal
-    applyModal.addEventListener('click', (e) => {
+    applyModal.addEventListener("click", (e) => {
         if (e.target === applyModal) {
-        applyModal.classList.add('opacity-0', 'pointer-events-none');
-        applyModal.classList.remove('opacity-100');
+            applyModal.classList.add("opacity-0", "pointer-events-none");
+            applyModal.classList.remove("opacity-100");
         }
     });
 });
 
 //(NOT LOGIN YET) JAVASCRIPT LIST DAN DETAIL KEGIATAN
-document.addEventListener('DOMContentLoaded', () => {
-    const detailContainer = document.getElementById('detailVolunteer');
-    const defaultMessage = detailContainer.querySelector('.default-message');
-    const detailContent = detailContainer.querySelector('.detail-content');
+document.addEventListener("DOMContentLoaded", () => {
+    const detailContainer = document.getElementById("detailVolunteer");
+    const defaultMessage = detailContainer.querySelector(".default-message");
+    const detailContent = detailContainer.querySelector(".detail-content");
 
     const applyButton = document.getElementById("applyBtn");
     const applyModal = document.getElementById("applyMdl");
     const closeModal = document.getElementById("closeApplyMdl");
-    const registrationForm = document.getElementById('registrationForm');
+    const registrationForm = document.getElementById("registrationForm");
 
     const backButton = document.getElementById("backBtn");
 
     // Tampilkan pesan default saat halaman dimuat
-    defaultMessage.classList.remove('hidden');
-    detailContent.classList.add('hidden');
+    defaultMessage.classList.remove("hidden");
+    detailContent.classList.add("hidden");
 
-    document.querySelectorAll('.volunteerCard').forEach(card => {
-        card.addEventListener('click', () => {
-
+    document.querySelectorAll(".volunteerCard").forEach((card) => {
+        card.addEventListener("click", () => {
             detailContainer.classList.remove("translate-y-full");
 
-            defaultMessage.classList.add('hidden');
-            detailContent.classList.remove('hidden');
+            defaultMessage.classList.add("hidden");
+            detailContent.classList.remove("hidden");
 
             // Ambil data dari atribut data-*
             const idKegiatan = card.dataset.idKegiatan;
@@ -303,58 +354,92 @@ document.addEventListener('DOMContentLoaded', () => {
             const logo = card.dataset.logo;
             const sistemKegiatan = card.dataset.sistemKegiatan;
             const sisaHari = card.dataset.sisaHari;
-            const pendaftarCount  = card.dataset.pendaftarCount;
+            const pendaftarCount = card.dataset.pendaftarCount;
             const deskripsi = card.dataset.deskripsi;
             const namaKriteria = card.dataset.namaKriteria;
             const namaBenefit = card.dataset.namaBenefit;
 
             // Tampilkan data di bagian detail
-            detailContainer.querySelector('.namaKegiatan').textContent = namaKegiatan;
-            detailContainer.querySelector('.namaMitra').textContent = namaMitra;
-            detailContainer.querySelector('.lokasiKegiatan').textContent = lokasiKegiatan;
-            detailContainer.querySelector('img').src = logo;
-            detailContainer.querySelector('.sistemKegiatan').textContent = sistemKegiatan;
-            detailContainer.querySelector('.sisaHari').textContent = sisaHari;
-            detailContainer.querySelector('.pendaftarCount').textContent = pendaftarCount;
-            detailContainer.querySelector('.deskripsi').textContent = deskripsi;
-            
-            const kriteriaContainer = detailContainer.querySelector('.kriteriaContainer'); // Ambil container kriteria
-            kriteriaContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
-            
-            if (namaKriteria && namaKriteria.trim() !== '') {
+            detailContainer.querySelector(".namaKegiatan").textContent =
+                namaKegiatan;
+            detailContainer.querySelector(".namaMitra").textContent = namaMitra;
+            detailContainer.querySelector(".lokasiKegiatan").textContent =
+                lokasiKegiatan;
+            detailContainer.querySelector("img").src = logo;
+            detailContainer.querySelector(".sistemKegiatan").textContent =
+                sistemKegiatan;
+            detailContainer.querySelector(".sisaHari").textContent = sisaHari;
+            detailContainer.querySelector(".pendaftarCount").textContent =
+                pendaftarCount;
+            detailContainer.querySelector(".deskripsi").textContent = deskripsi;
+
+            const kriteriaContainer =
+                detailContainer.querySelector(".kriteriaContainer"); // Ambil container kriteria
+            kriteriaContainer.innerHTML = ""; // Kosongkan container sebelum menambah elemen baru
+
+            if (namaKriteria && namaKriteria.trim() !== "") {
                 // Jika data kriteria ada
-                const kriteriaArray = namaKriteria.split(','); // Pisahkan berdasarkan koma
-                kriteriaArray.forEach(kriteria => {
-                    const kriteriaSpan = document.createElement('span');
-                    kriteriaSpan.classList.add('namaKriteria', 'px-4', 'py-1', 'bg-sky-200', 'text-sm', 'rounded-lg');
+                const kriteriaArray = namaKriteria.split(","); // Pisahkan berdasarkan koma
+                kriteriaArray.forEach((kriteria) => {
+                    const kriteriaSpan = document.createElement("span");
+                    kriteriaSpan.classList.add(
+                        "namaKriteria",
+                        "px-4",
+                        "py-1",
+                        "bg-sky-200",
+                        "text-sm",
+                        "rounded-lg"
+                    );
                     kriteriaSpan.textContent = kriteria.trim(); // Hapus spasi berlebih
                     kriteriaContainer.appendChild(kriteriaSpan);
                 });
             } else {
                 // Jika data kriteria kosong, tampilkan pesan
-                const emptyMessage = document.createElement('span');
-                emptyMessage.classList.add('namaKriteria', 'px-4', 'py-1', 'bg-red-200', 'text-sm', 'rounded-lg');
-                emptyMessage.textContent = 'Mitra belum mengisikan data';
+                const emptyMessage = document.createElement("span");
+                emptyMessage.classList.add(
+                    "namaKriteria",
+                    "px-4",
+                    "py-1",
+                    "bg-red-200",
+                    "text-sm",
+                    "rounded-lg"
+                );
+                emptyMessage.textContent = "Mitra belum mengisikan data";
                 kriteriaContainer.appendChild(emptyMessage);
             }
-            
-            const benefitContainer = detailContainer.querySelector('.benefitContainer'); // Ambil container kriteria
-            benefitContainer.innerHTML = ''; // Kosongkan container sebelum menambah elemen baru
-            
-            if (namaBenefit && namaBenefit.trim() !== '') {
+
+            const benefitContainer =
+                detailContainer.querySelector(".benefitContainer"); // Ambil container kriteria
+            benefitContainer.innerHTML = ""; // Kosongkan container sebelum menambah elemen baru
+
+            if (namaBenefit && namaBenefit.trim() !== "") {
                 // Jika data kriteria ada
-                const benefitArray = namaBenefit.split(','); // Pisahkan berdasarkan koma
-                benefitArray.forEach(benefit => {
-                    const benefitSpan = document.createElement('span');
-                    benefitSpan.classList.add('namaBenefit', 'px-4', 'py-1', 'bg-sky-200', 'text-sm', 'rounded-lg');
+                const benefitArray = namaBenefit.split(","); // Pisahkan berdasarkan koma
+                benefitArray.forEach((benefit) => {
+                    const benefitSpan = document.createElement("span");
+                    benefitSpan.classList.add(
+                        "namaBenefit",
+                        "px-4",
+                        "py-1",
+                        "bg-sky-200",
+                        "text-sm",
+                        "rounded-lg"
+                    );
                     benefitSpan.textContent = benefit.trim(); // Hapus spasi berlebih
                     benefitContainer.appendChild(benefitSpan);
                 });
             } else {
                 // Jika data kriteria kosong, tampilkan pesan
-                const emptyMessage = document.createElement('span');
-                emptyMessage.classList.add('namaBenefit', 'px-4', 'py-1', 'bg-red-200', 'text-sm', 'rounded-lg');
-                emptyMessage.textContent = 'Mitra belum mengisikan data';
+                const emptyMessage = document.createElement("span");
+                emptyMessage.classList.add(
+                    "namaBenefit",
+                    "px-4",
+                    "py-1",
+                    "bg-red-200",
+                    "text-sm",
+                    "rounded-lg"
+                );
+                emptyMessage.textContent = "Mitra belum mengisikan data";
                 benefitContainer.appendChild(emptyMessage);
             }
 
@@ -366,21 +451,21 @@ document.addEventListener('DOMContentLoaded', () => {
         applyModal.classList.remove("opacity-0", "pointer-events-none");
         applyModal.querySelector(".transform").classList.remove("scale-95");
     });
-    
+
     backButton.addEventListener("click", () => {
         detailContainer.classList.add("translate-y-full");
     });
     // Event untuk menutup modal
-    closeModal.addEventListener('click', () => {
-        applyModal.classList.add('opacity-0', 'pointer-events-none');
-        applyModal.classList.remove('opacity-100');
+    closeModal.addEventListener("click", () => {
+        applyModal.classList.add("opacity-0", "pointer-events-none");
+        applyModal.classList.remove("opacity-100");
     });
 
     // Event untuk menutup modal ketika klik di luar modal
-    applyModal.addEventListener('click', (e) => {
+    applyModal.addEventListener("click", (e) => {
         if (e.target === applyModal) {
-        applyModal.classList.add('opacity-0', 'pointer-events-none');
-        applyModal.classList.remove('opacity-100');
+            applyModal.classList.add("opacity-0", "pointer-events-none");
+            applyModal.classList.remove("opacity-100");
         }
     });
 });
@@ -502,8 +587,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeSkillModalButton = document.getElementById("closeModalSkillBtn");
     const deleteSkillButton = document.getElementById("deleteSkillBtn");
     const deleteSkillAlert = document.getElementById("deleteSkillAlert");
-    const cancelDeleteSkillButton = document.getElementById("cancelDeleteSkillButton");
-    const confirmDeleteSkillButton = document.getElementById("confirmDeleteSkillButton");
+    const cancelDeleteSkillButton = document.getElementById(
+        "cancelDeleteSkillButton"
+    );
+    const confirmDeleteSkillButton = document.getElementById(
+        "confirmDeleteSkillButton"
+    );
     let skillIdToDelete = null;
 
     openModalAddSkillButton.addEventListener("click", function () {
@@ -527,7 +616,10 @@ document.addEventListener("DOMContentLoaded", function () {
             if (id && id_skill) {
                 // Update action pada form
                 confirmDeleteSkillButton.action = `/user/${id}/remove-skill/${id_skill}`;
-                console.log("Form action updated:", confirmDeleteSkillButton.action);
+                console.log(
+                    "Form action updated:",
+                    confirmDeleteSkillButton.action
+                );
 
                 // Tampilkan modal konfirmasi
                 deleteSkillAlert.classList.remove("hidden");
@@ -546,13 +638,23 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const addExperienceButton = document.getElementById("addExperienceBtn");
     const addExperienceModal = document.getElementById("addExperienceModal");
-    const closeAddExperienceModalButton = document.getElementById("closeAddModalExperienceBtn");
+    const closeAddExperienceModalButton = document.getElementById(
+        "closeAddModalExperienceBtn"
+    );
     const editExperienceBtn = document.querySelectorAll(".edit-experience-btn");
     const showExperienceModal = document.getElementById("editExperienceModal");
-    const closeEditExperienceModalButton = document.getElementById("closeModalExperienceBtn");
-    const deleteExperienceAlert = document.getElementById("deleteExperienceAlert");
-    const confirmDeleteExperienceButton = document.getElementById("confirmDeleteExperience");
-    const cancelDeleteExperienceButton = document.getElementById("cancelDeleteExperience");
+    const closeEditExperienceModalButton = document.getElementById(
+        "closeModalExperienceBtn"
+    );
+    const deleteExperienceAlert = document.getElementById(
+        "deleteExperienceAlert"
+    );
+    const confirmDeleteExperienceButton = document.getElementById(
+        "confirmDeleteExperience"
+    );
+    const cancelDeleteExperienceButton = document.getElementById(
+        "cancelDeleteExperience"
+    );
 
     addExperienceButton.addEventListener("click", function () {
         addExperienceModal.classList.remove("hidden");
@@ -566,10 +668,10 @@ document.addEventListener("DOMContentLoaded", function () {
         showExperienceModal.classList.add("hidden");
     });
 
-    editExperienceBtn.forEach(button => {
-            button.addEventListener("click", function () {
-            const experienceId = this.getAttribute('data-id-experience');
-            const userId = this.getAttribute('data-id');
+    editExperienceBtn.forEach((button) => {
+        button.addEventListener("click", function () {
+            const experienceId = this.getAttribute("data-id-experience");
+            const userId = this.getAttribute("data-id");
             const judulKegiatan = this.getAttribute("data-judul-kegiatan");
             const mitra = this.getAttribute("data-mitra");
             const lokasiKegiatan = this.getAttribute("data-lokasi-kegiatan");
@@ -578,35 +680,40 @@ document.addEventListener("DOMContentLoaded", function () {
             const deskripsi = this.getAttribute("data-deskripsi");
 
             document.getElementById("activityName").value = judulKegiatan;
-            document.getElementById("company").value=mitra;
-            document.getElementById("location").value=lokasiKegiatan;
-            document.getElementById("startDate").value=tglMulai;
-            document.getElementById("endData").value=tglSelesai;
-            document.getElementById("description").value=deskripsi;
+            document.getElementById("company").value = mitra;
+            document.getElementById("location").value = lokasiKegiatan;
+            document.getElementById("startDate").value = tglMulai;
+            document.getElementById("endData").value = tglSelesai;
+            document.getElementById("description").value = deskripsi;
 
             const actionUrl = `/user/edit-experience/${userId}/${experienceId}`;
-            document.getElementById('editExperienceAction').action = actionUrl;
+            document.getElementById("editExperienceAction").action = actionUrl;
             showExperienceModal.classList.remove("hidden");
             showExperienceModal.classList.add("flex");
 
             document.addEventListener("click", function (event) {
                 if (event.target.closest(".delete-experience-btn")) {
-                    const deleteButton = event.target.closest(".delete-experience-btn");
+                    const deleteButton = event.target.closest(
+                        ".delete-experience-btn"
+                    );
                     const id = deleteButton.getAttribute("data-id");
-                    const id_experience = deleteButton.getAttribute("data-id-experience");
-        
+                    const id_experience =
+                        deleteButton.getAttribute("data-id-experience");
+
                     if (id && id_experience) {
                         // Update action pada form
                         confirmDeleteExperienceButton.action = `/user/remove-experience/${id}/${id_experience}`;
-                        console.log("Form action updated:", confirmDeleteExperienceButton.action);
-        
+                        console.log(
+                            "Form action updated:",
+                            confirmDeleteExperienceButton.action
+                        );
+
                         // Tampilkan modal konfirmasi
                         deleteExperienceAlert.classList.remove("hidden");
                         deleteExperienceAlert.classList.add("flex");
                     }
                 }
             });
-
         });
     });
 
@@ -646,59 +753,98 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // JAVASCRIPT DETAIL PROFILE USER
 //More Deskripsi
-document.getElementById('btn-more-desc').addEventListener('click', function (event) {
-    const element = event.target;
-    const parent = element.parentElement;
-    const shortDesc = parent.querySelector('.short-desc');
-    const moreDesc = parent.querySelector('.more-desc');
+document.addEventListener("DOMContentLoaded", function () {
+    document
+        .getElementById("btn-more-desc")
+        .addEventListener("click", function (event) {
+            const element = event.target;
+            const parent = element.parentElement;
+            const shortDesc = parent.querySelector(".short-desc");
+            const moreDesc = parent.querySelector(".more-desc");
 
-    if (moreDesc.classList.contains('hidden')) {
-        shortDesc.classList.add('hidden');
-        moreDesc.classList.remove('hidden');
-        element.textContent = "Less";
-    } else {
-        shortDesc.classList.remove('hidden');
-        moreDesc.classList.add('hidden');
-        element.textContent = "More";
-    }
+            if (moreDesc.classList.contains("hidden")) {
+                shortDesc.classList.add("hidden");
+                moreDesc.classList.remove("hidden");
+                element.textContent = "Less";
+            } else {
+                shortDesc.classList.remove("hidden");
+                moreDesc.classList.add("hidden");
+                element.textContent = "More";
+            }
+        });
 });
 
 // More Deskripsi Experience
-document.querySelectorAll('.btn-more-desc-exp').forEach(button => {
-    button.addEventListener('click', function (event) {
+document.querySelectorAll(".btn-more-desc-exp").forEach((button) => {
+    button.addEventListener("click", function (event) {
         const element = event.target;
         const parent = element.parentElement;
-        const shortDesc = parent.querySelector('.short-desc');
-        const moreDesc = parent.querySelector('.more-desc');
+        const shortDesc = parent.querySelector(".short-desc");
+        const moreDesc = parent.querySelector(".more-desc");
 
-        if (moreDesc.classList.contains('hidden')) {
-            shortDesc.classList.add('hidden');
-            moreDesc.classList.remove('hidden');
+        if (moreDesc.classList.contains("hidden")) {
+            shortDesc.classList.add("hidden");
+            moreDesc.classList.remove("hidden");
             element.textContent = "Less";
         } else {
-            shortDesc.classList.remove('hidden');
-            moreDesc.classList.add('hidden');
+            shortDesc.classList.remove("hidden");
+            moreDesc.classList.add("hidden");
             element.textContent = "More";
         }
     });
 });
 
-document.getElementById('changePictureBtn').addEventListener('click', function () {
-    // Klik otomatis pada input file
-    document.getElementById('uploadPictureInput').click();
-});
+document
+    .getElementById("changePictureBtn")
+    .addEventListener("click", function () {
+        // Klik otomatis pada input file
+        document.getElementById("uploadPictureInput").click();
+    });
 
-document.getElementById('uploadPictureInput').addEventListener('change', function () {
-    // Submit form secara otomatis jika file dipilih
-    if (this.files && this.files[0]) {
-        // Tampilkan pratinjau gambar (opsional)
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            document.getElementById('profilePicture').src = e.target.result;
-        };
-        reader.readAsDataURL(this.files[0]);
+document
+    .getElementById("uploadPictureInput")
+    .addEventListener("change", function () {
+        // Submit form secara otomatis jika file dipilih
+        if (this.files && this.files[0]) {
+            // Tampilkan pratinjau gambar (opsional)
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById("profilePicture").src = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
 
-        // Submit form
-        document.getElementById('updateProfilePictureForm').submit();
-    }
+            // Submit form
+            document.getElementById("updateProfilePictureForm").submit();
+        }
+    });
+
+// Applied volunteer
+document.addEventListener("DOMContentLoaded", function () {
+    const appliedCard = document.getElementById("appliedCard");
+    const detailAppliedVolunteerModal = document.getElementById(
+        "detailAppliedVolunteer"
+    );
+    const closeDetailAppliedVolunteer = document.getElementById(
+        "closeDetailAppliedVolunteer"
+    );
+
+    const openModal = () => {
+        detailAppliedVolunteerModal.classList.remove("hidden");
+        detailAppliedVolunteerModal.classList.add("flex");
+    };
+
+    const closeModal = () => {
+        detailAppliedVolunteerModal.classList.remove("flex");
+        detailAppliedVolunteerModal.classList.add("hidden");
+    };
+
+    appliedCard.addEventListener("click", openModal);
+
+    closeDetailAppliedVolunteer.addEventListener("click", closeModal);
+
+    detailAppliedVolunteerModal.addEventListener("click", (event) => {
+        if (event.target === detailAppliedVolunteerModal) {
+            closeModal();
+        }
+    });
 });

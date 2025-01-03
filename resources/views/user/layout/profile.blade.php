@@ -753,13 +753,14 @@
           <!-- Experience End -->
         </div>
       </div>
-      <div id="appliedContent" class="hidden container mt-8">
+      <div id="appliedContent" class="hidden container mt-8 flex flex-col gap-4">
         @if(isset($user->pendaftars) && $user->pendaftars->isNotEmpty())
         <?php $no = 1 ?>
         @foreach($user->pendaftars as $pendaftar)
-        <div class="border border-slate-300 rounded-2xl">
+        <div id="appliedCard" class="border border-slate-300 rounded-2xl cursor-pointer hover:border-sky-500">
           <div class="flex items-center gap-4 p-4">
-            <img src="{{asset('storage/logo/'.$pendaftar->kegiatan->mitra->logo)}}" alt="" class="w-16 rounded-full" />
+            <img src="{{asset('storage/logo/'.$pendaftar->kegiatan->mitra->logo)}}" alt=""
+              class="w-16 h-16 object-cover rounded-full" />
             <div class="overflow-hidden">
               <h2 class="text-xl font-semibold line-clamp-2">
                 {{$pendaftar->kegiatan->nama_kegiatan}}
@@ -799,6 +800,41 @@
           <p class="text-gray-500 text-center">You have not applied for any activities yet.</p>
         </div>
         @endif
+        {{-- Applied volunteer, detail information (modal). Start --}}
+        <div id="detailAppliedVolunteer"
+          class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full bg-black bg-opacity-50 items-center justify-center">
+          <div class="w-4/5 h-[370px] p-4 rounded-lg bg-white sm:max-w-lg">
+            <div class="flex justify-between items-center">
+              <h1 class="font-medium">Application Progress</h1>
+              <button id="closeDetailAppliedVolunteer">
+                <svg class="w-6" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M6.97 16.47a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 1 0-1.06-1.06l1.06 1.06Zm-1.06-1.06a.75.75 0 1 0 1.06 1.06l-1.06-1.06Zm6.06-3.94a.75.75 0 0 0-1.06-1.06l1.06 1.06Zm-5 3.94a.75.75 0 1 0-1.06 1.06l1.06-1.06Zm3.94 6.06a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-5-5a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM8.03 6.47a.75.75 0 0 0-1.06 1.06l1.06-1.06Zm0 11.06 5-5-1.06-1.06-5 5 1.06 1.06Zm5-5 5-5-1.06-1.06-5 5 1.06 1.06Zm-1.06 0 5 5 1.06-1.06-5-5-1.06 1.06Zm1.06-1.06-5-5-1.06 1.06 5 5 1.06-1.06Z"
+                    fill="#000" />
+                </svg>
+              </button>
+            </div>
+            <div class="mt-4 p-2 border rounded-lg">
+              <div class="flex flex-col gap-2 px-2">
+                <h2 class="text-sm text-gray-500">Application status</h2>
+                <span class="block w-24 text-center text-sm border border-sky-500 rounded-2xl text-sky-500 bg-sky-50">In
+                  Review</span>
+              </div>
+              <div class="mt-4 h-48 px-2 overflow-y-auto">
+                <h2 class="text-sm text-gray-500">Note from partner</h2>
+                <p class="text-sm text-justify">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
+                  possimus incidunt ut error consequuntur expedita obcaecati? Sed
+                  maxime accusantium asperiores, labore repellat voluptatibus libero
+                  repellendus rem et beatae veniam ipsam. Lorem ipsum dolor sit amet
+                  consectetur adipisicing elit. Mollitia eligendi modi laudantium
+                  iste deleniti explicabo officiis eveniet eaque eos error.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{-- Applied volunteer, detail information (modal). End --}}
       </div>
     </section>
   </div>
