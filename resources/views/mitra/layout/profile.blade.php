@@ -70,5 +70,67 @@
       </button> --}}
       {{-- Preview image before uploading end --}}
     </div>
+    <div class="">
+      <form action="" method="POST">
+        @csrf
+        <div class="mt-6 space-y-4 p-2 overflow-y-auto sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0">
+
+          <!-- Email Input -->
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Email</label>
+            <input type="email" id="email" name="email_mitra"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your email" required />
+          </div>
+
+          <!-- Name Input -->
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Company name</label>
+            <input type="text" id="name" name="nama_mitra"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your full name" required />
+          </div>
+
+          <!-- Phone Number Input -->
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Phone number</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter your phone number" required />
+          </div>
+
+          <!-- Industri Input -->
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Industry</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter industrial type" required />
+          </div>
+
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Company Size</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter company size" required />
+          </div>
+
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Site</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter company site" required />
+          </div>
+
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-6 p-2">
+          <button type="submit"
+            class="w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </section>
