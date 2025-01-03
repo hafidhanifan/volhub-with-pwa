@@ -135,6 +135,10 @@ Route::prefix('mitra')->group(function () {
         Route::put('edit-detail/{id}', [MitraController::class, 'editMitraAction'])->name('mitra.edit-profile-action');
         Route::post('edit-foto-profile/{id}', [MitraController::class, 'editFotoProfileAction'])->name('mitra.edit-foto-profile-action');
         Route::delete('delete-foto-profile/{id}', [MitraController::class, 'deleteFotoProfileAction'])->name('mitra.delete-foto-profile-action');
+
+        // Change password
+        Route::get('change-password/{id}', [MitraController::class, 'showChangePasswordPage'])->name('mitra.change-password-page');
+
     });
 });
 

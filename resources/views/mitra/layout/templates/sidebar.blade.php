@@ -53,6 +53,13 @@
           <ellipse cx="50" cy="36.5" rx="14.9" ry="16.5" />
         </svg>Profile</a>
     </li>
+    <li class="py-4 hover:bg-button_hover2">
+      <a href="{{ route('mitra.change-password-page', ['id' => $mitra->id_mitra]) }}" class="flex"><svg version="1.0"
+          class="w-6 mr-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xml:space="preserve">
+          <path fill="#231F20"
+            d="M52 24h-4v-8c0-8.836-7.164-16-16-16S16 7.164 16 16v8h-4c-2.211 0-4 1.789-4 4v32c0 2.211 1.789 4 4 4h40c2.211 0 4-1.789 4-4V28c0-2.211-1.789-4-4-4zM32 48c-2.211 0-4-1.789-4-4s1.789-4 4-4 4 1.789 4 4-1.789 4-4 4zm8-24H24v-8a8 8 0 0 1 16 0v8z" />
+        </svg>Change Password</a>
+    </li>
     <li class="py-4 hover:bg-rose-200">
       <a href="{{ route('mitra.logout') }}" class="flex"><svg class="w-6 mr-4 ml-2" viewBox="0 0 24 24" fill="none"
           xmlns="http://www.w3.org/2000/svg">

@@ -70,7 +70,7 @@
       </button> --}}
       {{-- Preview image before uploading end --}}
     </div>
-    <div class="">
+    <div>
       <form action="" method="POST">
         @csrf
         <div class="mt-6 space-y-4 p-2 overflow-y-auto sm:max-w-4xl sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0">
