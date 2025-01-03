@@ -46,10 +46,11 @@
             <input type="file" name="logo" id="uploadlogoMitra" class="hidden" accept="image/*">
             <button type="button" id="changeLogoBtn"
               class="w-24 text-sm px-4 py-1 rounded-lg bg-sky-400 hover:bg-sky-500">
-              Change Logo
+              Update
             </button>
           </form>
-          <form action="{{ route('mitra.delete-foto-profile-action', ['id'=> $mitra->id_mitra]) }}" method="POST" enctype="multipart/form-data">
+          <form action="{{ route('mitra.delete-foto-profile-action', ['id'=> $mitra->id_mitra]) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('DELETE')
             <button type="submit" class="w-24 text-sm px-4 py-1 rounded-lg bg-rose-400 hover:bg-rose-500">
@@ -59,23 +60,14 @@
         </div>
       </div>
 
-      @if (session('success'))
-      <p class="text-green-500">{{ session('success') }}</p>
-      @endif
-
-      @if (session('error'))
-      <p class="text-red-500">{{ session('error') }}</p>
-      @endif
-
-
       {{-- Preview image before uploading start --}}
-      <div class="mt-4">
+      {{-- <div class="mt-4">
         <img id="image-preview" class="max-w-full max-h-96 mx-auto hidden" />
       </div>
       <button type="button" id="crop-button" data-id="{{ auth()->user()->id_mitra }}"
         class="mt-4 px-4 py-2 bg-green-500 text-white rounded hidden">
         Crop & Upload
-      </button>
+      </button> --}}
       {{-- Preview image before uploading end --}}
     </div>
   </div>
