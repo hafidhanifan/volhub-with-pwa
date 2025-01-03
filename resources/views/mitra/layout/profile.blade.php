@@ -27,7 +27,7 @@
   </div>
   {{-- Desktop header end --}}
 
-  <div class="p-4">
+  <div class="p-4 h-[calc(100vh-81px)] overflow-y-auto">
     <div class="">
       <span class="block mb-4 text-sm text-gray-500">Company logo / picture</span>
       <div class="flex items-center gap-4">
@@ -73,7 +73,7 @@
     <div class="">
       <form action="" method="POST">
         @csrf
-        <div class="mt-6 space-y-4 p-2 overflow-y-auto sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0">
+        <div class="mt-6 space-y-4 p-2 overflow-y-auto sm:max-w-4xl sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0">
 
           <!-- Email Input -->
           <div class="">
@@ -121,12 +121,30 @@
               placeholder="Enter company site" required />
           </div>
 
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Bio</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter company bio" required />
+          </div>
+
+          <div class="">
+            <label class="block text-sm mb-1 text-gray-500">Address</label>
+            <input type="tel" id="phone" name="nomor_telephone"
+              class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
+              placeholder="Enter company address" required />
+          </div>
+        </div>
+        <div class="mt-4 p-2 sm:max-w-4xl">
+          <label class="block text-sm mb-1 text-gray-500">Address</label>
+          <textarea name="" id="" cols="30" rows="10"
+            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"></textarea>
         </div>
 
         <!-- Submit Button -->
-        <div class="mt-6 p-2">
+        <div class="mt-6 p-2 sm:flex sm:justify-end sm:max-w-4xl">
           <button type="submit"
-            class="w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1">
+            class="w-full bg-sky-500 text-white py-2 px-4 rounded-lg hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-1 sm:w-24">
             Save
           </button>
         </div>
