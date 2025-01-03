@@ -40,16 +40,22 @@
         @endif
         <div class="flex gap-2">
           {{-- Form update logo --}}
-          <form id="update-picture-form" action="{{ route('mitra.edit-foto-profile-action', $mitra->id_mitra) }}"
+          <form id="updateLogoForm" action="{{ route('mitra.edit-foto-profile-action', ['id'=> $mitra->id_mitra]) }}"
             method="POST" enctype="multipart/form-data">
             @csrf
-            <input type="file" name="profile_picture" id="profile_picture" class="hidden" onchange="this.form.submit()">
-            <button type="button" onclick="document.getElementById('profile_picture').click()"
+            <input type="file" name="logo" id="uploadlogoMitra" class="hidden" accept="image/*">
+            <button type="button" id="changeLogoBtn"
               class="w-24 text-sm px-4 py-1 rounded-lg bg-sky-400 hover:bg-sky-500">
-              Update
+              Change Logo
             </button>
           </form>
-          <button class="w-24 text-sm px-4 py-1 rounded-lg bg-rose-400 hover:bg-rose-500">Delete</button>
+          <form action="{{ route('mitra.delete-foto-profile-action', ['id'=> $mitra->id_mitra]) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="w-24 text-sm px-4 py-1 rounded-lg bg-rose-400 hover:bg-rose-500">
+              Delete
+            </button>
+          </form>
         </div>
       </div>
 

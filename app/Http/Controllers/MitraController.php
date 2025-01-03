@@ -258,40 +258,85 @@ class MitraController extends Controller
         return redirect()->route('mitra.profile', ['id' => $id->id_mitra])->with('success', 'Profile Mitra berhasil diupdate.');
     }
 
+    // public function editFotoProfileAction(Request $request, $id)
+    // {
+    //     $mitra = Mitra::findOrFail($id);
+
+    //     if ($request->isMethod('post')) {
+    //         // Upload new image
+    //         $request->validate([
+    //             'profil_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    //         ]);
+
+    //         if($mitra->logo && Storage::exist('public/logo/' . $mitra->logo)) {
+    //             // Delete old picture
+    //             Storage::delete('public/logo/' . $mitra->logo);
+    //         }
+
+    //         $filename = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
+    //         $request->file('profile_picture')->storeAs('public/logo', $filename);
+
+    //         $mitra->logo = $filename;
+    //         $mitra->save();
+
+    //         return back()->with('success', 'Foto berhasil diperbarui.');
+    //     } elseif ($request->isMethod('delete')) {
+    //         // Delete picture
+    //         if ($mitra->logo && Storage::exists('public/logo/' . $mitra->logo)) {
+    //             Storage::delete('public/logo/' . $mitra->logo);
+    //         }
+    
+    //         $mitra->logo = null;
+    //         $mitra->save();
+    
+    //         return back()->with('success', 'Foto berhasil dihapus.');
+    //     }
+    //     return back()->with('error', 'Permintaan tidak valid.');
+    // }
+
     public function editFotoProfileAction(Request $request, $id)
     {
         $mitra = Mitra::findOrFail($id);
 
-        if ($request->isMethod('post')) {
-            // Upload new image
-            $request->validate([
-                'profil_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
-
-            if($mitra->logo && Storage::exist('public/logo/' . $mitra->logo)) {
-                // Delete old picture
-                Storage::delete('public/logo/' . $mitra->logo);
+        // Menghapus gambar lama jika ada
+        if ($mitra->logo) {
+            $oldImage = storage_path('app/public/logo/' . $mitra->logo);
+            if (File::exists($oldImage)) {
+                File::delete($oldImage);
             }
+        }
 
-            $filename = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
-            $request->file('profile_picture')->storeAs('public/logo', $filename);
+        // Proses file upload
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $newName = $mitra->nama_mitra . '-' . now()->timestamp . '.' . $file->getClientOriginalExtension(); // Nama unik
+            $path = $file->storeAs('public/logo', $newName); // Simpan ke storage
 
-            $mitra->logo = $filename;
+            // Simpan nama file ke database
+            $mitra->logo = $newName;
             $mitra->save();
 
-            return back()->with('success', 'Foto berhasil diperbarui.');
-        } elseif ($request->isMethod('delete')) {
-            // Delete picture
-            if ($mitra->logo && Storage::exists('public/logo/' . $mitra->logo)) {
-                Storage::delete('public/logo/' . $mitra->logo);
+            return redirect()->back()->with('success');
+        }
+    }
+
+    public function deleteFotoProfileAction($id)
+    {
+        $mitra = Mitra::findOrFail($id);
+
+        // Menghapus gambar lama jika ada
+        if ($mitra->logo) {
+            $oldImage = storage_path('app/public/logo/' . $mitra->logo);
+            if (File::exists($oldImage)) {
+                File::delete($oldImage);
             }
-    
+
+            // Set logo menjadi null
             $mitra->logo = null;
             $mitra->save();
-    
-            return back()->with('success', 'Foto berhasil dihapus.');
         }
-        return back()->with('error', 'Permintaan tidak valid.');
+
+        return redirect()->back()->with('success');
     }
 
     //All about Pendaftar

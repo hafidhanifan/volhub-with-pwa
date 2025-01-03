@@ -447,6 +447,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+document.getElementById('changeLogoBtn').addEventListener('click', function () {
+    // Klik otomatis pada input file
+    document.getElementById('uploadlogoMitra').click();
+});
+
+document.getElementById('uploadlogoMitra').addEventListener('change', function () {
+    // Submit form secara otomatis jika file dipilih
+    if (this.files && this.files[0]) {
+        // Tampilkan pratinjau gambar (opsional)
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById('profilePicture').src = e.target.result;
+        };
+        reader.readAsDataURL(this.files[0]);
+
+        // Submit form
+        document.getElementById('updateLogoForm').submit();
+    }
+});
+
 // import Cropper from "cropperjs";
 // import "cropperjs/dist/cropper.css";
 
