@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Skill;
 use App\Models\Kategori;
 use App\Models\Kegiatan;
+use App\Models\Mitra;
 // use Intervention\Image\Image;
 use App\Models\Pendaftar;
 use App\Models\Experience;
@@ -372,10 +373,10 @@ class UserController extends Controller
 }
 
     // Partner page
-    public function showAllPartnerPage (Request $request) {
+    public function showAllPartnerPage () {
         $mitra = Mitra::all();
 
-        return view('user.profile-partner', compact('mitra'));
+        return view('user.layout.profile-partner', compact('mitra'));
 
     }
 }

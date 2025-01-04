@@ -1,6 +1,6 @@
 @include('user.layout.templates.header')
 @include('user.layout.templates.navbar')
-<section class="md:flex md:pt-4 gap-4 flex-wrap justify-center">
+<section class="mt-20 md:flex md:pt-4 gap-4 flex-wrap justify-center">
     <!-- Mitra Card -->
     <a href="../public/detail_mitra.html"
         class="block p-2 border-b hover:bg-gray-100 cursor-pointer md:w-5/12 md:border lg:w-1/4">
