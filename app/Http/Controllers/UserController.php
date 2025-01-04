@@ -371,4 +371,11 @@ class UserController extends Controller
         return view('user.layout.daftar-volunteer', compact('kegiatans', 'search', 'kegiatanByKategori', 'kegiatanBySearch', 'totalKegiatan', 'kategori'));
 }
 
+    // Partner page
+    public function showAllPartnerPage (Request $request) {
+        $mitra = Mitra::all();
+
+        return view('user.profile-partner', compact('mitra'));
+
+    }
 }
