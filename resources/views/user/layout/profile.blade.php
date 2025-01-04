@@ -803,7 +803,7 @@
         {{-- Applied volunteer, detail information (modal). Start --}}
         <div id="detailAppliedVolunteer"
           class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full bg-black bg-opacity-50 items-center justify-center">
-          <div class="w-4/5 h-[370px] p-4 rounded-lg bg-white sm:max-w-lg">
+          <div class="w-4/5 h-[370px] p-4 rounded-lg bg-white sm:max-w-lg md:max-w-xl">
             <div class="flex justify-between items-center">
               <h1 class="font-medium">Application Progress</h1>
               <button id="closeDetailAppliedVolunteer">
@@ -817,10 +817,20 @@
             <div class="mt-4 p-2 border rounded-lg">
               <div class="flex flex-col gap-2 px-2">
                 <h2 class="text-sm text-gray-500">Application status</h2>
+                {{-- Pengkondisian status pendaftaran --}}
                 <span class="block w-24 text-center text-sm border border-sky-500 rounded-2xl text-sky-500 bg-sky-50">In
                   Review</span>
+                {{-- <span
+                  class="block w-24 text-center text-sm border border-amber-500 rounded-2xl text-amber-500 bg-amber-50">shortlisted</span>
+                <span
+                  class="block w-24 text-center text-sm border border-violet-500 rounded-2xl text-violet-500 bg-violet-50">Interview</span>
+                <span
+                  class="block w-24 text-center text-sm border border-emerald-500 rounded-2xl text-emerald-500 bg-emerald-50">Hire</span>
+                --}}
+                {{-- Pengkondisian status pendaftaran end --}}
               </div>
-              <div class="mt-4 h-48 px-2 overflow-y-auto">
+              {{-- In review dan shortlisted--}}
+              {{-- <div class="mt-4 h-48 px-2 overflow-y-auto">
                 <h2 class="text-sm text-gray-500">Note from partner</h2>
                 <p class="text-sm text-justify">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
@@ -830,6 +840,46 @@
                   consectetur adipisicing elit. Mollitia eligendi modi laudantium
                   iste deleniti explicabo officiis eveniet eaque eos error.
                 </p>
+              </div> --}}
+
+              {{-- Interview --}}
+              <div class="mt-4 h-48 px-2 overflow-y-auto">
+                <h2 class="text-sm text-gray-500">Interview Schedule</h2>
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:gap-8">
+                  <div class="w-2/5 mt-2 flex gap-1 flex-col ">
+                    <span class="block text-sm">Interview Date</span>
+                    <span class="block text-sm font-semibold">34 September 2025</span>
+                  </div>
+                  <div class="w-3/4 mt-2 flex gap-1 flex-col">
+                    <span class="block text-sm">Interview Location</span>
+                    <span class="block text-sm font-semibold">Parkiran Amikom Utara, deket pohon yang itu pokokny, ntar
+                      cari aja hehe</span>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <h2 class="text-sm text-gray-500">Note from partner</h2>
+                  <p class="text-sm text-justify">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
+                    possimus incidunt ut error consequuntur expedita obcaecati? Sed
+                    maxime accusantium asperiores, labore repellat voluptatibus
+                    libero repellendus rem et beatae veniam ipsam. Lorem ipsum dolor
+                    sit amet consectetur adipisicing elit. Mollitia eligendi modi
+                    laudantium iste deleniti explicabo officiis eveniet eaque eos
+                    error.
+                  </p>
+                </div>
+                <div class="mt-4">
+                  <h2 class="text-sm text-gray-500">Note Interview</h2>
+                  <p class="text-sm text-justify">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
+                    possimus incidunt ut error consequuntur expedita obcaecati? Sed
+                    maxime accusantium asperiores, labore repellat voluptatibus
+                    libero repellendus rem et beatae veniam ipsam. Lorem ipsum dolor
+                    sit amet consectetur adipisicing elit. Mollitia eligendi modi
+                    laudantium iste deleniti explicabo officiis eveniet eaque eos
+                    error.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
