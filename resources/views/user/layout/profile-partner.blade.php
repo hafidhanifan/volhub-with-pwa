@@ -108,7 +108,7 @@
             <img src="../src/image/mitra-logo-3.jpg" alt="" class="max-w-16" />
             <div class="">
                 <p class="font-semibold">Bantu Bantu</p>
-                <p class="text-gray-500 text-sm">Kota Yogyakarta, Indonesia</p>
+                <p class="text-gray-500 text-sm">Kota Yogyakarta, Indonesiaaaa</p>
             </div>
         </div>
         <div class="flex flex-col px-4 mt-4">
