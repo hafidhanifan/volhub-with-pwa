@@ -176,7 +176,8 @@
       <!-- Card Items -->
       <?php $no = 1 ?>
       @foreach($kegiatans as $kegiatan)
-      <div class="w-full mt-4 rounded-lg p-4 max-w-lg shadow-md border-2 hover:border-2 hover:border-sky-300 md:w-1/3">
+      <div
+        class="w-full mt-4 rounded-lg p-4 max-w-lg shadow-md border-2 cursor-pointer hover:border-2 hover:border-sky-300 md:w-1/3">
         <div class="flex items-start justify-between">
           <div class="flex gap-4">
             @if(!empty($kegiatan->mitra->logo))
