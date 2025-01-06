@@ -179,10 +179,13 @@
       <div class="w-full mt-4 rounded-lg p-4 max-w-lg shadow-md border-2 hover:border-2 hover:border-sky-300 md:w-1/3">
         <div class="flex items-start justify-between">
           <div class="flex gap-4">
-
-            <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt="Logo" class="w-14 rounded-full" />
-
-
+            @if(!empty($kegiatan->mitra->logo))
+            <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt="Logo"
+              class="w-14 h-14 object-cover rounded-full" />
+            @else
+            <img class="w-14 h-14 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}"
+              alt="Logo Mitra" />
+            @endif
             <div class="w-full">
               <h2 class="line-clamp-1 font-semibold">
                 {{ $kegiatan->nama_kegiatan }}
@@ -201,7 +204,7 @@
           </svg>
         </div>
         <div class="description mt-4">
-          <p class="line-clamp-3 text-sm">
+          <p class="h-16 line-clamp-3 text-sm">
             {{ $kegiatan->deskripsi }}
           </p>
         </div>
