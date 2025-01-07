@@ -374,7 +374,8 @@ class UserController extends Controller
 
     // Partner page
     public function showAllPartnerPage () {
-        $mitra = Mitra::all();
+        // $mitra = Mitra::all();
+        $mitra = Mitra::withCount('kegiatans')->get();
 
         return view('user.layout.profile-partner', compact('mitra'));
 
