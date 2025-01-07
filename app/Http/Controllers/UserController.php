@@ -380,4 +380,9 @@ class UserController extends Controller
         return view('user.layout.profile-partner', compact('mitra'));
 
     }
+
+    public function showDetailPartnerPage () {
+
+        return view('user.layout.')
+    }
 }
