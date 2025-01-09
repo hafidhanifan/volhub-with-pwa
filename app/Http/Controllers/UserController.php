@@ -383,6 +383,6 @@ class UserController extends Controller
 
     public function showDetailPartnerPage () {
 
-        return view('user.layout.')
+        return view('user.layout.');
     }
 }

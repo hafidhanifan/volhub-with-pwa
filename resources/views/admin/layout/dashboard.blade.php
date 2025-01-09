@@ -1,6 +1,6 @@
-@include('admin.layout.templates.header')
+{{-- @include('admin.layout.templates.header') --}}
 @include('admin.layout.templates.sidebar')
-@include('admin.layout.templates.navbar')
+
 
 <!-- ========== section start ========== -->
       <section class="section">
