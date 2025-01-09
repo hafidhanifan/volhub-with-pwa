@@ -157,6 +157,7 @@ Route::prefix('user')->group(function () {
     });
    // Mitra page
     Route::get('partner', [UserController::class, 'showAllPartnerPage'])->name('partner');
+    Route::get('/partner/{id}', [UserController::class, 'showDetailPartnerPage'])->name('detail.partner');
 
     Route::middleware(['auth', 'separate.session:users'])->group(function () {
         Route::get('logout', [AuthController::class, 'logoutUser'])->name('user.logout');

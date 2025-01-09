@@ -4,7 +4,8 @@
     <!-- Mitra Card -->
     <?php $no = 1 ?>
     @foreach($mitra as $mitra)
-    <a href="" class="block p-2 border-b hover:bg-gray-100 cursor-pointer md:w-5/12 md:border lg:w-1/4">
+    <a href="{{ route('detail.partner', ['id' => $mitra->id_mitra]) }}"
+        class="block p-2 border-b hover:bg-gray-100 cursor-pointer md:w-5/12 md:border lg:w-1/4">
         <div class="flex items-center gap-2 px-2">
             @if(!empty($mitra->logo))
             <img src="{{ asset('storage/foto-profile/'.$mitra->logo)}}" alt=""
