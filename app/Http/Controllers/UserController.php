@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Skill;
 use App\Models\Kategori;
 use App\Models\Kegiatan;
+use App\Models\Mitra;
 // use Intervention\Image\Image;
 use App\Models\Pendaftar;
 use App\Models\Experience;
@@ -371,4 +372,17 @@ class UserController extends Controller
         return view('user.layout.daftar-volunteer', compact('kegiatans', 'search', 'kegiatanByKategori', 'kegiatanBySearch', 'totalKegiatan', 'kategori'));
 }
 
+    // Partner page
+    public function showAllPartnerPage () {
+        // $mitra = Mitra::all();
+        $mitra = Mitra::withCount('kegiatans')->get();
+
+        return view('user.layout.profile-partner', compact('mitra'));
+
+    }
+
+    public function showDetailPartnerPage () {
+
+        return view('user.layout.')
+    }
 }

@@ -138,7 +138,6 @@ Route::prefix('mitra')->group(function () {
 
         // Change password
         Route::get('change-password/{id}', [MitraController::class, 'showChangePasswordPage'])->name('mitra.change-password-page');
-
     });
 });
 
@@ -156,6 +155,8 @@ Route::prefix('user')->group(function () {
     Route::get('/signup', function () {
         return view('user/layout/signup');
     });
+   // Mitra page
+    Route::get('partner', [UserController::class, 'showAllPartnerPage'])->name('partner');
 
     Route::middleware(['auth', 'separate.session:users'])->group(function () {
         Route::get('logout', [AuthController::class, 'logoutUser'])->name('user.logout');
