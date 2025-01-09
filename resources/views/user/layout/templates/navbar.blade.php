@@ -10,10 +10,12 @@
 
         <!-- Navbar untuk layar lebar -->
         <div class="hidden md:flex space-x-8 items-center justify-center w-full">
-          <a href="{{ route('home') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Home</a>
+          <a href="{{ route('home') }}"
+            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover hover:text-white">Home</a>
           <a href="{{ route('daftar.kegiatan') }}"
-            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Volunteer</a>
-          <a href="{{ route('partner') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Partner</a>
+            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover hover:text-white">Volunteer</a>
+          <a href="{{ route('partner') }}"
+            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover hover:text-white">Partner</a>
         </div>
 
         <!-- Profile avatar -->
@@ -55,7 +57,7 @@
             </div>
             <!-- Profile Dropdown -->
             <div id="profile-dropdown"
-              class="hidden absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-50">
+              class="hidden absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg z-50">
               @if(auth()->check())
               @php
               $user = auth()->user();
