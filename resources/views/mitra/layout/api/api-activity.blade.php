@@ -14,13 +14,13 @@
     </button>
     <div class="w-full flex flex-col justify-between md:items-center md:flex-row">
       <div class="pl-4 pb-3">
-        <h1 class="font-normal text-lg">Volunteer Management</h1>
-        <p class="text-gray-500 text-sm">Manage your volunteer data</p>
+        <h1 class="font-normal text-lg">Activity Management</h1>
+        <p class="text-gray-500 text-sm">Manage your Activity data</p>
       </div>
       <div class="pl-4 md:pr-4">
         <a href=""
           class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
-          Add Volunteer
+          Add Activity
         </a>
       </div>
     </div>
@@ -28,13 +28,13 @@
 
   <div class="hidden w-full lg:flex justify-between items-center">
     <div class="p-4">
-      <h1 class="font-normal text-lg">Volunteer Management</h1>
-      <p class="text-gray-500 text-sm">Manage your volunteer data</p>
+      <h1 class="font-normal text-lg">Activity Management</h1>
+      <p class="text-gray-500 text-sm">Manage your Activity data</p>
     </div>
     <div class="pr-4">
       <a href=""
         class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
-        Add Volunteer
+        Add Activity
       </a>
     </div>
   </div>
@@ -47,7 +47,7 @@
       <thead class="bg-gray-100">
         <tr>
           <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
-            Volunteer listing
+            Activity listing
           </th>
           <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
             Date posted
@@ -149,7 +149,7 @@
     </div>
     <div class="w-full p-4">
       <a id="editBtn" href="#" class="w-full block text-center py-3 text-white font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
-        Edit Volunteer
+        Edit Activity
       </a>
     </div>
     <div class="px-4 flex justify-evenly gap-2">

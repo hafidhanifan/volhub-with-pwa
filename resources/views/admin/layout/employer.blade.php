@@ -14,40 +14,31 @@
     </button>
     <div class="w-full flex flex-col justify-between md:items-center md:flex-row">
       <div class="pl-4 pb-3">
-        <h1 class="font-normal text-lg">Category Management</h1>
-        <p class="text-gray-500 text-sm">Manage category data</p>
-      </div>
-      <div class="pl-4 mt-2 md:pr-4 md:mt-0">
-        <a href="{{ route('admin.add-kategori-page')}}"
-          class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
-          Add Category
-        </a>
+        <h1 class="font-normal text-lg">Employer Management</h1>
+        <p class="text-gray-500 text-sm">Manage employer data</p>
       </div>
     </div>
   </div>
 
   <div class="hidden w-full lg:flex justify-between items-center">
     <div class="p-4">
-      <h1 class="font-normal text-lg">Category Management</h1>
-      <p class="text-gray-500 text-sm">Manage category data</p>
-    </div>
-    <div class="pr-4">
-      <a href="{{ route('admin.add-kategori-page')}}"
-        class="py-3 px-3 h-fit text-white text-sm font-medium rounded-lg bg-sky-500 hover:bg-sky-600">
-        Add Category
-      </a>
+      <h1 class="font-normal text-lg">Employer Management</h1>
+      <p class="text-gray-500 text-sm">Manage employer data</p>
     </div>
   </div>
   <!-- Header Content End -->
 
   <!-- Category list start -->
   <div class="mt-8 overflow-x-auto w-full lg:mt-0 lg:p-4">
-    @if(!empty($kategori))
+    @if(!empty($employer))
     <table class="min-w-full table-auto border-separate border-spacing-0 border border-gray-200 lg:rounded-lg">
       <thead class="bg-gray-100">
         <tr>
           <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
-            Category Name
+            Employer Name
+          </th>
+          <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
+            Phone Number
           </th>
           <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">
             Edit
@@ -59,14 +50,18 @@
       </thead>
       <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
         <?php $no = 1 ?>
-        @foreach($kategori as $kategori)
+        @foreach($employer as $employer)
         <tr id="category" class="category cursor-pointer hover:bg-button_hover2">
 
           <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-            <span class="font-semibold">{{ $kategori->nama_kategori }}</span>
+            <span class="font-semibold">{{ $employer->nama_mitra }}</span>
+            <p class="text-sm text-gray-500">{{ $employer->email_mitra}}</p>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+            <span class="font-semibold">{{ $employer->nomor_telephone }}</span>
           </td>
           <td class="px-6 py-4">
-            <a href="{{ route('admin.edit-kategori-page', ['id' => $kategori->id_kategori]) }}">
+            <a href="">
               <svg class="w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                   <path
@@ -79,7 +74,7 @@
           {{-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600"></td> --}}
           <td class="px-6 py-4 flex">
             <form
-              action="{{ route('admin.delete-kategori-action', ['id' => $kategori->id_kategori]) }}"
+              action=""
               method="POST" style="display:inline;">
               @csrf
               @method('DELETE')
@@ -101,7 +96,7 @@
     {{-- If data is empty --}}
     @else
     <div class="w-full h-[calc(100vh-200px)] flex flex-col gap-3 items-center justify-center ">
-      <p class="text-center">Hmm, it seems the data is still empty</p>
+      <p class="text-center">Hmm, it seems the data is still empty.</p>
       <svg class="w-10" viewBox="0 0 91 91" id="Layer_1" version="1.1" xml:space="preserve"
         xmlns="http://www.w3.org/2000/svg" fill="#000">
         <g id="SVGRepo_iconCarrier">

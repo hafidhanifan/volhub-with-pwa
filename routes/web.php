@@ -18,65 +18,20 @@ Route::prefix('admin')->group(function () {
     });
     
     Route::middleware('auth:admin', 'separate.session:admin')->group(function () {
-        Route::get('dashboard/{id}', [AdminController::class, 'showDashboard'])->name('admin.dashboard');
+        Route::get('kategori', [AdminController::class, 'showKategori'])->name('admin.kategori');
 
         // Route untuk Kelola Kategori
-        Route::get('kategori', [AdminController::class, 'showKategoriPage'])->name('admin.kategori');
         Route::get('add-kategori', [AdminController::class, 'showAddKategoriPage'])->name('admin.add-kategori-page');
         Route::post('add-kategori', [AdminController::class, 'addKategoriAction'])->name('admin.add-kategori-action');
         Route::get('edit-kategori/{id}', [AdminController::class, 'showEditKategoriPage'])->name('admin.edit-kategori-page');
         Route::put('edit-kategori/{id}', [AdminController::class, 'editKategoriAction'])->name('admin.edit-kategori-action');
         Route::delete('delete-kategori/{id}', [AdminController::class, 'deleteKategoriAction'])->name('admin.delete-kategori-action');
 
-        //Route untuk kelola Kriteria
-        Route::get('kriteria', [AdminController::class, 'showKriteriaPage'])->name('admin.kriteria');
-        Route::get('add-kriteria', [AdminController::class, 'showAddKriteriaPage'])->name('admin.add-kriteria-page');
-        Route::post('add-kriteria', [AdminController::class, 'addKriteriaAction'])->name('admin.add-kriteria-action');
-        Route::get('edit-kriteria/{id}', [AdminController::class, 'showEditKriteriaPage'])->name('admin.edit-kriteria-page');
-        Route::put('edit-kriteria/{id}', [AdminController::class, 'editKriteriaAction'])->name('admin.edit-kriteria-action');
-        Route::delete('delete-kriteria/{id}', [AdminController::class, 'deleteKriteriaAction'])->name('admin.delete-kriteria-action');
-
-        //Route untuk kelola Benefit
-        Route::get('benefit', [AdminController::class, 'showBenefitPage'])->name('admin.benefit');
-        Route::get('add-benefit', [AdminController::class, 'showAddBenefitPage'])->name('admin.add-benefit-page');
-        Route::post('add-benefit', [AdminController::class, 'addBenefitAction'])->name('admin.add-benefit-action');
-        Route::get('edit-benefit/{id}', [AdminController::class, 'showEditBenefitPage'])->name('admin.edit-benefit-page');
-        Route::put('edit-benefit/{id}', [AdminController::class, 'editBenefitAction'])->name('admin.edit-benefit-action');
-        Route::delete('delete-benefit/{id}', [AdminController::class, 'deleteBenefitAction'])->name('admin.delete-benefit-action');
-
-        // Route untuk Kelola Skill
-        Route::get('skill', [AdminController::class, 'showSkillPage'])->name('admin.skill');
-        Route::get('add-skill', [AdminController::class, 'showAddSkillPage'])->name('admin.add-skill-page');
-        Route::post('add-skill', [AdminController::class, 'addSkillAction'])->name('admin.add-skill-action');
-        Route::get('edit-skill/{id}', [AdminController::class, 'showEditSkillPage'])->name('admin.edit-skill-page');
-        Route::put('edit-skill/{id}', [AdminController::class, 'editSkillAction'])->name('admin.edit-skill-action');
-        Route::delete('delete-skill/{id}', [AdminController::class, 'deleteSkillAction'])->name('admin.delete-skill-action');
-
-        // Route untuk Kelola Pendaftar
-        Route::get('pendaftar', [AdminController::class, 'showPendaftarPage'])->name('admin.pendaftar');
-        Route::get('detail-pendaftar/{id}', [AdminController::class, 'showDetailPendaftarPage'])->name('admin.detail.pendaftar');
-        Route::patch('pendaftar/{id}/update-status', [AdminController::class, 'updateStatus'])->name('admin.updateStatus');
-
-        // Route untuk Kelola Kegiatan
-        Route::get('kegiatan', [AdminController::class, 'showKegiatanPage'])->name('admin.kegiatan');
-        Route::get('add-kegiatan', [AdminController::class, 'showAddKegiatanPage'])->name('admin.add-kegiatan-page');
-        Route::get('detail-kegiatan/{id}', [AdminController::class, 'showDetailKegiatanPage'])->name('admin.detail-kegiatan-page');
-        Route::post('add-kegiatan', [AdminController::class, 'addKegiatanAction'])->name('admin.add-kegiatan-action');
-        Route::get('edit-kegiatan/{id}', [AdminController::class, 'showEditKegiatanPage'])->name('admin.edit-kegiatan-page');
-        Route::put('edit-kegiatan/{id}', [AdminController::class, 'editKegiatanAction'])->name('admin.edit-kegiatan-action');
-        Route::delete('delete-kegiatan/{id}', [AdminController::class, 'deleteKegiatanAction'])->name('admin.delete-kegiatan-action');
-
-        Route::get('add-benefit-kegiatan/{id}', [AdminController::class, 'showAddBenefitKegiatanPage'])->name('admin.add-benefit-kegiatan-page');
-        Route::post('add-benefit-kegiatan/{id}', [AdminController::class, 'addBenefitKegiatanAction'])->name('admin.add-benefit-kegiatan-action');
-        Route::delete('{id}/remove-benefit/{id_benefit}', [AdminController::class, 'removeBenefit'])->name('admin.remove-benefit-action');
-
-        Route::get('add-kriteria-kegiatan/{id}', [AdminController::class, 'showAddKriteriaKegiatanPage'])->name('admin.add-kriteria-kegiatan-page');
-        Route::post('add-kriteria-kegiatan/{id}', [AdminController::class, 'addKriteriaKegiatanAction'])->name('admin.add-kriteria-kegiatan-action');
-        Route::delete('{id}/remove-kriteria/{id_kriteria}', [AdminController::class, 'removeKriteria'])->name('admin.remove-kriteria-action');
-
         // Route untuk Kelola User
         Route::get('user', [AdminController::class, 'showUserPage'])->name('admin.user');
-        Route::get('detail-user/{id}', [AdminController::class, 'showDetailUserPage'])->name('admin.detail-user-page');
+
+        // Route untuk Kelola Employer
+        Route::get('employer', [AdminController::class, 'showEmployerPage'])->name('admin.employer');
 
         // Route untuk Kelola Setting
         Route::get('setting', [AdminController::class, 'showSettingPage'])->name('admin.setting');

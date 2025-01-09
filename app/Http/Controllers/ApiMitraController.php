@@ -24,12 +24,6 @@ class ApiMitraController extends Controller
 
     public function registerMitraAction(Request $request)
     {
-        $existing_username = Mitra::where('username', $request->username)->first();
-        if ($existing_username) {
-            Alert::error('Oops !', 'Username sudah digunakan :(');
-            return redirect()->back()->withInput(); 
-        }
-
         try {
             $client = new Client();
             $response = $client->post('https://api-volhub.cloud/employer/registrasi', [
@@ -37,21 +31,17 @@ class ApiMitraController extends Controller
                     'nama_mitra' => $request->nama_mitra,
                     'username' => $request->username,
                     'email_mitra' => $request->email_mitra,
-                    'password' => $request->password, // Kirim password sebelum enkripsi jika API membutuhkannya
+                    'password' => $request->password,
                     'nomor_telephone' => $request->nomor_telephone,
                 ],
             ]);
     
-            // Cek respons dari API
             if ($response->getStatusCode() == 200) {
-                Alert::success('Hore!', 'Akun berhasil ditambahkan di API dan database lokal');
-            } else {
-                Alert::warning('Perhatian', 'Akun berhasil ditambahkan di database lokal, tetapi gagal di API');
+                Alert::success('Hore!', 'Akun berhasil ditambahkan di API');
             }
         } catch (\Exception $e) {
             Alert::error('Oops!', 'Terjadi kesalahan saat menghubungi API: ' . $e->getMessage());
         }
-
 
         return redirect('/mitraApi/login');
     }

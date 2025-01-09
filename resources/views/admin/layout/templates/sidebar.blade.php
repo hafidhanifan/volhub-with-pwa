@@ -1,142 +1,77 @@
- <!-- ======== sidebar-nav start =========== -->
-    <!-- ======== Preloader =========== -->
-    <div id="preloader">
-      <div class="spinner"></div>
-    </div>
-    <!-- ======== Preloader =========== -->
-    
- <aside class="sidebar-nav-wrapper">
-      <div class="navbar-logo">
-        <a href="index.html">
-          <img src="{{ asset('/img/logo.png') }}" alt="logo" />
-        </a>
+<!-- Sidebar Start -->
+<aside id="sidebar"
+  class="w-3/5 h-screen z-20 fixed left-0 top-0 transform -translate-x-full transition-transform duration-300 bg-white md:w-2/6 lg:w-1/4 lg:relative lg:border-r lg:translate-x-0">
+  <div class="px-2 py-4 flex items-center gap-3 border-b">
+    <!-- @if(!empty($mitra->logo)) -->
+    <img src="{{ asset('storage/logo/'.$mitra->logo) }}" alt="Logo Mitra" class="w-12 h-12 object-cover rounded-full" />
+    <!-- @else -->
+    <div class="relative group">
+      <img class="w-12 h-12 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}" alt="Avatar" />
+      <div
+        class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
+        !
       </div>
-      <nav class="sidebar-nav">
-        <ul>
-          <li class="nav-item nav-item-has-children">
-            <a
-              href="#0"
-              data-bs-toggle="collapse"
-              data-bs-target="#ddmenu_1"
-              aria-controls="ddmenu_1"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="icon">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8.74999 18.3333C12.2376 18.3333 15.1364 15.8128 15.7244 12.4941C15.8448 11.8143 15.2737 11.25 14.5833 11.25H9.99999C9.30966 11.25 8.74999 10.6903 8.74999 10V5.41666C8.74999 4.7263 8.18563 4.15512 7.50586 4.27556C4.18711 4.86357 1.66666 7.76243 1.66666 11.25C1.66666 15.162 4.83797 18.3333 8.74999 18.3333Z"
-                  />
-                  <path
-                    d="M17.0833 10C17.7737 10 18.3432 9.43708 18.2408 8.75433C17.7005 5.14918 14.8508 2.29947 11.2457 1.75912C10.5629 1.6568 10 2.2263 10 2.91665V9.16666C10 9.62691 10.3731 10 10.8333 10H17.0833Z"
-                  />
-                </svg>
-              </span>
-              <span class="text">Dashboard</span>
-            </a>
-            <ul id="ddmenu_1" class="collapse show dropdown-nav">
-              <li>
-                <a href="{{ route('admin.dashboard', ['id' => auth()->guard('admin')->user()->id]) }}" class="active"> VolHub </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item nav-item-has-children">
-            <a
-              href="#0"
-              class="collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#ddmenu_2"
-              aria-controls="ddmenu_2"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="icon">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11.8097 1.66667C11.8315 1.66667 11.8533 1.6671 11.875 1.66796V4.16667C11.875 5.43232 12.901 6.45834 14.1667 6.45834H16.6654C16.6663 6.48007 16.6667 6.50186 16.6667 6.5237V16.6667C16.6667 17.5872 15.9205 18.3333 15 18.3333H5.00001C4.07954 18.3333 3.33334 17.5872 3.33334 16.6667V3.33334C3.33334 2.41286 4.07954 1.66667 5.00001 1.66667H11.8097ZM6.66668 7.70834C6.3215 7.70834 6.04168 7.98816 6.04168 8.33334C6.04168 8.67851 6.3215 8.95834 6.66668 8.95834H10C10.3452 8.95834 10.625 8.67851 10.625 8.33334C10.625 7.98816 10.3452 7.70834 10 7.70834H6.66668ZM6.04168 11.6667C6.04168 12.0118 6.3215 12.2917 6.66668 12.2917H13.3333C13.6785 12.2917 13.9583 12.0118 13.9583 11.6667C13.9583 11.3215 13.6785 11.0417 13.3333 11.0417H6.66668C6.3215 11.0417 6.04168 11.3215 6.04168 11.6667ZM6.66668 14.375C6.3215 14.375 6.04168 14.6548 6.04168 15C6.04168 15.3452 6.3215 15.625 6.66668 15.625H13.3333C13.6785 15.625 13.9583 15.3452 13.9583 15C13.9583 14.6548 13.6785 14.375 13.3333 14.375H6.66668Z"
-                  />
-                  <path
-                    d="M13.125 2.29167L16.0417 5.20834H14.1667C13.5913 5.20834 13.125 4.74197 13.125 4.16667V2.29167Z"
-                  />
-                </svg>
-              </span>
-              <span class="text">Pages</span>
-            </a>
-            <ul id="ddmenu_2" class="collapse dropdown-nav">
-              <li>
-                <a href="{{ route('admin.kategori') }}"> Kategori </a>
-              </li>
-              <li>
-                <a href="{{ route('admin.kriteria') }}"> Kriteria </a>
-              </li>
-              <li>
-                <a href="{{ route('admin.benefit') }}"> Benefit </a>
-              </li>
-              <li>
-                <a href="{{ route('admin.skill') }}"> Skill </a>
-              </li>
-              <li>
-                <a href="{{ route('admin.kegiatan') }}"> Kegiatan / Volunteer </a>
-              </li>
-              <li>
-                <a href="{{ route('admin.pendaftar') }}"> Pendaftar </a>
-              </li>
-              <li>
-                <a href="{{ route('admin.user') }}"> User </a>
-              </li>
-              <li>
-                <a href="{{ route('admin.setting') }}"> Setting </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item nav-item-has-children">
-            <a
-              href="#0"
-              class="collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#ddmenu_3"
-              aria-controls="ddmenu_3"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="icon">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M14.9211 10.1294C15.1652 9.88534 15.1652 9.48967 14.9211 9.24559L10.7544 5.0789C10.5103 4.83482 10.1147 4.83482 9.87057 5.0789C9.62649 5.32297 9.62649 5.71871 9.87057 5.96278L12.9702 9.06251H1.97916C1.63398 9.06251 1.35416 9.34234 1.35416 9.68751C1.35416 10.0327 1.63398 10.3125 1.97916 10.3125H12.9702L9.87057 13.4123C9.62649 13.6563 9.62649 14.052 9.87057 14.2961C10.1147 14.5402 10.5103 14.5402 10.7544 14.2961L14.9211 10.1294Z"
-                  />
-                  <path
-                    d="M11.6383 15.18L15.805 11.0133C16.5373 10.2811 16.5373 9.09391 15.805 8.36166L11.6383 4.195C11.2722 3.82888 10.7923 3.64582 10.3125 3.64582V3.02082C10.3125 2.10035 11.0587 1.35416 11.9792 1.35416H16.9792C17.8997 1.35416 18.6458 2.10035 18.6458 3.02082V16.3542C18.6458 17.2747 17.8997 18.0208 16.9792 18.0208H11.9792C11.0587 18.0208 10.3125 17.2747 10.3125 16.3542V15.7292C10.7923 15.7292 11.2722 15.5461 11.6383 15.18Z"
-                  />
-                </svg>
-              </span>
-              <span class="text">Auth</span>
-            </a>
-            <ul id="ddmenu_3" class="collapse dropdown-nav">
-              <li>
-                <a href="{{ route('admin.logout') }}"> Logout </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </aside>
-    <div class="overlay"></div>
-    <!-- ======== sidebar-nav end =========== -->
+      <div
+        class="absolute left-10 mb-2 w-60 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
+        <!-- You have not uploaded the company logo -->
+      </div>
+    </div>
+    <!-- @endif -->
+    <div>
+      <h1 class="text-xl line-clamp-1"></h1>
+      <p class="text-gray-500 text-sm"></p>
+    </div>
+  </div>
+  <ul class="flex flex-col">
+    <li class="py-4 hover:bg-button_hover2">
+      <a href="{{ route('admin.kategori') }}" class="flex">
+        <svg class="w-6 mr-4 ml-2" viewBox="0 0 28 28">
+          <path
+            d="M17.75 18c.966 0 1.75.784 1.75 1.75v2.002l-.008.108c-.31 2.127-2.22 3.149-5.425 3.149-3.193 0-5.134-1.01-5.553-3.112L8.5 21.75v-2c0-.966.784-1.75 1.75-1.75h7.5Zm.494-6h6.006c.966 0 1.75.784 1.75 1.75v2.002l-.008.108c-.31 2.127-2.22 3.149-5.425 3.149l-.168-.002a2.752 2.752 0 0 0-2.47-2.001L17.75 17h-.922a4.491 4.491 0 0 0 1.672-3.5c0-.526-.09-1.03-.256-1.5ZM3.75 12h6.006c-.166.47-.256.974-.256 1.5 0 1.33.578 2.527 1.496 3.35l.176.15h-.922c-1.262 0-2.326.85-2.65 2.01l-.033-.001c-3.193 0-5.134-1.01-5.553-3.112L2 15.75v-2c0-.966.784-1.75 1.75-1.75ZM14 10a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Zm6.5-6a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Zm-13 0a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Z"
+            fill="#212121" fill-rule="nonzero" />
+        </svg>Category</a>
+    </li>
+    <li class="py-4 hover:bg-button_hover2">
+      <a href="{{ route('admin.user') }}" class="flex"><svg class="w-6 mr-4 ml-2" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M3 9h18M7 3v2m10-2v2M6 12h2m3 0h2m3 0h2M6 15h2m3 0h2m3 0h2M6 18h2m3 0h2m3 0h2M6.2 21h11.6c1.12 0 1.68 0 2.108-.218a2 2 0 0 0 .874-.874C21 19.48 21 18.92 21 17.8V8.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C19.48 5 18.92 5 17.8 5H6.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C3 6.52 3 7.08 3 8.2v9.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C4.52 21 5.08 21 6.2 21Z"
+            stroke="#000" stroke-width="2" stroke-linecap="round" />
+        </svg>Volunteer</a>
+    </li>
+    <li class="py-4 hover:bg-button_hover2">
+      <a href="{{ route('admin.employer') }}" class="flex"><svg
+          class="w-6 mr-4 ml-2" viewBox="0 0 100 100" xml:space="preserve">
+          <path
+            d="M80 71.2V74c0 3.3-2.7 6-6 6H26c-3.3 0-6-2.7-6-6v-2.8c0-7.3 8.5-11.7 16.5-15.2.3-.1.5-.2.8-.4.6-.3 1.3-.3 1.9.1C42.4 57.8 46.1 59 50 59c3.9 0 7.6-1.2 10.8-3.2.6-.4 1.3-.4 1.9-.1.3.1.5.2.8.4 8 3.4 16.5 7.8 16.5 15.1z" />
+          <ellipse cx="50" cy="36.5" rx="14.9" ry="16.5" />
+        </svg>Employer</a>
+    </li>
+    <li class="py-4 hover:bg-button_hover2">
+      <a href="" class="flex"><svg
+          class="w-6 mr-4 ml-2" viewBox="0 0 100 100" xml:space="preserve">
+          <path
+            d="M80 71.2V74c0 3.3-2.7 6-6 6H26c-3.3 0-6-2.7-6-6v-2.8c0-7.3 8.5-11.7 16.5-15.2.3-.1.5-.2.8-.4.6-.3 1.3-.3 1.9.1C42.4 57.8 46.1 59 50 59c3.9 0 7.6-1.2 10.8-3.2.6-.4 1.3-.4 1.9-.1.3.1.5.2.8.4 8 3.4 16.5 7.8 16.5 15.1z" />
+          <ellipse cx="50" cy="36.5" rx="14.9" ry="16.5" />
+        </svg>Profile</a>
+    </li>
+    <li class="py-4 hover:bg-button_hover2">
+      <a href="" class="flex"><svg version="1.0"
+          class="w-6 mr-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" xml:space="preserve">
+          <path fill="#231F20"
+            d="M52 24h-4v-8c0-8.836-7.164-16-16-16S16 7.164 16 16v8h-4c-2.211 0-4 1.789-4 4v32c0 2.211 1.789 4 4 4h40c2.211 0 4-1.789 4-4V28c0-2.211-1.789-4-4-4zM32 48c-2.211 0-4-1.789-4-4s1.789-4 4-4 4 1.789 4 4-1.789 4-4 4zm8-24H24v-8a8 8 0 0 1 16 0v8z" />
+        </svg>Change Password</a>
+    </li>
+    <li class="py-4 hover:bg-rose-200">
+      <a href="{{ route('admin.logout') }}" class="flex"><svg class="w-6 mr-4 ml-2" viewBox="0 0 24 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <g fill="#000000">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M16.125 12a.75.75 0 0 0-.75-.75H4.402l1.961-1.68a.75.75 0 1 0-.976-1.14l-3.5 3a.75.75 0 0 0 0 1.14l3.5 3a.75.75 0 1 0 .976-1.14l-1.96-1.68h10.972a.75.75 0 0 0 .75-.75Z" />
+            <path
+              d="M9.375 8c0 .702 0 1.053.169 1.306a1 1 0 0 0 .275.275c.253.169.604.169 1.306.169h4.25a2.25 2.25 0 0 1 0 4.5h-4.25c-.702 0-1.053 0-1.306.168a1 1 0 0 0-.275.276c-.169.253-.169.604-.169 1.306 0 2.828 0 4.243.879 5.121.878.879 2.292.879 5.12.879h1c2.83 0 4.243 0 5.122-.879.879-.878.879-2.293.879-5.121V8c0-2.828 0-4.243-.879-5.121C20.617 2 19.203 2 16.375 2h-1c-2.829 0-4.243 0-5.121.879-.879.878-.879 2.293-.879 5.121Z" />
+          </g>
+        </svg>Logout</a>
+    </li>
+  </ul>
+</aside>
+<!-- Sidebar End -->

@@ -24,7 +24,7 @@ class AuthController extends Controller
 
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('admin.dashboard', ['id' => Auth::guard('admin')->user()->id]));
+            return redirect()->intended(route('admin.kategori', ['id' => Auth::guard('admin')->user()->id]));
         }
 
         Alert::error('Oops !', 'The username or password you entered is incorrect 🫣');
