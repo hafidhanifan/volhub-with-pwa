@@ -4,9 +4,9 @@
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex bg-white justify-between h-20">
         <!-- Logo -->
-        <div class="flex items-center bg-white z-50">
+        <a href="{{ route('home') }}" class="flex items-center bg-white z-50 cursor-pointer">
           <img src="{{ asset('img/volhub-logo/volhub-navigation-logo.png') }}" alt="Volhub Logo" class="w-16 md:w-20" />
-        </div>
+        </a>
 
         <!-- Navbar untuk layar lebar -->
         <div class="hidden md:flex space-x-8 items-center justify-center w-full">
@@ -48,7 +48,18 @@
                 <img class="w-12 h-12 object-cover rounded-full"
                   src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="Avatar" />
                 @else
-                <img class="h-10 w-full rounded-full" src="{{asset('img/logo-user.png')}}" alt="Avatar" />
+                <div class="relative group">
+                  <img class="w-10 h-10 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}"
+                    alt="Avatar" />
+                  <div
+                    class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
+                    !
+                  </div>
+                  <div
+                    class="absolute right-10 top-8 mb-2 w-64 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
+                    You have not uploaded a profile picture
+                  </div>
+                </div>
                 @endif
                 @else
                 <div class="relative group">
