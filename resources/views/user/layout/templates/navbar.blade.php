@@ -51,7 +51,18 @@
                 <img class="h-10 w-full rounded-full" src="{{asset('img/logo-user.png')}}" alt="Avatar" />
                 @endif
                 @else
-                <img class="h-10 w-full rounded-full" src="{{asset('img/default-profile.png')}}" alt="Avatar" />
+                <div class="relative group">
+                  <img class="w-10 h-10 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}"
+                    alt="Avatar" />
+                  <div
+                    class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
+                    !
+                  </div>
+                  <div
+                    class="absolute right-10 top-8 mb-2 w-64 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
+                    You have not uploaded a profile picture
+                  </div>
+                </div>
                 @endif
               </button>
             </div>
@@ -65,22 +76,24 @@
               <div class="px-4 py-2">
                 <div class="text-gray-900 font-semibold">{{$user->nama_user}}</div>
                 <div class="text-gray-500 text-sm overflow-hidden text-ellipsis whitespace-nowrap">
-                  <span class="">{{$user->email_user}}</span>
+                  <span>{{$user->email_user}}</span>
                 </div>
               </div>
               <div class="border-t border-gray-200"></div>
               <a href="{{ route('user.detail-profile-page', ['id' => $user->id]) }}"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Profile</a>
               <a href="{{route('user.logout')}}"
-                class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white">Logout</a>
+                class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white hover:rounded-b-md">Logout</a>
               @else
               <a href="{{ route('user.login') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login User</a>
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover hover:text-white hover:rounded-t-md">Login
+                User</a>
               <a href="{{ route('mitra.login') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover hover:text-white">Login
                 Employer</a>
               <a href="{{ route('api.mitra.login') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login API
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover hover:text-white hover:rounded-b-md">Login
+                API
                 Employer</a>
               @endif
             </div>
