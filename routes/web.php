@@ -116,9 +116,7 @@ Route::prefix('user')->group(function () {
 
     Route::middleware(['auth', 'separate.session:users'])->group(function () {
         Route::get('logout', [AuthController::class, 'logoutUser'])->name('user.logout');
-        // Route::get('daftar-volunteer', function () {
-        //     return view('user.layout.daftar-volunteer');
-        // });
+
 
         // (User) Route untuk Daftar Kegiatan
         Route::get('kegiatan/{id}', [UserController::class, 'showDaftarKegiatanPage'])->name('user.daftarKegiatan');
