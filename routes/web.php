@@ -87,7 +87,7 @@ Route::prefix('mitra')->group(function () {
 
         //Kelola Profile Perusahaan
         Route::get('edit-detail/{id}', [MitraController::class, 'showEditMitraPage'])->name('mitra.edit-profile-page');
-        Route::put('edit-detail/{id}', [MitraController::class, 'editMitraAction'])->name('mitra.edit-profile-action');
+        Route::put('edit-detail-action/{id}', [MitraController::class, 'editMitraAction'])->name('mitra.edit-profile-action');
         Route::post('edit-foto-profile/{id}', [MitraController::class, 'editFotoProfileAction'])->name('mitra.edit-foto-profile-action');
         Route::delete('delete-foto-profile/{id}', [MitraController::class, 'deleteFotoProfileAction'])->name('mitra.delete-foto-profile-action');
 

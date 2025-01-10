@@ -241,58 +241,19 @@ class MitraController extends Controller
     {
         $setting = Mitra::find($id);
         $setting->nama_mitra = $request->nama_mitra;
+        $setting->email_mitra = $request->email_mitra;
         $setting->bio = $request->bio;
         $setting->industri = $request->industri;
         $setting->ukuran_perusahaan = $request->ukuran_perusahaan;
         $setting->situs = $request->situs;
         $setting->alamat = $request->alamat;
-        $setting->nomor_perusahaan = $request->nomor_perusahaan;
+        $setting->nomor_telephone = $request->nomor_telephone;
         $setting->deskripsi = $request->deskripsi;
 
-        // if ($request->filled('password')) {
-        //     // Enkripsi password
-        //     $setting->password = Hash::make($request->password);
-        // }
         $setting->save();
 
-        return redirect()->route('mitra.profile', ['id' => $id->id_mitra])->with('success', 'Profile Mitra berhasil diupdate.');
+        return redirect()->back()->with('success', 'Profile Mitra berhasil diupdate.');
     }
-
-    // public function editFotoProfileAction(Request $request, $id)
-    // {
-    //     $mitra = Mitra::findOrFail($id);
-
-    //     if ($request->isMethod('post')) {
-    //         // Upload new image
-    //         $request->validate([
-    //             'profil_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    //         ]);
-
-    //         if($mitra->logo && Storage::exist('public/logo/' . $mitra->logo)) {
-    //             // Delete old picture
-    //             Storage::delete('public/logo/' . $mitra->logo);
-    //         }
-
-    //         $filename = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
-    //         $request->file('profile_picture')->storeAs('public/logo', $filename);
-
-    //         $mitra->logo = $filename;
-    //         $mitra->save();
-
-    //         return back()->with('success', 'Foto berhasil diperbarui.');
-    //     } elseif ($request->isMethod('delete')) {
-    //         // Delete picture
-    //         if ($mitra->logo && Storage::exists('public/logo/' . $mitra->logo)) {
-    //             Storage::delete('public/logo/' . $mitra->logo);
-    //         }
-    
-    //         $mitra->logo = null;
-    //         $mitra->save();
-    
-    //         return back()->with('success', 'Foto berhasil dihapus.');
-    //     }
-    //     return back()->with('error', 'Permintaan tidak valid.');
-    // }
 
     public function editFotoProfileAction(Request $request, $id)
     {

@@ -71,14 +71,15 @@
       {{-- Preview image before uploading end --}}
     </div>
     <div>
-      <form action="" method="POST">
+      <form action="{{ route('mitra.edit-profile-action', ['id' => $mitra->id_mitra]) }}" method="POST">
         @csrf
+        @method('PUT')
         <div class="mt-6 space-y-4 p-2 overflow-y-auto sm:max-w-4xl sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0">
 
           <!-- Email Input -->
           <div class="">
             <label class="block text-sm mb-1 text-gray-500">Email</label>
-            <input type="email" id="email" name="email_mitra"
+            <input type="email" id="email" name="email_mitra" value="{{ old('email_mitra', $mitra->email_mitra) }}"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
               placeholder="Enter your email" required />
           </div>
@@ -86,7 +87,7 @@
           <!-- Name Input -->
           <div class="">
             <label class="block text-sm mb-1 text-gray-500">Company name</label>
-            <input type="text" id="name" name="nama_mitra"
+            <input type="text" id="name" name="nama_mitra" value="{{ old('nama_mitra', $mitra->nama_mitra) }}"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
               placeholder="Enter your full name" required />
           </div>
@@ -94,7 +95,7 @@
           <!-- Phone Number Input -->
           <div class="">
             <label class="block text-sm mb-1 text-gray-500">Phone number</label>
-            <input type="tel" id="phone" name="nomor_telephone"
+            <input type="tel" id="phone" name="nomor_telephone" value="{{ old('nomor_telephone', $mitra->nomor_telephone) }}"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
               placeholder="Enter your phone number" required />
           </div>
@@ -102,43 +103,43 @@
           <!-- Industri Input -->
           <div class="">
             <label class="block text-sm mb-1 text-gray-500">Industry</label>
-            <input type="tel" id="phone" name="nomor_telephone"
+            <input type="text" id="phone" name="industri" value="{{ old('industri', $mitra->industri) }}"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
               placeholder="Enter industrial type" required />
           </div>
 
           <div class="">
             <label class="block text-sm mb-1 text-gray-500">Company Size</label>
-            <input type="tel" id="phone" name="nomor_telephone"
+            <input type="text" id="phone" name="ukuran_perusahaan" value="{{ old('ukuran_perusahaan', $mitra->ukuran_perusahaan) }}"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
               placeholder="Enter company size" required />
           </div>
 
           <div class="">
             <label class="block text-sm mb-1 text-gray-500">Site</label>
-            <input type="tel" id="phone" name="nomor_telephone"
+            <input type="text" id="phone" name="situs" value="{{ old('situs', $mitra->situs) }}"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
               placeholder="Enter company site" required />
           </div>
 
           <div class="">
             <label class="block text-sm mb-1 text-gray-500">Bio</label>
-            <input type="tel" id="phone" name="nomor_telephone"
+            <input type="text" id="phone" name="bio" value="{{ old('bio', $mitra->bio) }}"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
               placeholder="Enter company bio" required />
           </div>
 
           <div class="">
             <label class="block text-sm mb-1 text-gray-500">Address</label>
-            <input type="tel" id="phone" name="nomor_telephone"
+            <input type="text" id="phone" name="alamat" value="{{ old('alamat', $mitra->alamat) }}"
               class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"
               placeholder="Enter company address" required />
           </div>
         </div>
         <div class="mt-4 p-2 sm:max-w-4xl">
-          <label class="block text-sm mb-1 text-gray-500">Address</label>
-          <textarea name="" id="" cols="30" rows="10"
-            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400"></textarea>
+          <label class="block text-sm mb-1 text-gray-500">Description</label>
+          <textarea name="deskripsi" id="" cols="30" rows="10" 
+            class="w-full text-sm border border-gray-300 rounded-lg shadow-sm focus:ring-sky-500 focus:border-sky-500 placeholder-gray-400">{{ old('deskripsi', $mitra->deskripsi) }}</textarea>
         </div>
 
         <!-- Submit Button -->
