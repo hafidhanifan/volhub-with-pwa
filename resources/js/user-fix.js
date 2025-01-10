@@ -285,10 +285,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Perbarui action form pendaftaran menggunakan route
                 const form = document.querySelector("#registrationForm");
                 form.action = route;
-    
+
                 // Tampilkan modal
                 applyModal.classList.remove("opacity-0", "pointer-events-none");
-                applyModal.querySelector(".transform").classList.remove("scale-95");
+                applyModal
+                    .querySelector(".transform")
+                    .classList.remove("scale-95");
             });
         });
     });
