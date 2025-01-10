@@ -11,21 +11,25 @@
         <!-- Navbar untuk layar lebar -->
         @if(auth()->check())
         @php
-            $user = auth()->user();
+        $user = auth()->user();
         @endphp
-          <div class="hidden md:flex space-x-8 items-center justify-center w-full">
-            <a href="{{ route('home') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Home</a>
-            <a href="{{ route('user.daftarKegiatan', ['id' => $user->id]) }}"
-              class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Activity</a>
-            <a href="{{ route('partner') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Partner</a>
-          </div>
+        <div class="hidden md:flex space-x-8 items-center justify-center w-full">
+          <a href="{{ route('home') }}"
+            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover hover:text-white">Home</a>
+          <a href="{{ route('user.daftarKegiatan', ['id' => $user->id]) }}"
+            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover hover:text-white">Activity</a>
+          <a href="{{ route('partner') }}"
+            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover hover:text-white">Partner</a>
+        </div>
         @else
-          <div class="hidden md:flex space-x-8 items-center justify-center w-full">
-            <a href="{{ route('home') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Home</a>
-            <a href="{{ route('daftar.kegiatan') }}"
-              class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Activity</a>
-            <a href="{{ route('partner') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Partner</a>
-          </div>
+        <div class="hidden md:flex space-x-8 items-center justify-center w-full">
+          <a href="{{ route('home') }}"
+            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover hover:text-white">Home</a>
+          <a href="{{ route('daftar.kegiatan') }}"
+            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover hover:text-white">Activity</a>
+          <a href="{{ route('partner') }}"
+            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover hover:text-white">Partner</a>
+        </div>
         @endif
 
         <!-- Profile avatar -->
@@ -120,7 +124,7 @@
       class="-z-10 absolute top-20 left-0 w-full bg-white shadow-lg transform -translate-y-[calc(100%+5rem)] opacity-0 transition-all duration-300 md:hidden">
       @if(auth()->check())
       @php
-          $user = auth()->user();
+      $user = auth()->user();
       @endphp
       <div class="p-3">
         <div class="flex items-center mb-4">
@@ -148,9 +152,10 @@
           class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Home</a>
         <a href="{{ route('user.daftarKegiatan', ['id' => $user->id]) }}"
           class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Activity</a>
-        <a href="{{ route('partner') }}" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
+        <a href="{{ route('partner') }}"
+          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
       </div>
-  
+
       @else
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         <a href="{{ route('home') }}"
