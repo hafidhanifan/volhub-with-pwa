@@ -62,23 +62,8 @@ class UserController extends Controller
             $kegiatan->sisa_hari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);
         }        
 
-        return view('user.layout.daftar-volunteer', compact( 'kegiatans', 'user', 'totalKegiatan', 'kegiatan', 'kategori'));
+        return view('user.layout.daftar-volunteer', compact( 'kegiatans', 'user', 'totalKegiatan', 'kategori'));
     }
-
-    // public function showDetailKegiatan($id_kegiatan)
-    // {
-    //     $kegiatan = Kegiatan::with(['kategori'])->find($id_kegiatan);
-    //     if (!$kegiatan) {
-    //         return redirect()->route('user.daftar-volunteer')->with('error', 'Kegiatan tidak ditemukan.');
-    //     }
-
-    //     $rekomendasi = Kegiatan::where('id_kegiatan', '!=', $id_kegiatan)
-    //     //  ->latest() // Urutkan berdasarkan yang terbaru
-    //      ->take(4) 
-    //      ->get();
-        
-    //     return view('user.layout.detail-kegiatan', compact('kegiatan', 'rekomendasi'));
-    // }
 
     // All About Detail User
     public function showDetailUserPage($id)
@@ -261,25 +246,7 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    //All About Kegiatan
-    // public function showDetailKegiatanPage($id, $id_kegiatan)
-    // {
-    //     $user = User::findOrFail($id);
-    //     $kegiatan = Kegiatan::with(['kategori'])->find($id_kegiatan);
-    //     if (!$kegiatan) {
-    //         return redirect()->route('user.daftar-volunteer')->with('error', 'Kegiatan tidak ditemukan.');
-    //     }
-       
-    //      $rekomendasi = Kegiatan::where('id_kegiatan', '!=', $id_kegiatan)
-    //     //  ->latest() // Urutkan berdasarkan yang terbaru
-    //      ->take(4) 
-    //      ->get();
- 
-    //     return view('user.layout.detail-kegiatan', compact('kegiatan', 'user', 'rekomendasi'));
-    // }
-
-    
-    //All Abour Pendaftaran
+    //All About Pendaftaran
     public function addPendaftaranAction(Request $request, $id, $id_kegiatan)
     {
         $user = User::findOrFail($id);
@@ -289,7 +256,7 @@ class UserController extends Controller
                                          ->where('id_kegiatan', $kegiatan->id_kegiatan)
                                          ->exists();
         if ($existingPendaftaran) {
-            return redirect()->back()->with('error', 'Anda sudah mendaftar kegiatan ini.');
+            return redirect()->route('user.daftarKegiatan', $id)->with('error', 'Anda sudah mendaftar kegiatan ini.');
         }
         
         $user = User::findOrFail($id);
@@ -320,7 +287,7 @@ class UserController extends Controller
 
         $pendaftar->save();
 
-        return redirect()->back()->with('success', 'Pendaftaran Berhasil');
+        return redirect()->route('user.daftarKegiatan', $id)->with('success', 'Pendaftaran Berhasil');
     }
 
     public function search(Request $request)

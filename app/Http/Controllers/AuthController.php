@@ -144,7 +144,8 @@ class AuthController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/user/kegiatan/{id}');
+            $userId = Auth::id(); // Mendapatkan ID pengguna yang sedang login
+            return redirect()->intended('/user/kegiatan/' . $userId); // Ganti {id} dengan nilai $userId
         }
 
         Alert::error('Oops !', 'The username or password you entered is incorrect 🫣');

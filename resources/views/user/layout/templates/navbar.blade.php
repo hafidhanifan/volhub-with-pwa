@@ -9,12 +9,24 @@
         </div>
 
         <!-- Navbar untuk layar lebar -->
-        <div class="hidden md:flex space-x-8 items-center justify-center w-full">
-          <a href="{{ route('home') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Home</a>
-          <a href="{{ route('daftar.kegiatan') }}"
-            class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Volunteer</a>
-          <a href="{{ route('partner') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Partner</a>
-        </div>
+        @if(auth()->check())
+        @php
+            $user = auth()->user();
+        @endphp
+          <div class="hidden md:flex space-x-8 items-center justify-center w-full">
+            <a href="{{ route('home') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Home</a>
+            <a href="{{ route('user.daftarKegiatan', ['id' => $user->id]) }}"
+              class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Volunteer</a>
+            <a href="{{ route('partner') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Partner</a>
+          </div>
+        @else
+          <div class="hidden md:flex space-x-8 items-center justify-center w-full">
+            <a href="{{ route('home') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Home</a>
+            <a href="{{ route('daftar.kegiatan') }}"
+              class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Volunteer</a>
+            <a href="{{ route('partner') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Partner</a>
+          </div>
+        @endif
 
         <!-- Profile avatar -->
         <div class="flex items-center">
@@ -90,23 +102,9 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu"
       class="-z-10 absolute top-20 left-0 w-full bg-white shadow-lg transform -translate-y-[calc(100%+5rem)] opacity-0 transition-all duration-300 md:hidden">
-      @if(!auth()->check())
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="{{ route('home') }}"
-          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Home</a>
-        <a href="{{ route('daftar.kegiatan') }}"
-          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Volunteer</a>
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
-        <a href="{{ route('mitra.login') }}"
-          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Mitra</a>
-        <a href="{{ route('user.login') }}"
-          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Volunteer</a>
-      </div>
-      <div class="border-t border-gray-200"></div>
-      @else
-      <!-- Jika user sudah Login -->
+      @if(auth()->check())
       @php
-      $user = auth()->user();
+          $user = auth()->user();
       @endphp
       <div class="p-3">
         <div class="flex items-center mb-4">
@@ -128,6 +126,28 @@
         <a href="{{route('user.logout')}}"
           class="block px-2 py-2 text-base font-light text-red-600 hover:text-white hover:bg-button_alert rounded-lg">Logout</a>
       </div>
+      <div class="border-t border-gray-200"></div>
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="{{ route('home') }}"
+          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Home</a>
+        <a href="{{ route('user.daftarKegiatan', ['id' => $user->id]) }}"
+          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Volunteer</a>
+        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
+      </div>
+  
+      @else
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="{{ route('home') }}"
+          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Home</a>
+        <a href="{{ route('daftar.kegiatan') }}"
+          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Volunteer</a>
+        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
+        <a href="{{ route('mitra.login') }}"
+          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Mitra</a>
+        <a href="{{ route('user.login') }}"
+          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Volunteer</a>
+      </div>
+      <div class="border-t border-gray-200"></div>
       @endif
     </div>
   </nav>

@@ -149,6 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const namaKriteria = card.dataset.namaKriteria;
             const namaBenefit = card.dataset.namaBenefit;
             const button = card.dataset.button;
+            const route = card.dataset.route;
 
             // Tampilkan data di bagian detail
             detailContainer.querySelector(".namaKegiatan").textContent =
@@ -281,14 +282,13 @@ document.addEventListener("DOMContentLoaded", () => {
             motivationTextarea.placeholder = `Write your motivation for joining "${namaKegiatan}" from "${namaMitra}"...`;
 
             applyButton.addEventListener("click", () => {
-                // Perbarui action form pendaftaran
+                // Perbarui action form pendaftaran menggunakan route
                 const form = document.querySelector("#registrationForm");
-                form.action = `${id}/add-pendaftaran/${idKegiatan}`;
-
+                form.action = route;
+    
+                // Tampilkan modal
                 applyModal.classList.remove("opacity-0", "pointer-events-none");
-                applyModal
-                    .querySelector(".transform")
-                    .classList.remove("scale-95");
+                applyModal.querySelector(".transform").classList.remove("scale-95");
             });
         });
     });

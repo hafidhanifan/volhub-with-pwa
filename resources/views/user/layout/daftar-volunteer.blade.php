@@ -53,6 +53,7 @@
               @foreach($kegiatans as $kegiatan)
               <div id="volunteerCard" class="volunteerCard flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100"
                   data-id-kegiatan="{{ $kegiatan->id_kegiatan }}"
+                  data-route="{{ route('user.add-pendaftaran-action', ['id' => auth()->id(), 'id_kegiatan' => $kegiatan->id_kegiatan]) }}"
                   data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}"
                   data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}"
                   data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}" 
