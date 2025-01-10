@@ -16,14 +16,14 @@
           <div class="hidden md:flex space-x-8 items-center justify-center w-full">
             <a href="{{ route('home') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Home</a>
             <a href="{{ route('user.daftarKegiatan', ['id' => $user->id]) }}"
-              class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Volunteer</a>
+              class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Activity</a>
             <a href="{{ route('partner') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Partner</a>
           </div>
         @else
           <div class="hidden md:flex space-x-8 items-center justify-center w-full">
             <a href="{{ route('home') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Home</a>
             <a href="{{ route('daftar.kegiatan') }}"
-              class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Volunteer</a>
+              class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Activity</a>
             <a href="{{ route('partner') }}" class="px-6 py-2 rounded-md font-normal hover:bg-button_hover">Partner</a>
           </div>
         @endif
@@ -147,7 +147,7 @@
         <a href="{{ route('home') }}"
           class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Home</a>
         <a href="{{ route('user.daftarKegiatan', ['id' => $user->id]) }}"
-          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Volunteer</a>
+          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Activity</a>
         <a href="{{ route('partner') }}" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
       </div>
   
@@ -156,7 +156,7 @@
         <a href="{{ route('home') }}"
           class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Home</a>
         <a href="{{ route('daftar.kegiatan') }}"
-          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Volunteer</a>
+          class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Activity</a>
         <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
         <a href="{{ route('mitra.login') }}"
           class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Login Mitra</a>

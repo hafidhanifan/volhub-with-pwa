@@ -47,6 +47,10 @@
           <span class="block text-sm text-slate-500 font-normal">{{ $totalKegiatan }} results</span>
         </div>
 
+        @if(auth()->check())
+        @php
+          $user = auth()->user();
+        @endphp
         <div class="overflow-y-auto max-h-[75vh]">
           @if($kegiatans->isNotEmpty())
             <?php $no = 1 ?>
@@ -107,6 +111,67 @@
             @endif
           @endif
         </div>
+        @else
+        <div class="overflow-y-auto max-h-[75vh]">
+          @if($kegiatans->isNotEmpty())
+            <?php $no = 1 ?>
+              @foreach($kegiatans as $kegiatan)
+              <div id="volunteerCard" class="volunteerCard flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100"
+                  data-id-kegiatan="{{ $kegiatan->id_kegiatan }}"
+                  data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}"
+                  data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}"
+                  data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}" 
+                  data-logo="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}"
+                  data-sistem-kegiatan="{{ $kegiatan->sistem_kegiatan}}"
+                  {{-- data-sisa-hari="{{ $kegiatan->sisa_hari }}" --}}
+                  data-pendaftar-count ="{{ $kegiatan->pendaftars_count}} applied"
+                  data-deskripsi="{{ $kegiatan->deskripsi}}"
+                  data-nama-kriteria="{{ implode(',', $kegiatan->kriterias->pluck('nama_kriteria')->toArray()) }}"
+                  data-nama-benefit="{{ implode(',', $kegiatan->benefits->pluck('nama_benefit')->toArray()) }}"
+                  data-sisa-hari="
+                   @if($kegiatan->sisa_hari > 0)
+                      {{ $kegiatan->sisa_hari }} days left
+                  @else
+                      Closed
+                  @endif
+                  "
+                  data-button="{{ $kegiatan->sisa_hari > 0 ? 'Apply' : 'Closed' }}"
+                >
+                <div class="max-w-16">
+                  <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt=""
+                    class="w-full rounded-full outline outline-1 outline-slate-200" />
+                </div>
+                <div class="w-full">
+                  <div class="flex flex-col gap-1">
+                    <p class="font-semibold line-clamp-1">
+                      {{ $kegiatan->nama_kegiatan }}
+                    </p>
+                    <p class="text-sm text-gray-800 line-clamp-1">
+                      {{ $kegiatan->mitra->nama_mitra }}
+                    </p>
+                    <p class="text-sm text-gray-800 line-clamp-1">{{ $kegiatan->lokasi_kegiatan }}</p>
+                    <p class="text-sm text-gray-800">{{ $kegiatan->sistem_kegiatan}}</p>
+                  </div>
+                </div>
+              </div>
+              @endforeach
+          @else
+            @if(!$kegiatanByKategori)
+              <div class="flex items-center justify-center h-screen">
+                <p class="text-gray-500 text-center">No activities match your search.</p>
+              </div>
+            @elseif(!$kegiatanByKategori && $kegiatanBySearch)
+              <div class="flex items-center justify-center h-screen">
+                <p class="text-gray-500 text-center">No activities match your search.</p>
+              </div>
+            @elseif(!$kegiatanBySearch && $kegiatanByKategori)
+              <div class="flex items-center justify-center h-screen">
+                <p class="text-gray-500 text-center">No activities match your search.</p>
+              </div>
+            @endif
+          @endif
+        </div>
+        @endif
       </div>
       <!-- Detail Volunteer -->
       <div id="detailVolunteer"
