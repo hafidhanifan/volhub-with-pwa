@@ -156,7 +156,7 @@
           class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Home</a>
         <a href="{{ route('user.daftarKegiatan', ['id' => $user->id]) }}"
           class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Volunteer</a>
-        <a href="#" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
+        <a href="{{ route('partner') }}" class="block px-3 py-2 text-base font-light rounded-lg hover:bg-button_hover">Partner</a>
       </div>
   
       @else
