@@ -4,9 +4,9 @@
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex bg-white justify-between h-20">
         <!-- Logo -->
-        <div class="flex items-center bg-white z-50">
+        <a href="{{ route('home') }}" class="flex items-center bg-white z-50 cursor-pointer">
           <img src="{{ asset('img/volhub-logo/volhub-navigation-logo.png') }}" alt="Volhub Logo" class="w-16 md:w-20" />
-        </div>
+        </a>
 
         <!-- Navbar untuk layar lebar -->
         @if(auth()->check())
@@ -58,16 +58,38 @@
                 <img class="w-12 h-12 object-cover rounded-full"
                   src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="Avatar" />
                 @else
-                <img class="h-10 w-full rounded-full" src="{{asset('img/logo-user.png')}}" alt="Avatar" />
+                <div class="relative group">
+                  <img class="w-10 h-10 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}"
+                    alt="Avatar" />
+                  <div
+                    class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
+                    !
+                  </div>
+                  <div
+                    class="absolute right-10 top-8 mb-2 w-64 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
+                    You have not uploaded a profile picture
+                  </div>
+                </div>
                 @endif
                 @else
-                <img class="h-10 w-full rounded-full" src="{{asset('img/default-profile.png')}}" alt="Avatar" />
+                <div class="relative group">
+                  <img class="w-10 h-10 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}"
+                    alt="Avatar" />
+                  <div
+                    class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
+                    !
+                  </div>
+                  <div
+                    class="absolute right-10 top-8 mb-2 w-64 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
+                    You have not uploaded a profile picture
+                  </div>
+                </div>
                 @endif
               </button>
             </div>
             <!-- Profile Dropdown -->
             <div id="profile-dropdown"
-              class="hidden absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-50">
+              class="hidden absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-lg z-50">
               @if(auth()->check())
               @php
               $user = auth()->user();
@@ -75,22 +97,24 @@
               <div class="px-4 py-2">
                 <div class="text-gray-900 font-semibold">{{$user->nama_user}}</div>
                 <div class="text-gray-500 text-sm overflow-hidden text-ellipsis whitespace-nowrap">
-                  <span class="">{{$user->email_user}}</span>
+                  <span>{{$user->email_user}}</span>
                 </div>
               </div>
               <div class="border-t border-gray-200"></div>
               <a href="{{ route('user.detail-profile-page', ['id' => $user->id]) }}"
                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Profile</a>
               <a href="{{route('user.logout')}}"
-                class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white">Logout</a>
+                class="block px-4 py-2 text-sm text-red-700 hover:bg-button_alert hover:text-white hover:rounded-b-md">Logout</a>
               @else
               <a href="{{ route('user.login') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login User</a>
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover hover:text-white hover:rounded-t-md">Login
+                User</a>
               <a href="{{ route('mitra.login') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover hover:text-white">Login
                 Employer</a>
               <a href="{{ route('api.mitra.login') }}"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover">Login API
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-button_hover hover:text-white hover:rounded-b-md">Login
+                API
                 Employer</a>
               @endif
             </div>
