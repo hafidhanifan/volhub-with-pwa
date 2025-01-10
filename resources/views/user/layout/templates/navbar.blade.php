@@ -75,14 +75,6 @@
                 <div class="relative group">
                   <img class="w-10 h-10 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}"
                     alt="Avatar" />
-                  <div
-                    class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
-                    !
-                  </div>
-                  <div
-                    class="absolute right-10 top-8 mb-2 w-64 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
-                    You have not uploaded a profile picture
-                  </div>
                 </div>
                 @endif
               </button>
