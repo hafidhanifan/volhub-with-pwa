@@ -63,7 +63,7 @@
             data-route="{{ route('user.add-pendaftaran-action', ['id' => auth()->id(), 'id_kegiatan' => $kegiatan->id_kegiatan]) }}"
             data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}" data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}"
             data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}"
-            data-logo="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}"
+            data-logo="{{ $kegiatan->mitra->logo ? asset('storage/logo/'.$kegiatan->mitra->logo) : asset('img/default-profile.png') }}"
             data-sistem-kegiatan="{{ $kegiatan->sistem_kegiatan}}" {{-- data-sisa-hari="{{ $kegiatan->sisa_hari }}" --}}
             data-pendaftar-count="{{ $kegiatan->pendaftars_count}} applied" data-deskripsi="{{ $kegiatan->deskripsi}}"
             data-nama-kriteria="{{ implode(',', $kegiatan->kriterias->pluck('nama_kriteria')->toArray()) }}"
@@ -218,7 +218,7 @@
               <div class="max-w-16">
                 <img
                   src="{{ $kegiatan && $kegiatan->logo ? asset('storage/logo/' . $kegiatan->logo) : asset('img/default-profile.png') }}"
-                  alt="logo mitra" class="w-full rounded-full"
+                  alt="logo mitra" class="w-12 h-12 object-cover rounded-full"
                   data-logo="{{ $kegiatan && $kegiatan->logo ? asset('storage/logo/' . $kegiatan->logo) : '' }}" />
 
               </div>
