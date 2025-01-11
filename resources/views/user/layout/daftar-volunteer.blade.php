@@ -40,9 +40,9 @@
 
   <!-- All volunteer start -->
   <section>
-    <div class="lg:flex lg:justify-center lg:gap-x-4 lg:px-8 lg:mt-2">
+    <div class="bg-gray-50 lg:flex lg:justify-center lg:gap-x-4 lg:px-8 lg:mt-2">
       <!-- Volunteer Card -->
-      <div class="bg-white lg:w-1/3 lg:bg-white lg:rounded-lg lg:shadow-sm lg:p-4">
+      <div class="bg-white lg:w-1/3 lg:bg-white lg:rounded-lg lg:shadow-sm lg:p-4 lg:my-4">
         <div class="p-2 border-b bg-white lg:rounded-t-lg">
           <span class="block font-medium">All Volunteer</span>
           <span class="block text-sm text-slate-500 font-normal">{{ $totalKegiatan }} results</span>
@@ -143,8 +143,8 @@
                 !
               </div>
               <div
-                class="absolute right-10 top-8 mb-2 w-64 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
-                You have not uploaded a profile picture
+                class="absolute left-10 top-8 mb-2 w-64 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
+                Employer has not uploaded the company logo
               </div>
             </div>
             @endif
@@ -182,7 +182,7 @@
       </div>
       <!-- Detail Volunteer -->
       <div id="detailVolunteer"
-        class="fixed top-0 left-0 w-full h-screen bg-white z-50 transform transition-transform duration-500 ease-in-out overflow-y-auto no-scrollbar lg:static lg:translate-y-0 lg:w-2/3 lg:h-auto lg:z-auto lg:transition-none lg:rounded-lg lg:shadow-sm lg:p-8">
+        class="fixed top-0 left-0 w-full h-screen bg-white z-50 transform transition-transform duration-500 ease-in-out overflow-y-auto no-scrollbar lg:static lg:translate-y-0 lg:w-2/3 lg:h-auto lg:z-auto lg:transition-none lg:rounded-lg lg:shadow-sm lg:p-8 lg:my-4">
         <div class="p-4 lg:hidden">
           <button id="backBtn">
             <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 386.242 386.242" xml:space="preserve">
@@ -192,7 +192,8 @@
           </button>
         </div>
         <div class="flex items-center justify-center h-screen default-message">
-          <p class="text-gray-500 text-center">Detail Activity Here</p>
+          <p class="text-gray-500 text-center">Select one of the volunteer activities to display detailed information
+          </p>
         </div>
         <div class="detail-content hidden">
           @if(isset($kegiatan))
@@ -343,7 +344,6 @@
       </div>
     </div>
     @endif
-    <!-- Modal for appy Volunteer End -->
 
     <!-- Modal Notification  -->
     {{-- @if(!$user->cv)
