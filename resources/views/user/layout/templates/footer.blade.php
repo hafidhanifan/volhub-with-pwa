@@ -1,4 +1,4 @@
-<footer class="bg-[#3795BD] w-full mt-16">
+<footer class="bg-[#3795BD] w-full">
   <div class="pb-8 flex flex-col items-center gap-8 lg:flex-row lg:justify-evenly lg:items-start">
     <div class="max-w-xs pt-8 flex justify-evenly lg:gap-4">
       <img src="{{ asset('img/footer-logo/volhub-white-logo.png') }}" alt="Volhub footer logo" class="w-1/3 lg:w-2/5" />
@@ -33,5 +33,6 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
+
 </html>
 @include('sweetalert::alert')

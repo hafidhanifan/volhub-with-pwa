@@ -1,7 +1,7 @@
 @include('user.layout.templates.header')
 @include('user.layout.templates.navbar')
 
-<main class="mt-20 mb-20">
+<main class="mt-20">
   <!-- Search section start -->
   <section class="flex items-center p-4 ml-4 max-w-2xl">
     <!-- Search Bar -->
@@ -42,7 +42,8 @@
   <section>
     <div class="bg-gray-50 lg:flex lg:justify-center lg:gap-x-4 lg:px-8 lg:mt-2">
       <!-- Volunteer Card -->
-      <div class="bg-white lg:w-1/3 lg:bg-white lg:rounded-lg lg:shadow-sm lg:p-4 lg:my-4">
+      <div
+        class="bg-white lg:w-1/3 lg:bg-white lg:rounded-lg lg:shadow-sm lg:p-4 lg:my-4 lg:mb-20 lg:max-h-[79vh] no-scrollbar lg:overflow-y-auto">
         <div class="p-2 border-b bg-white lg:rounded-t-lg">
           <span class="block font-medium">All Volunteer</span>
           <span class="block text-sm text-slate-500 font-normal">{{ $totalKegiatan }} results</span>
@@ -57,7 +58,7 @@
           <?php $no = 1 ?>
           @foreach($kegiatans as $kegiatan)
           <div id="volunteerCard"
-            class="volunteerCard flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100"
+            class="volunteerCard flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100 cursor-pointer"
             data-id-kegiatan="{{ $kegiatan->id_kegiatan }}"
             data-route="{{ route('user.add-pendaftaran-action', ['id' => auth()->id(), 'id_kegiatan' => $kegiatan->id_kegiatan]) }}"
             data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}" data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}"
@@ -74,10 +75,25 @@
                       Closed
                   @endif
                   " data-button="{{ $kegiatan->sisa_hari > 0 ? 'Apply' : 'Closed' }}">
-            <div class="max-w-16">
+            @if(!empty($kegiatan->mitra->logo))
+            <div class="w-20">
               <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt=""
-                class="w-full rounded-full outline outline-1 outline-slate-200" />
+                class="w-12 h-12 object-cover rounded-full outline outline-1 outline-slate-200 lg:w-14 lg:h-14" />
             </div>
+            @else
+            <div class="w-20 relative group">
+              <img class="w-12 h-12 object-cover rounded-full outline outline-1 outline-slate-200 lg:w-14 lg:h-14"
+                src="{{ asset('img/default-profile.png') }}" alt="Avatar" />
+              <div
+                class="absolute top-0 right-3 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
+                !
+              </div>
+              <div
+                class="absolute left-10 top-8 mb-2 w-64 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
+                Employer has not uploaded the company logo
+              </div>
+            </div>
+            @endif
             <div class="w-full">
               <div class="flex flex-col gap-1">
                 <p class="font-semibold line-clamp-1">
@@ -114,7 +130,7 @@
           <?php $no = 1 ?>
           @foreach($kegiatans as $kegiatan)
           <div id="volunteerCard"
-            class="volunteerCard flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100"
+            class="volunteerCard flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100 cursor-pointer"
             data-id-kegiatan="{{ $kegiatan->id_kegiatan }}" data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}"
             data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}" data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}"
             data-logo="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}"
@@ -182,7 +198,7 @@
       </div>
       <!-- Detail Volunteer -->
       <div id="detailVolunteer"
-        class="fixed top-0 left-0 w-full h-screen bg-white z-50 transform transition-transform duration-500 ease-in-out overflow-y-auto no-scrollbar lg:static lg:translate-y-0 lg:w-2/3 lg:h-auto lg:z-auto lg:transition-none lg:rounded-lg lg:shadow-sm lg:p-8 lg:my-4">
+        class="fixed top-0 left-0 w-full h-screen bg-white z-50 transform transition-transform duration-500 ease-in-out overflow-y-auto no-scrollbar lg:static lg:translate-y-0 lg:w-2/3 lg:max-h-[79vh] lg:z-auto lg:transition-none lg:rounded-lg lg:shadow-sm lg:p-8 lg:my-4">
         <div class="p-4 lg:hidden">
           <button id="backBtn">
             <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 386.242 386.242" xml:space="preserve">
