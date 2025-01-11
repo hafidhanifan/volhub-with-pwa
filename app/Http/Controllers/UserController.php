@@ -45,10 +45,6 @@ class UserController extends Controller
         return view('user.layout.daftar-volunteer', compact('kegiatans', 'totalKegiatan', 'kategori'));
     }
 
-    public function showFaqPage() {
-        return view('user.layout.faq');
-    }
-
     public function showDaftarKegiatanPage($id)
     {   
         $user = User::find($id);

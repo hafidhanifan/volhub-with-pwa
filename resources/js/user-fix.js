@@ -353,7 +353,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const namaKegiatan = card.dataset.namaKegiatan;
             const namaMitra = card.dataset.namaMitra;
             const lokasiKegiatan = card.dataset.lokasiKegiatan;
-            const logo = card.dataset.logo;
+            const logo = card.dataset.logo; // Hanya data-logo
+            const logoImage = document.querySelector("img[data-logo]");
+            if (logoImage) {
+                // Jika logo tersedia, setel src gambar dengan logo
+                logoImage.src = logo || "/img/default-profile.png"; // Path default jika logo tidak ada
+
+                // Debugging akhir
+                console.log("Final src:", logoImage.src);
+            } else {
+                console.error("Logo image element not found.");
+            }
             const sistemKegiatan = card.dataset.sistemKegiatan;
             const sisaHari = card.dataset.sisaHari;
             const pendaftarCount = card.dataset.pendaftarCount;

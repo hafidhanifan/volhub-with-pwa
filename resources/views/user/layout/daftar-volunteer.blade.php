@@ -133,18 +133,18 @@
             class="volunteerCard flex p-2 gap-x-4 border-b hover:bg-button_hover2 transition duration-100 cursor-pointer"
             data-id-kegiatan="{{ $kegiatan->id_kegiatan }}" data-nama-kegiatan="{{ $kegiatan->nama_kegiatan }}"
             data-nama-mitra="{{ $kegiatan->mitra->nama_mitra }}" data-lokasi-kegiatan="{{ $kegiatan->lokasi_kegiatan }}"
-            data-logo="{{ asset('storage/logo/'.$kegiatan->mitra->logo) }}"
+            data-logo="{{ $kegiatan->mitra->logo ? asset('storage/logo/'.$kegiatan->mitra->logo) : asset('img/default-profile.png') }}"
             data-sistem-kegiatan="{{ $kegiatan->sistem_kegiatan}}" {{-- data-sisa-hari="{{ $kegiatan->sisa_hari }}" --}}
             data-pendaftar-count="{{ $kegiatan->pendaftars_count}} applied" data-deskripsi="{{ $kegiatan->deskripsi}}"
             data-nama-kriteria="{{ implode(',', $kegiatan->kriterias->pluck('nama_kriteria')->toArray()) }}"
             data-nama-benefit="{{ implode(',', $kegiatan->benefits->pluck('nama_benefit')->toArray()) }}"
             data-sisa-hari="
-                   @if($kegiatan->sisa_hari > 0)
-                      {{ $kegiatan->sisa_hari }} days left
-                  @else
-                      Closed
-                  @endif
-                  " data-button="{{ $kegiatan->sisa_hari > 0 ? 'Apply' : 'Closed' }}">
+            @if($kegiatan->sisa_hari > 0)
+            {{ $kegiatan->sisa_hari }} days left
+            @else
+            Closed
+            @endif
+            " data-button="{{ $kegiatan->sisa_hari > 0 ? 'Apply' : 'Closed' }}">
             @if(!empty($kegiatan->mitra->logo))
             <div class="w-20">
               <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt=""
@@ -216,7 +216,11 @@
           <div class="px-8 md:p-2">
             <div class="flex items-center gap-x-4">
               <div class="max-w-16">
-                <img src="" alt="logo mitra" class="w-full rounded-full" />
+                <img
+                  src="{{ $kegiatan && $kegiatan->logo ? asset('storage/logo/' . $kegiatan->logo) : asset('img/default-profile.png') }}"
+                  alt="logo mitra" class="w-full rounded-full"
+                  data-logo="{{ $kegiatan && $kegiatan->logo ? asset('storage/logo/' . $kegiatan->logo) : '' }}" />
+
               </div>
               <span class="namaMitra lock"></span>
             </div>
