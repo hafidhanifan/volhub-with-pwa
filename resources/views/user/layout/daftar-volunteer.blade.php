@@ -129,9 +129,9 @@
                       Closed
                   @endif
                   " data-button="{{ $kegiatan->sisa_hari > 0 ? 'Apply' : 'Closed' }}">
-            <div class="max-w-16">
+            <div class="w-20">
               <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt=""
-                class="w-full rounded-full outline outline-1 outline-slate-200" />
+                class="w-12 h-12 object-cover rounded-full outline outline-1 outline-slate-200 lg:w-14 lg:h-14" />
             </div>
             <div class="w-full">
               <div class="flex flex-col gap-1">
