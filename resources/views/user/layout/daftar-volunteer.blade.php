@@ -129,10 +129,25 @@
                       Closed
                   @endif
                   " data-button="{{ $kegiatan->sisa_hari > 0 ? 'Apply' : 'Closed' }}">
+            @if(!empty($kegiatan->mitra->logo))
             <div class="w-20">
               <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt=""
                 class="w-12 h-12 object-cover rounded-full outline outline-1 outline-slate-200 lg:w-14 lg:h-14" />
             </div>
+            @else
+            <div class="w-20 relative group">
+              <img class="w-12 h-12 object-cover rounded-full outline outline-1 outline-slate-200 lg:w-14 lg:h-14"
+                src="{{ asset('img/default-profile.png') }}" alt="Avatar" />
+              <div
+                class="absolute top-0 right-3 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
+                !
+              </div>
+              <div
+                class="absolute right-10 top-8 mb-2 w-64 px-2 py-1 text-xs text-white bg-rose-500 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none lg:text-sm">
+                You have not uploaded a profile picture
+              </div>
+            </div>
+            @endif
             <div class="w-full">
               <div class="flex flex-col gap-1">
                 <p class="font-semibold line-clamp-1">
@@ -167,7 +182,7 @@
       </div>
       <!-- Detail Volunteer -->
       <div id="detailVolunteer"
-        class="fixed top-0 left-0 w-full h-screen bg-white z-50 transform transition-transform duration-500 ease-in-out no-scrollbar lg:static lg:translate-y-0 lg:w-2/3 lg:h-auto lg:z-auto lg:transition-none lg:rounded-lg lg:shadow-sm lg:p-8">
+        class="fixed top-0 left-0 w-full h-screen bg-white z-50 transform transition-transform duration-500 ease-in-out overflow-y-auto no-scrollbar lg:static lg:translate-y-0 lg:w-2/3 lg:h-auto lg:z-auto lg:transition-none lg:rounded-lg lg:shadow-sm lg:p-8">
         <div class="p-4 lg:hidden">
           <button id="backBtn">
             <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 386.242 386.242" xml:space="preserve">
