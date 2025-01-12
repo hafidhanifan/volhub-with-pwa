@@ -302,6 +302,11 @@ document.addEventListener("DOMContentLoaded", () => {
         detailContainer.classList.add("translate-y-full");
     });
 
+    document.getElementById("cv").addEventListener("change", function (event) {
+        const fileName = event.target.files[0]?.name || "Upload your CV here !";
+        document.getElementById("file-name").textContent = fileName;
+    });
+
     submitButton.addEventListener("click", () => {
         applyModal.classList.add("opacity-0", "pointer-events-none");
         applyModal.querySelector(".transform").classList.add("scale-95");
