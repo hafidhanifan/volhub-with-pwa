@@ -287,7 +287,7 @@
         class="bg-white rounded-lg shadow-lg w-4/5 p-6 transform scale-95 transition-transform duration-300 md:w-1/3">
         <div class="flex justify-between items-center mb-4">
           <label for="motivation" class="font-semibold">Your Motivation</label>
-          <button id="closeApplyMdl" class="text-gray-500 hover:text-gray-700 text-xl">
+          <button id="closeApplyMdl" class="text-gray-500 hover:text-gray-700 text-3xl">
             &times;
           </button>
         </div>
@@ -298,7 +298,8 @@
             class="block mb-4 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300"
             placeholder="Write your motivation ..."></textarea>
           @if($user->cv)
-          <p>CV Anda telah diunggah. <a href="{{ asset('storage/cv/' . auth()->user()->cv) }}" target="_blank">Unduh
+          <p>Your CV has been uploaded, <a href="{{ asset('storage/cv/' . auth()->user()->cv) }}" target="_blank"
+              class="text-sky-500">Download
               CV</a></p>
           @else
           <label for="cv" class="font-semibold">Upload Your CV</label>
@@ -344,19 +345,18 @@
     </div>
     @else
     <div id="applyMdl" data-is-logged-in="false"
-      class="fixed bottom-0 right-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+      class="fixed bottom-4 right-4 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 md:bottom-8 md:right-8">
       <!-- Modal Content -->
       <div
-        class="bg-white rounded-lg shadow-lg w-4/5 p-6 transform scale-95 transition-transform duration-300 md:w-1/3">
-        <div class="flex justify-between items-center mb-4">
-          <label for="motivation" class="font-semibold">Apply Volunteer</label>
-          <button id="closeApplyMdl" class="text-gray-500 hover:text-gray-700 text-xl">
-            &times;
-          </button>
-        </div>
-        <div class="flex items-center justify-center h-5/6">
-          <p class="text-gray-500 text-center">Login first</p>
-        </div>
+        class="flex gap-2 items-center py-2 px-4 bg-sky-400 rounded-lg shadow-lg transform scale-95 transition-transform duration-30">
+        <svg class="w-5" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10.88 16.15a1.12 1.12 0 0 1 1.13-1.12 1.11 1.11 0 1 1-1.13 1.12Zm.36-2.73L11.1 8.2a.898.898 0 0 1 1.262-.917.9.9 0 0 1 .529.917l-.13 5.22a.76.76 0 1 1-1.52 0Z"
+            fill="#ffffff" />
+          <path d="M12 21.5A9.25 9.25 0 1 0 12 3a9.25 9.25 0 0 0 0 18.5Z" stroke="#ffffff" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <p class="text-white">You must login first to apply volunteer</p>
       </div>
     </div>
     @endif
