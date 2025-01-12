@@ -303,8 +303,10 @@
               CV</a></p>
           @else
           <label for="cv" class="font-semibold">Upload Your CV</label>
-          <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-            <div class="flex flex-col items-center">
+          <div
+            class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 cursor-pointer"
+            onclick="document.getElementById('cv').click()">
+            <div class="flex flex-col items-center cursor-pointer" onclick="document.getElementById('cv').click()">
               <svg class="w-20 fill-gray-300" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -327,9 +329,10 @@
                 </g>
               </svg>
               <div class="mt-4 text-sm lg:flex leading-6 text-gray-600">
+                <p>Upload your CV here !</p>
                 <label for="cv"
                   class="relative cursor-pointer rounded-md bg-white font-semibold text-sky-600 hover:text-indigo-500">
-                  <input type="file" id="cv" name="cv" />
+                  <input type="file" id="cv" name="cv" class="sr-only" />
                 </label>
               </div>
             </div>
