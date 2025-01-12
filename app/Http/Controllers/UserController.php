@@ -344,7 +344,7 @@ class UserController extends Controller
     }
 
     public function showDetailPartnerPage ($id) {
-        $mitra = Mitra::findOrFail($id);
+        $mitra = Mitra::with('kegiatans')->findOrFail($id);
         return view('user.layout.detail-profile-employer', compact('mitra'));
     }
 }
