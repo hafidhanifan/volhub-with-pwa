@@ -8,7 +8,7 @@
         class="block p-2 border-b hover:bg-gray-100 cursor-pointer md:w-5/12 md:border lg:w-1/4">
         <div class="flex items-center gap-2 px-2">
             @if(!empty($mitra->logo))
-            <img src="{{ asset('storage/foto-profile/'.$mitra->logo)}}" alt=""
+            <img src="{{ asset('storage/logo/'.$mitra->logo)}}" alt=""
                 class="w-14 h-14 object-cover rounded-full" />
             @else
             <div class="relative group">
