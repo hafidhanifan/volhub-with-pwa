@@ -336,6 +336,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const applyButton = document.getElementById("applyBtn");
     const applyModal = document.getElementById("applyMdl");
+    const isLoggedIn = applyModal.getAttribute("data-is-logged-in") === "true";
     const closeModal = document.getElementById("closeApplyMdl");
     const registrationForm = document.getElementById("registrationForm");
 
@@ -457,27 +458,32 @@ document.addEventListener("DOMContentLoaded", () => {
             registrationForm.appendChild(hiddenKegiatanInput);
         });
     });
+
     applyButton.addEventListener("click", () => {
-        applyModal.classList.remove("opacity-0", "pointer-events-none");
-        applyModal.querySelector(".transform").classList.remove("scale-95");
-    });
+        if (isLoggedIn) {
+            // User login: Tampilkan modal form
+            applyModal.classList.remove("opacity-0", "pointer-events-none");
+            applyModal.classList.add("opacity-100");
+        } else {
+            // User belum login: Tampilkan alert
+            applyModal.classList.remove("opacity-0", "pointer-events-none");
+            applyModal.classList.add("opacity-100");
 
-    backButton.addEventListener("click", () => {
-        detailContainer.classList.add("translate-y-full");
-    });
-    // Event untuk menutup modal
-    closeModal.addEventListener("click", () => {
-        applyModal.classList.add("opacity-0", "pointer-events-none");
-        applyModal.classList.remove("opacity-100");
-    });
-
-    // Event untuk menutup modal ketika klik di luar modal
-    applyModal.addEventListener("click", (e) => {
-        if (e.target === applyModal) {
-            applyModal.classList.add("opacity-0", "pointer-events-none");
-            applyModal.classList.remove("opacity-100");
+            // Hilangkan alert setelah 3 detik
+            setTimeout(() => {
+                applyModal.classList.add("opacity-0", "pointer-events-none");
+                applyModal.classList.remove("opacity-100");
+            }, 3000);
         }
     });
+
+    if (closeModal) {
+        closeModal.addEventListener("click", () => {
+            // Tutup modal
+            modal.classList.add("opacity-0", "pointer-events-none");
+            modal.classList.remove("opacity-100");
+        });
+    }
 });
 
 /* Profile user page */

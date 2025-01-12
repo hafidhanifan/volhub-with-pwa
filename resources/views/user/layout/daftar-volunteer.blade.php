@@ -279,10 +279,8 @@
 
     <!-- Modal for apply Volunteer -->
     @if(auth()->check())
-    @php
-    $user = auth()->user();
-    @endphp
-    <div id="applyMdl" data-id-user="{{ auth()->user()->id }}"
+    @php $user = auth()->user(); @endphp
+    <div id="applyMdl" data-is-logged-in="true"
       class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
       <!-- Modal Content -->
       <div
@@ -345,8 +343,8 @@
       </div>
     </div>
     @else
-    <div id="applyMdl"
-      class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="applyMdl" data-is-logged-in="false"
+      class="fixed bottom-0 right-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
       <!-- Modal Content -->
       <div
         class="bg-white rounded-lg shadow-lg w-4/5 p-6 transform scale-95 transition-transform duration-300 md:w-1/3">
@@ -356,7 +354,6 @@
             &times;
           </button>
         </div>
-
         <div class="flex items-center justify-center h-5/6">
           <p class="text-gray-500 text-center">Login first</p>
         </div>
