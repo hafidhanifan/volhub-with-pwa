@@ -215,12 +215,11 @@
           @if(isset($kegiatan))
           <div class="px-8 md:p-2">
             <div class="flex items-center gap-x-4">
-              <div class="max-w-16">
+              <div class="w-16">
                 <img
                   src="{{ $kegiatan && $kegiatan->logo ? asset('storage/logo/' . $kegiatan->logo) : asset('img/default-profile.png') }}"
-                  alt="logo mitra" class="w-12 h-12 object-cover rounded-full"
+                  alt="logo mitra" class="w-12 h-12 object-cover rounded-full lg:w-14 lg:h-14"
                   data-logo="{{ $kegiatan && $kegiatan->logo ? asset('storage/logo/' . $kegiatan->logo) : '' }}" />
-
               </div>
               <span class="namaMitra lock"></span>
             </div>
