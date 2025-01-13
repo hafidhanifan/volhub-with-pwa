@@ -85,3 +85,15 @@ body {
 .no-scrollbar {
     scrollbar-width: none; /* Hilangkan scrollbar di Firefox */
 }
+
+/* Tambahkan efek jarak untuk underline */
+.underline-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -9px; /* Jarak antara teks dan underline */
+    height: 1px; /* Ketebalan underline */
+    background-color: #0ea5e9; /* Warna underline */
+    border-radius: 2px; /* Opsional: Membuat ujung garis bawah melengkung */
+}

@@ -491,6 +491,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    // Ambil semua elemen dengan class 'nav-link'
+    const links = document.querySelectorAll(".nav-link");
+
+    const removeActiveClasses = () => {
+        links.forEach((link) => {
+            link.classList.remove("text-sky-500", "underline-active");
+        });
+    };
+
+    links.forEach((link) => {
+        link.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent page reload
+            const targetId = this.getAttribute("href").slice(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: "smooth" });
+
+                removeActiveClasses();
+                this.classList.add("text-sky-500", "underline-active");
+            }
+        });
+    });
+});
+
 /* Profile user page */
 // Modal setting user
 document.addEventListener("DOMContentLoaded", () => {
