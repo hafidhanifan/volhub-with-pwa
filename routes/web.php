@@ -133,7 +133,6 @@ Route::prefix('user')->group(function () {
         Route::put('edit-experience/{id}/{id_experience}', [UserController::class, 'editExperienceAction'])->name('user.edit-experience-action');
         Route::delete('remove-experience/{id}/{id_experience}', [UserController::class, 'removeExperienceAction'])->name('user.remove-experience-action');
 
-
         // (User) Route untuk Detail Kegiatan
         Route::get('{id}/detail-kegiatan/{id_kegiatan}', [UserController::class, 'showDetailKegiatanPage'])->name('user.detail-kegiatan-page');
 

@@ -333,7 +333,14 @@ class UserController extends Controller
         $kategori = Kategori::all();
 
         return view('user.layout.daftar-volunteer', compact('kegiatans', 'search', 'kegiatanByKategori', 'kegiatanBySearch', 'totalKegiatan', 'kategori'));
-}
+    }
+
+    public function showDetailApplyInformation($id, $id_pen) {
+        $user = User::find($id);
+        $pendaftar = Pendaftar::with(['user'])->find($id_pen);
+
+        return view('user.layout.profile', compact('user', 'pendaftar'));
+    }
 
     // Partner page
     public function showAllPartnerPage () {

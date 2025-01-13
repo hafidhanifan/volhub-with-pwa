@@ -757,7 +757,14 @@
         @if(isset($user->pendaftars) && $user->pendaftars->isNotEmpty())
         <?php $no = 1 ?>
         @foreach($user->pendaftars as $pendaftar)
-        <div id="appliedCard" class="border border-slate-300 rounded-2xl cursor-pointer hover:border-sky-500">
+        <div id="appliedCard" class="appliedCard border border-slate-300 rounded-2xl cursor-pointer hover:border-sky-500"
+            data-id-pendaftar="{{ $pendaftar->id_pendaftar }}"
+            data-status-applicant="{{ $pendaftar->status_applicant }}"
+            data-tgl-interview="{{ $pendaftar->tgl_interview }}"
+            data-lokasi-interview="{{ $pendaftar->lokasi_interview }}"
+            data-note-to-applicant="{{ $pendaftar->note_to_applicant }}"
+            data-note-interview="{{ $pendaftar->note_interview }}"
+        >
           <div class="flex items-center gap-4 p-4">
             <img src="{{asset('storage/logo/'.$pendaftar->kegiatan->mitra->logo)}}" alt=""
               class="w-16 h-16 object-cover rounded-full" />
@@ -765,7 +772,7 @@
               <h2 class="text-xl font-semibold line-clamp-2">
                 {{$pendaftar->kegiatan->nama_kegiatan}}
               </h2>
-              <p class="text-sm">Mitra VolHub</p>
+              <p class="text-sm">{{$pendaftar->kegiatan->mitra->nama_mitra}}</p>
             </div>
           </div>
           <div class="mt-4 max-h-32 overflow-hidden">
@@ -777,7 +784,7 @@
             <span class="
                       font-medium text-sm p-2 rounded-xl flex-1 text-center
                       @if($pendaftar->status_applicant === 'In-review') border border-sky-500 text-sky-500 bg-sky-50 
-                      @elseif($pendaftar->status_applicant === 'Interview') border border-violet-500 text-violet-500 bg-violet-50 
+                      @elseif($pendaftar->status_applicant === 'Interview') border border-violet-500 text-violet-500 bg-violet-50 
                       @elseif($pendaftar->status_applicant === 'Shortlist') border border-amber-500 text-amber-500 bg-amber-50 
                       @elseif($pendaftar->status_applicant === 'Hire') border border-emerald-500 text-emerald-500 bg-emerald-50 
                       @elseif($pendaftar->status_applicant === 'Reject') border border-rose-500 text-rose-500 bg-rose-50 
@@ -800,6 +807,7 @@
           <p class="text-gray-500 text-center">You have not applied for any activities yet.</p>
         </div>
         @endif
+        
         {{-- Applied volunteer, detail information (modal). Start --}}
         <div id="detailAppliedVolunteer"
           class="hidden fixed top-0 left-0 right-0 z-50 w-full h-full bg-black bg-opacity-50 items-center justify-center">
@@ -817,67 +825,28 @@
             <div class="mt-4 p-2 border rounded-lg">
               <div class="flex flex-col gap-2 px-2">
                 <h2 class="text-sm text-gray-500">Application status</h2>
-                {{-- Pengkondisian status pendaftaran --}}
-                <span class="block w-24 text-center text-sm border border-sky-500 rounded-2xl text-sky-500 bg-sky-50">In
-                  Review</span>
-                {{-- <span
-                  class="block w-24 text-center text-sm border border-amber-500 rounded-2xl text-amber-500 bg-amber-50">shortlisted</span>
-                <span
-                  class="block w-24 text-center text-sm border border-violet-500 rounded-2xl text-violet-500 bg-violet-50">Interview</span>
-                <span
-                  class="block w-24 text-center text-sm border border-emerald-500 rounded-2xl text-emerald-500 bg-emerald-50">Hire</span>
-                --}}
-                {{-- Pengkondisian status pendaftaran end --}}
+                <span class="statusApplicant"></span>
               </div>
-              {{-- In review dan shortlisted--}}
-              {{-- <div class="mt-4 h-48 px-2 overflow-y-auto">
-                <h2 class="text-sm text-gray-500">Note from partner</h2>
-                <p class="text-sm text-justify">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
-                  possimus incidunt ut error consequuntur expedita obcaecati? Sed
-                  maxime accusantium asperiores, labore repellat voluptatibus libero
-                  repellendus rem et beatae veniam ipsam. Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Mollitia eligendi modi laudantium
-                  iste deleniti explicabo officiis eveniet eaque eos error.
-                </p>
-              </div> --}}
-
               {{-- Interview --}}
               <div class="mt-4 h-48 px-2 overflow-y-auto">
                 <h2 class="text-sm text-gray-500">Interview Schedule</h2>
                 <div class="flex flex-col sm:flex-row sm:justify-between sm:gap-8">
                   <div class="w-2/5 mt-2 flex gap-1 flex-col ">
                     <span class="block text-sm">Interview Date</span>
-                    <span class="block text-sm font-semibold">34 September 2025</span>
+                    <span class="tglInterview block text-sm font-semibold"></span>
                   </div>
                   <div class="w-3/4 mt-2 flex gap-1 flex-col">
                     <span class="block text-sm">Interview Location</span>
-                    <span class="block text-sm font-semibold">Parkiran Amikom Utara, deket pohon yang itu pokokny, ntar
-                      cari aja hehe</span>
+                    <span class="lokasiInterview block text-sm font-semibold"></span>
                   </div>
                 </div>
                 <div class="mt-4">
-                  <h2 class="text-sm text-gray-500">Note from partner</h2>
-                  <p class="text-sm text-justify">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
-                    possimus incidunt ut error consequuntur expedita obcaecati? Sed
-                    maxime accusantium asperiores, labore repellat voluptatibus
-                    libero repellendus rem et beatae veniam ipsam. Lorem ipsum dolor
-                    sit amet consectetur adipisicing elit. Mollitia eligendi modi
-                    laudantium iste deleniti explicabo officiis eveniet eaque eos
-                    error.
-                  </p>
+                  <h2 class="text-sm text-gray-500">Note Interview</h2>
+                  <p class="noteInterview text-sm text-justify"></p>
                 </div>
                 <div class="mt-4">
-                  <h2 class="text-sm text-gray-500">Note Interview</h2>
-                  <p class="text-sm text-justify">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel
-                    possimus incidunt ut error consequuntur expedita obcaecati? Sed
-                    maxime accusantium asperiores, labore repellat voluptatibus
-                    libero repellendus rem et beatae veniam ipsam. Lorem ipsum dolor
-                    sit amet consectetur adipisicing elit. Mollitia eligendi modi
-                    laudantium iste deleniti explicabo officiis eveniet eaque eos
-                    error.
+                  <h2 class="text-sm text-gray-500">Note For Applicant</h2>
+                  <p class="noteToApplicant text-sm text-justify">
                   </p>
                 </div>
               </div>

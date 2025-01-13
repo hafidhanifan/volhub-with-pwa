@@ -841,14 +841,9 @@ document
 
 // Applied volunteer
 document.addEventListener("DOMContentLoaded", function () {
-    const appliedCard = document.getElementById("appliedCard");
-    const detailAppliedVolunteerModal = document.getElementById(
-        "detailAppliedVolunteer"
-    );
-    const closeDetailAppliedVolunteer = document.getElementById(
-        "closeDetailAppliedVolunteer"
-    );
-
+    const detailAppliedVolunteerModal = document.getElementById("detailAppliedVolunteer");
+    const closeDetailAppliedVolunteer = document.getElementById("closeDetailAppliedVolunteer");
+    
     const openModal = () => {
         detailAppliedVolunteerModal.classList.remove("hidden");
         detailAppliedVolunteerModal.classList.add("flex");
@@ -859,10 +854,49 @@ document.addEventListener("DOMContentLoaded", function () {
         detailAppliedVolunteerModal.classList.add("hidden");
     };
 
-    appliedCard.addEventListener("click", openModal);
+    const getStatusClasses = (status) => {
+        switch (status) {
+            case "In-review":
+                return "block w-24 text-center text-sm rounded-2xl border border-sky-500 text-sky-500 bg-sky-50";
+            case "Interview":
+                return "block w-24 text-center text-sm rounded-2xl border border-violet-500 text-violet-500 bg-violet-50";
+            case "Shortlist":
+                return "block w-24 text-center text-sm rounded-2xl border border-amber-500 text-amber-500 bg-amber-50";
+            case "Hire":
+                return "block w-24 text-center text-sm rounded-2xl border border-emerald-500 text-emerald-500 bg-emerald-50";
+            case "Reject":
+                return "block w-24 text-center text-sm rounded-2xl border border-rose-500 text-rose-500 bg-rose-50";
+            default:
+                return "block w-24 text-center text-sm rounded-2xl bg-gray-500 text-white border-gray-600";
+        }
+    };
 
+    document.querySelectorAll(".appliedCard").forEach((card) => {
+        card.addEventListener("click", () => {
+            const statusApplicant = card.dataset.statusApplicant;
+            const tglInterview = card.dataset.tglInterview;
+            const lokasiInterview = card.dataset.lokasiInterview;
+            const noteToApplicant = card.dataset.noteToApplicant;
+            const noteInterview = card.dataset.noteInterview;
+
+            const statusElement = detailAppliedVolunteerModal.querySelector(".statusApplicant");
+            statusElement.textContent = statusApplicant;
+            statusElement.className = `statusApplicant ${getStatusClasses(statusApplicant)}`;
+
+            detailAppliedVolunteerModal.querySelector(".tglInterview").textContent = tglInterview;
+            detailAppliedVolunteerModal.querySelector(".lokasiInterview").textContent = lokasiInterview;
+            detailAppliedVolunteerModal.querySelector(".noteToApplicant").textContent = noteToApplicant;
+            detailAppliedVolunteerModal.querySelector(".noteInterview").textContent = noteInterview;
+            
+            // Membuka modal
+            openModal();
+        });
+    });
+
+    // Menutup modal saat tombol close diklik
     closeDetailAppliedVolunteer.addEventListener("click", closeModal);
 
+    // Menutup modal jika area di luar konten modal diklik
     detailAppliedVolunteerModal.addEventListener("click", (event) => {
         if (event.target === detailAppliedVolunteerModal) {
             closeModal();
