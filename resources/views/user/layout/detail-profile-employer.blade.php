@@ -53,7 +53,11 @@
                             d="M0 100.07h14.72V1.57c0-.86.71-1.57 1.57-1.57h49.86c.86 0 1.57.71 1.57 1.57V38.5h44.12c.86 0 1.57.71 1.57 1.57v59.99h9.47v12.99H0v-12.98zm27.32-85.25h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57h-10.2c-.31 0-.57-.26-.57-.57V15.39c0-.31.26-.57.57-.57zM44.6 76.3h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57H44.6c-.31 0-.57-.26-.57-.57V76.87c0-.32.26-.57.57-.57zm-17.28 0h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57h-10.2c-.31 0-.57-.26-.57-.57V76.87c0-.32.26-.57.57-.57zM44.6 55.8h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57H44.6c-.31 0-.57-.26-.57-.57V56.38c0-.32.26-.58.57-.58zm-17.28 0h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57h-10.2c-.31 0-.57-.26-.57-.57V56.38c0-.32.26-.58.57-.58zM44.6 35.31h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57H44.6c-.31 0-.57-.26-.57-.57V35.88c0-.31.26-.57.57-.57zm-17.28 0h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57h-10.2c-.31 0-.57-.26-.57-.57V35.88c0-.31.26-.57.57-.57zM44.6 14.82h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57H44.6c-.31 0-.57-.26-.57-.57V15.39c0-.31.26-.57.57-.57zm-21.43-7.5h35.92c.62 0 1.13.61 1.13 1.35v85.87c0 .74-.51 1.35-1.13 1.35H23.17c-.62 0-1.13-.61-1.13-1.35V8.67c0-.74.51-1.35 1.13-1.35zm49.44 46.11h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57h-10.2c-.31 0-.57-.26-.57-.57V54c0-.31.26-.57.57-.57zM89.89 76.3h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57h-10.2c-.31 0-.57-.26-.57-.57V76.87c0-.32.26-.57.57-.57zm-17.28 0h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57h-10.2c-.31 0-.57-.26-.57-.57V76.87c0-.32.26-.57.57-.57zm17.28-22.87h10.2c.31 0 .57.26.57.57v12.36c0 .31-.26.57-.57.57h-10.2c-.31 0-.57-.26-.57-.57V54c0-.31.26-.57.57-.57zm-21.03-7.61h35.92c.62 0 1.13.61 1.13 1.35v47.37c0 .74-.51 1.35-1.13 1.35H68.86c-.62 0-1.13-.61-1.13-1.35V47.17c0-.74.51-1.35 1.13-1.35z"
                             style="fill-rule: evenodd; clip-rule: evenodd" />
                     </svg>
+                    @if(!empty($mitra->industri))
                     <p class="text-sm md:text-base">{{$mitra->industri}}</p>
+                    @else
+                    <p class="text-sm md:text-base text-rose-500">The employer has not yet provided any information.</p>
+                    @endif
                 </div>
                 <div class="flex gap-2 items-center">
                     <svg class="w-5 fill-slate-600 md:w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -61,8 +65,12 @@
                         <path
                             d="M9 0a9 9 0 1 0 .001 18.001A9 9 0 0 0 9 0zM1.11 9.68h2.51c.04.91.167 1.814.38 2.7H1.84a7.864 7.864 0 0 1-.73-2.7zm8.57-5.4V1.19a4.128 4.128 0 0 1 2.22 2c.205.347.386.708.54 1.08l-2.76.01zm3.22 1.35c.232.883.37 1.788.41 2.7H9.68v-2.7h3.22zM8.32 1.19v3.09H5.56c.154-.372.335-.733.54-1.08a4.135 4.135 0 0 1 2.22-2.01zm0 4.44v2.7H4.7c.04-.912.178-1.817.41-2.7h3.21zm-4.7 2.69H1.11c.08-.936.327-1.85.73-2.7H4c-.213.886-.34 1.79-.38 2.7zM4.7 9.68h3.62v2.7H5.11a12.84 12.84 0 0 1-.41-2.7zm3.63 4v3.09a4.128 4.128 0 0 1-2.22-2 8.568 8.568 0 0 1-.54-1.08l2.76-.01zm1.35 3.09v-3.04h2.76a8.568 8.568 0 0 1-.54 1.08 4.128 4.128 0 0 1-2.22 2v-.04zm0-4.44v-2.7h3.62a12.84 12.84 0 0 1-.41 2.7H9.68zm4.71-2.7h2.51a7.864 7.864 0 0 1-.73 2.7H14c.21-.87.337-1.757.38-2.65l.01-.05zm0-1.35A14.124 14.124 0 0 0 14 5.63h2.16c.403.85.65 1.764.73 2.7l-2.5-.05zm1-4H13.6a8.922 8.922 0 0 0-1.39-2.52 8.017 8.017 0 0 1 3.14 2.52h.04zm-9.6-2.52A8.922 8.922 0 0 0 4.4 4.28H2.65a8.017 8.017 0 0 1 3.14-2.52zm-3.15 12H4.4c.324.91.793 1.76 1.39 2.52a7.992 7.992 0 0 1-3.14-2.55l-.01.03zm9.56 2.52a8.922 8.922 0 0 0 1.39-2.52h1.76a7.992 7.992 0 0 1-3.14 2.48l-.01.04z" />
                     </svg>
+                    @if(!empty($mitra->situs))
                     <a href="{{$mitra->situs}}" target="_blank"
                         class="text-sm cursor-pointer text-sky-500 hover:text-sky-600 md:text-base">{{$mitra->situs}}</a>
+                    @else
+                    <p class="text-sm md:text-base text-rose-500">The employer has not yet provided any information.</p>
+                    @endif
                 </div>
                 <div class="flex gap-2 items-center">
                     <svg class="w-5 fill-slate-600 md:w-6" viewBox="0 0 24 24" fill="none"
@@ -70,7 +78,11 @@
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M3.75 5.25 3 6v12l.75.75h16.5L21 18V6l-.75-.75H3.75Zm.75 2.446v9.554h15V7.695L12 14.514 4.5 7.696Zm13.81-.946H5.69L12 12.486l6.31-5.736Z" />
                     </svg>
+                    @if(!empty($mitra->email_mitra))
                     <p class="text-sm md:text-base">{{$mitra->email_mitra}}</p>
+                    @else
+                    <p class="text-sm md:text-base text-rose-500">The employer has not yet provided any information.</p>
+                    @endif
                 </div>
                 <div class="flex gap-2 items-center">
                     <svg class="w-5 stroke-slate-600" viewBox="0 0 24 24" fill="none"
@@ -79,7 +91,11 @@
                             d="M21.97 18.33c0 .36-.08.73-.25 1.09-.17.36-.39.7-.68 1.02-.49.54-1.03.93-1.64 1.18-.6.25-1.25.38-1.95.38-1.02 0-2.11-.24-3.26-.73s-2.3-1.15-3.44-1.98a28.75 28.75 0 0 1-3.28-2.8 28.414 28.414 0 0 1-2.79-3.27c-.82-1.14-1.48-2.28-1.96-3.41C2.24 8.67 2 7.58 2 6.54c0-.68.12-1.33.36-1.93.24-.61.62-1.17 1.15-1.67C4.15 2.31 4.85 2 5.59 2c.28 0 .56.06.81.18.26.12.49.3.67.56l2.32 3.27c.18.25.31.48.4.7.09.21.14.42.14.61 0 .24-.07.48-.21.71-.13.23-.32.47-.56.71l-.76.79c-.11.11-.16.24-.16.4 0 .08.01.15.03.23.03.08.06.14.08.2.18.33.49.76.93 1.28.45.52.93 1.05 1.45 1.58.54.53 1.06 1.02 1.59 1.47.52.44.95.74 1.29.92.05.02.11.05.18.08.08.03.16.04.25.04.17 0 .3-.06.41-.17l.76-.75c.25-.25.49-.44.72-.56.23-.14.46-.21.71-.21.19 0 .39.04.61.13.22.09.45.22.7.39l3.31 2.35c.26.18.44.39.55.64.1.25.16.5.16.78Z"
                             stroke-width="1.5" stroke-miterlimit="10" />
                     </svg>
+                    @if(!empty($mitra->nomor_telephone))
                     <p class="text-sm md:text-base">{{$mitra->nomor_telephone}}</p>
+                    @else
+                    <p class="text-sm md:text-base text-rose-500">The employer has not yet provided any information.</p>
+                    @endif
                 </div>
             </div>
             <div class="mt-12 flex justify-center gap-20 md:justify-start">
@@ -95,9 +111,15 @@
             <h2 class="font-medium text-lg md:border-b md:p-5 md:text-xl">
                 Description
             </h2>
+            @if(!empty($mitra->deskripsi))
             <div class="mt-2">
                 <p class="text-justify text-sm md:px-5 md:pb-5 md:text-base">{{$mitra->deskripsi}}</p>
             </div>
+            @else
+            <div class="mt-8 mb-8 lg:mt-20 lg:mb-20 flex justify-center">
+                <p class="text-sm md:text-base text-rose-500">The employer has not yet provided any information.</p>
+            </div>
+            @endif
         </div>
         <div id="volunteer" class="scroll-mt-20 bg-white p-5 md:p-0 md:mt-4 md:border md:rounded-lg md:border-gray-300">
             <h2 class="font-medium text-lg md:border-b-2 md:p-5 md:text-xl">
@@ -112,11 +134,11 @@
                     <img src="{{ asset('storage/logo/'.$mitra->logo)}}" alt="Employer Logo"
                         class="w-14 h-14 object-cover rounded-full lg:w-16 lg:h-16" />
                     @else
-                    <div class="relative group">
+                    <div class="w-24 relative group">
                         <img class="w-14 h-14 object-cover rounded-full lg:w-16 lg:h-16" src=" {{
                         asset('img/default-profile.png') }}" alt="Avatar" />
                         <div
-                            class="absolute top-0 left-20 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
+                            class="absolute top-0 left-11 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
                             !
                         </div>
                         <div
@@ -133,8 +155,9 @@
                 </a>
                 @endforeach
                 @else
-                <div class="flex items-center justify-center default-message">
-                    <p class="text-gray-500 text-center">No Information</p>
+                <div class="mt-8 mb-8 lg:mt-20 lg:mb-20 flex justify-center">
+                    <p class="text-sm md:text-base text-rose-500">The employer has not yet organized any volunteer
+                        activities. Stay tuned!</p>
                 </div>
                 @endif
             </div>
