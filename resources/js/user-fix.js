@@ -114,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const detailContainer = document.getElementById("detailVolunteer");
     const defaultMessage = detailContainer.querySelector(".default-message");
     const detailContent = detailContainer.querySelector(".detail-content");
-
     const applyButton = document.getElementById("applyBtn");
     const applyModal = document.getElementById("applyMdl");
     const submitButton = document.getElementById("submitBtn");
@@ -122,10 +121,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const notification = document.getElementById("notification");
     const registrationForm = document.getElementById("registrationForm");
     const motivationTextarea = document.getElementById("motivation");
-
     const backButton = document.getElementById("backBtn");
 
-    // Tampilkan pesan default saat halaman dimuat
+    // Initialize default message
     defaultMessage.classList.remove("hidden");
     detailContent.classList.add("hidden");
 
@@ -136,32 +134,31 @@ document.addEventListener("DOMContentLoaded", () => {
             defaultMessage.classList.add("hidden");
             detailContent.classList.remove("hidden");
 
-            // Ambil data dari atribut data-*
-            const idKegiatan = card.dataset.idKegiatan;
-            const namaKegiatan = card.dataset.namaKegiatan;
-            const namaMitra = card.dataset.namaMitra;
-            const lokasiKegiatan = card.dataset.lokasiKegiatan;
-            const logo = card.dataset.logo; // Hanya data-logo
-            const logoImage = document.querySelector("img[data-logo]");
-            if (logoImage) {
-                logoImage.src = logo || "/img/default-profile.png"; // Path default jika logo tidak ada
-            }
-            const sistemKegiatan = card.dataset.sistemKegiatan;
-            const sisaHari = parseInt(card.dataset.sisaHari, 10);
-            const pendaftarCount = card.dataset.pendaftarCount;
-            const deskripsi = card.dataset.deskripsi;
-            const namaKriteria = card.dataset.namaKriteria;
-            const namaBenefit = card.dataset.namaBenefit;
-            const button = card.dataset.button;
-            const route = card.dataset.route;
+            // Retrieve data attributes
+            const {
+                idKegiatan,
+                namaKegiatan,
+                namaMitra,
+                lokasiKegiatan,
+                logo,
+                sistemKegiatan,
+                sisaHari,
+                pendaftarCount,
+                deskripsi,
+                namaKriteria,
+                namaBenefit,
+                button,
+                route,
+            } = card.dataset;
 
-            // Tampilkan data di bagian detail
+            // Update detail content
             detailContainer.querySelector(".namaKegiatan").textContent =
                 namaKegiatan;
             detailContainer.querySelector(".namaMitra").textContent = namaMitra;
             detailContainer.querySelector(".lokasiKegiatan").textContent =
                 lokasiKegiatan;
-            detailContainer.querySelector("img").src = logo;
+            detailContainer.querySelector("img").src =
+                logo || "/img/default-profile.png";
             detailContainer.querySelector(".sistemKegiatan").textContent =
                 sistemKegiatan;
             detailContainer.querySelector(".sisaHari").textContent = sisaHari;
@@ -170,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
             detailContainer.querySelector(".deskripsi").textContent = deskripsi;
             detailContainer.querySelector(".button").textContent = button;
 
+            // Update apply button state
             if (button === "Apply") {
                 applyButton.classList.remove(
                     "bg-gray-400",
@@ -181,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "hover:bg-button_hover",
                     "cursor-pointer"
                 );
-                applyButton.disabled = false; // Aktifkan tombol
+                applyButton.disabled = false;
             } else if (button === "Closed") {
                 applyButton.classList.remove(
                     "bg-cyan-500",
@@ -193,17 +191,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     "cursor-not-allowed",
                     "opacity-50"
                 );
-                applyButton.disabled = true; // Nonaktifkan tombol
+                applyButton.disabled = true;
             }
 
-            const kriteriaContainer =
-                detailContainer.querySelector(".kriteriaContainer"); // Ambil container kriteria
-            kriteriaContainer.innerHTML = ""; // Kosongkan container sebelum menambah elemen baru
+            // Apply button event
+            applyButton.addEventListener("click", () => {
+                registrationForm.action = route;
+                applyModal.classList.remove("hidden", "pointer-events-none");
+                applyModal.classList.add("flex");
+            });
 
-            if (namaKriteria && namaKriteria.trim() !== "") {
-                // Jika data kriteria ada
-                const kriteriaArray = namaKriteria.split(","); // Pisahkan berdasarkan koma
-                kriteriaArray.forEach((kriteria) => {
+            closeModal.addEventListener("click", () => {
+                applyModal.classList.add("hidden", "pointer-events-none");
+            });
+
+            // Update criteria
+            const kriteriaContainer =
+                detailContainer.querySelector(".kriteriaContainer");
+            kriteriaContainer.innerHTML = "";
+
+            if (namaKriteria?.trim()) {
+                namaKriteria.split(",").forEach((kriteria) => {
                     const kriteriaSpan = document.createElement("span");
                     kriteriaSpan.classList.add(
                         "namaKriteria",
@@ -213,11 +221,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         "text-sm",
                         "rounded-lg"
                     );
-                    kriteriaSpan.textContent = kriteria.trim(); // Hapus spasi berlebih
+                    kriteriaSpan.textContent = kriteria.trim();
                     kriteriaContainer.appendChild(kriteriaSpan);
                 });
             } else {
-                // Jika data kriteria kosong, tampilkan pesan
                 const emptyMessage = document.createElement("span");
                 emptyMessage.classList.add(
                     "namaKriteria",
@@ -231,14 +238,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 kriteriaContainer.appendChild(emptyMessage);
             }
 
+            // Update benefits
             const benefitContainer =
-                detailContainer.querySelector(".benefitContainer"); // Ambil container kriteria
-            benefitContainer.innerHTML = ""; // Kosongkan container sebelum menambah elemen baru
+                detailContainer.querySelector(".benefitContainer");
+            benefitContainer.innerHTML = "";
 
-            if (namaBenefit && namaBenefit.trim() !== "") {
-                // Jika data kriteria ada
-                const benefitArray = namaBenefit.split(","); // Pisahkan berdasarkan koma
-                benefitArray.forEach((benefit) => {
+            if (namaBenefit?.trim()) {
+                namaBenefit.split(",").forEach((benefit) => {
                     const benefitSpan = document.createElement("span");
                     benefitSpan.classList.add(
                         "namaBenefit",
@@ -248,11 +254,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         "text-sm",
                         "rounded-lg"
                     );
-                    benefitSpan.textContent = benefit.trim(); // Hapus spasi berlebih
+                    benefitSpan.textContent = benefit.trim();
                     benefitContainer.appendChild(benefitSpan);
                 });
             } else {
-                // Jika data kriteria kosong, tampilkan pesan
                 const emptyMessage = document.createElement("span");
                 emptyMessage.classList.add(
                     "namaBenefit",
@@ -266,44 +271,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 benefitContainer.appendChild(emptyMessage);
             }
 
-            const id = document.getElementById("applyMdl").dataset.idUser;
-            /// Isi form dengan ID kegiatan
-            const hiddenKegiatanInput = document.createElement("input");
-            hiddenKegiatanInput.type = "hidden";
-            hiddenKegiatanInput.name = "id_kegiatan";
-            hiddenKegiatanInput.value = idKegiatan;
-
-            // Hapus input hidden sebelumnya (jika ada) agar tidak duplikasi
+            // Update hidden input for form
             const existingInput = registrationForm.querySelector(
                 'input[name="id_kegiatan"]'
             );
             if (existingInput) existingInput.remove();
 
-            // Tambahkan input hidden ke form
+            const hiddenKegiatanInput = document.createElement("input");
+            hiddenKegiatanInput.type = "hidden";
+            hiddenKegiatanInput.name = "id_kegiatan";
+            hiddenKegiatanInput.value = idKegiatan;
             registrationForm.appendChild(hiddenKegiatanInput);
 
-            // Update placeholder pada motivation
-            motivationTextarea.placeholder = `Write your motivation for joining "${namaKegiatan}" from "${namaMitra}"...`;
-
-            applyButton.addEventListener("click", () => {
-                // Perbarui action form pendaftaran menggunakan route
-                const form = document.querySelector("#registrationForm");
-                form.action = route;
-
-                // Tampilkan modal
-                applyModal.classList.remove("opacity-0", "pointer-events-none");
-                applyModal
-                    .querySelector(".transform")
-                    .classList.remove("scale-95");
-            });
+            // Update placeholder
+            motivationTextarea.placeholder = `Write your motivation for joining \"${namaKegiatan}\" from \"${namaMitra}\"...`;
         });
     });
-    backButton.addEventListener("click", () => {
-        detailContainer.classList.add("translate-y-full");
-    });
 
-    document.getElementById("cv").addEventListener("change", function (event) {
-        const fileName = event.target.files[0]?.name || "Upload your CV here !";
+    document.getElementById("cv").addEventListener("change", (event) => {
+        const fileName = event.target.files[0]?.name || "Upload your CV here!";
         document.getElementById("file-name").textContent = fileName;
     });
 
@@ -312,24 +298,14 @@ document.addEventListener("DOMContentLoaded", () => {
         applyModal.querySelector(".transform").classList.add("scale-95");
         notification.classList.remove("opacity-0", "pointer-events-none");
 
-        // Menghilangkan notifikasi setelah 3 detik
         setTimeout(() => {
             notification.classList.add("opacity-0", "pointer-events-none");
         }, 3000);
     });
 
-    // Event untuk menutup modal
-    closeModal.addEventListener("click", () => {
-        applyModal.classList.add("opacity-0", "pointer-events-none");
-        applyModal.classList.remove("opacity-100");
-    });
-
-    // Event untuk menutup modal ketika klik di luar modal
-    applyModal.addEventListener("click", (e) => {
-        if (e.target === applyModal) {
-            applyModal.classList.add("opacity-0", "pointer-events-none");
-            applyModal.classList.remove("opacity-100");
-        }
+    // Mobile (hidden detail activity)
+    backButton.addEventListener("click", () => {
+        detailContainer.classList.add("translate-y-full");
     });
 });
 
@@ -485,8 +461,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (closeModal) {
         closeModal.addEventListener("click", () => {
             // Tutup modal
-            modal.classList.add("opacity-0", "pointer-events-none");
-            modal.classList.remove("opacity-100");
+            applyModal.classList.add("opacity-0", "pointer-events-none");
+            applyModal.classList.remove("opacity-100");
         });
     }
 });
@@ -867,9 +843,14 @@ document
 
 // Applied volunteer
 document.addEventListener("DOMContentLoaded", function () {
-    const detailAppliedVolunteerModal = document.getElementById("detailAppliedVolunteer");
-    const closeDetailAppliedVolunteer = document.getElementById("closeDetailAppliedVolunteer");
-    
+    const appliedCard = document.getElementById("appliedCard");
+    const detailAppliedVolunteerModal = document.getElementById(
+        "detailAppliedVolunteer"
+    );
+    const closeDetailAppliedVolunteer = document.getElementById(
+        "closeDetailAppliedVolunteer"
+    );
+
     const openModal = () => {
         detailAppliedVolunteerModal.classList.remove("hidden");
         detailAppliedVolunteerModal.classList.add("flex");
@@ -880,49 +861,10 @@ document.addEventListener("DOMContentLoaded", function () {
         detailAppliedVolunteerModal.classList.add("hidden");
     };
 
-    const getStatusClasses = (status) => {
-        switch (status) {
-            case "In-review":
-                return "block w-24 text-center text-sm rounded-2xl border border-sky-500 text-sky-500 bg-sky-50";
-            case "Interview":
-                return "block w-24 text-center text-sm rounded-2xl border border-violet-500 text-violet-500 bg-violet-50";
-            case "Shortlist":
-                return "block w-24 text-center text-sm rounded-2xl border border-amber-500 text-amber-500 bg-amber-50";
-            case "Hire":
-                return "block w-24 text-center text-sm rounded-2xl border border-emerald-500 text-emerald-500 bg-emerald-50";
-            case "Reject":
-                return "block w-24 text-center text-sm rounded-2xl border border-rose-500 text-rose-500 bg-rose-50";
-            default:
-                return "block w-24 text-center text-sm rounded-2xl bg-gray-500 text-white border-gray-600";
-        }
-    };
+    appliedCard.addEventListener("click", openModal);
 
-    document.querySelectorAll(".appliedCard").forEach((card) => {
-        card.addEventListener("click", () => {
-            const statusApplicant = card.dataset.statusApplicant;
-            const tglInterview = card.dataset.tglInterview;
-            const lokasiInterview = card.dataset.lokasiInterview;
-            const noteToApplicant = card.dataset.noteToApplicant;
-            const noteInterview = card.dataset.noteInterview;
-
-            const statusElement = detailAppliedVolunteerModal.querySelector(".statusApplicant");
-            statusElement.textContent = statusApplicant;
-            statusElement.className = `statusApplicant ${getStatusClasses(statusApplicant)}`;
-
-            detailAppliedVolunteerModal.querySelector(".tglInterview").textContent = tglInterview;
-            detailAppliedVolunteerModal.querySelector(".lokasiInterview").textContent = lokasiInterview;
-            detailAppliedVolunteerModal.querySelector(".noteToApplicant").textContent = noteToApplicant;
-            detailAppliedVolunteerModal.querySelector(".noteInterview").textContent = noteInterview;
-            
-            // Membuka modal
-            openModal();
-        });
-    });
-
-    // Menutup modal saat tombol close diklik
     closeDetailAppliedVolunteer.addEventListener("click", closeModal);
 
-    // Menutup modal jika area di luar konten modal diklik
     detailAppliedVolunteerModal.addEventListener("click", (event) => {
         if (event.target === detailAppliedVolunteerModal) {
             closeModal();

@@ -252,7 +252,9 @@ class UserController extends Controller
                                          ->where('id_kegiatan', $kegiatan->id_kegiatan)
                                          ->exists();
         if ($existingPendaftaran) {
-            return redirect()->route('user.daftarKegiatan', $id)->with('error', 'Anda sudah mendaftar kegiatan ini.');
+            return redirect()->route('user.daftarKegiatan', $id)
+                     ->with('error', 'Anda sudah mendaftar kegiatan ini.')
+                     ->with('existingPendaftaran', $existingPendaftaran);
         }
         
         $user = User::findOrFail($id);

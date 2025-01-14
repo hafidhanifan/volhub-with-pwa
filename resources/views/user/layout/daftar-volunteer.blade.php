@@ -248,6 +248,25 @@
                 Save
               </button>
             </div>
+            {{-- Alert user already register volunteer start --}}
+            @if(session('error'))
+            <div id="alertNotification"
+              class="fixed bottom-4 right-4 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 md:bottom-8 md:right-8">
+              <div
+                class="flex gap-2 items-center py-2 px-4 bg-red-500 rounded-lg shadow-lg transform scale-95 transition-transform duration-300">
+                <svg class="w-5" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10.88 16.15a1.12 1.12 0 0 1 1.13-1.12 1.11 1.11 0 1 1-1.13 1.12Zm.36-2.73L11.1 8.2a.898.898 0 0 1 1.262-.917.9.9 0 0 1 .529.917l-.13 5.22a.76.76 0 1 1-1.52 0Z"
+                    fill="#ffffff" />
+                  <path d="M12 21.5A9.25 9.25 0 1 0 12 3a9.25 9.25 0 0 0 0 18.5Z" stroke="#ffffff" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <p class="text-white">{{ session('error') }}</p>
+              </div>
+            </div>
+            @endif
+            {{-- Alert user already register volunteer end --}}
+
             <div class="mt-4 md:w-2/3">
               <h2 class="font-semibold">Description</h2>
               <p class="deskripsi text-sm text-justify">
@@ -281,7 +300,7 @@
     @if(auth()->check())
     @php $user = auth()->user(); @endphp
     <div id="applyMdl" data-is-logged-in="true"
-      class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+      class="fixed inset-0 bg-gray-800 bg-opacity-50 z-50 items-center justify-center hidden pointer-events-none">
       <!-- Modal Content -->
       <div
         class="bg-white rounded-lg shadow-lg w-4/5 p-6 transform scale-95 transition-transform duration-300 md:w-1/3">
