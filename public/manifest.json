@@ -1,0 +1,20 @@
+{
+    "name": "VolHub",
+    "short_name": "VolHub",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4a90e2",
+    "icons": [
+        {
+            "src": "/images/icons/volhub-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/icons/volhub-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }
+    ]
+}
