@@ -35,3 +35,15 @@ self.addEventListener("activate", (event) => {
         )
     );
 });
+
+// Notifikasi
+self.addEventListener("push", (event) => {
+    const data = event.data.json();
+    const title = data.title || "Notification";
+    const options = {
+        body: data.body || "You have a new message!",
+        icon: "/images/icons/volhub-192x192.png", // Sesuaikan path ikon
+    };
+
+    event.waitUntil(self.registration.showNotification(title, options));
+});
