@@ -7,8 +7,9 @@
   <meta name="dicoding:f1836yb034@dicoding.org" content="hafidhanifan33@gmail.com">
   <link rel="shortcut icon" href="{{ asset('/img/volhub-logo/volhub-navigation-logo.png') }}" type="image/x-icon" />
   <link rel="manifest" href="{{ asset('manifest.json') }}">
-  <title>VolunteerHub</title>
   @vite(['resources/css/app.css','resources/js/user-fix.js','resources/js/app.js'])
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>VolunteerHub</title>
 </head>
 
 <body>

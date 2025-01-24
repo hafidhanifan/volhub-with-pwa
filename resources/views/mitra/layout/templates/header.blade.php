@@ -7,7 +7,7 @@
   <meta name="dicoding:f1836yb034@dicoding.org" content="hafidhanifan33@gmail.com">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="shortcut icon" href="{{ asset('/img/volhub-logo/volhub-navigation-logo.png') }}" type="image/x-icon" />
-  @vite(['resources/css/app.css','resources/css/bootstrap.css','resources/js/mitra-fix.js'])
+  @vite(['resources/css/app.css','resources/css/bootstrap.css','resources/js/mitra-fix.js','resources/js/app.js'])
   <title>Partner - VolHub</title>
 </head>
 

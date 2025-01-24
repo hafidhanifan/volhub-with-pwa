@@ -1,7 +1,6 @@
 const CACHE_NAME = "pwa-cache-v1";
 const urlsToCache = [
     "/",
-    // "/offline",
     "/build/assets/app-BuWhUq6L.css", // Sesuaikan dengan output Tailwind Anda
     "/build/assets/app-Dp8K0SpU.js", // Sesuaikan dengan output JS Anda
 ];
@@ -34,15 +33,4 @@ self.addEventListener("activate", (event) => {
             )
         )
     );
-});
-
-// Notifikasi
-self.addEventListener("push", (event) => {
-    const data = event.data.json(); // Data JSON dikirim dari backend
-    self.registration.showNotification(data.title, {
-        body: data.body,
-        icon: "/images/icons/volhub-192x192.png", // Sesuaikan dengan ikon aplikasi Anda
-        vibrate: [200, 100, 200], // Pola getar (opsional)
-        tag: "status-update", // Identitas notifikasi (opsional)
-    });
 });

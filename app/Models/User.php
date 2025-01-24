@@ -52,5 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Experience::class, 'id_user');
     }
+    public function pushSubscriptions()
+    {
+    return $this->hasMany(PushSubscription::class, 'user_id');
+    }
 
 }

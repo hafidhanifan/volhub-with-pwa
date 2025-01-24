@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApiMitraController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MitraController;
+use App\Http\Controllers\PushSubscriptionController;
 
 Route::get('/', [UserController::class, 'showHome'])->name('home');
 
@@ -116,6 +117,9 @@ Route::prefix('user')->group(function () {
 
     Route::middleware(['auth', 'separate.session:users'])->group(function () {
         Route::get('logout', [AuthController::class, 'logoutUser'])->name('user.logout');
+
+        Route::post('/subscribe', [PushSubscriptionController::class, 'store']);
+        Route::post('/notify', [PushSubscriptionController::class, 'notify']);
 
 
         // (User) Route untuk Daftar Kegiatan

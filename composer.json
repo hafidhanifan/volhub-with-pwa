@@ -10,11 +10,13 @@
     "require": {
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "2.7",
+        "laravel-notification-channels/webpush": "^9.0",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "realrashid/sweet-alert": "^7.2",
-        "intervention/image": "2.7"
+        "minishlink/web-push": "^9.0",
+        "realrashid/sweet-alert": "^7.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

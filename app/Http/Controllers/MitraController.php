@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Validation\ValidationException;
+use Minishlink\WebPush\WebPush;
+use Minishlink\WebPush\Subscription;
+
 
 class MitraController extends Controller
 {
@@ -473,19 +476,68 @@ class MitraController extends Controller
     public function shortlist($id, $id_pendaftar)
     {
         $mitra = Mitra::find($id);
-        $pendaftar = Pendaftar::with(['user'])->find($id_pendaftar);
+        if (!$mitra) {
+            return redirect()->back()->withErrors('Mitra tidak ditemukan.');
+        }
+    
+        $pendaftar = Pendaftar::with(['user.pushSubscriptions'])->find($id_pendaftar);
+        if (!$pendaftar || !$pendaftar->user) {
+            return redirect()->back()->withErrors('Pendaftar atau pengguna tidak ditemukan.');
+        }
+    
         $kegiatans = Kegiatan::where('id_mitra', $mitra->id_mitra)->get();
-
         $pendaftar->status_applicant = 'Shortlist';
         foreach ($kegiatans as $kegiatan) {
-            // Menghitung sisa hari dengan penutupan dihitung sampai akhir hari (23:59:59)
             $sisaHari = Carbon::now()->diffInDays(Carbon::parse($kegiatan->tgl_penutupan)->endOfDay(), false);
-        
-            // Pastikan sisa hari tidak negatif
             $kegiatan->sisa_hari = max($sisaHari, 0);
         }
         $pendaftar->save();
-
+    
+        // Kirim push notification
+        $subscriptions = $pendaftar->user->pushSubscriptions ?? [];
+        if ($subscriptions->isEmpty()) {
+            return redirect()->back()->with('message', 'Tidak ada subscription untuk dikirim notifikasi.');
+        }
+    
+        $webPush = new WebPush([
+            'VAPID' => [
+                'subject' => 'mailto:example@example.com',
+                'publicKey' => config('webpush.vapid.public_key'),
+                'privateKey' => config('webpush.vapid.private_key'),
+            ],
+        ]);
+    
+        foreach ($subscriptions as $subscription) {
+            // Buat objek Subscription
+            $webPushSubscription = Subscription::create([
+                'endpoint' => $subscription->endpoint,
+                'publicKey' => $subscription->p256dh,
+                'authToken' => $subscription->auth,
+            ]);
+    
+            $payload = json_encode([
+                'title' => 'Shortlist Notification',
+                'body' => "Hello {$pendaftar->user->nama_user}, you have been shortlisted!",
+            ]);
+    
+            // Tambahkan notifikasi ke antrean
+            $webPush->queueNotification($webPushSubscription, $payload);
+        }
+    
+        // Kirim semua notifikasi sekaligus
+        $reports = $webPush->flush();
+    
+        // Periksa laporan
+        foreach ($reports as $report) {
+            $endpoint = $report->getRequest()->getUri()->__toString();
+    
+            if ($report->isSuccess()) {
+                logger("Notification sent successfully to {$endpoint}.");
+            } else {
+                logger("Notification failed to {$endpoint}: {$report->getReason()}");
+            }
+        }
+    
         return redirect()->back()->with('targetStage', 'shortlisted');
     }
 
@@ -501,6 +553,51 @@ class MitraController extends Controller
                 'status' => 'success',
             ]);
         }
+
+         // Kirim push notification
+         $subscriptions = $pendaftar->user->pushSubscriptions ?? [];
+         if ($subscriptions->isEmpty()) {
+             return redirect()->back()->with('message', 'Tidak ada subscription untuk dikirim notifikasi.');
+         }
+     
+         $webPush = new WebPush([
+             'VAPID' => [
+                 'subject' => 'mailto:example@example.com',
+                 'publicKey' => config('webpush.vapid.public_key'),
+                 'privateKey' => config('webpush.vapid.private_key'),
+             ],
+         ]);
+     
+         foreach ($subscriptions as $subscription) {
+             // Buat objek Subscription
+             $webPushSubscription = Subscription::create([
+                 'endpoint' => $subscription->endpoint,
+                 'publicKey' => $subscription->p256dh,
+                 'authToken' => $subscription->auth,
+             ]);
+     
+             $payload = json_encode([
+                 'title' => 'Shortlist Notification',
+                 'body' => "Hello {$pendaftar->user->nama_user}, habis ini interview!",
+             ]);
+     
+             // Tambahkan notifikasi ke antrean
+             $webPush->queueNotification($webPushSubscription, $payload);
+         }
+     
+         // Kirim semua notifikasi sekaligus
+         $reports = $webPush->flush();
+     
+         // Periksa laporan
+         foreach ($reports as $report) {
+             $endpoint = $report->getRequest()->getUri()->__toString();
+     
+             if ($report->isSuccess()) {
+                 logger("Notification sent successfully to {$endpoint}.");
+             } else {
+                 logger("Notification failed to {$endpoint}: {$report->getReason()}");
+             }
+         }
 
         return redirect()->back()->with('targetStage', 'interviewContent');
     }
