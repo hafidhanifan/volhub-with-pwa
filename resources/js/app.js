@@ -1,3 +1,4 @@
+// Install Service Worker
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
         navigator.serviceWorker
@@ -86,33 +87,6 @@ self.addEventListener("push", function (event) {
         console.log("No push data available.");
     }
 });
-
-// self.addEventListener("push", (event) => {
-//     const data = event.data.json();
-//     self.registration.showNotification(data.title, {
-//         body: data.body,
-//         icon: "/images/icons/volhub-192x192.png",
-//         badge: "/images/icons/badge-96x96.png",
-//         vibrate: [200, 100, 200],
-//         actions: [
-//             { action: "view", title: "Lihat Detail" },
-//             { action: "dismiss", title: "Tutup" },
-//         ],
-//         tag: "status-update",
-//     });
-// });
-
-// self.addEventListener("notificationclick", (event) => {
-//     event.notification.close(); // Tutup notifikasi
-
-//     if (event.action === "view") {
-//         // Jika tombol "Lihat Detail" diklik
-//         clients.openWindow("/detail-pendaftaran"); // Buka halaman tertentu
-//     } else {
-//         // Jika tombol "Tutup" atau lainnya
-//         console.log("Notifikasi ditutup.");
-//     }
-// });
 
 function shortlistApplicant(id) {
     fetch(`/shortlist/${id}`, {

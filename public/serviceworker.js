@@ -1,8 +1,10 @@
-const CACHE_NAME = "pwa-cache-v1";
+const CACHE_NAME = "volhub-cache-v1";
 const urlsToCache = [
     "/",
-    "/build/assets/app-BuWhUq6L.css", // Sesuaikan dengan output Tailwind Anda
-    "/build/assets/app-Dp8K0SpU.js", // Sesuaikan dengan output JS Anda
+    "/build/assets/app-BuWhUq6L.css",
+    "/build/assets/app-C-NKBMM9.js",
+    "/build/assets/user-fix-BhwnjqK6.js",
+    "/build/assets/mitra-fix-CFwqNUXL.js",
 ];
 
 self.addEventListener("install", (event) => {
