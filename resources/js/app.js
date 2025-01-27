@@ -16,7 +16,6 @@ if ("serviceWorker" in navigator) {
 }
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
 if ("Notification" in window && "serviceWorker" in navigator) {
     Notification.requestPermission().then((permission) => {
         if (permission === "granted") {
