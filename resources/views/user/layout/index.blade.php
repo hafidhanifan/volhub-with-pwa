@@ -20,7 +20,7 @@
       </button>
     </div>
     <div class="mx-auto w-full">
-      <img src="{{asset('img/hero image/hero-image.png') }}" alt="Hero Image"
+      <img lazy="loading" src="{{asset('img/hero image/hero-image.png') }}" alt="Hero Image"
         class="z-0 w-full mx-auto sm:w-4/5 md:w-8/12 lg:w-3/6 lg:-mt-12" />
     </div>
 
@@ -137,11 +137,11 @@
 
       <div class="flex justify-center">
         <div class="mt-8 mx-6 px-2 relative bg-sky-300 rounded-lg lg:md-0">
-          <img src="{{ asset('img/about-image/about-image.jpg') }}" alt="About Image"
+          <img lazy="loading" src="{{ asset('img/about-image/about-image.jpg') }}" alt="About Image"
             class="max-w-64 sm:max-w-80 md:max-w-64 lg:max-w-96 rounded-lg -rotate-3 hover:rotate-0 hover:scale-110 transition-transform duration-500" />
-          <img src="{{ asset('img/about-image/about-small-card1.png') }}" alt="Small About Image Card"
+          <img lazy="loading" src="{{ asset('img/about-image/about-small-card1.png') }}" alt="Small About Image Card"
             class="w-2/4 absolute top-1/3 left-2/3 border border-sky-300 shadow-xl rounded-lg hover:scale-105 transition-transform duration-500" />
-          <img src="{{ asset('img/about-image/about-small-card2.png') }}" alt="Small About Image Card"
+          <img lazy="loading" src="{{ asset('img/about-image/about-small-card2.png') }}" alt="Small About Image Card"
             class="w-2/4 absolute bottom-1/4 right-2/3 border border-sky-300 shadow-xl rounded-lg hover:scale-105 transition-transform duration-500" />
         </div>
       </div>
@@ -181,10 +181,10 @@
         <div class="flex items-start justify-between">
           <div class="flex gap-4">
             @if(!empty($kegiatan->mitra->logo))
-            <img src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt="Logo"
+            <img lazy="loading" src="{{asset('storage/logo/'.$kegiatan->mitra->logo)}}" alt="Logo"
               class="w-14 h-14 object-cover rounded-full" />
             @else
-            <img class="w-14 h-14 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}"
+            <img lazy="loading" class="w-14 h-14 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}"
               alt="Logo Mitra" />
             @endif
             <div class="w-full">

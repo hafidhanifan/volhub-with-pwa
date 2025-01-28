@@ -5,7 +5,8 @@
       <div class="flex bg-white justify-between h-20">
         <!-- Logo -->
         <a href="{{ route('home') }}" class="flex items-center bg-white z-50 cursor-pointer">
-          <img src="{{ asset('img/volhub-logo/volhub-navigation-logo.png') }}" alt="Volhub Logo" class="w-16 md:w-20" />
+          <img lazy="loading" src="{{ asset('img/volhub-logo/volhub-navigation-logo.png') }}" alt="Volhub Logo"
+            class="w-16 md:w-20" />
         </a>
 
         <!-- Navbar untuk layar lebar -->
@@ -59,12 +60,12 @@
                 $user = auth()->user();
                 @endphp
                 @if(!empty($user->foto_profile))
-                <img class="w-12 h-12 object-cover rounded-full"
+                <img lazy="loading" class="w-12 h-12 object-cover rounded-full"
                   src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="Avatar" />
                 @else
                 <div class="relative group">
-                  <img class="w-10 h-10 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}"
-                    alt="Avatar" />
+                  <img lazy="loading" class="w-10 h-10 object-cover rounded-full"
+                    src="{{ asset('img/default-profile.png') }}" alt="Avatar" />
                   <div
                     class="absolute top-0 right-0 bg-red-600 text-white rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs">
                     !
@@ -77,8 +78,8 @@
                 @endif
                 @else
                 <div class="relative group">
-                  <img class="w-10 h-10 object-cover rounded-full" src="{{ asset('img/default-profile.png') }}"
-                    alt="Avatar" />
+                  <img lazy="loading" class="w-10 h-10 object-cover rounded-full"
+                    src="{{ asset('img/default-profile.png') }}" alt="Avatar" />
                 </div>
                 @endif
               </button>
@@ -129,10 +130,10 @@
       <div class="p-3">
         <div class="flex items-center mb-4">
           @if(!empty($user->foto_profile))
-          <img class="h-10 w-10 rounded-full" src="{{asset('storage/foto-profile/'.$user->foto_profile)}}"
-            alt="Avatar" />
+          <img lazy="loading" class="h-10 w-10 rounded-full"
+            src="{{asset('storage/foto-profile/'.$user->foto_profile)}}" alt="Avatar" />
           @else
-          <img class="h-10 w-10 rounded-full" src="{{asset('img/logo-user.png')}}" alt="Avatar" />
+          <img lazy="loading" class="h-10 w-10 rounded-full" src="{{asset('img/logo-user.png')}}" alt="Avatar" />
           @endif
           <div class="ml-3">
             <div class="text-base font-medium text-gray-800">
